@@ -9,6 +9,10 @@
     @apply text-2xl font-bold pb-3;
   }
 
+  h3 {
+    @apply font-bold pb-2;
+  }
+
   section {
     @apply py-5;
   }
