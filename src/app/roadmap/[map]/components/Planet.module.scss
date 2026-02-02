@@ -1,0 +1,82 @@
+.planetCnr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  animation: rotate 180s linear infinite;
+
+  .link {
+    transition: scale 0.2s ease-in-out;
+    z-index: 2;
+
+    .planet {
+      height: 19rem;
+      width: auto;
+      color: white;
+    }
+
+    &:hover {
+      scale: 1.05;
+    }
+  }
+
+  .outerOrbit {
+    border-radius: 50%;
+    height: 115%;
+    aspect-ratio: 1;
+    border: 1px dashed white;
+    position: absolute;
+  }
+
+  .orbit {
+    height: 90%;
+    aspect-ratio: 1;
+    position: absolute;
+
+    .satellite {
+      position: absolute;
+      background-color: rgb(216, 119, 0);
+      width: max-content;
+      min-width: 9.4rem;
+      max-width: 70%;
+      text-align: center;
+      word-break: break-word;
+      padding: 0.3rem 0.6rem;
+      border-radius: 0.5rem;
+      color: white;
+      z-index: 1;
+      animation: rotate 180s linear infinite reverse;
+
+      &:first-child {
+        right: 100%;
+        bottom: 100%;
+      }
+
+      &:nth-child(2) {
+        top: 100%;
+        left: 100%;
+      }
+
+      &:nth-child(3) {
+        left: 100%;
+        bottom: 100%;
+      }
+
+      &:nth-child(4) {
+        top: 100%;
+        right: 100%;
+      }
+    }
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
