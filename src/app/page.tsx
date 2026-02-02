@@ -2,7 +2,7 @@ import Image from 'next/image';
 import SolarSystem from './components/SolarSystem';
 import galaxy from '@/assets/galaxy.webp';
 
-export default function HomePage() {
+const HomePage = () => {
   return (
     <main className="min-h-screen flex items-center justify-center gap-52 text-white px-40 py-28 pl-64">
       <SolarSystem />
@@ -30,4 +30,6 @@ export default function HomePage() {
       </div>
     </main>
   );
-}
+};
+
+export default HomePage;
