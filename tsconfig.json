@@ -41,7 +41,11 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
+    "**/*.mts",
+    ".next/dev/types/app/page.tsx",
+    ".next/dev/types/app/layout.tsx",
+    ".next/dev/types/app/roadmap/[map]/page.tsx",
+    ".next/dev/types/app/roadmap/[map]/[planet]/page.tsx"
   ],
   "exclude": ["node_modules"]
 }
