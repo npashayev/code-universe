@@ -17,7 +17,6 @@ export interface PlanetData {
 export type PlanetContent =
   | TextContent
   | ImplementationTaskContent
-  | CodeExampleContent
   | HtmlElementContent
   | CodeTaskContent
   | ImageContent;
@@ -27,7 +26,6 @@ export type TextType = 'text' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 export type ContentType =
   | TextType
   | 'implementation-task'
-  | 'code-example'
   | 'html-element'
   | 'code-task'
   | 'image';
@@ -49,12 +47,6 @@ export interface CodeSnippet {
   output?: string;
 }
 
-export interface CodeExampleContent extends BaseContent {
-  type: 'code-example';
-  title?: string;
-  example: CodeSnippet;
-}
-
 export interface HtmlElementContent extends BaseContent {
   type: 'html-element';
   title?: string;
@@ -69,6 +61,7 @@ export interface HtmlElementSnippet {
 
 export interface CodeTaskContent extends BaseContent {
   type: 'code-task';
+  title?: string;
   task: CodeSnippet;
 }
 
