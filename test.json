@@ -1,372 +1,357 @@
 {
-    "planets": [
+  "planets": [
+    {
+      "id": "planet-1",
+      "name": "JavaScript Fundamentals",
+      "tags": ["test tag 1", "test tag 2"],
+      "description": "Master the core concepts of JavaScript programming",
+      "imageUrl": "/planet.webp",
+      "researchTopics": [
+        "Variables and Data Types",
+        "Functions and Scope",
+        "Async Programming",
+        "ES6+ Features"
+      ],
+      "questions": [
+        "What is the difference between let, const, and var?",
+        "How does closure work in JavaScript?",
+        "What are Promises and async/await?"
+      ],
+      "contents": [
         {
-            "id": "planet-1",
-            "name": "JavaScript Fundamentals",
-            "tags": [
-                "test tag 1",
-                "test tag 2"
-            ],
-            "description": "Master the core concepts of JavaScript programming",
-            "imageUrl": "/planet.webp",
-            "researchTopics": [
-                "Variables and Data Types",
-                "Functions and Scope",
-                "Async Programming",
-                "ES6+ Features"
-            ],
-            "questions": [
-                "What is the difference between let, const, and var?",
-                "How does closure work in JavaScript?",
-                "What are Promises and async/await?"
-            ],
-            "contents": [
-                {
-                    "id": "content-1-1",
-                    "type": "h2",
-                    "text": "Introduction to JavaScript"
-                },
-                {
-                    "id": "content-1-2",
-                    "type": "text",
-                    "text": "JavaScript is a versatile programming language that powers the modern web. It enables interactive web pages and is an essential part of web applications."
-                },
-                {
-                    "id": "content-1-3",
-                    "type": "code-example",
-                    "title": "Variable Declaration",
-                    "example": {
-                        "language": "javascript",
-                        "code": "const greeting = 'Hello, World!';\nlet count = 0;\ncount++;\nconsole.log(greeting, count);",
-                        "output": "Hello, World! 1"
-                    }
-                },
-                {
-                    "id": "content-1-4",
-                    "type": "implementation-task",
-                    "task": "Create a function that takes an array of numbers and returns the sum of all even numbers."
-                },
-                {
-                    "id": "content-1-5",
-                    "type": "image",
-                    "name": "javascript-ecosystem",
-                    "title": "The JavaScript Ecosystem",
-                    "url": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=600"
-                }
-            ]
+          "id": "content-1-1",
+          "type": "h2",
+          "text": "Introduction to JavaScript"
         },
         {
-            "id": "planet-2",
-            "name": "Python Basics",
-            "description": "Learn Python programming from scratch",
-            "tags": [
-                "test tag 1",
-                "test tag 2"
-            ],
-            "imageUrl": "/planet.webp",
-            "researchTopics": [
-                "Python Syntax",
-                "Data Structures",
-                "Object-Oriented Programming",
-                "File Handling"
-            ],
-            "questions": [
-                "What are list comprehensions?",
-                "How do decorators work?",
-                "What is the difference between tuples and lists?"
-            ],
-            "contents": [
-                {
-                    "id": "content-2-1",
-                    "type": "h2",
-                    "text": "Getting Started with Python"
-                },
-                {
-                    "id": "content-2-2",
-                    "type": "text",
-                    "text": "Python is known for its simple syntax and readability, making it perfect for beginners and professionals alike."
-                },
-                {
-                    "id": "content-2-3",
-                    "type": "h3",
-                    "text": "List Comprehensions"
-                },
-                {
-                    "id": "content-2-4",
-                    "type": "code-example",
-                    "title": "Creating Lists with Comprehensions",
-                    "example": {
-                        "language": "python",
-                        "code": "# Traditional approach\nsquares = []\nfor i in range(10):\n    squares.append(i ** 2)\n\n# List comprehension\nsquares = [i ** 2 for i in range(10)]\nprint(squares)",
-                        "output": "[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]"
-                    }
-                },
-                {
-                    "id": "content-2-5",
-                    "type": "code-task",
-                    "task": {
-                        "language": "python",
-                        "code": "# Fix the bug in this function\ndef calculate_average(numbers):\n    total = 0\n    for num in numbers:\n        total += num\n    return total / len(numbers)\n\n# What happens when the list is empty?"
-                    }
-                },
-                {
-                    "id": "content-2-6",
-                    "type": "implementation-task",
-                    "task": "Write a class 'BankAccount' with methods for deposit, withdraw, and check balance. Include proper error handling for insufficient funds."
-                }
-            ]
+          "id": "content-1-2",
+          "type": "text",
+          "text": "JavaScript is a versatile programming language that powers the modern web. It enables interactive web pages and is an essential part of web applications."
         },
         {
-            "id": "planet-3",
-            "name": "HTML & CSS Mastery",
-            "description": "Build beautiful and responsive web interfaces",
-            "tags": [
-                "test tag 1",
-                "test tag 2"
-            ],
-            "imageUrl": "/planet.webp",
-            "researchTopics": [
-                "Semantic HTML",
-                "Flexbox and Grid",
-                "Responsive Design",
-                "CSS Animations"
-            ],
-            "questions": [
-                "What is the box model?",
-                "How does flexbox differ from grid?",
-                "What are CSS custom properties?"
-            ],
-            "contents": [
-                {
-                    "id": "content-3-1",
-                    "type": "h2",
-                    "text": "Modern Web Design"
-                },
-                {
-                    "id": "content-3-2",
-                    "type": "text",
-                    "text": "HTML and CSS form the foundation of web development. HTML provides structure while CSS brings style and visual appeal."
-                },
-                {
-                    "id": "content-3-3",
-                    "type": "html-element",
-                    "title": "Responsive Card Component",
-                    "element": {
-                        "html": "<div class=\"card\">\n <div class=\"card-body\">\n    <h3>Card Title</h3>\n    <p>This is a responsive card component.</p>\n    <button>Learn More</button>\n  </div>\n</div>",
-                        "css": ".card {\n  max-width: 300px;\n  border-radius: 8px;\n  overflow: hidden;\n  box-shadow: 0 4px 6px rgba(0,0,0,0.1);\n  transition: transform 0.3s;\n}\n\n.card:hover {\n  transform: translateY(-5px);\n}\n\n.card img {\n  width: 100%;\n  height: auto;\n}\n\n.card-body {\n  padding: 1.5rem;\n}\n\nbutton {\n  background: #007bff;\n  color: white;\n  border: none;\n  padding: 0.5rem 1rem;\n  border-radius: 4px;\n  cursor: pointer;\n}",
-                        "js": "document.querySelector(\"button\").addEventListener(\"click\", () => {\n  alert(\"Button clicked!\");\n});"
-                    }
-                },
-                {
-                    "id": "content-3-4",
-                    "type": "h3",
-                    "text": "Flexbox Layout"
-                },
-                {
-                    "id": "content-3-5",
-                    "type": "code-example",
-                    "title": "Centering Content with Flexbox",
-                    "example": {
-                        "language": "css",
-                        "code": ".container {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  min-height: 100vh;\n  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n}"
-                    }
-                },
-                {
-                    "id": "content-3-6",
-                    "type": "implementation-task",
-                    "task": "Create a navigation bar that is sticky on scroll and changes background color when scrolled past 100px."
-                },
-                {
-                    "id": "content-3-7",
-                    "type": "image",
-                    "name": "responsive-design",
-                    "title": "Responsive Design Principles",
-                    "url": "https://images.unsplash.com/photo-1547658719-da2b51169166?w=600"
-                }
-            ]
+          "id": "content-1-3",
+          "type": "code-example",
+          "title": "Variable Declaration",
+          "example": {
+            "language": "javascript",
+            "code": "const greeting = 'Hello, World!';\nlet count = 0;\ncount++;\nconsole.log(greeting, count);",
+            "output": "Hello, World! 1"
+          }
         },
         {
-            "id": "planet-4",
-            "name": "TypeScript Advanced",
-            "description": "Take your TypeScript skills to the next level",
-            "tags": [
-                "test tag 1",
-                "test tag 2"
-            ],
-            "imageUrl": "/planet.webp",
-            "researchTopics": [
-                "Generics",
-                "Type Guards",
-                "Utility Types",
-                "Decorators",
-                "Advanced Patterns"
-            ],
-            "questions": [
-                "When should you use generics?",
-                "What are conditional types?",
-                "How do type predicates work?"
-            ],
-            "contents": [
-                {
-                    "id": "content-4-1",
-                    "type": "h2",
-                    "text": "Advanced TypeScript Techniques"
-                },
-                {
-                    "id": "content-4-2",
-                    "type": "text",
-                    "text": "TypeScript adds static typing to JavaScript, enabling better tooling, error detection, and code maintainability in large applications."
-                },
-                {
-                    "id": "content-4-3",
-                    "type": "h3",
-                    "text": "Generic Functions"
-                },
-                {
-                    "id": "content-4-4",
-                    "type": "code-example",
-                    "title": "Type-Safe Array Operations",
-                    "example": {
-                        "language": "typescript",
-                        "code": "function firstElement<T>(arr: T[]): T | undefined {\n  return arr[0];\n}\n\nconst numbers = [1, 2, 3];\nconst firstNum = firstElement(numbers); // Type: number | undefined\n\nconst strings = ['a', 'b', 'c'];\nconst firstStr = firstElement(strings); // Type: string | undefined",
-                        "output": "// TypeScript infers the correct return type based on input"
-                    }
-                },
-                {
-                    "id": "content-4-5",
-                    "type": "h4",
-                    "text": "Utility Types"
-                },
-                {
-                    "id": "content-4-6",
-                    "type": "code-example",
-                    "example": {
-                        "language": "typescript",
-                        "code": "interface User {\n  id: number;\n  name: string;\n  email: string;\n  password: string;\n}\n\n// Pick specific properties\ntype UserPreview = Pick<User, 'id' | 'name'>;\n\n// Make all properties optional\ntype PartialUser = Partial<User>;\n\n// Make all properties readonly\ntype ReadonlyUser = Readonly<User>;"
-                    }
-                },
-                {
-                    "id": "content-4-7",
-                    "type": "code-task",
-                    "task": {
-                        "language": "typescript",
-                        "code": "// Complete this type guard function\nfunction isString(value: unknown): value is string {\n  // Add implementation\n}\n\n// Usage\nconst value: unknown = 'hello';\nif (isString(value)) {\n  console.log(value.toUpperCase()); // Should work without error\n}"
-                    }
-                },
-                {
-                    "id": "content-4-8",
-                    "type": "implementation-task",
-                    "task": "Create a generic 'Repository<T>' class that implements CRUD operations with proper TypeScript typing. Include methods: findById, findAll, create, update, and delete."
-                }
-            ]
+          "id": "content-1-4",
+          "type": "implementation-task",
+          "task": "Create a function that takes an array of numbers and returns the sum of all even numbers."
         },
         {
-            "id": "planet-5",
-            "name": "Web Development Best Practices",
-            "description": "Learn industry-standard practices for professional development",
-            "tags": [
-                "test tag 1",
-                "test tag 2"
-            ],
-            "imageUrl": "/planet.webp",
-            "researchTopics": [
-                "Code Organization",
-                "Performance Optimization",
-                "Security",
-                "Testing",
-                "Accessibility"
-            ],
-            "questions": [
-                "What is SOLID principles?",
-                "How to optimize web performance?",
-                "What are common security vulnerabilities?"
-            ],
-            "contents": [
-                {
-                    "id": "content-5-1",
-                    "type": "h2",
-                    "text": "Professional Development Standards"
-                },
-                {
-                    "id": "content-5-2",
-                    "type": "text",
-                    "text": "Following best practices ensures your code is maintainable, scalable, and secure. These principles are essential for any professional developer."
-                },
-                {
-                    "id": "content-5-3",
-                    "type": "h3",
-                    "text": "Code Organization"
-                },
-                {
-                    "id": "content-5-4",
-                    "type": "text",
-                    "text": "Organizing your code properly makes it easier to maintain and collaborate with others. Use clear naming conventions, separate concerns, and follow the DRY (Don't Repeat Yourself) principle."
-                },
-                {
-                    "id": "content-5-5",
-                    "type": "code-example",
-                    "title": "Module Pattern",
-                    "example": {
-                        "language": "javascript",
-                        "code": "// utils/validation.js\nexport const validateEmail = (email) => {\n  const regex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\n  return regex.test(email);\n};\n\nexport const validatePassword = (password) => {\n  return password.length >= 8;\n};\n\n// Usage in another file\nimport { validateEmail, validatePassword } from './utils/validation.js';"
-                    }
-                },
-                {
-                    "id": "content-5-6",
-                    "type": "h4",
-                    "text": "Performance Optimization"
-                },
-                {
-                    "id": "content-5-7",
-                    "type": "html-element",
-                    "title": "Lazy Loading Images",
-                    "element": {
-                        "html": "<img \n  src=\"placeholder.jpg\" \n  data-src=\"actual-image.jpg\" \n  alt=\"Description\"\n  class=\"lazy-load\"\n  loading=\"lazy\"\n>",
-                        "css": ".lazy-load {\n  opacity: 0;\n  transition: opacity 0.3s;\n}\n\n.lazy-load.loaded {\n  opacity: 1;\n}",
-                        "js": "const lazyImages = document.querySelectorAll(\".lazy-load\");\n\nconst imageObserver = new IntersectionObserver((entries) => {\n  entries.forEach(entry => {\n    if (entry.isIntersecting) {\n      const img = entry.target;\n      img.src = img.dataset.src;\n      img.classList.add(\"loaded\");\n      imageObserver.unobserve(img);\n    }\n  });\n});\n\nlazyImages.forEach(img => imageObserver.observe(img));"
-                    }
-                },
-                {
-                    "id": "content-5-8",
-                    "type": "image",
-                    "name": "performance-metrics",
-                    "title": "Web Performance Metrics",
-                    "url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600"
-                },
-                {
-                    "id": "content-5-9",
-                    "type": "h5",
-                    "text": "Security Considerations"
-                },
-                {
-                    "id": "content-5-10",
-                    "type": "code-task",
-                    "task": {
-                        "language": "javascript",
-                        "code": "// Identify the security vulnerability in this code\nfunction displayUserComment(comment) {\n  document.getElementById('comments').innerHTML += comment;\n}\n\n// Hint: What if comment contains malicious script tags?"
-                    }
-                },
-                {
-                    "id": "content-5-11",
-                    "type": "implementation-task",
-                    "task": "Implement input sanitization for a user registration form. Protect against XSS attacks, SQL injection, and validate all user inputs on both client and server side."
-                },
-                {
-                    "id": "content-5-12",
-                    "type": "h6",
-                    "text": "Testing Your Code"
-                },
-                {
-                    "id": "content-5-13",
-                    "type": "code-example",
-                    "title": "Unit Testing Example",
-                    "example": {
-                        "language": "javascript",
-                        "code": "// Function to test\nfunction add(a, b) {\n  return a + b;\n}\n\n// Test\ndescribe('add function', () => {\n  test('adds two positive numbers', () => {\n    expect(add(2, 3)).toBe(5);\n  });\n  \n  test('handles negative numbers', () => {\n    expect(add(-1, -1)).toBe(-2);\n  });\n});",
-                        "output": "✓ add function › adds two positive numbers\n✓ add function › handles negative numbers"
-                    }
-                }
-            ]
+          "id": "content-1-5",
+          "type": "image",
+          "name": "javascript-ecosystem",
+          "title": "The JavaScript Ecosystem",
+          "url": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=600"
         }
-    ]
+      ]
+    },
+    {
+      "id": "planet-2",
+      "name": "Python Basics",
+      "description": "Learn Python programming from scratch",
+      "tags": ["test tag 1", "test tag 2"],
+      "imageUrl": "/planet.webp",
+      "researchTopics": [
+        "Python Syntax",
+        "Data Structures",
+        "Object-Oriented Programming",
+        "File Handling"
+      ],
+      "questions": [
+        "What are list comprehensions?",
+        "How do decorators work?",
+        "What is the difference between tuples and lists?"
+      ],
+      "contents": [
+        {
+          "id": "content-2-1",
+          "type": "h2",
+          "text": "Getting Started with Python"
+        },
+        {
+          "id": "content-2-2",
+          "type": "text",
+          "text": "Python is known for its simple syntax and readability, making it perfect for beginners and professionals alike."
+        },
+        {
+          "id": "content-2-3",
+          "type": "h3",
+          "text": "List Comprehensions"
+        },
+        {
+          "id": "content-2-4",
+          "type": "code-example",
+          "title": "Creating Lists with Comprehensions",
+          "example": {
+            "language": "python",
+            "code": "# Traditional approach\nsquares = []\nfor i in range(10):\n    squares.append(i ** 2)\n\n# List comprehension\nsquares = [i ** 2 for i in range(10)]\nprint(squares)",
+            "output": "[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]"
+          }
+        },
+        {
+          "id": "content-2-5",
+          "type": "code-task",
+          "task": {
+            "language": "python",
+            "code": "# Fix the bug in this function\ndef calculate_average(numbers):\n    total = 0\n    for num in numbers:\n        total += num\n    return total / len(numbers)\n\n# What happens when the list is empty?"
+          }
+        },
+        {
+          "id": "content-2-6",
+          "type": "implementation-task",
+          "task": "Write a class 'BankAccount' with methods for deposit, withdraw, and check balance. Include proper error handling for insufficient funds."
+        }
+      ]
+    },
+    {
+      "id": "planet-3",
+      "name": "HTML & CSS Mastery",
+      "description": "Build beautiful and responsive web interfaces",
+      "tags": ["test tag 1", "test tag 2"],
+      "imageUrl": "/planet.webp",
+      "researchTopics": [
+        "Semantic HTML",
+        "Flexbox and Grid",
+        "Responsive Design",
+        "CSS Animations"
+      ],
+      "questions": [
+        "What is the box model?",
+        "How does flexbox differ from grid?",
+        "What are CSS custom properties?"
+      ],
+      "contents": [
+        {
+          "id": "content-3-1",
+          "type": "h2",
+          "text": "Modern Web Design"
+        },
+        {
+          "id": "content-3-2",
+          "type": "text",
+          "text": "HTML and CSS form the foundation of web development. HTML provides structure while CSS brings style and visual appeal."
+        },
+        {
+          "id": "content-3-3",
+          "type": "html-element",
+          "title": "Responsive Card Component",
+          "element": {
+            "html": "<div class=\"card\">\n <div class=\"card-body\">\n    <h3>Card Title</h3>\n    <p>This is a responsive card component.</p>\n    <button>Learn More</button>\n  </div>\n</div>",
+            "css": ".card {\n  max-width: 300px;\n  border-radius: 8px;\n  overflow: hidden;\n  box-shadow: 0 4px 6px rgba(0,0,0,0.1);\n  transition: transform 0.3s;\n}\n\n.card:hover {\n  transform: translateY(-5px);\n}\n\n.card img {\n  width: 100%;\n  height: auto;\n}\n\n.card-body {\n  padding: 1.5rem;\n}\n\nbutton {\n  background: #007bff;\n  color: white;\n  border: none;\n  padding: 0.5rem 1rem;\n  border-radius: 4px;\n  cursor: pointer;\n}",
+            "js": "document.querySelector(\"button\").addEventListener(\"click\", () => {\n  alert(\"Button clicked!\");\n});"
+          }
+        },
+        {
+          "id": "content-3-4",
+          "type": "h3",
+          "text": "Flexbox Layout"
+        },
+        {
+          "id": "content-3-5",
+          "type": "code-example",
+          "title": "Centering Content with Flexbox",
+          "task": {
+            "language": "css",
+            "code": ".container {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  min-height: 100vh;\n  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n}"
+          }
+        },
+        {
+          "id": "content-3-6",
+          "type": "implementation-task",
+          "task": "Create a navigation bar that is sticky on scroll and changes background color when scrolled past 100px."
+        },
+        {
+          "id": "content-3-7",
+          "type": "image",
+          "name": "responsive-design",
+          "title": "Responsive Design Principles",
+          "url": "https://images.unsplash.com/photo-1547658719-da2b51169166?w=600"
+        }
+      ]
+    },
+    {
+      "id": "planet-4",
+      "name": "TypeScript Advanced",
+      "description": "Take your TypeScript skills to the next level",
+      "tags": ["test tag 1", "test tag 2"],
+      "imageUrl": "/planet.webp",
+      "researchTopics": [
+        "Generics",
+        "Type Guards",
+        "Utility Types",
+        "Decorators",
+        "Advanced Patterns"
+      ],
+      "questions": [
+        "When should you use generics?",
+        "What are conditional types?",
+        "How do type predicates work?"
+      ],
+      "contents": [
+        {
+          "id": "content-4-1",
+          "type": "h2",
+          "text": "Advanced TypeScript Techniques"
+        },
+        {
+          "id": "content-4-2",
+          "type": "text",
+          "text": "TypeScript adds static typing to JavaScript, enabling better tooling, error detection, and code maintainability in large applications."
+        },
+        {
+          "id": "content-4-3",
+          "type": "h3",
+          "text": "Generic Functions"
+        },
+        {
+          "id": "content-4-4",
+          "type": "code-example",
+          "title": "Type-Safe Array Operations",
+          "task": {
+            "language": "typescript",
+            "code": "function firstElement<T>(arr: T[]): T | undefined {\n  return arr[0];\n}\n\nconst numbers = [1, 2, 3];\nconst firstNum = firstElement(numbers); // Type: number | undefined\n\nconst strings = ['a', 'b', 'c'];\nconst firstStr = firstElement(strings); // Type: string | undefined",
+            "output": "// TypeScript infers the correct return type based on input"
+          }
+        },
+        {
+          "id": "content-4-5",
+          "type": "h4",
+          "text": "Utility Types"
+        },
+        {
+          "id": "content-4-6",
+          "type": "code-example",
+          "task": {
+            "language": "typescript",
+            "code": "interface User {\n  id: number;\n  name: string;\n  email: string;\n  password: string;\n}\n\n// Pick specific properties\ntype UserPreview = Pick<User, 'id' | 'name'>;\n\n// Make all properties optional\ntype PartialUser = Partial<User>;\n\n// Make all properties readonly\ntype ReadonlyUser = Readonly<User>;"
+          }
+        },
+        {
+          "id": "content-4-7",
+          "type": "code-task",
+          "task": {
+            "language": "typescript",
+            "code": "// Complete this type guard function\nfunction isString(value: unknown): value is string {\n  // Add implementation\n}\n\n// Usage\nconst value: unknown = 'hello';\nif (isString(value)) {\n  console.log(value.toUpperCase()); // Should work without error\n}"
+          }
+        },
+        {
+          "id": "content-4-8",
+          "type": "implementation-task",
+          "task": "Create a generic 'Repository<T>' class that implements CRUD operations with proper TypeScript typing. Include methods: findById, findAll, create, update, and delete."
+        }
+      ]
+    },
+    {
+      "id": "planet-5",
+      "name": "Web Development Best Practices",
+      "description": "Learn industry-standard practices for professional development",
+      "tags": ["test tag 1", "test tag 2"],
+      "imageUrl": "/planet.webp",
+      "researchTopics": [
+        "Code Organization",
+        "Performance Optimization",
+        "Security",
+        "Testing",
+        "Accessibility"
+      ],
+      "questions": [
+        "What is SOLID principles?",
+        "How to optimize web performance?",
+        "What are common security vulnerabilities?"
+      ],
+      "contents": [
+        {
+          "id": "content-5-1",
+          "type": "h2",
+          "text": "Professional Development Standards"
+        },
+        {
+          "id": "content-5-2",
+          "type": "text",
+          "text": "Following best practices ensures your code is maintainable, scalable, and secure. These principles are essential for any professional developer."
+        },
+        {
+          "id": "content-5-3",
+          "type": "h3",
+          "text": "Code Organization"
+        },
+        {
+          "id": "content-5-4",
+          "type": "text",
+          "text": "Organizing your code properly makes it easier to maintain and collaborate with others. Use clear naming conventions, separate concerns, and follow the DRY (Don't Repeat Yourself) principle."
+        },
+        {
+          "id": "content-5-5",
+          "type": "code-example",
+          "title": "Module Pattern",
+          "task": {
+            "language": "javascript",
+            "code": "// utils/validation.js\nexport const validateEmail = (email) => {\n  const regex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\n  return regex.test(email);\n};\n\nexport const validatePassword = (password) => {\n  return password.length >= 8;\n};\n\n// Usage in another file\nimport { validateEmail, validatePassword } from './utils/validation.js';"
+          }
+        },
+        {
+          "id": "content-5-6",
+          "type": "h4",
+          "text": "Performance Optimization"
+        },
+        {
+          "id": "content-5-7",
+          "type": "html-element",
+          "title": "Lazy Loading Images",
+          "element": {
+            "html": "<img \n  src=\"placeholder.jpg\" \n  data-src=\"actual-image.jpg\" \n  alt=\"Description\"\n  class=\"lazy-load\"\n  loading=\"lazy\"\n>",
+            "css": ".lazy-load {\n  opacity: 0;\n  transition: opacity 0.3s;\n}\n\n.lazy-load.loaded {\n  opacity: 1;\n}",
+            "js": "const lazyImages = document.querySelectorAll(\".lazy-load\");\n\nconst imageObserver = new IntersectionObserver((entries) => {\n  entries.forEach(entry => {\n    if (entry.isIntersecting) {\n      const img = entry.target;\n      img.src = img.dataset.src;\n      img.classList.add(\"loaded\");\n      imageObserver.unobserve(img);\n    }\n  });\n});\n\nlazyImages.forEach(img => imageObserver.observe(img));"
+          }
+        },
+        {
+          "id": "content-5-8",
+          "type": "image",
+          "name": "performance-metrics",
+          "title": "Web Performance Metrics",
+          "url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600"
+        },
+        {
+          "id": "content-5-9",
+          "type": "h5",
+          "text": "Security Considerations"
+        },
+        {
+          "id": "content-5-10",
+          "type": "code-task",
+          "task": {
+            "language": "javascript",
+            "code": "// Identify the security vulnerability in this code\nfunction displayUserComment(comment) {\n  document.getElementById('comments').innerHTML += comment;\n}\n\n// Hint: What if comment contains malicious script tags?"
+          }
+        },
+        {
+          "id": "content-5-11",
+          "type": "implementation-task",
+          "task": "Implement input sanitization for a user registration form. Protect against XSS attacks, SQL injection, and validate all user inputs on both client and server side.\n\nSteps:\n1. Create a registration form with fields: username, email, password, and confirm password\n2. Implement client-side validation using regex patterns for each field\n3. Add server-side validation to verify all inputs before processing\n4. Sanitize inputs to remove any HTML/script tags (XSS prevention)\n5. Use parameterized queries or ORM to prevent SQL injection\n6. Hash passwords using bcrypt before storing in database\n7. Add error messages for invalid inputs\n8. Test with malicious inputs like: <script>alert('xss')</script>, ' OR '1'='1, etc."
+        },
+        {
+          "id": "content-5-12",
+          "type": "h6",
+          "text": "Testing Your Code"
+        },
+        {
+          "id": "content-5-13",
+          "type": "code-example",
+          "title": "Unit Testing Example",
+          "task": {
+            "language": "javascript",
+            "code": "// Function to test\nfunction add(a, b) {\n  return a + b;\n}\n\n// Test\ndescribe('add function', () => {\n  test('adds two positive numbers', () => {\n    expect(add(2, 3)).toBe(5);\n  });\n  \n  test('handles negative numbers', () => {\n    expect(add(-1, -1)).toBe(-2);\n  });\n});",
+            "output": "✓ add function › adds two positive numbers\n✓ add function › handles negative numbers"
+          }
+        }
+      ]
+    }
+  ]
 }
