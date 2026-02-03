@@ -7,7 +7,7 @@
   animation: rotate 180s linear infinite;
 
   .link {
-    transition: scale 0.2s ease-in-out;
+    transition: scale 0.3s ease-in-out;
     z-index: 2;
 
     .planet {
@@ -17,7 +17,7 @@
     }
 
     &:hover {
-      scale: 1.05;
+      scale: 1.03;
     }
   }
 
