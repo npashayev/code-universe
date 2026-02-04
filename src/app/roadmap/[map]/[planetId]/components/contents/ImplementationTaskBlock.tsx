@@ -1,16 +1,16 @@
-import { ImplementationTaskContent } from "@/lib/types/planet";
+import { ImplementationTaskContent } from '@/types/planet';
 
 interface Props {
-    content: ImplementationTaskContent;
+  content: ImplementationTaskContent;
 }
 
 const ImplementationTaskBlock = ({ content }: Props) => {
-    return (
-        <div>
-            <h3>Implementation task</h3>
-            <p className="whitespace-pre-wrap">{content.task}</p>
-        </div>
-    )
-}
+  return (
+    <div>
+      <h3>Implementation task</h3>
+      <p className="whitespace-pre-wrap">{content.task}</p>
+    </div>
+  );
+};
 
-export default ImplementationTaskBlock
+export default ImplementationTaskBlock;

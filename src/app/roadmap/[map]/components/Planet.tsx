@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import styles from './Planet.module.scss';
 import Image from 'next/image';
-import { PlanetData } from '@/lib/types/planet';
+import { PlanetData } from '@/types/planet';
 
 interface Props {
   map: string;

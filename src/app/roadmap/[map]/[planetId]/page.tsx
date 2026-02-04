@@ -1,8 +1,8 @@
-import { PlanetData } from '@/lib/types/planet';
 import { use } from 'react';
 import PlanetHeader from './components/PlanetHeader';
 import ResearchTopics from './components/ResearchTopics';
 import ContentList from './components/ContentList';
+import { PlanetData } from '@/types/planet';
 
 interface Props {
   params: Promise<{

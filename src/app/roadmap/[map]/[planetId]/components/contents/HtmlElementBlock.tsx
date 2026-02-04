@@ -1,5 +1,5 @@
 'use client';
-import { HtmlElementContent } from '@/lib/types/planet';
+import { HtmlElementContent } from '@/types/planet';
 import { useEffect, useState, useRef } from 'react';
 
 interface Props {

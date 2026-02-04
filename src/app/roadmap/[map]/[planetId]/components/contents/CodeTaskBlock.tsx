@@ -1,5 +1,5 @@
-import CodeEditor from '@/lib/components/common/CodeEditor';
-import { CodeTaskContent } from '@/lib/types/planet';
+import CodeEditor from '@/components/shared/CodeEditor';
+import { CodeTaskContent } from '@/types/planet';
 
 interface Props {
   content: CodeTaskContent;

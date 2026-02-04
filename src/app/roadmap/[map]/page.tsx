@@ -1,8 +1,8 @@
 import { use } from 'react';
 import styles from './page.module.scss';
-import { PlanetData } from '@/lib/types/planet';
 import Planet from './components/Planet';
 import MapSidebar from './components/MapSidebar';
+import { PlanetData } from '@/types/planet';
 
 interface Props {
   params: Promise<{

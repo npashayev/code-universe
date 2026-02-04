@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import { motion as Motion, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
-import { PlanetData } from '@/lib/types/planet';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { PlanetData } from '@/types/planet';
 
 interface Props {
   planets: PlanetData[];

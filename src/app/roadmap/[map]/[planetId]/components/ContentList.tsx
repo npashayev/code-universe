@@ -1,4 +1,4 @@
-import { PlanetContent } from '@/lib/types/planet';
+import { PlanetContent } from '@/types/planet';
 import Content from './contents/Content';
 
 interface Props {

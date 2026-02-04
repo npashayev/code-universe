@@ -1,4 +1,4 @@
-import { PlanetData } from '@/lib/types/planet';
+import { PlanetData } from '@/types/planet';
 import Image from 'next/image';
 
 interface Props {
