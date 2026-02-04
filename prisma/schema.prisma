@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Planet {
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  category        String
+  status          String    // 'draft' | 'published'
+  name            String
+  step            Int
+  tags            String[]
+  image           Json      // { url: string, alt?: string, metadata: { width: number, height: number } }
+  description     String
+  researchTopics  String[]
+  resources       Json[]    // Array of { title?: string, label: string, url: string }
+  questions       String[]
+  contents        Json[]    // Array of discriminated union content objects
+  nextPlanetId    String?   @db.ObjectId
+  prevPlanetId    String?   @db.ObjectId
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@map("planets")
+}
