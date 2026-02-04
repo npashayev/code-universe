@@ -1,5 +1,6 @@
 export interface PlanetData {
   id: string; // will be id from mongodb
+  category: string;
   status: 'draft' | 'published';
   name: string;
   step: number; // integer
