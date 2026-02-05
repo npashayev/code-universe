@@ -1,33 +1,41 @@
+export type SupportedLanguage = 'az' | 'en';
+
 export interface PlanetData {
-  id: string; // will be id from mongodb
+  id: string;
   category: string;
   status: 'draft' | 'published';
-  name: string;
-  step: number; // integer
-  tags: string[];
+  step: number;
   image: {
     url: string;
-    alt?: string;
     metadata: ImageMetadata;
+    alt?: LocalizedString;
   };
+  nextPlanetId: string | null;
+  prevPlanetId: string | null;
+  localized: Record<SupportedLanguage, LocalizedPlanetData>;
+}
+
+export interface LocalizedPlanetData {
+  name: string;
+  tags: string[];
   description: string;
   researchTopics: string[];
   resources?: Resource[];
   questions: string[];
   contents: PlanetContent[];
-  nextPlanetId: string | null; // should be appended when planet is fetched (if that is the better way)
-  prevPlanetId: string | null; // should be appended when planet is fetched (if that is the better way)
 }
 
-export interface ImageMetadata {
-  width: number;
-  height: number;
-}
+export type LocalizedString = Record<SupportedLanguage, string>;
 
 export interface Resource {
   title?: string;
   label: string;
   url: string;
+}
+
+export interface ImageMetadata {
+  width: number;
+  height: number;
 }
 
 export type PlanetContent =
@@ -39,7 +47,7 @@ export type PlanetContent =
 
 interface BaseContent {
   id: string;
-  order: number; // integer - if specifically not provided defaults to - prev + 1
+  order: number;
 }
 
 export interface TextContent extends BaseContent {
@@ -49,11 +57,12 @@ export interface TextContent extends BaseContent {
     text: string;
   };
   text: string;
-  variant: 'normal' | 'note' | 'warning' | 'tip'; // defaults to 'normal'
-  markdown: boolean; // defaults to 'false'
+  variant: 'normal' | 'note' | 'warning' | 'tip';
+  markdown: boolean;
 }
 
-export type TitleLevel = 'p' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'; // defaults to 'p' if not provided
+export type TitleLevel = 'p' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+
 export interface ImplementationTaskContent extends BaseContent {
   type: 'implementation-task';
   title?: string;
@@ -63,7 +72,7 @@ export interface ImplementationTaskContent extends BaseContent {
 export interface CodeContent extends BaseContent {
   type: 'code';
   title?: string;
-  task: CodeSnippet;
+  code: CodeSnippet;
 }
 
 export interface CodeSnippet {
@@ -78,7 +87,7 @@ export type ProgrammingLanguage =
   | 'html'
   | 'css'
   | 'json'
-  | 'shell' // bash, sh
+  | 'shell'
   | 'markdown';
 
 export interface HtmlElementContent extends BaseContent {

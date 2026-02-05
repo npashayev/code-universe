@@ -8,22 +8,30 @@ datasource db {
 }
 
 model Planet {
-  id              String    @id @default(auto()) @map("_id") @db.ObjectId
-  category        String
-  status          String    // 'draft' | 'published'
-  name            String
-  step            Int
-  tags            String[]
-  image           Json      // { url: string, alt?: string, metadata: { width: number, height: number } }
-  description     String
-  researchTopics  String[]
-  resources       Json[]    // Array of { title?: string, label: string, url: string }
-  questions       String[]
-  contents        Json[]    // Array of discriminated union content objects
-  nextPlanetId    String?   @db.ObjectId
-  prevPlanetId    String?   @db.ObjectId
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  category     String
+  status       String   // 'draft' | 'published'
+  step         Int
+  image        Json     // { url: string, metadata: { width: number, height: number }, alt?: { az: string, en: string } }
+  nextPlanetId String?  @db.ObjectId
+  prevPlanetId String?  @db.ObjectId
+  localized    Json     // { en: LocalizedPlanetData, az: LocalizedPlanetData }
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   @@map("planets")
 }
+
+// localized structure:
+// {
+//   en: {
+//     name: string,
+//     tags: string[],
+//     description: string,
+//     researchTopics: string[],
+//     resources?: Array<{ title?: string, label: string, url: string }>,
+//     questions: string[],
+//     contents: Array<PlanetContent>
+//   },
+//   az: { ... same structure ... }
+// }
