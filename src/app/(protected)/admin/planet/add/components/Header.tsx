@@ -1,4 +1,4 @@
-import { ChevronDown, Eye, Globe, Languages, Save, Upload } from 'lucide-react';
+import { ChevronDown, Eye, Globe, Languages, Upload } from 'lucide-react';
 
 const Header = () => {
   return (
