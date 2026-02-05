@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 @layer base {
-  h1 {
+  /* h1 {
     @apply text-3xl font-bold pb-4;
   }
 
@@ -15,7 +15,7 @@
 
   section {
     @apply py-5;
-  }
+  } */
 
   button {
     @apply cursor-pointer;
