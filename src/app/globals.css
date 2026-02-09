@@ -22,6 +22,12 @@
   }
 }
 
+@layer utilities {
+  .bg-night {
+    @apply bg-[#030213]/80;
+  }
+}
+
 @layer components {
   .scrollbar-hide {
     -ms-overflow-style: none; /* IE/Edge */
