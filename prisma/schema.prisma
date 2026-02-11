@@ -21,3 +21,20 @@ model Planet {
   
   @@map("planets")
 }
+
+enum UserRole {
+  ADMIN
+}
+
+model User {
+  id             String     @id @default(cuid()) @map("_id") 
+  email          String     @unique
+  hashedPassword String
+  firstName      String
+  lastName       String
+  role           UserRole   @default(ADMIN)
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+
+  @@map("users")
+}
