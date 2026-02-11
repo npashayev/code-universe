@@ -13,14 +13,13 @@ export const urlSchema = (message = 'Invalid URL') =>
     { message },
   );
 
-// Base Enums
 const statusEnum = z.enum(['draft', 'published']);
-const categoryEnum = z.enum(['HTML', 'CSS', 'Javascript']); // Updated to match CATEGORY values
+const categoryEnum = z.enum(['HTML', 'CSS', 'Javascript']);
 const supportedLanguages = z.enum(['az', 'en']);
 const titleLevelEnum = z.enum(['p', 'h2', 'h3', 'h4', 'h5', 'h6']);
 const variantEnum = z.enum(['normal', 'note', 'warning', 'tip']);
 const programmingLanguageEnum = z.enum([
-  'Javascript', // Updated to match PROGRAMMING_LANGUAGE values
+  'Javascript',
   'TypeScript',
   'HTML',
   'CSS',
@@ -29,7 +28,6 @@ const programmingLanguageEnum = z.enum([
   'Markdown',
 ]);
 
-// Nested Types
 const imageMetadataSchema = z.object({
   width: z.number().int().positive(),
   height: z.number().int().positive(),
@@ -71,20 +69,16 @@ const htmlElementSnippetSchema = z.object({
   js: z.string().optional(),
 });
 
-// Base Content Schema (for shared fields)
 const baseContentSchema = z.object({
   id: z.string(),
-  order: z.number().int(),
-  label: z.string().optional(), // Added label field
+  label: z.string().optional(),
 });
 
-// PlanetContent Union
 const textContentSchema = baseContentSchema.extend({
   type: z.literal('text'),
   title: z.object({ level: titleLevelEnum, text: z.string() }).optional(),
   text: z.string(),
   variant: variantEnum,
-  // Removed markdown field (not in types)
 });
 
 const implementationTaskContentSchema = baseContentSchema.extend({
@@ -123,10 +117,12 @@ const planetContentSchema = z.union([
   imageContentSchema,
 ]);
 
-// Localized Planet Data
 export const localizedPlanetDataSchema = z.object({
   name: z.string(),
-  tags: z.array(tagSchema),
+  tags: z
+    .array(tagSchema)
+    .min(1, 'At least one tag is required.')
+    .max(4, 'You can add up to 4 tags.'),
   description: z.string(),
   researchTopics: z.array(researchTopicSchema),
   resources: z.array(resourceSchema).optional(),
@@ -134,7 +130,6 @@ export const localizedPlanetDataSchema = z.object({
   contents: z.array(planetContentSchema),
 });
 
-// CreatePlanetData Schema
 export const createPlanetDataSchema = z.object({
   category: categoryEnum,
   status: statusEnum,
@@ -146,7 +141,6 @@ export const createPlanetDataSchema = z.object({
   localized: z.record(supportedLanguages, localizedPlanetDataSchema),
 });
 
-// PlanetData Schema (extends CreatePlanetData with additional fields)
 export const planetDataSchema = createPlanetDataSchema.extend({
   id: z.string(),
   step: z.number().int(),
@@ -155,7 +149,3 @@ export const planetDataSchema = createPlanetDataSchema.extend({
   createdAt: z.date(),
   updatedAt: z.date(),
 });
-
-// Type inference
-// export type CreatePlanetDataType = z.infer<typeof createPlanetDataSchema>;
-// export type PlanetDataType = z.infer<typeof planetDataSchema>;
