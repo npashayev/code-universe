@@ -45,7 +45,8 @@
     ".next/dev/types/app/page.tsx",
     ".next/dev/types/app/layout.tsx",
     ".next/dev/types/app/roadmap/[map]/page.tsx",
-    ".next/dev/types/app/roadmap/[map]/[planet]/page.tsx"
+    ".next/dev/types/app/roadmap/[map]/[planet]/page.tsx",
+    "adminUser.ts"
   ],
   "exclude": ["node_modules"]
 }
