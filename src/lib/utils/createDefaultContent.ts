@@ -1,28 +1,30 @@
-import { CONTENT_TYPE, ContentType, PlanetContent } from '@/types/planet';
+import {
+  CONTENT_TYPE,
+  ContentType,
+  PlanetContent,
+  PROGRAMMING_LANGUAGE,
+} from '@/types/planet';
 
 export const createDefaultContent = (
   type: ContentType,
-  order: number,
+  index: number,
 ): PlanetContent => {
   const baseId = crypto.randomUUID();
-  const baseLabel = `Block ${order}`;
+  const baseLabel = `Block ${index + 1}`;
 
   switch (type) {
     case CONTENT_TYPE.text:
       return {
         id: baseId,
-        order,
         label: baseLabel,
         type: 'text',
         text: '',
         variant: 'normal',
-        markdown: false,
       };
 
     case CONTENT_TYPE.implementationTask:
       return {
         id: baseId,
-        order,
         label: baseLabel,
         type: 'implementation-task',
         task: '',
@@ -31,11 +33,10 @@ export const createDefaultContent = (
     case CONTENT_TYPE.code:
       return {
         id: baseId,
-        order,
         label: baseLabel,
         type: 'code',
         code: {
-          language: 'javascript',
+          language: PROGRAMMING_LANGUAGE.javascript,
           code: '',
         },
       };
@@ -43,7 +44,6 @@ export const createDefaultContent = (
     case CONTENT_TYPE.htmlElement:
       return {
         id: baseId,
-        order,
         label: baseLabel,
         type: 'html-element',
         element: {
@@ -54,7 +54,6 @@ export const createDefaultContent = (
     case CONTENT_TYPE.image:
       return {
         id: baseId,
-        order,
         label: baseLabel,
         type: 'image',
         image: {
