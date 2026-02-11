@@ -87,7 +87,6 @@ export type ContentType = (typeof CONTENT_TYPE)[keyof typeof CONTENT_TYPE];
 
 export interface BaseContent {
   id: string;
-  order: number;
   label?: string;
   type: ContentType;
 }
