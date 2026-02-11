@@ -1,45 +1,43 @@
-import {
-  CreatePlanetData,
-  ImageContent,
-  SupportedLanguage,
-} from '@/types/planet';
+import { UpdateContentFn } from '@/lib/hooks/useLocalizedContent';
+import { ImageContent, SupportedLanguage } from '@/types/planet';
 import { FileUp, ImageIcon } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { Updater } from 'use-immer';
 
 interface Props {
   content: ImageContent;
-  setPlanetData: Updater<CreatePlanetData>;
+  onUpdate: UpdateContentFn;
+  setPendingFiles: React.Dispatch<React.SetStateAction<Map<string, File>>>;
   locale: SupportedLanguage;
 }
-const ImageContentBlock = ({ content, setPlanetData, locale }: Props) => {
+const ImageContentBlock = ({
+  content,
+  onUpdate,
+  setPendingFiles,
+  locale,
+}: Props) => {
   const [imagePreviewUrl, setImagePreviewUrl] = useState('');
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('Worked');
     const file = e.target.files?.[0];
+    if (!file) return;
 
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      console.log(imageUrl);
-      setImagePreviewUrl(imageUrl);
-    }
+    const previewUrl = URL.createObjectURL(file);
+    setImagePreviewUrl(previewUrl);
+
+    // Store file for later upload
+    const fileKey = `content-${locale}-${content.id}`;
+    setPendingFiles(prev => {
+      const newMap = new Map(prev);
+      newMap.set(fileKey, file);
+      return newMap;
+    });
   };
-
   useEffect(() => {
     return () => {
       if (imagePreviewUrl) URL.revokeObjectURL(imagePreviewUrl);
     };
   }, [imagePreviewUrl]);
-
-  const updateContent = (id: string, updates: Partial<ImageContent>) => {
-    setPlanetData(draft => {
-      const content = draft.localized[locale].contents.find(c => c.id === id);
-      if (!content) return;
-      Object.assign(content, updates);
-    });
-  };
 
   return (
     <div className="space-y-6">
@@ -51,7 +49,7 @@ const ImageContentBlock = ({ content, setPlanetData, locale }: Props) => {
           type="text"
           placeholder="Caption for the image..."
           value={content.title || ''}
-          onChange={e => updateContent(content.id, { title: e.target.value })}
+          onChange={e => onUpdate(content.id, { title: e.target.value })}
           className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none"
         />
       </div>
@@ -67,7 +65,7 @@ const ImageContentBlock = ({ content, setPlanetData, locale }: Props) => {
                 accept="image/*"
               />
               <label
-                htmlFor="main-image-upload"
+                htmlFor={`image-upload-${content.id}`}
                 className="w-full flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 border border-dashed border-white/20 hover:border-orange-500/50 rounded-xl px-4 py-4 outline-none transition-all text-slate-400 cursor-pointer group"
               >
                 <FileUp
@@ -86,7 +84,7 @@ const ImageContentBlock = ({ content, setPlanetData, locale }: Props) => {
               type="text"
               value={content.image.alt || ''}
               onChange={e =>
-                updateContent(content.id, {
+                onUpdate(content.id, {
                   image: { ...content.image, alt: e.target.value },
                 })
               }

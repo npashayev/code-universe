@@ -1,19 +1,16 @@
 import { getAdminPageSelectStyles } from '@/lib/utils/getAdminPageSelectStyles';
 import {
   CodeContent,
-  CreatePlanetData,
   PROGRAMMING_LANGUAGE,
   ProgrammingLanguage,
-  SupportedLanguage,
 } from '@/types/planet';
 import { ChevronDown, Eye, Terminal } from 'lucide-react';
-import { Updater } from 'use-immer';
 import Select from 'react-select';
+import { UpdateContentFn } from '@/lib/hooks/useLocalizedContent';
 
 interface Props {
   content: CodeContent;
-  setPlanetData: Updater<CreatePlanetData>;
-  locale: SupportedLanguage;
+  onUpdate: UpdateContentFn;
 }
 
 interface LanguageOption {
@@ -28,14 +25,7 @@ const languageOptions: LanguageOption[] = Object.entries(
   value,
 }));
 
-const CodeContentBlock = ({ content, setPlanetData, locale }: Props) => {
-  const updateContent = (id: string, updates: Partial<CodeContent>) => {
-    setPlanetData(draft => {
-      const content = draft.localized[locale].contents.find(c => c.id === id);
-      if (!content) return;
-      Object.assign(content, updates);
-    });
-  };
+const CodeContentBlock = ({ content, onUpdate }: Props) => {
   return (
     <div className="space-y-6">
       <div className="flex gap-4">
@@ -46,7 +36,7 @@ const CodeContentBlock = ({ content, setPlanetData, locale }: Props) => {
           <input
             type="text"
             value={content.title || ''}
-            onChange={e => updateContent(content.id, { title: e.target.value })}
+            onChange={e => onUpdate(content.id, { title: e.target.value })}
             className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-sm outline-none"
           />
         </div>
@@ -64,7 +54,7 @@ const CodeContentBlock = ({ content, setPlanetData, locale }: Props) => {
               options={languageOptions}
               onChange={option => {
                 if (!option) return;
-                updateContent(content.id, {
+                onUpdate(content.id, {
                   code: {
                     ...content.code,
                     language: option.value,
@@ -95,7 +85,7 @@ const CodeContentBlock = ({ content, setPlanetData, locale }: Props) => {
           <textarea
             value={content.code.code}
             onChange={e =>
-              updateContent(content.id, {
+              onUpdate(content.id, {
                 code: { ...content.code, code: e.target.value },
               })
             }
@@ -109,7 +99,7 @@ const CodeContentBlock = ({ content, setPlanetData, locale }: Props) => {
           <textarea
             value={content.code.output || ''}
             onChange={e =>
-              updateContent(content.id, {
+              onUpdate(content.id, {
                 code: { ...content.code, output: e.target.value },
               })
             }

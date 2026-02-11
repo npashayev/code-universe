@@ -8,22 +8,31 @@ interface Props {
   planetData: CreatePlanetData;
   setPlanetData: Updater<CreatePlanetData>;
   locale: SupportedLanguage;
+  setPendingFiles: React.Dispatch<React.SetStateAction<Map<string, File>>>;
 }
 
 const BasicConfigurationSection = ({
   planetData,
   setPlanetData,
   locale,
+  setPendingFiles,
 }: Props) => {
   const [imagePreviewUrl, setImagePreviewUrl] = useState('');
 
-  const handleMainImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+    if (!file) return;
 
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setImagePreviewUrl(imageUrl);
-    }
+    const previewUrl = URL.createObjectURL(file);
+    setImagePreviewUrl(previewUrl);
+
+    // Different fileKey for main image
+    const fileKey = 'main-image';
+    setPendingFiles(prev => {
+      const newMap = new Map(prev);
+      newMap.set(fileKey, file);
+      return newMap;
+    });
   };
 
   useEffect(() => {
@@ -87,7 +96,7 @@ const BasicConfigurationSection = ({
                     type="file"
                     id="main-image-upload"
                     className="hidden"
-                    onChange={handleMainImageUpload}
+                    onChange={handleImageUpload}
                     accept="image/*"
                   />
                   <label

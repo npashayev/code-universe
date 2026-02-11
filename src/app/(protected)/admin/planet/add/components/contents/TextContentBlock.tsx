@@ -9,12 +9,13 @@ import { Updater } from 'use-immer';
 import Select from 'react-select';
 import { getAdminPageSelectStyles } from '@/lib/utils/getAdminPageSelectStyles';
 import { ChevronDown } from 'lucide-react';
-import { useEffect } from 'react';
+import { UpdateContentFn } from '@/lib/hooks/useLocalizedContent';
 
 interface Props {
   content: TextContent;
   setPlanetData: Updater<CreatePlanetData>;
   locale: SupportedLanguage;
+  onUpdate: UpdateContentFn;
 }
 
 interface TitleLevelOption {
@@ -73,15 +74,12 @@ const textVariantOptions: TextVariantOption[] = [
   },
 ];
 
-const TextContentBlock = ({ content, setPlanetData, locale }: Props) => {
-  const updateContent = (id: string, updates: Partial<TextContent>) => {
-    setPlanetData(draft => {
-      const content = draft.localized[locale].contents.find(c => c.id === id);
-      if (!content) return;
-      Object.assign(content, updates);
-    });
-  };
-
+const TextContentBlock = ({
+  content,
+  setPlanetData,
+  locale,
+  onUpdate,
+}: Props) => {
   return (
     <div className="space-y-6">
       <div className="flex gap-2">
@@ -101,12 +99,13 @@ const TextContentBlock = ({ content, setPlanetData, locale }: Props) => {
               options={titleLevelOptions}
               onChange={option => {
                 if (!option) return;
-                updateContent(content.id, {
-                  title: {
-                    level: option.value,
-                    text: content.title?.text || '',
-                  },
-                });
+                if (!content.title?.text)
+                  onUpdate(content.id, {
+                    title: {
+                      level: option.value,
+                      text: content.title?.text || '',
+                    },
+                  });
               }}
               styles={getAdminPageSelectStyles<TitleLevelOption>({
                 controlStyles: {
@@ -147,7 +146,7 @@ const TextContentBlock = ({ content, setPlanetData, locale }: Props) => {
                 return;
               }
 
-              updateContent(content.id, {
+              onUpdate(content.id, {
                 title: {
                   level: content.title?.level || 'p',
                   text: value,
@@ -164,7 +163,7 @@ const TextContentBlock = ({ content, setPlanetData, locale }: Props) => {
         </label>
         <textarea
           value={content.text}
-          onChange={e => updateContent(content.id, { text: e.target.value })}
+          onChange={e => onUpdate(content.id, { text: e.target.value })}
           className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm min-h-37.5 outline-none"
         />
       </div>
@@ -184,7 +183,7 @@ const TextContentBlock = ({ content, setPlanetData, locale }: Props) => {
                 options={textVariantOptions}
                 onChange={option => {
                   if (!option) return;
-                  updateContent(content.id, {
+                  onUpdate(content.id, {
                     variant: option.value,
                   });
                 }}

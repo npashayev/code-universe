@@ -1,31 +1,12 @@
-import {
-  CreatePlanetData,
-  ImplementationTaskContent,
-  SupportedLanguage,
-} from '@/types/planet';
-import { Updater } from 'use-immer';
+import { UpdateContentFn } from '@/lib/hooks/useLocalizedContent';
+import { ImplementationTaskContent } from '@/types/planet';
 
 interface Props {
   content: ImplementationTaskContent;
-  setPlanetData: Updater<CreatePlanetData>;
-  locale: SupportedLanguage;
+  onUpdate: UpdateContentFn;
 }
 
-const ImplementationTaskContentBlock = ({
-  content,
-  setPlanetData,
-  locale,
-}: Props) => {
-  const updateContent = (
-    id: string,
-    updates: Partial<ImplementationTaskContent>,
-  ) => {
-    setPlanetData(draft => {
-      const content = draft.localized[locale].contents.find(c => c.id === id);
-      if (!content) return;
-      Object.assign(content, updates);
-    });
-  };
+const ImplementationTaskContentBlock = ({ content, onUpdate }: Props) => {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
@@ -35,7 +16,7 @@ const ImplementationTaskContentBlock = ({
         <input
           type="text"
           value={content.title || ''}
-          onChange={e => updateContent(content.id, { title: e.target.value })}
+          onChange={e => onUpdate(content.id, { title: e.target.value })}
           className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none"
         />
       </div>
@@ -45,7 +26,7 @@ const ImplementationTaskContentBlock = ({
         </label>
         <textarea
           value={content.task}
-          onChange={e => updateContent(content.id, { task: e.target.value })}
+          onChange={e => onUpdate(content.id, { task: e.target.value })}
           className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm min-h-30 outline-none"
         />
       </div>

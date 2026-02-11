@@ -1,25 +1,49 @@
 import { HelpCircle, Trash2 } from 'lucide-react';
 import { useState } from 'react';
-import { CreatePlanetData, SupportedLanguage } from '@/types/planet';
+import { CreatePlanetData, Question, SupportedLanguage } from '@/types/planet';
 import { Updater } from 'use-immer';
+import {
+  DndContext,
+  closestCenter,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+} from '@dnd-kit/core';
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+  arrayMove,
+} from '@dnd-kit/sortable';
+import { SortableItem } from '@/components/shared/SortableItem';
+import { updateLocalizedArray } from '@/lib/utils/updateLocalizedArray';
+import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 
 interface Props {
-  planetData: CreatePlanetData;
+  questions: Question[];
   setPlanetData: Updater<CreatePlanetData>;
   locale: SupportedLanguage;
 }
 
-const QuestionsSection = ({ planetData, setPlanetData, locale }: Props) => {
+export const QuestionsSection = ({
+  questions,
+  setPlanetData,
+  locale,
+}: Props) => {
   const [currentQuestion, setCurrentQuestion] = useState('');
 
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
+  );
+
   const addQuestion = () => {
+    if (!currentQuestion.trim()) return;
     setPlanetData(draft => {
       draft.localized[locale].questions.push({
         id: crypto.randomUUID(),
         question: currentQuestion,
       });
     });
-
     setCurrentQuestion('');
   };
 
@@ -27,7 +51,21 @@ const QuestionsSection = ({ planetData, setPlanetData, locale }: Props) => {
     setPlanetData(draft => {
       draft.localized[locale].questions = draft.localized[
         locale
-      ].questions.filter(qn => qn.id !== id);
+      ].questions.filter(q => q.id !== id);
+    });
+  };
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+
+    setPlanetData(draft => {
+      const sorted = arrayMove(
+        draft.localized[locale].questions,
+        draft.localized[locale].questions.findIndex(q => q.id === active.id),
+        draft.localized[locale].questions.findIndex(q => q.id === over.id),
+      );
+      updateLocalizedArray(draft, locale, 'questions', sorted);
     });
   };
 
@@ -37,6 +75,7 @@ const QuestionsSection = ({ planetData, setPlanetData, locale }: Props) => {
         <HelpCircle size={14} />
         <span>Questions</span>
       </div>
+
       <div className="flex gap-2">
         <div className="relative flex-1">
           <HelpCircle
@@ -47,11 +86,7 @@ const QuestionsSection = ({ planetData, setPlanetData, locale }: Props) => {
             type="text"
             value={currentQuestion}
             onChange={e => setCurrentQuestion(e.target.value)}
-            onKeyDown={e => {
-              if (e.key === 'Enter') {
-                addQuestion();
-              }
-            }}
+            onKeyDown={e => e.key === 'Enter' && addQuestion()}
             placeholder="Add question"
             className="w-full bg-white/5 border border-white/10 focus:border-orange-500/50 rounded-xl pl-10 pr-4 py-3 outline-none transition-all text-white"
           />
@@ -63,30 +98,43 @@ const QuestionsSection = ({ planetData, setPlanetData, locale }: Props) => {
           Add
         </button>
       </div>
-      <div className="space-y-2">
-        {planetData.localized[locale].questions.map(question => (
-          <div
-            key={question.id}
-            className="flex items-center justify-between p-4 bg-white/5 border border-white/10 rounded-xl"
-          >
-            <span className="text-sm text-slate-300 font-medium">
-              {question.question}
-            </span>
-            <button
-              onClick={() => removeQuestion(question.id)}
-              className="text-slate-600 hover:text-red-400"
-            >
-              <Trash2 size={16} />
-            </button>
+
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragEnd={handleDragEnd}
+        modifiers={[restrictToVerticalAxis]}
+      >
+        <SortableContext
+          items={questions.map(q => q.id)}
+          strategy={verticalListSortingStrategy}
+        >
+          <div className="overflow-hidden space-y-2">
+            {questions.map(question => (
+              <SortableItem key={question.id} id={question.id}>
+                <div className="flex items-center justify-between p-4 bg-white/5 border border-white/10 rounded-xl">
+                  <span className="text-sm text-slate-300 font-medium">
+                    {question.question}
+                  </span>
+                  <button
+                    onClick={() => removeQuestion(question.id)}
+                    className="text-slate-600 hover:text-red-400"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                </div>
+              </SortableItem>
+            ))}
           </div>
-        ))}
-        {(planetData.localized[locale].questions?.length === 0 ||
-          !planetData.localized[locale].questions) && (
-          <span className="text-slate-600 text-xs italic">
-            No questions assigned yet.
-          </span>
-        )}
-      </div>
+        </SortableContext>
+
+        {!questions ||
+          (questions.length === 0 && (
+            <span className="text-slate-600 text-xs italic">
+              No questions assigned yet.
+            </span>
+          ))}
+      </DndContext>
     </section>
   );
 };

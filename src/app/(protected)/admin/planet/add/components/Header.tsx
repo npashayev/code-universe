@@ -1,4 +1,10 @@
-import { CATEGORY, Category, CreatePlanetData, Status } from '@/types/planet';
+import {
+  CATEGORY,
+  Category,
+  CreatePlanetData,
+  Status,
+  SupportedLanguage,
+} from '@/types/planet';
 import {
   ChevronDown,
   Code,
@@ -14,6 +20,7 @@ import { LanguageOption } from '../page';
 import { useRef } from 'react';
 import { getAdminPageSelectStyles } from '@/lib/utils/getAdminPageSelectStyles';
 import { localizedPlanetDataSchema } from '@/lib/validation/createPlanetDataSchema';
+import { useR2Upload } from '@/lib/hooks/useR2Upload';
 
 interface Props {
   planetData: CreatePlanetData;
@@ -21,6 +28,8 @@ interface Props {
   languageOptions: LanguageOption[];
   currentLanguage: LanguageOption;
   setCurrentLanguage: (language: LanguageOption) => void;
+  pendingFiles: Map<string, File>;
+  setPendingFiles: React.Dispatch<React.SetStateAction<Map<string, File>>>;
 }
 
 type StatusOption = {
@@ -57,6 +66,8 @@ const Header = ({
   currentLanguage,
   languageOptions,
   setCurrentLanguage,
+  pendingFiles,
+  setPendingFiles,
 }: Props) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -91,7 +102,6 @@ const Header = ({
     if (!file) return;
 
     const reader = new FileReader();
-
     reader.onload = () => {
       try {
         const parsed = JSON.parse(reader.result as string);
@@ -117,6 +127,74 @@ const Header = ({
 
     // allow re-uploading same file
     e.target.value = '';
+  };
+
+  const { batchUpload, deleteFile, isUploading, error, progress } =
+    useR2Upload();
+
+  const handleSubmit = async () => {
+    if (pendingFiles.size === 0) {
+      // No files to upload, submit directly
+      alert('Success');
+      return;
+    }
+
+    try {
+      // Prepare batch upload items
+      const uploadItems = Array.from(pendingFiles.entries()).map(
+        ([fileKey, file]) => {
+          // Determine type based on fileKey
+          const type =
+            fileKey === 'main-image' ? 'planet-main' : 'planet-content';
+
+          return {
+            file,
+            fileKey,
+            type: type as 'planet-main' | 'planet-content',
+          };
+        },
+      );
+
+      // Upload all files (with automatic rollback if any fails)
+      const uploadResults = await batchUpload(uploadItems);
+
+      if (!uploadResults) {
+        // Upload failed, error is already set in hook
+        console.error('Upload failed:', error);
+        return;
+      }
+
+      // Update planetData with real R2 URLs
+      setPlanetData(draft => {
+        uploadResults.forEach((result, fileKey) => {
+          if (fileKey === 'main-image') {
+            // Update main planet image
+            draft.image.url = result.url;
+          } else if (fileKey.startsWith('content-')) {
+            // Parse: "content-az-abc123" -> locale: "az", contentId: "abc123"
+            const parts = fileKey.split('-');
+            const locale = parts[1] as SupportedLanguage;
+            const contentId = parts.slice(2).join('-'); // we join with '-' because randomUUID function gives us id containing dashes
+
+            // Find and update the content block
+            const content = draft.localized[locale].contents.find(
+              c => c.id === contentId,
+            );
+            if (content && content.type === 'image') {
+              content.image.url = result.url;
+            }
+          }
+        });
+      });
+
+      // Clear pending files
+      setPendingFiles(new Map());
+
+      // Now submit to backend
+      alert('Success');
+    } catch (err) {
+      console.error('Submission error:', err);
+    }
   };
 
   return (

@@ -1,4 +1,9 @@
-import { CONTENT_TYPE, CreatePlanetData, SupportedLanguage } from '@/types/planet';
+import {
+  CONTENT_TYPE,
+  CreatePlanetData,
+  PlanetContent,
+  SupportedLanguage,
+} from '@/types/planet';
 import { Database } from 'lucide-react';
 import { Updater } from 'use-immer';
 import TextContentBlock from './contents/TextContentBlock';
@@ -7,23 +12,31 @@ import ImplementationTaskContentBlock from './contents/ImplementationTaskContent
 import CodeContentBlock from './contents/CodeContentBlock';
 import HtmlElementContentBlock from './contents/HtmlElementContentBlock';
 import ImageContentBlock from './contents/ImageContentBlock';
+import { useLocalizedContent } from '@/lib/hooks/useLocalizedContent';
 
 interface Props {
-  planetData: CreatePlanetData;
+  contents: PlanetContent[];
   setPlanetData: Updater<CreatePlanetData>;
   locale: SupportedLanguage;
+  setPendingFiles: React.Dispatch<React.SetStateAction<Map<string, File>>>;
 }
 
-const ContentsSection = ({ planetData, setPlanetData, locale }: Props) => {
-  const { contents } = planetData.localized[locale];
-
-
+const ContentsSection = ({
+  contents,
+  setPlanetData,
+  locale,
+  setPendingFiles,
+}: Props) => {
+  const { removeContent, updateContent } = useLocalizedContent({
+    setPlanetData,
+    locale,
+  });
 
   return (
     <section className="space-y-8 pt-8 border-t border-white/10">
       <div className="flex items-center gap-3 text-white font-bold text-xl tracking-tight">
         <Database className="text-orange-500" size={24} />
-        <span>Discovery Contents</span>
+        <span>Contents</span>
       </div>
       <div className="space-y-10">
         <div className="space-y-10">
@@ -36,8 +49,8 @@ const ContentsSection = ({ planetData, setPlanetData, locale }: Props) => {
               <ContentHeading
                 idx={idx}
                 content={content}
-                setPlanetData={setPlanetData}
-                locale={locale}
+                onUpdate={updateContent}
+                onRemove={removeContent}
               />
 
               {content.type === CONTENT_TYPE.text && (
@@ -45,33 +58,29 @@ const ContentsSection = ({ planetData, setPlanetData, locale }: Props) => {
                   content={content}
                   setPlanetData={setPlanetData}
                   locale={locale}
+                  onUpdate={updateContent}
                 />
               )}
               {content.type === CONTENT_TYPE.implementationTask && (
                 <ImplementationTaskContentBlock
                   content={content}
-                  setPlanetData={setPlanetData}
-                  locale={locale}
+                  onUpdate={updateContent}
                 />
               )}
               {content.type === CONTENT_TYPE.code && (
-                <CodeContentBlock
-                  content={content}
-                  setPlanetData={setPlanetData}
-                  locale={locale}
-                />
+                <CodeContentBlock content={content} onUpdate={updateContent} />
               )}
               {content.type === CONTENT_TYPE.htmlElement && (
                 <HtmlElementContentBlock
                   content={content}
-                  setPlanetData={setPlanetData}
-                  locale={locale}
+                  onUpdate={updateContent}
                 />
               )}
               {content.type === CONTENT_TYPE.image && (
                 <ImageContentBlock
                   content={content}
-                  setPlanetData={setPlanetData}
+                  onUpdate={updateContent}
+                  setPendingFiles={setPendingFiles}
                   locale={locale}
                 />
               )}
