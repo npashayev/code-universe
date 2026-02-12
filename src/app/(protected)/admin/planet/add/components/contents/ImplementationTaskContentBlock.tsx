@@ -1,5 +1,8 @@
 import { UpdateContentFn } from '@/lib/hooks/useLocalizedContent';
 import { ImplementationTaskContent } from '@/types/planet';
+import Input from '../shared/Input';
+import Label from '../shared/Label';
+import Textarea from '../shared/Textarea';
 
 interface Props {
   content: ImplementationTaskContent;
@@ -10,24 +13,23 @@ const ImplementationTaskContentBlock = ({ content, onUpdate }: Props) => {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <label className="block mb-2 text-xs font-bold text-slate-500 uppercase tracking-wider">
+        <Label htmlFor={`implementation-task-title-${content.id}`}>
           Task Title (Optional)
-        </label>
-        <input
-          type="text"
+        </Label>
+        <Input
+          id={`implementation-task-title-${content.id}`}
           value={content.title || ''}
           onChange={e => onUpdate(content.id, { title: e.target.value })}
-          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none"
         />
       </div>
       <div className="space-y-2">
-        <label className="block mb-2 text-xs font-bold text-slate-500 uppercase tracking-wider">
+        <Label htmlFor={`implementation-task-instructions-${content.id}`}>
           Task Instructions
-        </label>
-        <textarea
+        </Label>
+        <Textarea
+          id={`implementation-task-instructions-${content.id}`}
           value={content.task}
           onChange={e => onUpdate(content.id, { task: e.target.value })}
-          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm min-h-30 outline-none"
         />
       </div>
     </div>

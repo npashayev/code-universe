@@ -1,5 +1,8 @@
 import { UpdateContentFn } from '@/lib/hooks/useLocalizedContent';
 import { HtmlElementContent } from '@/types/planet';
+import Label from '../shared/Label';
+import Input from '../shared/Input';
+import Textarea from '../shared/Textarea';
 
 interface Props {
   content: HtmlElementContent;
@@ -10,57 +13,59 @@ const HtmlElementContentBlock = ({ content, onUpdate }: Props) => {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider">
+        <Label htmlFor={`html-element-content-title-${content.id}`}>
           Title (Optional)
-        </label>
-        <input
-          type="text"
+        </Label>
+        <Input
+          id={`html-element-content-title-${content.id}`}
           value={content.title || ''}
           onChange={e => onUpdate(content.id, { title: e.target.value })}
-          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none"
         />
       </div>
       <div className="space-y-4">
         <div className="space-y-2">
-          <label className="block text-[12px] text-slate-500 uppercase font-bold">
+          <Label htmlFor={`html-element-html-code-${content.id}`}>
             HTML code
-          </label>
-          <textarea
+          </Label>
+          <Textarea
+            id={`html-element-html-code-${content.id}`}
             value={content.element.html}
             onChange={e =>
               onUpdate(content.id, {
                 element: { ...content.element, html: e.target.value },
               })
             }
-            className="w-full bg-[#0d0d1e] border border-white/10 rounded-xl px-4 py-3 text-[10px] font-mono h-32 outline-none"
+            className="code-area"
           />
         </div>
         <div className="space-y-2">
-          <label className="block text-[12px] text-slate-500 uppercase font-bold">
+          <Label htmlFor={`html-element-css-code-${content.id}`}>
             CSS code (Optional)
-          </label>
-          <textarea
+          </Label>
+          <Textarea
+            id={`html-element-css-code-${content.id}`}
             value={content.element.css || ''}
             onChange={e =>
               onUpdate(content.id, {
                 element: { ...content.element, css: e.target.value },
               })
             }
-            className="w-full bg-[#0d0d1e] border border-white/10 rounded-xl px-4 py-3 text-[10px] font-mono h-32 outline-none"
+            className="code-area"
           />
         </div>
         <div className="space-y-2">
-          <label className="block text-[12px] text-slate-500 uppercase font-bold">
+          <Label htmlFor={`html-element-js-code-${content.id}`}>
             Javascript code (Optional)
-          </label>
-          <textarea
+          </Label>
+          <Textarea
+            id={`html-element-js-code-${content.id}`}
             value={content.element.js || ''}
             onChange={e =>
               onUpdate(content.id, {
                 element: { ...content.element, js: e.target.value },
               })
             }
-            className="w-full bg-[#0d0d1e] border border-white/10 rounded-xl px-4 py-3 text-[10px] font-mono h-32 outline-none"
+            className="code-area"
           />
         </div>
       </div>

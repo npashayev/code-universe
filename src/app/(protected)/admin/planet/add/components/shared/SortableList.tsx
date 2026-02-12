@@ -1,0 +1,56 @@
+import { SortableItem } from '@/components/shared/SortableItem';
+import {
+  DndContext,
+  DragEndEvent,
+  PointerSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+
+interface Props<T extends { id: string }> {
+  elements: T[];
+  handleDragEnd: (event: DragEndEvent) => void;
+  renderItem: (element: T) => React.ReactNode;
+}
+
+const SortableList = <T extends { id: string }>({
+  elements,
+  handleDragEnd,
+  renderItem,
+}: Props<T>) => {
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
+  );
+
+  return (
+    <DndContext
+      sensors={sensors}
+      collisionDetection={closestCenter}
+      onDragEnd={handleDragEnd}
+      modifiers={[restrictToVerticalAxis]}
+    >
+      {elements.length > 0 && (
+        <SortableContext
+          items={elements.map(e => e.id)}
+          strategy={verticalListSortingStrategy}
+        >
+          <div className="overflow-hidden space-y-2">
+            {elements.map(element => (
+              <SortableItem key={element.id} id={element.id}>
+                {renderItem(element)}
+              </SortableItem>
+            ))}
+          </div>
+        </SortableContext>
+      )}
+    </DndContext>
+  );
+};
+
+export default SortableList;

@@ -1,26 +1,18 @@
 'use client';
 
-import { CATEGORY, CreatePlanetData, SupportedLanguage } from '@/types/planet';
+import { PLANET_CATEGORY, CreatePlanetData } from '@/types/planet';
 import { useState } from 'react';
 import { useImmer } from 'use-immer';
 import Header from './components/Header';
-import BasicConfigurationSection from './components/BasicConfigurationSection';
-import TagsSection from './components/TagsSection';
-import ResearchTopicsSection from './components/ResearchTopicsSection';
-import ExternalResourcesSection from './components/ExternalResourcesSection';
-import QuestionsSection from './components/QuestionsSection';
-import ContentsSection from './components/ContentsSection';
+import BasicConfigurationSection from './components/sections/BasicConfigurationSection';
+import TagsSection from './components/sections/TagsSection';
+import ResearchTopicsSection from './components/sections/ResearchTopicsSection';
+import ExternalResourcesSection from './components/sections/ExternalResourcesSection';
+import QuestionsSection from './components/sections/QuestionsSection';
+import ContentsSection from './components/sections/ContentsSection';
 import ContentSidebar from './components/ContentSidebar';
-
-export interface LanguageOption {
-  value: SupportedLanguage;
-  label: string;
-}
-
-const languageOptions: LanguageOption[] = [
-  { value: 'en', label: 'English' },
-  { value: 'az', label: 'Azerbaijani' },
-];
+import { LanguageOption } from '@/types/reactSelectOptions';
+import { languageOptions } from '@/lib/constants/reactSelectOptions';
 
 const AddPlanetPage = () => {
   const [currentLanguage, setCurrentLanguage] = useState<LanguageOption>(
@@ -28,7 +20,7 @@ const AddPlanetPage = () => {
   );
 
   const [planetData, setPlanetData] = useImmer<CreatePlanetData>({
-    category: CATEGORY.html,
+    category: PLANET_CATEGORY.html,
     status: 'draft',
     image: {
       url: '',
@@ -72,7 +64,6 @@ const AddPlanetPage = () => {
       <Header
         planetData={planetData}
         setPlanetData={setPlanetData}
-        languageOptions={languageOptions}
         currentLanguage={currentLanguage}
         setCurrentLanguage={setCurrentLanguage}
         pendingFiles={pendingFiles}

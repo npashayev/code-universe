@@ -6,13 +6,14 @@ import {
 } from '@/types/planet';
 import { Database } from 'lucide-react';
 import { Updater } from 'use-immer';
-import TextContentBlock from './contents/TextContentBlock';
-import ContentHeading from './contents/ContentHeading';
-import ImplementationTaskContentBlock from './contents/ImplementationTaskContentBlock';
-import CodeContentBlock from './contents/CodeContentBlock';
-import HtmlElementContentBlock from './contents/HtmlElementContentBlock';
-import ImageContentBlock from './contents/ImageContentBlock';
+import TextContentBlock from '../contents/TextContentBlock';
+import ContentHeading from '../contents/ContentHeading';
+import ImplementationTaskContentBlock from '../contents/ImplementationTaskContentBlock';
+import CodeContentBlock from '../contents/CodeContentBlock';
+import HtmlElementContentBlock from '../contents/HtmlElementContentBlock';
+import ImageContentBlock from '../contents/ImageContentBlock';
 import { useLocalizedContent } from '@/lib/hooks/useLocalizedContent';
+import { cn } from '@/lib/utils/cn';
 
 interface Props {
   contents: PlanetContent[];
@@ -36,7 +37,7 @@ const ContentsSection = ({
     <section className="space-y-8 pt-8 border-t border-white/10">
       <div className="flex items-center gap-3 text-white font-bold text-xl tracking-tight">
         <Database className="text-orange-500" size={24} />
-        <span>Contents</span>
+        <h2>Contents</h2>
       </div>
       <div className="space-y-10">
         <div className="space-y-10">
@@ -44,7 +45,7 @@ const ContentsSection = ({
             <div
               key={content.id}
               id={content.id}
-              className="p-8 bg-white/3 border border-white/10 rounded-3xl space-y-8 relative group hover:border-orange-500/30 transition-all"
+              className={cn('admin-page-section', 'p-8 rounded-3xl space-y-8')}
             >
               <ContentHeading
                 idx={idx}

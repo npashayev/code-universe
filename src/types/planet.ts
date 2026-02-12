@@ -1,15 +1,16 @@
 export type SupportedLanguage = 'az' | 'en';
-export type Status = 'draft' | 'published';
+export type PlanetStatus = 'draft' | 'published';
 
-export const CATEGORY = {
+export const PLANET_CATEGORY = {
   html: 'HTML',
   css: 'CSS',
   javascript: 'Javascript',
 } as const;
 
-export type Category = (typeof CATEGORY)[keyof typeof CATEGORY];
+export type PlanetCategory =
+  (typeof PLANET_CATEGORY)[keyof typeof PLANET_CATEGORY];
 
-export interface Tag {
+export interface PlanetTag {
   id: string;
   tag: string;
 }
@@ -25,8 +26,8 @@ export interface Question {
 }
 
 export interface CreatePlanetData {
-  category: Category;
-  status: Status;
+  category: PlanetCategory;
+  status: PlanetStatus;
   image: {
     url: string;
     metadata: ImageMetadata;
@@ -46,7 +47,7 @@ export interface PlanetData extends CreatePlanetData {
 
 export interface LocalizedPlanetData {
   name: string;
-  tags: Tag[];
+  tags: PlanetTag[];
   description: string;
   researchTopics: ResearchTopic[];
   resources?: Resource[];

@@ -1,22 +1,6 @@
 @import 'tailwindcss';
 
 @layer base {
-  /* h1 {
-    @apply text-3xl font-bold pb-4;
-  }
-
-  h2 {
-    @apply text-2xl font-bold pb-3;
-  }
-
-  h3 {
-    @apply font-bold pb-2;
-  }
-
-  section {
-    @apply py-5;
-  } */
-
   button {
     @apply cursor-pointer;
   }
@@ -28,6 +12,11 @@
   }
 }
 
+@theme {
+  --color-white-subtle: rgb(255 255 255 / 0.05);
+  --color-white-default: rgb(255 255 255 / 0.1);
+}
+
 @layer components {
   .scrollbar-hide {
     -ms-overflow-style: none; /* IE/Edge */
@@ -36,6 +25,14 @@
 
   .scrollbar-hide::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
+  }
+
+  .admin-page-section {
+    @apply bg-white/3 border border-white/10 rounded-2xl p-6 space-y-2 hover:border-orange-500/30 transition-all;
+  }
+
+  .code-area {
+    @apply text-[10px] font-mono h-32 bg-[#0d0d1e]!;
   }
 }
 
