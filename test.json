@@ -1,357 +1,547 @@
 {
   "planets": [
     {
-      "id": "planet-1",
-      "name": "JavaScript Fundamentals",
-      "tags": ["test tag 1", "test tag 2"],
-      "description": "Master the core concepts of JavaScript programming",
-      "imageUrl": "/planet.webp",
-      "researchTopics": [
-        "Variables and Data Types",
-        "Functions and Scope",
-        "Async Programming",
-        "ES6+ Features"
-      ],
-      "questions": [
-        "What is the difference between let, const, and var?",
-        "How does closure work in JavaScript?",
-        "What are Promises and async/await?"
-      ],
-      "contents": [
-        {
-          "id": "content-1-1",
-          "type": "h2",
-          "text": "Introduction to JavaScript"
+      "id": "f3a9c1d7-2e84-4b56-a012-7c3f8e9d0b45",
+      "category": "Javascript",
+      "status": "published",
+      "step": 1,
+      "nextPlanetId": null,
+      "prevPlanetId": null,
+      "createdAt": "2024-03-10T09:00:00.000Z",
+      "updatedAt": "2024-03-10T09:00:00.000Z",
+      "image": {
+        "url": "/planet.webp",
+        "metadata": {
+          "width": 1024,
+          "height": 1024
         },
-        {
-          "id": "content-1-2",
-          "type": "text",
-          "text": "JavaScript is a versatile programming language that powers the modern web. It enables interactive web pages and is an essential part of web applications."
-        },
-        {
-          "id": "content-1-3",
-          "type": "code-example",
-          "title": "Variable Declaration",
-          "example": {
-            "language": "javascript",
-            "code": "const greeting = 'Hello, World!';\nlet count = 0;\ncount++;\nconsole.log(greeting, count);",
-            "output": "Hello, World! 1"
-          }
-        },
-        {
-          "id": "content-1-4",
-          "type": "implementation-task",
-          "task": "Create a function that takes an array of numbers and returns the sum of all even numbers."
-        },
-        {
-          "id": "content-1-5",
-          "type": "image",
-          "name": "javascript-ecosystem",
-          "title": "The JavaScript Ecosystem",
-          "url": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=600"
+        "alt": {
+          "en": "JavaScript Event Listeners planet",
+          "az": "JavaScript Hadisə Dinləyiciləri planeti"
         }
-      ]
-    },
-    {
-      "id": "planet-2",
-      "name": "Python Basics",
-      "description": "Learn Python programming from scratch",
-      "tags": ["test tag 1", "test tag 2"],
-      "imageUrl": "/planet.webp",
-      "researchTopics": [
-        "Python Syntax",
-        "Data Structures",
-        "Object-Oriented Programming",
-        "File Handling"
-      ],
-      "questions": [
-        "What are list comprehensions?",
-        "How do decorators work?",
-        "What is the difference between tuples and lists?"
-      ],
-      "contents": [
-        {
-          "id": "content-2-1",
-          "type": "h2",
-          "text": "Getting Started with Python"
+      },
+      "localized": {
+        "en": {
+          "name": "JavaScript Event Listeners",
+          "description": "Every time you click a button on a website, hover over an image, or submit a form, something happens — and that's no accident. Behind the scenes, the page is constantly listening for your actions, ready to respond the moment you interact with it. This is the magic of event listeners, and once you understand them, the way you see websites will completely change. Learning event listeners means you can finally make your projects feel alive — no more static pages that just sit there looking pretty. You'll be able to build things that react, respond, and interact with the user in real time. Think about the games you play in a browser, the drag-and-drop interfaces you use every day, or the forms that show you errors before you even hit submit — event listeners are the engine behind all of that. Once you learn this topic, you'll have the power to turn any ordinary HTML page into an interactive experience. Whether you're building a simple to-do list or a complex web application, event listeners will be one of the most used tools in your toolkit. This is one of those topics where after you learn it, you'll wonder how you ever built anything without it.",
+          "tags": [
+            {
+              "id": "t1a2b3c4",
+              "tag": "JavaScript"
+            },
+            {
+              "id": "t2d3e4f5",
+              "tag": "DOM"
+            },
+            {
+              "id": "t3f4g5h6",
+              "tag": "Events"
+            },
+            {
+              "id": "t4i5j6k7",
+              "tag": "Interactivity"
+            },
+            {
+              "id": "t5l6m7n8",
+              "tag": "Browser API"
+            }
+          ],
+          "researchTopics": [
+            {
+              "id": "r1a2b3c4",
+              "topic": "Event bubbling and capturing phases — how events travel up and down the DOM tree"
+            },
+            {
+              "id": "r2d3e4f5",
+              "topic": "The difference between event delegation and direct event binding, and when to use each"
+            },
+            {
+              "id": "r3f4g5h6",
+              "topic": "Memory leaks caused by forgetting to remove event listeners and how to prevent them"
+            },
+            {
+              "id": "r4i5j6k7",
+              "topic": "Passive event listeners and how they improve scroll and touch performance"
+            },
+            {
+              "id": "r5l6m7n8",
+              "topic": "Touch events vs mouse events and how to write handlers that work on both mobile and desktop"
+            }
+          ],
+          "questions": [
+            {
+              "id": "q1a2b3c4",
+              "question": "What is the difference between addEventListener and assigning a handler via onclick?"
+            },
+            {
+              "id": "q2d3e4f5",
+              "question": "Explain event bubbling. How would you stop an event from bubbling up the DOM?"
+            },
+            {
+              "id": "q3f4g5h6",
+              "question": "What is event delegation and why is it considered a better pattern for dynamic lists?"
+            },
+            {
+              "id": "q4i5j6k7",
+              "question": "How do you remove an event listener, and what is the most common mistake developers make when trying to do so?"
+            },
+            {
+              "id": "q5l6m7n8",
+              "question": "What is the event object? Name at least three properties on it that you find useful."
+            },
+            {
+              "id": "q6n7o8p9",
+              "question": "What is the difference between event.preventDefault() and event.stopPropagation()? Give a real-world example for each."
+            },
+            {
+              "id": "q7q8r9s0",
+              "question": "If you need to attach the same event type to 100 dynamically generated elements, what is the most efficient approach?"
+            },
+            {
+              "id": "q8t9u0v1",
+              "question": "What is an AbortController and how can it be used to clean up event listeners?"
+            }
+          ],
+          "resources": [
+            {
+              "id": "res1a2b3",
+              "title": "MDN Web Docs",
+              "label": "EventTarget.addEventListener() — full reference with all options",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener"
+            },
+            {
+              "id": "res2c3d4",
+              "title": "javascript.info",
+              "label": "Introduction to browser events — in-depth guide with examples",
+              "url": "https://javascript.info/introduction-browser-events"
+            },
+            {
+              "id": "res3e4f5",
+              "title": "javascript.info",
+              "label": "Event delegation — practical patterns and when to use them",
+              "url": "https://javascript.info/event-delegation"
+            },
+            {
+              "id": "res4g5h6",
+              "title": "MDN Web Docs",
+              "label": "Event reference — full list of all browser events",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/Events"
+            }
+          ],
+          "contents": [
+            {
+              "id": "c01f2a3b4c",
+              "type": "text",
+              "variant": "normal",
+              "title": {
+                "level": "h2",
+                "text": "What Are Event Listeners?"
+              },
+              "text": "An event listener is a function that waits for something to happen in the browser — a click, a keypress, a scroll — and then runs your code in response. You attach it to an HTML element using `addEventListener`, and from that point on, the browser watches that element and calls your function whenever the specified event occurs.\n\nBefore `addEventListener` existed, developers used inline HTML attributes like `onclick=\"doSomething()\"` or set properties like `element.onclick = handler`. The problem with those approaches is that they only allow one handler per event. With `addEventListener`, you can attach as many handlers as you want to the same element and the same event type, which makes your code much more flexible and modular."
+            },
+            {
+              "id": "c02g3h4i5j",
+              "type": "image",
+              "label": "Event listener flow diagram",
+              "image": {
+                "url": "/image1.jpg",
+                "alt": "Diagram showing how event listeners connect user actions to JavaScript functions",
+                "metadata": {
+                  "width": 612,
+                  "height": 408
+                }
+              }
+            },
+            {
+              "id": "c03k4l5m6n",
+              "type": "code",
+              "label": "Your first event listener",
+              "code": {
+                "language": "javascript",
+                "code": "const button = document.querySelector('#myButton');\n\n// Listen for a click event\nbutton.addEventListener('click', function(event) {\n  console.log('Button was clicked!');\n  console.log('Event type:', event.type);\n  console.log('Target element:', event.target);\n});\n\n// Arrow function syntax works just as well\nbutton.addEventListener('mouseover', (event) => {\n  button.style.backgroundColor = 'lightblue';\n});\n\nbutton.addEventListener('mouseout', (event) => {\n  button.style.backgroundColor = '';\n});",
+                "output": "Button was clicked!\nEvent type: click\nTarget element: <button id=\"myButton\">...</button>"
+              }
+            },
+            {
+              "id": "c04o5p6q7r",
+              "type": "text",
+              "variant": "note",
+              "title": {
+                "level": "h3",
+                "text": "The Event Object"
+              },
+              "text": "Every time your listener function is called, the browser automatically passes it an **event object** as the first argument. This object is packed with useful information about what just happened.\n\nSome of the most commonly used properties are:\n- `event.type` — the name of the event, like `'click'` or `'keydown'`\n- `event.target` — the exact element the user interacted with\n- `event.currentTarget` — the element the listener is attached to (useful when bubbling)\n- `event.preventDefault()` — stops the browser's default behavior (like preventing a form from submitting)\n- `event.stopPropagation()` — prevents the event from bubbling up to parent elements\n\nGet comfortable with this object — you'll use it constantly."
+            },
+            {
+              "id": "c05s6t7u8v",
+              "type": "html-element",
+              "label": "Interactive speedometer — hold the pedals",
+              "title": "Event Listeners in Action: Speed Controller",
+              "description": "This demo uses mousedown, mouseup, and mouseleave events to control a speedometer. Hold the GAS pedal to accelerate and the BRAKE pedal to slow down. When you release both, the car naturally decelerates on its own.",
+              "element": {
+                "html": "<div id=\"app\">\n  <div id=\"speedometer\">\n    <div id=\"speed-display\">\n      <span id=\"speed-val\">000</span>\n      <span id=\"speed-unit\">KM/H</span>\n    </div>\n    <div id=\"speed-bar-container\">\n      <div id=\"speed-bar\"></div>\n    </div>\n  </div>\n  <div id=\"pedals\">\n    <div id=\"btn-up\" class=\"pedal\">\n      <span class=\"pedal-icon\">&#9650;</span>\n      <span class=\"pedal-label\">GAS</span>\n    </div>\n    <div id=\"btn-down\" class=\"pedal\">\n      <span class=\"pedal-icon\">&#9660;</span>\n      <span class=\"pedal-label\">BRAKE</span>\n    </div>\n  </div>\n  <div id=\"instruction\">Hold a pedal to change speed</div>\n</div>",
+                "css": "* { box-sizing: border-box; margin: 0; padding: 0; }\nbody { background: #0d0d1a; display: flex; justify-content: center; align-items: center; min-height: 320px; }\n#app { display: flex; flex-direction: column; align-items: center; gap: 36px; padding: 40px 20px; }\n#speedometer { background: #111827; border: 2px solid #1f2937; border-radius: 16px; padding: 24px 52px; text-align: center; box-shadow: 0 0 40px rgba(0,255,136,0.08); }\n#speed-display { display: flex; align-items: baseline; gap: 10px; justify-content: center; }\n#speed-val { font-size: 80px; font-weight: bold; color: #00ff88; font-family: 'Courier New', monospace; text-shadow: 0 0 18px #00ff88; transition: color 0.3s, text-shadow 0.3s; line-height: 1; }\n#speed-unit { font-size: 16px; color: #4ade80; opacity: 0.6; letter-spacing: 4px; font-family: 'Courier New', monospace; }\n#speed-bar-container { margin-top: 14px; width: 220px; height: 6px; background: #1f2937; border-radius: 3px; overflow: hidden; }\n#speed-bar { height: 100%; width: 0%; background: linear-gradient(to right, #00ff88, #facc15, #ef4444); border-radius: 3px; transition: width 0.15s; }\n#pedals { display: flex; gap: 52px; perspective: 500px; }\n.pedal { width: 110px; height: 68px; background: linear-gradient(180deg, #374151 0%, #1f2937 100%); border: 2px solid #4b5563; border-bottom: 5px solid #0f172a; border-radius: 8px 8px 4px 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transform: rotateX(28deg); transition: transform 0.1s ease, box-shadow 0.1s ease; box-shadow: 0 14px 24px rgba(0,0,0,0.7); user-select: none; gap: 5px; }\n.pedal:hover { border-color: #6b7280; }\n.pedal-label { font-size: 10px; letter-spacing: 3px; color: #9ca3af; font-family: 'Courier New', monospace; font-weight: bold; }\n.pedal-icon { font-size: 20px; color: #d1d5db; }\n#btn-up .pedal-icon { color: #4ade80; }\n#btn-down .pedal-icon { color: #f87171; }\n.pedal-pressed { transform: rotateX(5deg) !important; box-shadow: 0 3px 8px rgba(0,0,0,0.7) !important; border-bottom-width: 2px !important; }\n#instruction { font-size: 11px; color: #374151; font-family: 'Courier New', monospace; letter-spacing: 2px; text-transform: uppercase; }",
+                "js": "var speed = 0;\nvar activeInterval = null;\nvar idleInterval = null;\n\nvar speedVal = document.getElementById('speed-val');\nvar speedBar = document.getElementById('speed-bar');\nvar btnUp = document.getElementById('btn-up');\nvar btnDown = document.getElementById('btn-down');\n\nfunction updateDisplay() {\n  speedVal.textContent = String(speed).padStart(3, '0');\n  var ratio = speed / 150;\n  var r = Math.floor(ratio * 2 * 255);\n  var g = Math.floor((1 - ratio) * 255 + 100);\n  if (r > 255) r = 255;\n  if (g > 255) g = 255;\n  var color = 'rgb(' + r + ',' + g + ',80)';\n  speedVal.style.color = color;\n  speedVal.style.textShadow = '0 0 18px ' + color;\n  speedBar.style.width = (ratio * 100) + '%';\n}\n\nfunction clearActive() {\n  if (activeInterval) { clearInterval(activeInterval); activeInterval = null; }\n}\n\nfunction startIdle() {\n  if (idleInterval) return;\n  idleInterval = setInterval(function() {\n    if (speed > 0) { speed--; updateDisplay(); }\n  }, 500);\n}\n\nfunction stopIdle() {\n  if (idleInterval) { clearInterval(idleInterval); idleInterval = null; }\n}\n\nfunction pressUp() {\n  stopIdle();\n  clearActive();\n  btnUp.classList.add('pedal-pressed');\n  activeInterval = setInterval(function() {\n    if (speed < 150) { speed++; updateDisplay(); }\n  }, 200);\n}\n\nfunction releaseUp() {\n  if (!btnUp.classList.contains('pedal-pressed')) return;\n  clearActive();\n  btnUp.classList.remove('pedal-pressed');\n  startIdle();\n}\n\nfunction pressDown() {\n  stopIdle();\n  clearActive();\n  btnDown.classList.add('pedal-pressed');\n  activeInterval = setInterval(function() {\n    if (speed > 0) { speed--; updateDisplay(); }\n  }, 100);\n}\n\nfunction releaseDown() {\n  if (!btnDown.classList.contains('pedal-pressed')) return;\n  clearActive();\n  btnDown.classList.remove('pedal-pressed');\n  startIdle();\n}\n\nbtnUp.addEventListener('mousedown', pressUp);\nbtnUp.addEventListener('mouseup', releaseUp);\nbtnUp.addEventListener('mouseleave', releaseUp);\nbtnDown.addEventListener('mousedown', pressDown);\nbtnDown.addEventListener('mouseup', releaseDown);\nbtnDown.addEventListener('mouseleave', releaseDown);\n\nbtnUp.addEventListener('touchstart', function(e) { e.preventDefault(); pressUp(); });\nbtnUp.addEventListener('touchend', releaseUp);\nbtnDown.addEventListener('touchstart', function(e) { e.preventDefault(); pressDown(); });\nbtnDown.addEventListener('touchend', releaseDown);\n\nstartIdle();\nupdateDisplay();"
+              }
+            },
+            {
+              "id": "c06w7x8y9z",
+              "type": "image",
+              "label": "Event bubbling visualization",
+              "image": {
+                "url": "/image2.jpg",
+                "alt": "Visual representation of event bubbling through the DOM tree",
+                "metadata": {
+                  "width": 1200,
+                  "height": 630
+                }
+              }
+            },
+            {
+              "id": "c07a1b2c3d",
+              "type": "implementation-task",
+              "label": "Build a click counter",
+              "title": "Task: Click Counter",
+              "task": "Create a button that counts how many times it has been clicked and displays the count on the page. Add a second button that resets the counter back to zero. Use `addEventListener` for both buttons — do not use inline `onclick` attributes. As a bonus, make the counter text turn red when the count exceeds 10."
+            },
+            {
+              "id": "c08e2f3g4h",
+              "type": "code",
+              "label": "Event delegation pattern",
+              "code": {
+                "language": "javascript",
+                "code": "// Bad approach — attaching a listener to every single item\n// const items = document.querySelectorAll('.item');\n// items.forEach(item => item.addEventListener('click', handler)); // slow for large lists\n// Also won't work for items added dynamically after this code runs!\n\n// Good approach — one listener on the parent\nconst list = document.querySelector('#myList');\n\nlist.addEventListener('click', function(event) {\n  // event.target is the actual element the user clicked\n  if (event.target.classList.contains('item')) {\n    console.log('Clicked item:', event.target.textContent);\n    event.target.classList.toggle('selected');\n  }\n});\n\n// Now this works even for items added later!\nconst newItem = document.createElement('li');\nnewItem.className = 'item';\nnewItem.textContent = 'I was added dynamically';\nlist.appendChild(newItem); // the click handler already works on this",
+                "output": "Clicked item: Item 1\nClicked item: I was added dynamically"
+              }
+            },
+            {
+              "id": "c09i3j4k5l",
+              "type": "image",
+              "label": "Event delegation vs direct binding",
+              "image": {
+                "url": "/image3.jpg",
+                "alt": "Comparison showing event delegation with one parent listener vs many individual listeners",
+                "metadata": {
+                  "width": 1600,
+                  "height": 1000
+                }
+              }
+            },
+            {
+              "id": "c10m4n5o6p",
+              "type": "text",
+              "variant": "tip",
+              "title": {
+                "level": "h3",
+                "text": "Always Clean Up Your Listeners"
+              },
+              "text": "One of the most common sources of memory leaks in JavaScript applications is forgetting to remove event listeners. When you attach a listener to an element and that element is later removed from the DOM, the listener doesn't automatically go away — it keeps the element alive in memory because something is still referencing it.\n\nThis is especially important in frameworks like React or Vue where components mount and unmount frequently. Always remove listeners when they're no longer needed. The two main ways to do this are `removeEventListener` (which requires you to hold a reference to the original function) and the more modern `AbortController` approach, which lets you cancel multiple listeners at once with a single call."
+            },
+            {
+              "id": "c11q5r6s7t",
+              "type": "code",
+              "label": "Removing event listeners properly",
+              "code": {
+                "language": "javascript",
+                "code": "function handleClick(event) {\n  console.log('Clicked!', event.target);\n}\n\nconst button = document.querySelector('#myButton');\n\n// Add the listener\nbutton.addEventListener('click', handleClick);\n\n// Remove it — must pass the exact same function reference\nbutton.removeEventListener('click', handleClick); // works\n\n// This will NOT work — it's a different function instance\n// button.removeEventListener('click', () => console.log('hi')); // fails silently\n\n// --- Modern approach: AbortController ---\nconst controller = new AbortController();\n\nbutton.addEventListener('click', handleClick, {\n  signal: controller.signal\n});\n\ndocument.addEventListener('keydown', handleClick, {\n  signal: controller.signal\n});\n\n// Remove ALL listeners attached to this controller at once\ncontroller.abort();",
+                "output": "// No output — listener was removed before any click"
+              }
+            },
+            {
+              "id": "c12u6v7w8x",
+              "type": "implementation-task",
+              "label": "Form validation with events",
+              "title": "Task: Real-Time Form Validation",
+              "task": "Build a simple form with a username input and a submit button. Use the `input` event to validate the username in real time as the user types — show an error message if the username is shorter than 4 characters or contains spaces. Use the `submit` event on the form to prevent the default submission if the validation fails. If the form is valid, show a success message instead of submitting."
+            },
+            {
+              "id": "c13y7z8a9b",
+              "type": "html-element",
+              "label": "Drag and drop reordering demo",
+              "title": "Drag & Drop with DOM Events",
+              "description": "This demo shows how the dragstart, dragover, dragleave, and drop events work together. Drag the event type cards to reorder them. Watch the event names logged at the bottom as you drag.",
+              "element": {
+                "html": "<div id=\"app\">\n  <h3 id=\"title\">JavaScript Event Types</h3>\n  <p id=\"subtitle\">Drag the cards to reorder them</p>\n  <div id=\"drag-list\">\n    <div class=\"drag-item\" draggable=\"true\">&#128432; click</div>\n    <div class=\"drag-item\" draggable=\"true\">&#128432; mouseover</div>\n    <div class=\"drag-item\" draggable=\"true\">&#9000; keydown</div>\n    <div class=\"drag-item\" draggable=\"true\">&#128203; submit</div>\n    <div class=\"drag-item\" draggable=\"true\">&#128230; load</div>\n    <div class=\"drag-item\" draggable=\"true\">&#128260; change</div>\n    <div class=\"drag-item\" draggable=\"true\">&#128076; touchstart</div>\n  </div>\n  <div id=\"event-log\"></div>\n</div>",
+                "css": "* { box-sizing: border-box; margin: 0; padding: 0; }\nbody { background: #0f172a; display: flex; justify-content: center; padding: 32px 16px; }\n#app { width: 100%; max-width: 420px; display: flex; flex-direction: column; align-items: center; gap: 16px; }\n#title { color: #e2e8f0; font-size: 17px; font-weight: bold; font-family: sans-serif; }\n#subtitle { color: #475569; font-size: 13px; font-family: sans-serif; }\n#drag-list { width: 100%; display: flex; flex-direction: column; gap: 8px; }\n.drag-item { background: #1e293b; border: 1px solid #334155; border-top: 2px solid #334155; border-radius: 8px; padding: 13px 18px; color: #cbd5e1; font-family: 'Courier New', monospace; font-size: 14px; cursor: grab; transition: background 0.15s, opacity 0.15s; display: flex; align-items: center; gap: 10px; }\n.drag-item:hover { background: #263347; border-color: #475569; }\n.dragging { opacity: 0.35; cursor: grabbing; }\n.drag-over { border-top: 3px solid #38bdf8 !important; background: #1a3550 !important; }\n#event-log { min-height: 22px; color: #38bdf8; font-size: 12px; font-family: 'Courier New', monospace; letter-spacing: 0.5px; }",
+                "js": "var dragged = null;\nvar items = document.querySelectorAll('.drag-item');\nvar log = document.getElementById('event-log');\n\nfunction setLog(msg) {\n  log.textContent = msg;\n}\n\nitems.forEach(function(item) {\n  item.addEventListener('dragstart', function() {\n    dragged = item;\n    setTimeout(function() { item.classList.add('dragging'); }, 0);\n    setLog('dragstart: \"' + item.textContent.trim() + '\"');\n  });\n\n  item.addEventListener('dragend', function() {\n    item.classList.remove('dragging');\n    setLog('drop complete!');\n    setTimeout(function() { log.textContent = ''; }, 1500);\n  });\n\n  item.addEventListener('dragover', function(e) {\n    e.preventDefault();\n    if (item !== dragged) item.classList.add('drag-over');\n    setLog('dragover: \"' + item.textContent.trim() + '\"');\n  });\n\n  item.addEventListener('dragleave', function() {\n    item.classList.remove('drag-over');\n  });\n\n  item.addEventListener('drop', function(e) {\n    e.preventDefault();\n    item.classList.remove('drag-over');\n    if (item !== dragged) {\n      var list = document.getElementById('drag-list');\n      var all = Array.prototype.slice.call(list.children);\n      var di = all.indexOf(dragged);\n      var ti = all.indexOf(item);\n      if (di < ti) {\n        list.insertBefore(dragged, item.nextSibling);\n      } else {\n        list.insertBefore(dragged, item);\n      }\n      setLog('drop: order updated!');\n    }\n  });\n});"
+              }
+            },
+            {
+              "id": "c14c8d9e0f",
+              "type": "image",
+              "label": "Touch vs mouse events on mobile",
+              "image": {
+                "url": "/image4.avif",
+                "alt": "Mobile device showing touch event handling compared to mouse events on desktop",
+                "metadata": {
+                  "width": 360,
+                  "height": 240
+                }
+              }
+            }
+          ]
         },
-        {
-          "id": "content-2-2",
-          "type": "text",
-          "text": "Python is known for its simple syntax and readability, making it perfect for beginners and professionals alike."
-        },
-        {
-          "id": "content-2-3",
-          "type": "h3",
-          "text": "List Comprehensions"
-        },
-        {
-          "id": "content-2-4",
-          "type": "code-example",
-          "title": "Creating Lists with Comprehensions",
-          "example": {
-            "language": "python",
-            "code": "# Traditional approach\nsquares = []\nfor i in range(10):\n    squares.append(i ** 2)\n\n# List comprehension\nsquares = [i ** 2 for i in range(10)]\nprint(squares)",
-            "output": "[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]"
-          }
-        },
-        {
-          "id": "content-2-5",
-          "type": "code-task",
-          "task": {
-            "language": "python",
-            "code": "# Fix the bug in this function\ndef calculate_average(numbers):\n    total = 0\n    for num in numbers:\n        total += num\n    return total / len(numbers)\n\n# What happens when the list is empty?"
-          }
-        },
-        {
-          "id": "content-2-6",
-          "type": "implementation-task",
-          "task": "Write a class 'BankAccount' with methods for deposit, withdraw, and check balance. Include proper error handling for insufficient funds."
+        "az": {
+          "name": "JavaScript Hadisə Dinləyiciləri",
+          "description": "Bir veb saytda düyməyə hər dəfə basanda, şəklin üzərinə keçdikdə və ya formanı göndərdikdə nəsə baş verir — bu, təsadüf deyil. Arxada isə səhifə daim sizin hərəkətlərinizi izləyir, qarşılıqlı əlaqəyə girdiyin anda cavab verməyə hazır olur. Bu, hadisə dinləyicilərinin sehridir və onları başa düşdükdən sonra veb saytlara baxışınız tamamilə dəyişəcək. Hadisə dinləyicilərini öyrənmək o deməkdir ki, siz artıq layihələrinizi canlandıra bilərsiniz — yalnız gözəl görünən statik səhifələr deyil. İstifadəçi ilə real vaxt rejimində cavab verən, reaksiya göstərən interaktiv şeylər qura bilərsiniz. Brauzerdə oynadığınız oyunlar, hər gün istifadə etdiyiniz sürüklə-burax interfeysləri, ya da düyməni basmadan əvvəl xətaları göstərən formalar — bunların hamısının arxasında hadisə dinləyiciləri dayanır. Bu mövzunu öyrəndikdən sonra istənilən HTML səhifəsini interaktiv təcrübəyə çevirmək gücünüz olacaq. İstər sadə tapşırıq siyahısı, istərsə də mürəkkəb veb tətbiqi qursanız, hadisə dinləyiciləri alət dəstinizdəki ən çox istifadə edilən vasitələrdən biri olacaq. Bu elə bir mövzudur ki, onu öyrəndikdən sonra onsuz necə bir şey qurduğunuza heyrət edəcəksiniz.",
+          "tags": [
+            {
+              "id": "t1a2b3c4",
+              "tag": "JavaScript"
+            },
+            {
+              "id": "t2d3e4f5",
+              "tag": "DOM"
+            },
+            {
+              "id": "t3f4g5h6",
+              "tag": "Hadisələr"
+            },
+            {
+              "id": "t4i5j6k7",
+              "tag": "İnteraktivlik"
+            },
+            {
+              "id": "t5l6m7n8",
+              "tag": "Brauzer API"
+            }
+          ],
+          "researchTopics": [
+            {
+              "id": "r1a2b3c4",
+              "topic": "Hadisə yüksəlməsi və tutma mərhələləri — hadisələrin DOM ağacında necə yayıldığı"
+            },
+            {
+              "id": "r2d3e4f5",
+              "topic": "Hadisə delegasiyası ilə birbaşa hadisə bağlama arasındakı fərq və hər birinin nə vaxt istifadə ediləcəyi"
+            },
+            {
+              "id": "r3f4g5h6",
+              "topic": "Hadisə dinləyicilərini silməyi unutmaqdan qaynaqlanan yaddaş sızıntıları və onlardan necə qaçmaq olar"
+            },
+            {
+              "id": "r4i5j6k7",
+              "topic": "Passiv hadisə dinləyiciləri və onların sürüşdürmə və toxunma performansını necə yaxşılaşdırdığı"
+            },
+            {
+              "id": "r5l6m7n8",
+              "topic": "Toxunma hadisələri ilə siçan hadisələri — mobil və masaüstü üçün uyğun işləyicilər yazmaq"
+            }
+          ],
+          "questions": [
+            {
+              "id": "q1a2b3c4",
+              "question": "addEventListener ilə onclick vasitəsilə işləyici təyin etmək arasındakı fərq nədir?"
+            },
+            {
+              "id": "q2d3e4f5",
+              "question": "Hadisə yüksəlməsini izah edin. Bir hadisənin DOM-da yüksəlməsini necə dayandırarsınız?"
+            },
+            {
+              "id": "q3f4g5h6",
+              "question": "Hadisə delegasiyası nədir və dinamik siyahılar üçün niyə daha yaxşı bir pattern hesab olunur?"
+            },
+            {
+              "id": "q4i5j6k7",
+              "question": "Hadisə dinləyicisini necə silərsiniz və inkişafçıların bunu etməyə çalışarkən etdikləri ən geniş yayılmış səhv nədir?"
+            },
+            {
+              "id": "q5l6m7n8",
+              "question": "Hadisə obyekti nədir? Onun sizin üçün faydalı olan ən azı üç xüsusiyyətini adlandırın."
+            },
+            {
+              "id": "q6n7o8p9",
+              "question": "event.preventDefault() ilə event.stopPropagation() arasındakı fərq nədir? Hər biri üçün real dünya nümunəsi verin."
+            },
+            {
+              "id": "q7q8r9s0",
+              "question": "100 dinamik olaraq yaradılmış elementə eyni hadisə növünü əlavə etmək lazımdırsa, ən səmərəli yanaşma nə olardı?"
+            },
+            {
+              "id": "q8t9u0v1",
+              "question": "AbortController nədir və hadisə dinləyicilərini təmizləmək üçün necə istifadə oluna bilər?"
+            }
+          ],
+          "resources": [
+            {
+              "id": "res1a2b3",
+              "title": "MDN Web Docs",
+              "label": "EventTarget.addEventListener() — bütün parametrləri ilə tam arayış",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener"
+            },
+            {
+              "id": "res2c3d4",
+              "title": "javascript.info",
+              "label": "Brauzer hadisələrinə giriş — nümunələrlə dərin bələdçi",
+              "url": "https://javascript.info/introduction-browser-events"
+            },
+            {
+              "id": "res3e4f5",
+              "title": "javascript.info",
+              "label": "Hadisə delegasiyası — praktiki pattern-lər və nə vaxt istifadə ediləcəyi",
+              "url": "https://javascript.info/event-delegation"
+            },
+            {
+              "id": "res4g5h6",
+              "title": "MDN Web Docs",
+              "label": "Hadisə arayışı — bütün brauzer hadisələrinin tam siyahısı",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/Events"
+            }
+          ],
+          "contents": [
+            {
+              "id": "c01f2a3b4c",
+              "type": "text",
+              "variant": "normal",
+              "title": {
+                "level": "h2",
+                "text": "Hadisə Dinləyiciləri Nədir?"
+              },
+              "text": "Hadisə dinləyicisi brauzerdə bir şeyin baş verməsini gözləyən funksiyadır — bir klik, klaviatura basışı, sürüşdürmə — və sonra sizin kodunuzu cavab olaraq işə salır. Onu `addEventListener` vasitəsilə bir HTML elementinə bağlayırsınız və o andan etibarən brauzer həmin elementi izləyir və göstərilən hadisə baş verən kimi funksiyanızı çağırır.\n\n`addEventListener` mövcud olmadan əvvəl inkişafçılar `onclick=\"doSomething()\"` kimi sətirdaxili HTML atributlarından istifadə edir və ya `element.onclick = handler` kimi xüsusiyyətlər təyin edirdilər. Bu yanaşmaların problemi ondan ibarətdir ki, onlar hər hadisəyə yalnız bir işləyici icazə verir. `addEventListener` ilə eyni element və eyni hadisə növünə istədiyiniz qədər işləyici əlavə edə bilərsiniz, bu da kodunuzu daha çevik və modulyar edir."
+            },
+            {
+              "id": "c02g3h4i5j",
+              "type": "image",
+              "label": "Hadisə dinləyicisinin axın diaqramı",
+              "image": {
+                "url": "/image1.jpg",
+                "alt": "İstifadəçi hərəkətlərinin JavaScript funksiyalarına necə qoşulduğunu göstərən diaqram",
+                "metadata": {
+                  "width": 612,
+                  "height": 408
+                }
+              }
+            },
+            {
+              "id": "c03k4l5m6n",
+              "type": "code",
+              "label": "İlk hadisə dinləyiciniz",
+              "code": {
+                "language": "javascript",
+                "code": "const button = document.querySelector('#myButton');\n\n// Klik hadisəsini dinlə\nbutton.addEventListener('click', function(event) {\n  console.log('Düyməyə basıldı!');\n  console.log('Hadisə növü:', event.type);\n  console.log('Hədəf element:', event.target);\n});\n\n// Arrow funksiya sintaksisi də eyni dərəcədə işləyir\nbutton.addEventListener('mouseover', (event) => {\n  button.style.backgroundColor = 'lightblue';\n});\n\nbutton.addEventListener('mouseout', (event) => {\n  button.style.backgroundColor = '';\n});",
+                "output": "Düyməyə basıldı!\nHadisə növü: click\nHədəf element: <button id=\"myButton\">...</button>"
+              }
+            },
+            {
+              "id": "c04o5p6q7r",
+              "type": "text",
+              "variant": "note",
+              "title": {
+                "level": "h3",
+                "text": "Hadisə Obyekti"
+              },
+              "text": "Dinləyici funksiyanız hər çağırıldıqda, brauzer avtomatik olaraq ona birinci arqument kimi bir **hadisə obyekti** ötürür. Bu obyekt az əvvəl baş verənlər haqqında faydalı məlumatlarla doludur.\n\nƏn çox istifadə edilən xüsusiyyətlər bunlardır:\n- `event.type` — hadisənin adı, məsələn `'click'` və ya `'keydown'`\n- `event.target` — istifadəçinin qarşılıqlı əlaqədə olduğu dəqiq element\n- `event.currentTarget` — dinləyicinin bağlandığı element (yüksəlmə zamanı faydalıdır)\n- `event.preventDefault()` — brauzer tərəfindən standart davranışı dayandırır (məsələn, formanın göndərilməsinin qarşısını alır)\n- `event.stopPropagation()` — hadisənin valideyn elementlərə yüksəlməsinin qarşısını alır\n\nBu obyektlə rahat olun — onu daim istifadə edəcəksiniz."
+            },
+            {
+              "id": "c05s6t7u8v",
+              "type": "html-element",
+              "label": "İnteraktiv sürətölçər — pedalları basın saxlayın",
+              "title": "Hadisə Dinləyiciləri Əməldə: Sürət İdarəetməsi",
+              "description": "Bu demo sürətölçəri idarə etmək üçün mousedown, mouseup və mouseleave hadisələrindən istifadə edir. Sürətlənmək üçün QAZ pedalını, yavaşlamaq üçün ƏYLƏC pedalını basın saxlayın. Hər iki pedalı buraxdıqda avtomobil öz-özünə yavaşlayır.",
+              "element": {
+                "html": "<div id=\"app\">\n  <div id=\"speedometer\">\n    <div id=\"speed-display\">\n      <span id=\"speed-val\">000</span>\n      <span id=\"speed-unit\">KM/H</span>\n    </div>\n    <div id=\"speed-bar-container\">\n      <div id=\"speed-bar\"></div>\n    </div>\n  </div>\n  <div id=\"pedals\">\n    <div id=\"btn-up\" class=\"pedal\">\n      <span class=\"pedal-icon\">&#9650;</span>\n      <span class=\"pedal-label\">QAZ</span>\n    </div>\n    <div id=\"btn-down\" class=\"pedal\">\n      <span class=\"pedal-icon\">&#9660;</span>\n      <span class=\"pedal-label\">ƏYLƏC</span>\n    </div>\n  </div>\n  <div id=\"instruction\">Sürəti dəyişmək üçün pedalı basın saxlayın</div>\n</div>",
+                "css": "* { box-sizing: border-box; margin: 0; padding: 0; }\nbody { background: #0d0d1a; display: flex; justify-content: center; align-items: center; min-height: 320px; }\n#app { display: flex; flex-direction: column; align-items: center; gap: 36px; padding: 40px 20px; }\n#speedometer { background: #111827; border: 2px solid #1f2937; border-radius: 16px; padding: 24px 52px; text-align: center; box-shadow: 0 0 40px rgba(0,255,136,0.08); }\n#speed-display { display: flex; align-items: baseline; gap: 10px; justify-content: center; }\n#speed-val { font-size: 80px; font-weight: bold; color: #00ff88; font-family: 'Courier New', monospace; text-shadow: 0 0 18px #00ff88; transition: color 0.3s, text-shadow 0.3s; line-height: 1; }\n#speed-unit { font-size: 16px; color: #4ade80; opacity: 0.6; letter-spacing: 4px; font-family: 'Courier New', monospace; }\n#speed-bar-container { margin-top: 14px; width: 220px; height: 6px; background: #1f2937; border-radius: 3px; overflow: hidden; }\n#speed-bar { height: 100%; width: 0%; background: linear-gradient(to right, #00ff88, #facc15, #ef4444); border-radius: 3px; transition: width 0.15s; }\n#pedals { display: flex; gap: 52px; perspective: 500px; }\n.pedal { width: 110px; height: 68px; background: linear-gradient(180deg, #374151 0%, #1f2937 100%); border: 2px solid #4b5563; border-bottom: 5px solid #0f172a; border-radius: 8px 8px 4px 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transform: rotateX(28deg); transition: transform 0.1s ease, box-shadow 0.1s ease; box-shadow: 0 14px 24px rgba(0,0,0,0.7); user-select: none; gap: 5px; }\n.pedal:hover { border-color: #6b7280; }\n.pedal-label { font-size: 10px; letter-spacing: 3px; color: #9ca3af; font-family: 'Courier New', monospace; font-weight: bold; }\n.pedal-icon { font-size: 20px; color: #d1d5db; }\n#btn-up .pedal-icon { color: #4ade80; }\n#btn-down .pedal-icon { color: #f87171; }\n.pedal-pressed { transform: rotateX(5deg) !important; box-shadow: 0 3px 8px rgba(0,0,0,0.7) !important; border-bottom-width: 2px !important; }\n#instruction { font-size: 11px; color: #374151; font-family: 'Courier New', monospace; letter-spacing: 2px; text-transform: uppercase; }",
+                "js": "var speed = 0;\nvar activeInterval = null;\nvar idleInterval = null;\n\nvar speedVal = document.getElementById('speed-val');\nvar speedBar = document.getElementById('speed-bar');\nvar btnUp = document.getElementById('btn-up');\nvar btnDown = document.getElementById('btn-down');\n\nfunction updateDisplay() {\n  speedVal.textContent = String(speed).padStart(3, '0');\n  var ratio = speed / 150;\n  var r = Math.floor(ratio * 2 * 255);\n  var g = Math.floor((1 - ratio) * 255 + 100);\n  if (r > 255) r = 255;\n  if (g > 255) g = 255;\n  var color = 'rgb(' + r + ',' + g + ',80)';\n  speedVal.style.color = color;\n  speedVal.style.textShadow = '0 0 18px ' + color;\n  speedBar.style.width = (ratio * 100) + '%';\n}\n\nfunction clearActive() {\n  if (activeInterval) { clearInterval(activeInterval); activeInterval = null; }\n}\n\nfunction startIdle() {\n  if (idleInterval) return;\n  idleInterval = setInterval(function() {\n    if (speed > 0) { speed--; updateDisplay(); }\n  }, 500);\n}\n\nfunction stopIdle() {\n  if (idleInterval) { clearInterval(idleInterval); idleInterval = null; }\n}\n\nfunction pressUp() {\n  stopIdle(); clearActive();\n  btnUp.classList.add('pedal-pressed');\n  activeInterval = setInterval(function() {\n    if (speed < 150) { speed++; updateDisplay(); }\n  }, 200);\n}\n\nfunction releaseUp() {\n  if (!btnUp.classList.contains('pedal-pressed')) return;\n  clearActive();\n  btnUp.classList.remove('pedal-pressed');\n  startIdle();\n}\n\nfunction pressDown() {\n  stopIdle(); clearActive();\n  btnDown.classList.add('pedal-pressed');\n  activeInterval = setInterval(function() {\n    if (speed > 0) { speed--; updateDisplay(); }\n  }, 100);\n}\n\nfunction releaseDown() {\n  if (!btnDown.classList.contains('pedal-pressed')) return;\n  clearActive();\n  btnDown.classList.remove('pedal-pressed');\n  startIdle();\n}\n\nbtnUp.addEventListener('mousedown', pressUp);\nbtnUp.addEventListener('mouseup', releaseUp);\nbtnUp.addEventListener('mouseleave', releaseUp);\nbtnDown.addEventListener('mousedown', pressDown);\nbtnDown.addEventListener('mouseup', releaseDown);\nbtnDown.addEventListener('mouseleave', releaseDown);\nbtnUp.addEventListener('touchstart', function(e) { e.preventDefault(); pressUp(); });\nbtnUp.addEventListener('touchend', releaseUp);\nbtnDown.addEventListener('touchstart', function(e) { e.preventDefault(); pressDown(); });\nbtnDown.addEventListener('touchend', releaseDown);\n\nstartIdle();\nupdateDisplay();"
+              }
+            },
+            {
+              "id": "c06w7x8y9z",
+              "type": "image",
+              "label": "Hadisə yüksəlməsinin vizuallaşdırılması",
+              "image": {
+                "url": "/image2.jpg",
+                "alt": "DOM ağacında hadisə yüksəlməsinin vizual təsviri",
+                "metadata": {
+                  "width": 1200,
+                  "height": 630
+                }
+              }
+            },
+            {
+              "id": "c07a1b2c3d",
+              "type": "implementation-task",
+              "label": "Klik sayğacı yaradın",
+              "title": "Tapşırıq: Klik Sayğacı",
+              "task": "Neçə dəfə basıldığını sayan və sayı səhifədə göstərən bir düymə yaradın. Sayğacı sıfıra qaytaran ikinci bir düymə əlavə edin. Hər iki düymə üçün `addEventListener` istifadə edin — sətirdaxili `onclick` atributlarından istifadə etməyin. Bonus olaraq, say 10-u keçdikdə sayğac mətnini qırmızıya çevirin."
+            },
+            {
+              "id": "c08e2f3g4h",
+              "type": "code",
+              "label": "Hadisə delegasiyası pattern-i",
+              "code": {
+                "language": "javascript",
+                "code": "// Pis yanaşma — hər elementə ayrıca dinləyici bağlamaq\n// const items = document.querySelectorAll('.item');\n// items.forEach(item => item.addEventListener('click', handler)); // böyük siyahılar üçün yavaş\n// Həmçinin bu koddan sonra dinamik əlavə edilən elementlər üçün işləmir!\n\n// Yaxşı yanaşma — valideyinə bir dinləyici\nconst list = document.querySelector('#myList');\n\nlist.addEventListener('click', function(event) {\n  // event.target istifadəçinin kliklədiyi dəqiq elementdir\n  if (event.target.classList.contains('item')) {\n    console.log('Klikləyildi:', event.target.textContent);\n    event.target.classList.toggle('selected');\n  }\n});\n\n// İndi sonradan əlavə edilən elementlər üçün də işləyir!\nconst newItem = document.createElement('li');\nnewItem.className = 'item';\nnewItem.textContent = 'Dinamik əlavə edildim';\nlist.appendChild(newItem); // klik işləyicisi artıq bu üçün işləyir",
+                "output": "Klikləyildi: Element 1\nKlikləyildi: Dinamik əlavə edildim"
+              }
+            },
+            {
+              "id": "c09i3j4k5l",
+              "type": "image",
+              "label": "Hadisə delegasiyası vs birbaşa bağlama",
+              "image": {
+                "url": "/image3.jpg",
+                "alt": "Bir valideyn dinləyicisi ilə hadisə delegasiyasını çoxlu fərdi dinləyicilərlə müqayisə edən vizual",
+                "metadata": {
+                  "width": 1600,
+                  "height": 1000
+                }
+              }
+            },
+            {
+              "id": "c10m4n5o6p",
+              "type": "text",
+              "variant": "tip",
+              "title": {
+                "level": "h3",
+                "text": "Dinləyicilərinizi Həmişə Təmizləyin"
+              },
+              "text": "JavaScript tətbiqlərindəki ən geniş yayılmış yaddaş sızıntısı mənbələrindən biri hadisə dinləyicilərini silməyi unutmaqdır. Bir elementə dinləyici bağladıqda və həmin element sonradan DOM-dan çıxarıldıqda, dinləyici avtomatik olaraq yox olmur — elementi yaddaşda saxlamağa davam edir, çünki hələ ona istinad edən bir şey var.\n\nBu, xüsusilə React və ya Vue kimi komponentlərin tez-tez mount edilib unmount edildiyi framework-lərdə vacibdir. Lazım olmadıqda həmişə dinləyiciləri silin. Bunun iki əsas yolu var: `removeEventListener` (orijinal funksiyaya istinadı saxlamağı tələb edir) və daha müasir `AbortController` yanaşması, bu da bir çağırışla birdən çox dinləyicini eyni anda ləğv etməyə imkan verir."
+            },
+            {
+              "id": "c11q5r6s7t",
+              "type": "code",
+              "label": "Hadisə dinləyicilərini düzgün silmək",
+              "code": {
+                "language": "javascript",
+                "code": "function handleClick(event) {\n  console.log('Klikləyildi!', event.target);\n}\n\nconst button = document.querySelector('#myButton');\n\n// Dinləyicini əlavə et\nbutton.addEventListener('click', handleClick);\n\n// Sil — eyni funksiya istinadını ötürmək lazımdır\nbutton.removeEventListener('click', handleClick); // işləyir\n\n// Bu işləməyəcək — fərqli funksiya nümunəsidir\n// button.removeEventListener('click', () => console.log('salam')); // səssizcə uğursuz olur\n\n// --- Müasir yanaşma: AbortController ---\nconst controller = new AbortController();\n\nbutton.addEventListener('click', handleClick, {\n  signal: controller.signal\n});\n\ndocument.addEventListener('keydown', handleClick, {\n  signal: controller.signal\n});\n\n// Bu controller-ə bağlanmış BÜTÜN dinləyiciləri bir dəfəyə sil\ncontroller.abort();",
+                "output": "// Çıxış yoxdur — dinləyici hər hansı bir klikdən əvvəl silindi"
+              }
+            },
+            {
+              "id": "c12u6v7w8x",
+              "type": "implementation-task",
+              "label": "Hadisələrlə forma yoxlaması",
+              "title": "Tapşırıq: Real Vaxtlı Forma Yoxlaması",
+              "task": "İstifadəçi adı input sahəsi və göndər düyməsi olan sadə bir forma yaradın. İstifadəçi yazdıqca istifadəçi adını real vaxtda yoxlamaq üçün `input` hadisəsindən istifadə edin — istifadəçi adı 4 simvoldan qısa olduqda və ya boşluq içerdikdə xəta mesajı göstərin. Yoxlama uğursuz olarsa standart göndərməni dayandırmaq üçün forma üzərindəki `submit` hadisəsindən istifadə edin. Forma keçərli olduqda, göndərmək əvəzinə uğur mesajı göstərin."
+            },
+            {
+              "id": "c13y7z8a9b",
+              "type": "html-element",
+              "label": "Sürüklə və burax yenidən sıralama demosu",
+              "title": "DOM Hadisələri ilə Sürüklə & Burax",
+              "description": "Bu demo dragstart, dragover, dragleave və drop hadisələrinin birlikdə necə işlədiyini göstərir. Kartları yenidən sıralamaq üçün sürükləyin. Sürüklədiyiniz zaman aşağıda qeydə alınan hadisə adlarını izləyin.",
+              "element": {
+                "html": "<div id=\"app\">\n  <h3 id=\"title\">JavaScript Hadisə Növləri</h3>\n  <p id=\"subtitle\">Kartları yenidən sıralamaq üçün sürükləyin</p>\n  <div id=\"drag-list\">\n    <div class=\"drag-item\" draggable=\"true\">&#128432; click</div>\n    <div class=\"drag-item\" draggable=\"true\">&#128432; mouseover</div>\n    <div class=\"drag-item\" draggable=\"true\">&#9000; keydown</div>\n    <div class=\"drag-item\" draggable=\"true\">&#128203; submit</div>\n    <div class=\"drag-item\" draggable=\"true\">&#128230; load</div>\n    <div class=\"drag-item\" draggable=\"true\">&#128260; change</div>\n    <div class=\"drag-item\" draggable=\"true\">&#128076; touchstart</div>\n  </div>\n  <div id=\"event-log\"></div>\n</div>",
+                "css": "* { box-sizing: border-box; margin: 0; padding: 0; }\nbody { background: #0f172a; display: flex; justify-content: center; padding: 32px 16px; }\n#app { width: 100%; max-width: 420px; display: flex; flex-direction: column; align-items: center; gap: 16px; }\n#title { color: #e2e8f0; font-size: 17px; font-weight: bold; font-family: sans-serif; }\n#subtitle { color: #475569; font-size: 13px; font-family: sans-serif; }\n#drag-list { width: 100%; display: flex; flex-direction: column; gap: 8px; }\n.drag-item { background: #1e293b; border: 1px solid #334155; border-top: 2px solid #334155; border-radius: 8px; padding: 13px 18px; color: #cbd5e1; font-family: 'Courier New', monospace; font-size: 14px; cursor: grab; transition: background 0.15s, opacity 0.15s; }\n.drag-item:hover { background: #263347; border-color: #475569; }\n.dragging { opacity: 0.35; cursor: grabbing; }\n.drag-over { border-top: 3px solid #38bdf8 !important; background: #1a3550 !important; }\n#event-log { min-height: 22px; color: #38bdf8; font-size: 12px; font-family: 'Courier New', monospace; }",
+                "js": "var dragged = null;\nvar items = document.querySelectorAll('.drag-item');\nvar log = document.getElementById('event-log');\n\nfunction setLog(msg) { log.textContent = msg; }\n\nitems.forEach(function(item) {\n  item.addEventListener('dragstart', function() {\n    dragged = item;\n    setTimeout(function() { item.classList.add('dragging'); }, 0);\n    setLog('dragstart: \"' + item.textContent.trim() + '\"');\n  });\n  item.addEventListener('dragend', function() {\n    item.classList.remove('dragging');\n    setLog('drop tamamlandı!');\n    setTimeout(function() { log.textContent = ''; }, 1500);\n  });\n  item.addEventListener('dragover', function(e) {\n    e.preventDefault();\n    if (item !== dragged) item.classList.add('drag-over');\n    setLog('dragover: \"' + item.textContent.trim() + '\"');\n  });\n  item.addEventListener('dragleave', function() {\n    item.classList.remove('drag-over');\n  });\n  item.addEventListener('drop', function(e) {\n    e.preventDefault();\n    item.classList.remove('drag-over');\n    if (item !== dragged) {\n      var list = document.getElementById('drag-list');\n      var all = Array.prototype.slice.call(list.children);\n      var di = all.indexOf(dragged);\n      var ti = all.indexOf(item);\n      if (di < ti) { list.insertBefore(dragged, item.nextSibling); }\n      else { list.insertBefore(dragged, item); }\n      setLog('drop: sıralama yeniləndi!');\n    }\n  });\n});"
+              }
+            },
+            {
+              "id": "c14c8d9e0f",
+              "type": "image",
+              "label": "Mobil cihazda toxunma vs siçan hadisələri",
+              "image": {
+                "url": "/image4.avif",
+                "alt": "Mobil cihazda toxunma hadisəsinin idarə edilməsinin masaüstü siçan hadisələri ilə müqayisəsi",
+                "metadata": {
+                  "width": 360,
+                  "height": 240
+                }
+              }
+            }
+          ]
         }
-      ]
-    },
-    {
-      "id": "planet-3",
-      "name": "HTML & CSS Mastery",
-      "description": "Build beautiful and responsive web interfaces",
-      "tags": ["test tag 1", "test tag 2"],
-      "imageUrl": "/planet.webp",
-      "researchTopics": [
-        "Semantic HTML",
-        "Flexbox and Grid",
-        "Responsive Design",
-        "CSS Animations"
-      ],
-      "questions": [
-        "What is the box model?",
-        "How does flexbox differ from grid?",
-        "What are CSS custom properties?"
-      ],
-      "contents": [
-        {
-          "id": "content-3-1",
-          "type": "h2",
-          "text": "Modern Web Design"
-        },
-        {
-          "id": "content-3-2",
-          "type": "text",
-          "text": "HTML and CSS form the foundation of web development. HTML provides structure while CSS brings style and visual appeal."
-        },
-        {
-          "id": "content-3-3",
-          "type": "html-element",
-          "title": "Responsive Card Component",
-          "element": {
-            "html": "<div class=\"card\">\n <div class=\"card-body\">\n    <h3>Card Title</h3>\n    <p>This is a responsive card component.</p>\n    <button>Learn More</button>\n  </div>\n</div>",
-            "css": ".card {\n  max-width: 300px;\n  border-radius: 8px;\n  overflow: hidden;\n  box-shadow: 0 4px 6px rgba(0,0,0,0.1);\n  transition: transform 0.3s;\n}\n\n.card:hover {\n  transform: translateY(-5px);\n}\n\n.card img {\n  width: 100%;\n  height: auto;\n}\n\n.card-body {\n  padding: 1.5rem;\n}\n\nbutton {\n  background: #007bff;\n  color: white;\n  border: none;\n  padding: 0.5rem 1rem;\n  border-radius: 4px;\n  cursor: pointer;\n}",
-            "js": "document.querySelector(\"button\").addEventListener(\"click\", () => {\n  alert(\"Button clicked!\");\n});"
-          }
-        },
-        {
-          "id": "content-3-4",
-          "type": "h3",
-          "text": "Flexbox Layout"
-        },
-        {
-          "id": "content-3-5",
-          "type": "code-example",
-          "title": "Centering Content with Flexbox",
-          "task": {
-            "language": "css",
-            "code": ".container {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  min-height: 100vh;\n  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n}"
-          }
-        },
-        {
-          "id": "content-3-6",
-          "type": "implementation-task",
-          "task": "Create a navigation bar that is sticky on scroll and changes background color when scrolled past 100px."
-        },
-        {
-          "id": "content-3-7",
-          "type": "image",
-          "name": "responsive-design",
-          "title": "Responsive Design Principles",
-          "url": "https://images.unsplash.com/photo-1547658719-da2b51169166?w=600"
-        }
-      ]
-    },
-    {
-      "id": "planet-4",
-      "name": "TypeScript Advanced",
-      "description": "Take your TypeScript skills to the next level",
-      "tags": ["test tag 1", "test tag 2"],
-      "imageUrl": "/planet.webp",
-      "researchTopics": [
-        "Generics",
-        "Type Guards",
-        "Utility Types",
-        "Decorators",
-        "Advanced Patterns"
-      ],
-      "questions": [
-        "When should you use generics?",
-        "What are conditional types?",
-        "How do type predicates work?"
-      ],
-      "contents": [
-        {
-          "id": "content-4-1",
-          "type": "h2",
-          "text": "Advanced TypeScript Techniques"
-        },
-        {
-          "id": "content-4-2",
-          "type": "text",
-          "text": "TypeScript adds static typing to JavaScript, enabling better tooling, error detection, and code maintainability in large applications."
-        },
-        {
-          "id": "content-4-3",
-          "type": "h3",
-          "text": "Generic Functions"
-        },
-        {
-          "id": "content-4-4",
-          "type": "code-example",
-          "title": "Type-Safe Array Operations",
-          "task": {
-            "language": "typescript",
-            "code": "function firstElement<T>(arr: T[]): T | undefined {\n  return arr[0];\n}\n\nconst numbers = [1, 2, 3];\nconst firstNum = firstElement(numbers); // Type: number | undefined\n\nconst strings = ['a', 'b', 'c'];\nconst firstStr = firstElement(strings); // Type: string | undefined",
-            "output": "// TypeScript infers the correct return type based on input"
-          }
-        },
-        {
-          "id": "content-4-5",
-          "type": "h4",
-          "text": "Utility Types"
-        },
-        {
-          "id": "content-4-6",
-          "type": "code-example",
-          "task": {
-            "language": "typescript",
-            "code": "interface User {\n  id: number;\n  name: string;\n  email: string;\n  password: string;\n}\n\n// Pick specific properties\ntype UserPreview = Pick<User, 'id' | 'name'>;\n\n// Make all properties optional\ntype PartialUser = Partial<User>;\n\n// Make all properties readonly\ntype ReadonlyUser = Readonly<User>;"
-          }
-        },
-        {
-          "id": "content-4-7",
-          "type": "code-task",
-          "task": {
-            "language": "typescript",
-            "code": "// Complete this type guard function\nfunction isString(value: unknown): value is string {\n  // Add implementation\n}\n\n// Usage\nconst value: unknown = 'hello';\nif (isString(value)) {\n  console.log(value.toUpperCase()); // Should work without error\n}"
-          }
-        },
-        {
-          "id": "content-4-8",
-          "type": "implementation-task",
-          "task": "Create a generic 'Repository<T>' class that implements CRUD operations with proper TypeScript typing. Include methods: findById, findAll, create, update, and delete."
-        }
-      ]
-    },
-    {
-      "id": "planet-5",
-      "name": "Web Development Best Practices",
-      "description": "Learn industry-standard practices for professional development",
-      "tags": ["test tag 1", "test tag 2"],
-      "imageUrl": "/planet.webp",
-      "researchTopics": [
-        "Code Organization",
-        "Performance Optimization",
-        "Security",
-        "Testing",
-        "Accessibility"
-      ],
-      "questions": [
-        "What is SOLID principles?",
-        "How to optimize web performance?",
-        "What are common security vulnerabilities?"
-      ],
-      "contents": [
-        {
-          "id": "content-5-1",
-          "type": "h2",
-          "text": "Professional Development Standards"
-        },
-        {
-          "id": "content-5-2",
-          "type": "text",
-          "text": "Following best practices ensures your code is maintainable, scalable, and secure. These principles are essential for any professional developer."
-        },
-        {
-          "id": "content-5-3",
-          "type": "h3",
-          "text": "Code Organization"
-        },
-        {
-          "id": "content-5-4",
-          "type": "text",
-          "text": "Organizing your code properly makes it easier to maintain and collaborate with others. Use clear naming conventions, separate concerns, and follow the DRY (Don't Repeat Yourself) principle."
-        },
-        {
-          "id": "content-5-5",
-          "type": "code-example",
-          "title": "Module Pattern",
-          "task": {
-            "language": "javascript",
-            "code": "// utils/validation.js\nexport const validateEmail = (email) => {\n  const regex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\n  return regex.test(email);\n};\n\nexport const validatePassword = (password) => {\n  return password.length >= 8;\n};\n\n// Usage in another file\nimport { validateEmail, validatePassword } from './utils/validation.js';"
-          }
-        },
-        {
-          "id": "content-5-6",
-          "type": "h4",
-          "text": "Performance Optimization"
-        },
-        {
-          "id": "content-5-7",
-          "type": "html-element",
-          "title": "Lazy Loading Images",
-          "element": {
-            "html": "<img \n  src=\"placeholder.jpg\" \n  data-src=\"actual-image.jpg\" \n  alt=\"Description\"\n  class=\"lazy-load\"\n  loading=\"lazy\"\n>",
-            "css": ".lazy-load {\n  opacity: 0;\n  transition: opacity 0.3s;\n}\n\n.lazy-load.loaded {\n  opacity: 1;\n}",
-            "js": "const lazyImages = document.querySelectorAll(\".lazy-load\");\n\nconst imageObserver = new IntersectionObserver((entries) => {\n  entries.forEach(entry => {\n    if (entry.isIntersecting) {\n      const img = entry.target;\n      img.src = img.dataset.src;\n      img.classList.add(\"loaded\");\n      imageObserver.unobserve(img);\n    }\n  });\n});\n\nlazyImages.forEach(img => imageObserver.observe(img));"
-          }
-        },
-        {
-          "id": "content-5-8",
-          "type": "image",
-          "name": "performance-metrics",
-          "title": "Web Performance Metrics",
-          "url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600"
-        },
-        {
-          "id": "content-5-9",
-          "type": "h5",
-          "text": "Security Considerations"
-        },
-        {
-          "id": "content-5-10",
-          "type": "code-task",
-          "task": {
-            "language": "javascript",
-            "code": "// Identify the security vulnerability in this code\nfunction displayUserComment(comment) {\n  document.getElementById('comments').innerHTML += comment;\n}\n\n// Hint: What if comment contains malicious script tags?"
-          }
-        },
-        {
-          "id": "content-5-11",
-          "type": "implementation-task",
-          "task": "Implement input sanitization for a user registration form. Protect against XSS attacks, SQL injection, and validate all user inputs on both client and server side.\n\nSteps:\n1. Create a registration form with fields: username, email, password, and confirm password\n2. Implement client-side validation using regex patterns for each field\n3. Add server-side validation to verify all inputs before processing\n4. Sanitize inputs to remove any HTML/script tags (XSS prevention)\n5. Use parameterized queries or ORM to prevent SQL injection\n6. Hash passwords using bcrypt before storing in database\n7. Add error messages for invalid inputs\n8. Test with malicious inputs like: <script>alert('xss')</script>, ' OR '1'='1, etc."
-        },
-        {
-          "id": "content-5-12",
-          "type": "h6",
-          "text": "Testing Your Code"
-        },
-        {
-          "id": "content-5-13",
-          "type": "code-example",
-          "title": "Unit Testing Example",
-          "task": {
-            "language": "javascript",
-            "code": "// Function to test\nfunction add(a, b) {\n  return a + b;\n}\n\n// Test\ndescribe('add function', () => {\n  test('adds two positive numbers', () => {\n    expect(add(2, 3)).toBe(5);\n  });\n  \n  test('handles negative numbers', () => {\n    expect(add(-1, -1)).toBe(-2);\n  });\n});",
-            "output": "✓ add function › adds two positive numbers\n✓ add function › handles negative numbers"
-          }
-        }
-      ]
+      }
     }
   ]
 }
