@@ -7,18 +7,18 @@ interface Props {
   defaultLanguage: string;
   isLight?: boolean;
   readOnly?: boolean;
-  height?: string; // fixed height if provided
+  height?: string;
   onChange?: OnChange;
-  paddingTop?: number; // optional padding override
-  paddingBottom?: number; // optional padding override
-  fontSize?: number; // optional font size override
+  paddingTop?: number;
+  paddingBottom?: number;
+  fontSize?: number;
 }
 
 const CodeEditor = ({
   defaultValue = '',
-  defaultLanguage,
+  defaultLanguage = 'plaintext',
   isLight = false,
-  readOnly = true,
+  readOnly = false,
   height,
   onChange,
   paddingTop = 20,
@@ -66,7 +66,7 @@ const CodeEditor = ({
     <Editor
       height={height ?? autoHeight}
       defaultLanguage={defaultLanguage}
-      defaultValue={defaultValue}
+      defaultValue={defaultValue.trim()}
       theme={isLight ? 'light' : 'vs-dark'}
       onMount={handleEditorDidMount}
       onChange={onChange}
