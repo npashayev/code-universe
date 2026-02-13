@@ -71,7 +71,7 @@ const TextContentBlock = ({
 
               onUpdate(content.id, {
                 title: {
-                  level: content.title?.level || 'p',
+                  level: content.title?.level || 'h2',
                   text: value,
                 },
               });

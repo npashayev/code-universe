@@ -1,21 +1,25 @@
-import { PlanetData } from '@/types/planet';
+import { ImageData, LocalizedPlanetData } from '@/types/planet';
 import Image from 'next/image';
 
 interface Props {
-  planet: PlanetData;
+  localizedData: LocalizedPlanetData;
+  image: ImageData<string>;
 }
 
-const PlanetHeader = ({ planet }: Props) => {
+const PlanetHeader = ({ localizedData, image }: Props) => {
+  const { name, description, tags } = localizedData;
+
   return (
     <header>
-      <h1>{planet.name}</h1>
-      <p>
-        <span className="font-bold">Tags:</span> {planet.tags.join(', ')}
-      </p>
+      <h1 className="text-4xl font-bold mb-4">{name}</h1>
+      <div className="flex gap-2 mb-4">
+        <h3 className="font-bold">Tags:</h3>
+        {tags.map(t => t.tag).join(', ')}
+      </div>
       <div className="flex justify-between gap-10 items-center">
-        <p>{planet.description.repeat(12)}</p>
+        <p>{description}</p>
         <div className="relative size-50 shrink-0">
-          <Image src={planet.imageUrl} alt={planet.name} fill />
+          <Image src={image.url} alt={image.alt} fill />
         </div>
       </div>
     </header>

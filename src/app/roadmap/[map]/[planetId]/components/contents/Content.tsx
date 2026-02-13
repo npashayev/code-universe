@@ -1,8 +1,9 @@
 import HtmlElementBlock from './HtmlElementBlock';
-import CodeTaskBlock from './CodeTaskBlock';
+import CodeBlock from './CodeBlock';
 import ImplementationTaskBlock from './ImplementationTaskBlock';
 import TextContentBlock from './TextContentBlock';
 import { PlanetContent } from '@/types/planet';
+import ImageBlock from './ImageBlock';
 
 interface Props {
   content: PlanetContent;
@@ -11,11 +12,6 @@ interface Props {
 const Content = ({ content }: Props) => {
   switch (content.type) {
     case 'text':
-    case 'h2':
-    case 'h3':
-    case 'h4':
-    case 'h5':
-    case 'h6':
       return <TextContentBlock content={content} />;
 
     case 'implementation-task':
@@ -24,11 +20,11 @@ const Content = ({ content }: Props) => {
     case 'html-element':
       return <HtmlElementBlock content={content} />;
 
-    case 'code-task':
-      return <CodeTaskBlock content={content} />;
+    case 'code':
+      return <CodeBlock content={content} />;
 
-    // case 'image':
-    //   return <ImageBlock content={content} />;
+    case 'image':
+      return <ImageBlock content={content} />;
 
     default:
       return null;

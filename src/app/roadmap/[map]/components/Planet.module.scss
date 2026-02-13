@@ -9,10 +9,12 @@
   .link {
     transition: scale 0.3s ease-in-out;
     z-index: 2;
+    height: 19rem;
+    aspect-ratio: 1;
 
     .planet {
-      height: 19rem;
-      width: auto;
+      object-fit: cover;
+      object-position: center;
       color: white;
       filter: drop-shadow(0 0 22px rgba(255, 255, 0, 0));
       transform: scale(1);

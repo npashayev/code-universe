@@ -1,14 +1,16 @@
+import { ResearchTopic } from '@/types/planet';
+
 interface Props {
-  researchTopics: string[];
+  researchTopics: ResearchTopic[];
 }
 
 const ResearchTopics = ({ researchTopics }: Props) => {
   return (
     <section>
-      <h2>Research Topics</h2>
-      <ul className="list-disc list-inside ml-6">
-        {researchTopics.map((topic, i) => (
-          <li key={i}>{topic}</li>
+      <h2 className="text-2xl font-bold mb-3">Research Topics</h2>
+      <ul className="list-disc list-inside ml-8">
+        {researchTopics.map(topic => (
+          <li key={topic.id}>{topic.topic}</li>
         ))}
       </ul>
     </section>

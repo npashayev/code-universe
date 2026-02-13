@@ -44,6 +44,18 @@ const CodeContentBlock = ({ content, onUpdate }: Props) => {
       </div>
       <div className="space-y-6">
         <div className="space-y-2">
+          <Label htmlFor={`code-content-description-${content.id}`}>
+            Description (Optional)
+          </Label>
+          <Textarea
+            id={`code-content-description-${content.id}`}
+            value={content.description}
+            onChange={e =>
+              onUpdate(content.id, { description: e.target.value })
+            }
+          />
+        </div>
+        <div className="space-y-2">
           <Label
             className="text-orange-500 flex gap-2 items-center"
             htmlFor={`code-content-code-${content.id}`}

@@ -8,7 +8,6 @@ interface Props {
 const ContentList = ({ contents }: Props) => {
   return (
     <section>
-      <h2>Tasks</h2>
       {contents.map(content => (
         <Content key={content.id} content={content} />
       ))}

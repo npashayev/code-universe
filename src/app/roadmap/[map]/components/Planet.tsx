@@ -9,31 +9,25 @@ interface Props {
 }
 
 const Planet = ({ map, planet }: Props) => {
+  const locale = 'en';
+
+  const { tags } = planet.localized[locale];
   return (
     <div className={styles.planetCnr} id={`planet-${planet.id}`}>
       <Link scroll={false} href={`${map}/${planet.id}`} className={styles.link}>
         <Image
-          src={planet.imageUrl}
-          alt={planet.name}
-          width={1024}
-          height={1024}
+          src={planet.image.url}
+          alt={planet.image.alt[locale]}
+          fill
           className={styles.planet}
           loading="lazy"
         />
       </Link>
       <div className={styles.orbit}>
-        {planet.tags[0] && (
-          <div className={styles.satellite}>{planet.tags[0]}</div>
-        )}
-        {planet.tags[1] && (
-          <div className={styles.satellite}>{planet.tags[1]}</div>
-        )}
-        {planet.tags[2] && (
-          <div className={styles.satellite}>{planet.tags[2]}</div>
-        )}
-        {planet.tags[3] && (
-          <div className={styles.satellite}>{planet.tags[3]}</div>
-        )}
+        {tags[0].tag && <div className={styles.satellite}>{tags[0].tag}</div>}
+        {tags[1].tag && <div className={styles.satellite}>{tags[1].tag}</div>}
+        {tags[2].tag && <div className={styles.satellite}>{tags[2].tag}</div>}
+        {tags[3].tag && <div className={styles.satellite}>{tags[3].tag}</div>}
       </div>
       <div className={styles.outerOrbit}></div>
     </div>

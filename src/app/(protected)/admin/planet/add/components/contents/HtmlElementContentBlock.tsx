@@ -22,6 +22,16 @@ const HtmlElementContentBlock = ({ content, onUpdate }: Props) => {
           onChange={e => onUpdate(content.id, { title: e.target.value })}
         />
       </div>
+      <div className="space-y-2">
+        <Label htmlFor={`html-element-description-${content.id}`}>
+          Description (Optional)
+        </Label>
+        <Textarea
+          id={`html-element-description-${content.id}`}
+          value={content.description}
+          onChange={e => onUpdate(content.id, { description: e.target.value })}
+        />
+      </div>
       <div className="space-y-4">
         <div className="space-y-2">
           <Label htmlFor={`html-element-html-code-${content.id}`}>

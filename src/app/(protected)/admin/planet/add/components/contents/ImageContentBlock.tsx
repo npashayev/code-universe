@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Label from '../shared/Label';
 import Input from '../shared/Input';
 import ImagePicker from '../shared/ImagePicker';
+import Textarea from '../shared/Textarea';
 
 interface Props {
   content: ImageContent;
@@ -44,11 +45,24 @@ const ImageContentBlock = ({
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <Label htmlFor={`image-content-title-${content.id}`}>Title</Label>
+        <Label htmlFor={`image-content-title-${content.id}`}>
+          Title (Optional)
+        </Label>
         <Input
-          id={content.id}
+          id={`image-content-title-${content.id}`}
           value={content.title || ''}
           onChange={e => onUpdate(content.id, { title: e.target.value })}
+        />
+      </div>
+      <div className="space-y-2">
+        <Label htmlFor={`image-content-description-${content.id}`}>
+          Description (Optional)
+        </Label>
+        <Textarea
+          id={`image-content-description-${content.id}`}
+          rows={2}
+          value={content.description ?? ''}
+          onChange={e => onUpdate(content.id, { description: e.target.value })}
         />
       </div>
       <ImagePicker

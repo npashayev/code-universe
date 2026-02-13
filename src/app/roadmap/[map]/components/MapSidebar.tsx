@@ -14,6 +14,7 @@ interface Props {
 const MapSidebar = ({ planets }: Props) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeId, setActiveId] = useState(planets[0].id);
+  const locale = 'en';
 
   const scrollToPlanet = (planetId: string) => {
     setActiveId(planetId);
@@ -57,7 +58,8 @@ const MapSidebar = ({ planets }: Props) => {
       </div>
       <nav className="h-full w-full overflow-auto scrollbar- bg-amber-100` overscroll-contain flex flex-col gap-1 scrollbar-hide">
         {planets.map((planet, index) => {
-          const { id, name } = planet;
+          const { id } = planet;
+          const { name } = planet.localized[locale];
           const isActive = activeId === id;
           return (
             <button
