@@ -25,14 +25,21 @@ export interface Question {
   question: string;
 }
 
+export interface ImageData<T> {
+  url: string;
+  metadata: ImageMetadata;
+  alt: T;
+}
+
+export interface ImageMetadata {
+  width: number;
+  height: number;
+}
+
 export interface CreatePlanetData {
   category: PlanetCategory;
   status: PlanetStatus;
-  image: {
-    url: string;
-    metadata: ImageMetadata;
-    alt: LocalizedString;
-  };
+  image: ImageData<LocalizedString>;
   localized: Record<SupportedLanguage, LocalizedPlanetData>;
 }
 
@@ -64,11 +71,6 @@ export interface Resource {
   url: string;
 }
 
-export interface ImageMetadata {
-  width: number;
-  height: number;
-}
-
 export type PlanetContent =
   | TextContent
   | ImplementationTaskContent
@@ -88,13 +90,16 @@ export type ContentType = (typeof CONTENT_TYPE)[keyof typeof CONTENT_TYPE];
 
 export interface BaseContent {
   id: string;
-  label?: string;
   type: ContentType;
+  label?: string;
+  title?: string;
+  description?: string;
 }
 
-export type TextVariant = 'normal' | 'note' | 'warning' | 'tip';
-
-export interface TextContent extends BaseContent {
+export interface TextContent extends Omit<
+  BaseContent,
+  'title' | 'description'
+> {
   type: 'text';
   title?: {
     level: TitleLevel;
@@ -104,17 +109,19 @@ export interface TextContent extends BaseContent {
   variant: TextVariant;
 }
 
-export type TitleLevel = 'p' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+export type TitleLevel = 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+export type TextVariant = 'normal' | 'note' | 'warning' | 'tip';
 
-export interface ImplementationTaskContent extends BaseContent {
+export interface ImplementationTaskContent extends Omit<
+  BaseContent,
+  'description'
+> {
   type: 'implementation-task';
-  title?: string;
   task: string;
 }
 
 export interface CodeContent extends BaseContent {
   type: 'code';
-  title?: string;
   code: CodeSnippet;
 }
 
@@ -125,7 +132,7 @@ export interface CodeSnippet {
 }
 
 export const PROGRAMMING_LANGUAGE = {
-  javascript: 'Javascript',
+  javascript: 'JavaScript',
   typescript: 'TypeScript',
   html: 'HTML',
   css: 'CSS',
@@ -134,12 +141,10 @@ export const PROGRAMMING_LANGUAGE = {
   markdown: 'Markdown',
 } as const;
 
-export type ProgrammingLanguage =
-  (typeof PROGRAMMING_LANGUAGE)[keyof typeof PROGRAMMING_LANGUAGE];
+export type ProgrammingLanguage = keyof typeof PROGRAMMING_LANGUAGE;
 
 export interface HtmlElementContent extends BaseContent {
   type: 'html-element';
-  title?: string;
   element: HtmlElementSnippet;
 }
 
@@ -151,10 +156,5 @@ export interface HtmlElementSnippet {
 
 export interface ImageContent extends BaseContent {
   type: 'image';
-  title?: string;
-  image: {
-    url: string;
-    alt: string;
-    metadata: ImageMetadata;
-  };
+  image: ImageData<string>;
 }
