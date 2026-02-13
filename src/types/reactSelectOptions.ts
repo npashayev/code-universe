@@ -19,7 +19,4 @@ export type CategoryOption = BaseOption<PlanetCategory, PlanetCategory>;
 export type ContentTypeOption = BaseOption<ContentType>;
 export type TitleLevelOption = BaseOption<TitleLevel>;
 export type TextVariantOption = BaseOption<TextVariant>;
-export type ProgrammingLanguageOption = BaseOption<
-  ProgrammingLanguage,
-  ProgrammingLanguage
->;
+export type ProgrammingLanguageOption = BaseOption<ProgrammingLanguage>;

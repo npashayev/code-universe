@@ -2,6 +2,7 @@ import {
   CONTENT_TYPE,
   PLANET_CATEGORY,
   PROGRAMMING_LANGUAGE,
+  ProgrammingLanguage,
 } from '@/types/planet';
 import {
   CategoryOption,
@@ -46,10 +47,6 @@ export const contentTypeOptions: ContentTypeOption[] = [
 
 export const titleLevelOptions: TitleLevelOption[] = [
   {
-    label: 'Paragraph (p)',
-    value: 'p',
-  },
-  {
     label: 'Heading 2 (h2)',
     value: 'h2',
   },
@@ -91,7 +88,7 @@ export const textVariantOptions: TextVariantOption[] = [
 ];
 
 export const programmingLanguageOptions: ProgrammingLanguageOption[] =
-  Object.entries(PROGRAMMING_LANGUAGE).map(([, value]) => ({
+  Object.entries(PROGRAMMING_LANGUAGE).map(([key, value]) => ({
     label: value,
-    value,
+    value: key as ProgrammingLanguage,
   }));
