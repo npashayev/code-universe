@@ -1,5 +1,5 @@
 import { UpdateContentFn } from '@/lib/hooks/useLocalizedContent';
-import { ImageContent, SupportedLanguage } from '@/types/planet';
+import { ImageContent } from '@/types/planet';
 import { PendingImageOption } from '@/types/reactSelectOptions';
 import Label from '../shared/Label';
 import Input from '../shared/Input';
@@ -10,7 +10,6 @@ import { PendingImageSelector } from '../Selectors';
 type PendingContentImageEntry = {
   previewUrl: string;
   file: File;
-  alt: string;
 };
 
 interface Props {
@@ -20,7 +19,6 @@ interface Props {
   setPendingContentImages: React.Dispatch<
     React.SetStateAction<Map<string, PendingContentImageEntry>>
   >;
-  locale: SupportedLanguage;
 }
 
 const ImageContentBlock = ({
@@ -28,21 +26,20 @@ const ImageContentBlock = ({
   onUpdate,
   pendingContentImages,
   setPendingContentImages,
-  locale,
 }: Props) => {
   const pendingImageOptions: PendingImageOption[] = Array.from(
     pendingContentImages.entries(),
-  ).map(([id, { alt }]) => ({
-    value: id,
-    label: alt || '(No alt)',
+  ).map(([fileName]) => ({
+    value: fileName,
+    label: fileName,
   }));
 
-  const selectedPendingOption: PendingImageOption | null = content.pendingImageId
-    ? (pendingImageOptions.find(o => o.value === content.pendingImageId) ?? {
-      value: content.pendingImageId,
-      label:
-        pendingContentImages.get(content.pendingImageId)?.alt || '(No alt)',
-    })
+  const selectedPendingOption: PendingImageOption | null = content
+    .pendingImageId
+    ? {
+        value: content.pendingImageId,
+        label: content.pendingImageId,
+      }
     : null;
 
   const imagePreviewUrl =
@@ -53,41 +50,22 @@ const ImageContentBlock = ({
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const id = crypto.randomUUID();
+    const fileName = file.name;
     const previewUrl = URL.createObjectURL(file);
 
     setPendingContentImages(prev =>
-      new Map(prev).set(id, {
-        previewUrl,
-        file,
-        alt: content.image.alt || '',
-      }),
+      new Map(prev).set(fileName, { previewUrl, file }),
     );
     onUpdate(content.id, {
-      pendingImageId: id,
-      image: { ...content.image, alt: content.image.alt || '' },
+      pendingImageId: fileName,
+      image: { ...content.image },
     });
   };
 
   const handleAltChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newAlt = e.target.value;
     onUpdate(content.id, {
-      image: { ...content.image, alt: newAlt },
+      image: { ...content.image, alt: e.target.value },
     });
-    if (content.pendingImageId) {
-      setPendingContentImages(prev => {
-        const m = new Map(prev);
-        const entry = m.get(content.pendingImageId!);
-        if (entry) m.set(content.pendingImageId!, { ...entry, alt: newAlt });
-        return m;
-      }); <ImagePicker
-        id={`image-upload-${content.id}`}
-        altText={content.image.alt || ''}
-        onAltChange={handleAltChange}
-        handleImageUpload={handleImageUpload}
-        imagePreviewUrl={imagePreviewUrl ?? ''}
-      />
-    }
   };
 
   return (

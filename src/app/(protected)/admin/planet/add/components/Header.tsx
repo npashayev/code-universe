@@ -14,7 +14,6 @@ import {
 type PendingContentImageEntry = {
   previewUrl: string;
   file: File;
-  alt: string;
 };
 
 interface Props {
@@ -54,8 +53,8 @@ const Header = ({
     // Generate filename from planet name or use default
     const planetName = planetData.localized[currentLanguage.value]?.name
       ? planetData.localized[currentLanguage.value].name
-          .toLowerCase()
-          .replace(/\s+/g, '-')
+        .toLowerCase()
+        .replace(/\s+/g, '-')
       : 'planet';
 
     // const timestamp = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
@@ -162,7 +161,6 @@ const Header = ({
         prev.forEach(({ previewUrl }) => URL.revokeObjectURL(previewUrl));
         return new Map();
       });
-
       alert('Success');
     } catch (err) {
       console.error('Submission error:', err);
@@ -242,8 +240,13 @@ const Header = ({
           </div>
         </div>
 
-        <button className="flex items-center gap-2 px-6 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-xl transition-all shadow-lg shadow-orange-500/20 cursor-pointer text-sm">
-          Add Planet
+        <button
+          type="button"
+          onClick={handleSubmit}
+          disabled={isUploading}
+          className="flex items-center gap-2 px-6 py-2.5 bg-orange-500 hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-xl transition-all shadow-lg shadow-orange-500/20 cursor-pointer text-sm"
+        >
+          {isUploading ? 'Uploading…' : 'Add Planet'}
         </button>
       </div>
     </header>

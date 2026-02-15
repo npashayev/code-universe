@@ -18,14 +18,12 @@ import { cn } from '@/lib/utils/cn';
 type PendingContentImageEntry = {
   previewUrl: string;
   file: File;
-  alt: string;
 };
 
 interface Props {
   contents: PlanetContent[];
   setPlanetData: Updater<CreatePlanetData>;
   locale: SupportedLanguage;
-  setPendingFiles: React.Dispatch<React.SetStateAction<Map<string, File>>>;
   pendingContentImages: Map<string, PendingContentImageEntry>;
   setPendingContentImages: React.Dispatch<
     React.SetStateAction<Map<string, PendingContentImageEntry>>
@@ -36,7 +34,6 @@ const ContentsSection = ({
   contents,
   setPlanetData,
   locale,
-  setPendingFiles,
   pendingContentImages,
   setPendingContentImages,
 }: Props) => {
@@ -95,7 +92,6 @@ const ContentsSection = ({
                   onUpdate={updateContent}
                   pendingContentImages={pendingContentImages}
                   setPendingContentImages={setPendingContentImages}
-                  locale={locale}
                 />
               )}
             </div>

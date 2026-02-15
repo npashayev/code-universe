@@ -1,7 +1,7 @@
 'use client';
 
 import { PLANET_CATEGORY, CreatePlanetData } from '@/types/planet';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useImmer } from 'use-immer';
 import Header from './components/Header';
 import BasicConfigurationSection from './components/sections/BasicConfigurationSection';
@@ -55,12 +55,12 @@ const AddPlanetPage = () => {
     new Map(),
   );
   const [pendingContentImages, setPendingContentImages] = useState<
-    Map<string, { previewUrl: string; file: File; alt: string }>
+    Map<string, { previewUrl: string; file: File }>
   >(new Map());
 
   const locale = currentLanguage.value;
 
-  // useEffect(() => console.log(planetData), [planetData]);
+  useEffect(() => console.log(planetData), [planetData]);
 
   return (
     <div className="min-h-screen text-slate-200 font-sans selection:bg-orange-500/30 pb-42">
@@ -112,7 +112,6 @@ const AddPlanetPage = () => {
             <ContentsSection
               contents={planetData.localized[locale].contents}
               setPlanetData={setPlanetData}
-              setPendingFiles={setPendingFiles}
               pendingContentImages={pendingContentImages}
               setPendingContentImages={setPendingContentImages}
               locale={locale}
