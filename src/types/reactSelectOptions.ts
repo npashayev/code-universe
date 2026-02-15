@@ -20,3 +20,5 @@ export type ContentTypeOption = BaseOption<ContentType>;
 export type TitleLevelOption = BaseOption<TitleLevel>;
 export type TextVariantOption = BaseOption<TextVariant>;
 export type ProgrammingLanguageOption = BaseOption<ProgrammingLanguage>;
+/** Option for selecting an existing pending content image by id (label = alt text). */
+export type PendingImageOption = BaseOption<string, string>;

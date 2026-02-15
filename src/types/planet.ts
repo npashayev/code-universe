@@ -157,4 +157,6 @@ export interface HtmlElementSnippet {
 export interface ImageContent extends BaseContent {
   type: 'image';
   image: ImageData<string>;
+  /** References a pending content image (preview) so multiple locales can share one upload. */
+  pendingImageId?: string;
 }

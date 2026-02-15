@@ -15,11 +15,21 @@ import ImageContentBlock from '../contents/ImageContentBlock';
 import { useLocalizedContent } from '@/lib/hooks/useLocalizedContent';
 import { cn } from '@/lib/utils/cn';
 
+type PendingContentImageEntry = {
+  previewUrl: string;
+  file: File;
+  alt: string;
+};
+
 interface Props {
   contents: PlanetContent[];
   setPlanetData: Updater<CreatePlanetData>;
   locale: SupportedLanguage;
   setPendingFiles: React.Dispatch<React.SetStateAction<Map<string, File>>>;
+  pendingContentImages: Map<string, PendingContentImageEntry>;
+  setPendingContentImages: React.Dispatch<
+    React.SetStateAction<Map<string, PendingContentImageEntry>>
+  >;
 }
 
 const ContentsSection = ({
@@ -27,6 +37,8 @@ const ContentsSection = ({
   setPlanetData,
   locale,
   setPendingFiles,
+  pendingContentImages,
+  setPendingContentImages,
 }: Props) => {
   const { removeContent, updateContent } = useLocalizedContent({
     setPlanetData,
@@ -81,7 +93,8 @@ const ContentsSection = ({
                 <ImageContentBlock
                   content={content}
                   onUpdate={updateContent}
-                  setPendingFiles={setPendingFiles}
+                  pendingContentImages={pendingContentImages}
+                  setPendingContentImages={setPendingContentImages}
                   locale={locale}
                 />
               )}

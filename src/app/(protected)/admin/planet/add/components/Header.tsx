@@ -11,6 +11,12 @@ import {
   StatusSelector,
 } from './Selectors';
 
+type PendingContentImageEntry = {
+  previewUrl: string;
+  file: File;
+  alt: string;
+};
+
 interface Props {
   planetData: CreatePlanetData;
   setPlanetData: Updater<CreatePlanetData>;
@@ -18,6 +24,10 @@ interface Props {
   setCurrentLanguage: React.Dispatch<React.SetStateAction<LanguageOption>>;
   pendingFiles: Map<string, File>;
   setPendingFiles: React.Dispatch<React.SetStateAction<Map<string, File>>>;
+  pendingContentImages: Map<string, PendingContentImageEntry>;
+  setPendingContentImages: React.Dispatch<
+    React.SetStateAction<Map<string, PendingContentImageEntry>>
+  >;
 }
 
 const Header = ({
@@ -27,6 +37,8 @@ const Header = ({
   setCurrentLanguage,
   pendingFiles,
   setPendingFiles,
+  pendingContentImages,
+  setPendingContentImages,
 }: Props) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -92,64 +104,65 @@ const Header = ({
     useR2Upload();
 
   const handleSubmit = async () => {
-    if (pendingFiles.size === 0) {
-      // No files to upload, submit directly
+    const hasMainImage = pendingFiles.has('main-image');
+    const hasContentImages = pendingContentImages.size > 0;
+
+    if (!hasMainImage && !hasContentImages) {
       alert('Success');
       return;
     }
 
     try {
-      // Prepare batch upload items
-      const uploadItems = Array.from(pendingFiles.entries()).map(
-        ([fileKey, file]) => {
-          // Determine type based on fileKey
-          const type =
-            fileKey === 'main-image' ? 'planet-main' : 'planet-content';
+      const uploadItems: Array<{
+        file: File;
+        fileKey: string;
+        type: 'planet-main' | 'planet-content';
+      }> = [];
 
-          return {
+      if (hasMainImage) {
+        const file = pendingFiles.get('main-image')!;
+        uploadItems.push({ file, fileKey: 'main-image', type: 'planet-main' });
+      }
+
+      Array.from(pendingContentImages.entries()).forEach(
+        ([id, { file }]) =>
+          uploadItems.push({
             file,
-            fileKey,
-            type: type as 'planet-main' | 'planet-content',
-          };
-        },
+            fileKey: id,
+            type: 'planet-content',
+          }),
       );
 
-      // Upload all files (with automatic rollback if any fails)
       const uploadResults = await batchUpload(uploadItems);
 
       if (!uploadResults) {
-        // Upload failed, error is already set in hook
         console.error('Upload failed:', error);
         return;
       }
 
-      // Update planetData with real R2 URLs
       setPlanetData(draft => {
         uploadResults.forEach((result, fileKey) => {
           if (fileKey === 'main-image') {
-            // Update main planet image
             draft.image.url = result.url;
-          } else if (fileKey.startsWith('content-')) {
-            // Parse: "content-az-abc123" -> locale: "az", contentId: "abc123"
-            const parts = fileKey.split('-');
-            const locale = parts[1] as SupportedLanguage;
-            const contentId = parts.slice(2).join('-'); // we join with '-' because randomUUID function gives us id containing dashes
-
-            // Find and update the content block
-            const content = draft.localized[locale].contents.find(
-              c => c.id === contentId,
-            );
-            if (content && content.type === 'image') {
-              content.image.url = result.url;
-            }
+          } else {
+            const pendingId = fileKey;
+            (['az', 'en'] as SupportedLanguage[]).forEach(loc => {
+              draft.localized[loc].contents.forEach(c => {
+                if (c.type === 'image' && c.pendingImageId === pendingId) {
+                  c.image.url = result.url;
+                }
+              });
+            });
           }
         });
       });
 
-      // Clear pending files
       setPendingFiles(new Map());
+      setPendingContentImages(prev => {
+        prev.forEach(({ previewUrl }) => URL.revokeObjectURL(previewUrl));
+        return new Map();
+      });
 
-      // Now submit to backend
       alert('Success');
     } catch (err) {
       console.error('Submission error:', err);

@@ -15,6 +15,7 @@ interface Props<T extends BaseOption<unknown>> {
   };
   isSearchable?: boolean;
   isDisabled?: boolean;
+  placeholder?: string;
 }
 
 const Selector = <T extends BaseOption<unknown>>({
@@ -26,6 +27,7 @@ const Selector = <T extends BaseOption<unknown>>({
   styles,
   isSearchable = false,
   isDisabled = false,
+  placeholder,
 }: Props<T>) => {
   return (
     <div className="relative group">
@@ -41,6 +43,7 @@ const Selector = <T extends BaseOption<unknown>>({
         styles={getAdminPageSelectStyles<T>(styles)}
         isSearchable={isSearchable}
         isDisabled={isDisabled}
+        placeholder={placeholder}
       />
 
       <ChevronDown

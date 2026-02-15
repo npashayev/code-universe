@@ -54,6 +54,9 @@ const AddPlanetPage = () => {
   const [pendingFiles, setPendingFiles] = useState<Map<string, File>>(
     new Map(),
   );
+  const [pendingContentImages, setPendingContentImages] = useState<
+    Map<string, { previewUrl: string; file: File; alt: string }>
+  >(new Map());
 
   const locale = currentLanguage.value;
 
@@ -68,6 +71,8 @@ const AddPlanetPage = () => {
         setCurrentLanguage={setCurrentLanguage}
         pendingFiles={pendingFiles}
         setPendingFiles={setPendingFiles}
+        pendingContentImages={pendingContentImages}
+        setPendingContentImages={setPendingContentImages}
       />
 
       <div className="px-6 md:px-[16%] pt-10 grid grid-cols-1 lg:grid-cols-12 gap-10">
@@ -108,6 +113,8 @@ const AddPlanetPage = () => {
               contents={planetData.localized[locale].contents}
               setPlanetData={setPlanetData}
               setPendingFiles={setPendingFiles}
+              pendingContentImages={pendingContentImages}
+              setPendingContentImages={setPendingContentImages}
               locale={locale}
             />
           )}

@@ -12,6 +12,7 @@ import {
   CategoryOption,
   ContentTypeOption,
   LanguageOption,
+  PendingImageOption,
   ProgrammingLanguageOption,
   StatusOption,
   TextVariantOption,
@@ -56,6 +57,13 @@ interface ProgrammingLanguageSelectorProps {
   onUpdate: UpdateContentFn;
   contentId: string;
   code: CodeContent['code'];
+}
+
+interface PendingImageSelectorProps {
+  options: PendingImageOption[];
+  value: PendingImageOption | null;
+  onChange: (option: PendingImageOption | null) => void;
+  placeholder?: string;
 }
 
 export const StatusSelector = ({
@@ -203,6 +211,29 @@ export const ProgrammingLanguageSelector = ({
       controlStyles: {
         paddingInlineStart: '12px',
         paddingBlock: '15px',
+      },
+    }}
+  />
+);
+
+export const PendingImageSelector = ({
+  options,
+  value,
+  onChange,
+  placeholder = 'Use same as existing image…',
+}: PendingImageSelectorProps) => (
+  <Selector<PendingImageOption>
+    instanceId="pending-image-select"
+    value={value}
+    options={options}
+    onChange={onChange}
+    isSearchable
+    placeholder={placeholder}
+    styles={{
+      controlStyles: {
+        paddingInlineStart: '12px',
+        paddingBlock: '9px',
+        width: '100%',
       },
     }}
   />
