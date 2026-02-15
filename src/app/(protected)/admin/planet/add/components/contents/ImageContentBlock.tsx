@@ -80,7 +80,13 @@ const ImageContentBlock = ({
         const entry = m.get(content.pendingImageId!);
         if (entry) m.set(content.pendingImageId!, { ...entry, alt: newAlt });
         return m;
-      });
+      }); <ImagePicker
+        id={`image-upload-${content.id}`}
+        altText={content.image.alt || ''}
+        onAltChange={handleAltChange}
+        handleImageUpload={handleImageUpload}
+        imagePreviewUrl={imagePreviewUrl ?? ''}
+      />
     }
   };
 
