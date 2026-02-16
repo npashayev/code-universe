@@ -1,15 +1,16 @@
 import { CreatePlanetData, SupportedLanguage } from '@/types/planet';
 import { Download, Globe, Upload } from 'lucide-react';
 import { Updater } from 'use-immer';
-import { useRef } from 'react';
-import { localizedPlanetDataSchema } from '@/lib/validation/createPlanetDataSchema';
-import { BatchUploadItem, useR2Upload } from '@/lib/hooks/useR2Upload';
+import { Dispatch, SetStateAction, useRef } from 'react';
+import { localizedPlanetDataSchema } from '@/lib/validation/planetDataSchema';
+import { useR2Upload } from '@/lib/hooks/useR2Upload';
 import { LanguageOption } from '@/types/reactSelectOptions';
 import {
   CategorySelector,
   LanguageSelector,
   StatusSelector,
 } from './Selectors';
+import { BatchUploadItem } from '@/types/r2';
 
 type PendingContentImageEntry = {
   previewUrl: string;
@@ -27,6 +28,7 @@ interface Props {
   setPendingContentImages: React.Dispatch<
     React.SetStateAction<Map<string, PendingContentImageEntry>>
   >;
+  setPreviewActive: Dispatch<SetStateAction<boolean>>;
 }
 
 const Header = ({
@@ -38,6 +40,7 @@ const Header = ({
   setPendingFiles,
   pendingContentImages,
   setPendingContentImages,
+  setPreviewActive,
 }: Props) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -46,25 +49,30 @@ const Header = ({
   };
 
   const handleExportClick = () => {
-    const jsonString = JSON.stringify(planetData, null, 2);
-    const blob = new Blob([jsonString], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
+    let url: string | null = null;
 
-    // Generate filename from planet name or use default
-    const planetName = planetData.localized[currentLanguage.value]?.name
-      ? planetData.localized[currentLanguage.value].name
-          .toLowerCase()
-          .replace(/\s+/g, '-')
-      : 'planet';
+    try {
+      const jsonString = JSON.stringify(planetData, null, 2);
+      const blob = new Blob([jsonString], { type: 'application/json' });
+      url = URL.createObjectURL(blob);
 
-    // const timestamp = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+      const planetName = planetData.localized[currentLanguage.value]?.name
+        ? planetData.localized[currentLanguage.value].name
+            .toLowerCase()
+            .replace(/\s+/g, '-')
+        : 'planet';
 
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `${planetName}.json`;
-    link.click();
-
-    URL.revokeObjectURL(url);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${planetName}.json`;
+      link.click();
+    } catch (error) {
+      console.error('Failed to export planet data:', error);
+    } finally {
+      if (url) {
+        setTimeout(() => URL.revokeObjectURL(url!), 1000);
+      }
+    }
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,15 +80,18 @@ const Header = ({
     if (!file) return;
 
     const reader = new FileReader();
+
     reader.onload = () => {
       try {
-        const parsed = JSON.parse(reader.result as string);
+        if (typeof reader.result !== 'string') return;
+
+        const parsed = JSON.parse(reader.result);
         const result = localizedPlanetDataSchema.safeParse(parsed);
 
         if (!result.success) {
           console.error(
             "JSON content doesn't satisfy LocalizedPlanetData structure",
-            result.error.format(), // Show detailed validation errors
+            result.error.format(),
           );
           return;
         }
@@ -93,9 +104,12 @@ const Header = ({
       }
     };
 
+    reader.onerror = () => {
+      console.error('Failed to read file', reader.error);
+    };
+
     reader.readAsText(file);
 
-    // allow re-uploading same file
     e.target.value = '';
   };
 
@@ -106,7 +120,7 @@ const Header = ({
     const hasContentImages = pendingContentImages.size > 0;
 
     if (!hasMainImage && !hasContentImages) {
-      alert('Success');
+      alert('No image selected');
       return;
     }
 
@@ -159,83 +173,87 @@ const Header = ({
   };
 
   return (
-    <header className="sticky top-0 z-100 bg-night backdrop-blur-xl border-b border-white/5 py-4 px-6 md:px-12">
-      <div className="max-w-6xl mx-auto flex items-center justify-between gap-6">
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-orange-500/20 flex items-center justify-center border border-orange-500/30">
-              <Globe className="text-orange-500" size={18} />
-            </div>
-            <h1 className="text-xl md:text-2xl font-bold text-white tracking-tight">
-              Create New Planet
-            </h1>
+    <header className="sticky top-0 flex justify-between items-center gap-6 z-100 bg-night backdrop-blur-xl border-b border-white/5 py-4 px-6 md:px-12">
+      <div className="flex items-center">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-xl bg-orange-500/20 flex items-center justify-center border border-orange-500/30">
+            <Globe className="text-orange-500" size={18} />
           </div>
-
-          <div className="h-8 w-px bg-white/10 hidden md:block" />
-
-          <div className="hidden md:flex items-center gap-4">
-            <LanguageSelector
-              currentLanguage={currentLanguage}
-              setCurrentLanguage={setCurrentLanguage}
-            />
-
-            <StatusSelector
-              planetData={planetData}
-              setPlanetData={setPlanetData}
-            />
-
-            <CategorySelector
-              planetData={planetData}
-              setPlanetData={setPlanetData}
-            />
-
-            {/* JSON Upload Trigger */}
-            <div>
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="application/json,.json"
-                className="hidden"
-                onChange={handleFileChange}
-              />
-
-              <button
-                type="button"
-                onClick={handleImportClick}
-                className="flex items-center gap-2 px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-xs font-bold text-slate-300 transition-all cursor-pointer"
-              >
-                <Upload size={14} />
-                Import JSON
-              </button>
-            </div>
-
-            {/* JSON Export Trigger */}
-            <div>
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="application/json,.json"
-                className="hidden"
-                onChange={handleFileChange}
-              />
-
-              <button
-                type="button"
-                onClick={handleExportClick}
-                className="flex items-center gap-2 px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-xs font-bold text-slate-300 transition-all cursor-pointer"
-              >
-                <Download size={14} />
-                Export JSON
-              </button>
-            </div>
-          </div>
+          <h1 className="text-xl md:text-2xl font-bold text-white tracking-tight">
+            Create New Planet
+          </h1>
         </div>
 
+        <div className="h-8 w-px ml-6 bg-white/10 hidden md:block" />
+      </div>
+
+      <div className="hidden md:flex items-center gap-4">
+        <LanguageSelector
+          currentLanguage={currentLanguage}
+          setCurrentLanguage={setCurrentLanguage}
+        />
+
+        <StatusSelector planetData={planetData} setPlanetData={setPlanetData} />
+
+        <CategorySelector
+          planetData={planetData}
+          setPlanetData={setPlanetData}
+        />
+
+        {/* JSON Upload Trigger */}
+        <div>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="application/json,.json"
+            className="hidden"
+            onChange={handleFileChange}
+          />
+
+          <button
+            type="button"
+            onClick={handleImportClick}
+            className="flex items-center gap-2 px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-xs font-bold text-slate-300 transition-all cursor-pointer"
+          >
+            <Upload size={14} />
+            Import JSON
+          </button>
+        </div>
+
+        {/* JSON Export Trigger */}
+        <div>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="application/json,.json"
+            className="hidden"
+            onChange={handleFileChange}
+          />
+
+          <button
+            type="button"
+            onClick={handleExportClick}
+            className="flex items-center gap-2 px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-xs font-bold text-slate-300 transition-all cursor-pointer"
+          >
+            <Download size={14} />
+            Export JSON
+          </button>
+        </div>
+      </div>
+
+      <div className="flex gap-4 items-center">
+        <button
+          type="button"
+          onClick={() => setPreviewActive(true)}
+          className="flex items-center gap-2 px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-base font-bold text-slate-300 transition-all cursor-pointer"
+        >
+          Preview
+        </button>
         <button
           type="button"
           onClick={handleSubmit}
           disabled={isUploading}
-          className="flex items-center gap-2 px-6 py-2.5 bg-orange-500 hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-xl transition-all shadow-lg shadow-orange-500/20 cursor-pointer text-sm"
+          className="flex items-center gap-2 px-6 py-2.5 bg-orange-500 hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-xl transition-all shadow-lg shadow-orange-500/20 text-sm"
         >
           {isUploading ? 'Uploading…' : 'Add Planet'}
         </button>

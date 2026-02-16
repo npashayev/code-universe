@@ -8,10 +8,10 @@ interface Props {
 const Resources = ({ resources }: Props) => {
   return (
     <section>
-      <h2 className="text-2xl mb-3 font-bold">Resources</h2>
-      <ul className="list-inside ml-8">
+      <h2 className="heading-secondary">Resources</h2>
+      <ul className="list-indented">
         {resources.map(res => (
-          <li key={res.id} className="flex gap-2">
+          <li key={res.id} className="flex gap-3">
             {res.title && <p className="font-bold">{res.title}:</p>}
             {
               <Link

@@ -10,7 +10,7 @@ const ImageBlock = ({ content }: Props) => {
   const { title, description, image } = content;
   return (
     <div>
-      {title && <h3 className="font-bold text-xl mb-1">{title}</h3>}
+      {title && <h3 className="heading-sub">{title}</h3>}
       {description && (
         <div className="prose max-w-none">
           <Markdown>{description}</Markdown>

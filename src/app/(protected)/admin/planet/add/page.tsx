@@ -1,6 +1,6 @@
 'use client';
 
-import { PLANET_CATEGORY, CreatePlanetData } from '@/types/planet';
+import { PLANET_CATEGORY, CreatePlanetData, PlanetData } from '@/types/planet';
 import { useEffect, useState } from 'react';
 import { useImmer } from 'use-immer';
 import Header from './components/Header';
@@ -13,11 +13,14 @@ import ContentsSection from './components/sections/ContentsSection';
 import ContentSidebar from './components/ContentSidebar';
 import { LanguageOption } from '@/types/reactSelectOptions';
 import { languageOptions } from '@/lib/constants/reactSelectOptions';
+import PlanetClient from '@/app/roadmap/[map]/[planetId]/components/PlanetClient';
 
 const AddPlanetPage = () => {
   const [currentLanguage, setCurrentLanguage] = useState<LanguageOption>(
     languageOptions[0],
   );
+
+  const [previewActive, setPreviewActive] = useState(false);
 
   const [planetData, setPlanetData] = useImmer<CreatePlanetData>({
     category: PLANET_CATEGORY.html,
@@ -51,9 +54,11 @@ const AddPlanetPage = () => {
       },
     },
   });
+
   const [pendingFiles, setPendingFiles] = useState<Map<string, File>>(
     new Map(),
   );
+
   const [pendingContentImages, setPendingContentImages] = useState<
     Map<string, { previewUrl: string; file: File }>
   >(new Map());
@@ -61,6 +66,17 @@ const AddPlanetPage = () => {
   const locale = currentLanguage.value;
 
   useEffect(() => console.log(planetData), [planetData]);
+
+  if (previewActive) {
+    return (
+      <div className="fixed w-screen h-screen bg-[radial-gradient(ellipse_at_bottom,#050914_0%,#000000_100%)] text-white">
+        <PlanetClient
+          planet={planetData as PlanetData}
+          locale={currentLanguage.value}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen text-slate-200 font-sans selection:bg-orange-500/30 pb-42">
@@ -73,6 +89,7 @@ const AddPlanetPage = () => {
         setPendingFiles={setPendingFiles}
         pendingContentImages={pendingContentImages}
         setPendingContentImages={setPendingContentImages}
+        setPreviewActive={setPreviewActive}
       />
 
       <div className="px-6 md:px-[16%] pt-10 grid grid-cols-1 lg:grid-cols-12 gap-10">

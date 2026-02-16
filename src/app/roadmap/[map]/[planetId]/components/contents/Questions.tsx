@@ -7,8 +7,8 @@ interface Props {
 const Questions = ({ questions }: Props) => {
   return (
     <section>
-      <h2 className="text-2xl font-bold mb-3">Questions</h2>
-      <ol className="list-decimal list-inside ml-8">
+      <h2 className="heading-secondary">Questions</h2>
+      <ol className="list-decimal list-indented">
         {questions.map(qn => (
           <li key={qn.id}>{qn.question}</li>
         ))}

@@ -64,15 +64,15 @@ const HtmlElementBlock = ({ content }: Props) => {
   `;
 
   return (
-    <div className="my-8">
-      {title && <h3 className="mb-1 font-bold text-xl">{title}</h3>}
+    <div>
+      {title && <h3 className="heading-sub">{title}</h3>}
       {description && (
         <div className="prose max-w-none">
           <Markdown>{description}</Markdown>
         </div>
       )}
 
-      <div className="mt-4 border border-gray-300 rounded-lg overflow-hidden bg-white shadow-sm resize">
+      <div className="mt-4 border border-gray-300 rounded-lg overflow-hidden bg-white resize">
         <iframe
           ref={iframeRef}
           className="w-full border-0 bg-white block"
