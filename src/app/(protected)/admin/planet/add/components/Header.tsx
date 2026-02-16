@@ -3,7 +3,7 @@ import { Download, Globe, Upload } from 'lucide-react';
 import { Updater } from 'use-immer';
 import { useRef } from 'react';
 import { localizedPlanetDataSchema } from '@/lib/validation/createPlanetDataSchema';
-import { useR2Upload } from '@/lib/hooks/useR2Upload';
+import { BatchUploadItem, useR2Upload } from '@/lib/hooks/useR2Upload';
 import { LanguageOption } from '@/types/reactSelectOptions';
 import {
   CategorySelector,
@@ -53,8 +53,8 @@ const Header = ({
     // Generate filename from planet name or use default
     const planetName = planetData.localized[currentLanguage.value]?.name
       ? planetData.localized[currentLanguage.value].name
-        .toLowerCase()
-        .replace(/\s+/g, '-')
+          .toLowerCase()
+          .replace(/\s+/g, '-')
       : 'planet';
 
     // const timestamp = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
@@ -99,8 +99,7 @@ const Header = ({
     e.target.value = '';
   };
 
-  const { batchUpload, deleteFile, isUploading, error, progress } =
-    useR2Upload();
+  const { batchUpload, isUploading } = useR2Upload();
 
   const handleSubmit = async () => {
     const hasMainImage = pendingFiles.has('main-image');
@@ -112,30 +111,21 @@ const Header = ({
     }
 
     try {
-      const uploadItems: Array<{
-        file: File;
-        fileKey: string;
-        type: 'planet-main' | 'planet-content';
-      }> = [];
+      const uploadItems: BatchUploadItem[] = [];
 
       if (hasMainImage) {
         const file = pendingFiles.get('main-image')!;
         uploadItems.push({ file, fileKey: 'main-image', type: 'planet-main' });
       }
 
-      Array.from(pendingContentImages.entries()).forEach(
-        ([id, { file }]) =>
-          uploadItems.push({
-            file,
-            fileKey: id,
-            type: 'planet-content',
-          }),
+      Array.from(pendingContentImages.entries()).forEach(([id, { file }]) =>
+        uploadItems.push({ file, fileKey: id, type: 'planet-content' }),
       );
 
       const uploadResults = await batchUpload(uploadItems);
 
       if (!uploadResults) {
-        console.error('Upload failed:', error);
+        alert('Upload failed. Please try again.');
         return;
       }
 
@@ -144,10 +134,9 @@ const Header = ({
           if (fileKey === 'main-image') {
             draft.image.url = result.url;
           } else {
-            const pendingId = fileKey;
             (['az', 'en'] as SupportedLanguage[]).forEach(loc => {
               draft.localized[loc].contents.forEach(c => {
-                if (c.type === 'image' && c.pendingImageId === pendingId) {
+                if (c.type === 'image' && c.pendingImageId === fileKey) {
                   c.image.url = result.url;
                 }
               });
@@ -161,9 +150,11 @@ const Header = ({
         prev.forEach(({ previewUrl }) => URL.revokeObjectURL(previewUrl));
         return new Map();
       });
+
       alert('Success');
     } catch (err) {
       console.error('Submission error:', err);
+      alert('Something went wrong. Please try again.');
     }
   };
 

@@ -1,19 +1,26 @@
 import { useState } from 'react';
 
-interface UploadResult {
+export interface UploadResult {
   success: boolean;
   url: string;
   fileKey: string;
-  r2Key: string;
+  r2Key: string; // actual key in R2, needed for deletion
 }
 
-interface BatchUploadItem {
+export interface BatchUploadItem {
   file: File;
   fileKey: string;
   type: 'planet-main' | 'planet-content';
 }
 
-interface UseR2UploadReturn {
+export interface PresignedItem {
+  fileKey: string;
+  r2Key: string;
+  presignedUrl: string;
+  publicUrl: string;
+}
+
+export interface UseR2UploadReturn {
   upload: (
     file: File,
     fileKey: string,
@@ -29,8 +36,6 @@ interface UseR2UploadReturn {
   reset: () => void;
 }
 
-const WORKER_URL = 'https://image-upload-worker.codeuniverse-app.workers.dev';
-
 export function useR2Upload(): UseR2UploadReturn {
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -39,43 +44,15 @@ export function useR2Upload(): UseR2UploadReturn {
     total: number;
   } | null>(null);
 
-  // Single file upload
   const upload = async (
     file: File,
     fileKey: string,
     type: 'planet-main' | 'planet-content' = 'planet-content',
   ): Promise<UploadResult | null> => {
-    setIsUploading(true);
-    setError(null);
-
-    try {
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('fileKey', fileKey);
-      formData.append('type', type);
-
-      const response = await fetch(WORKER_URL, {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Upload failed');
-      }
-
-      const result: UploadResult = await response.json();
-      return result;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Upload failed';
-      setError(errorMessage);
-      return null;
-    } finally {
-      setIsUploading(false);
-    }
+    const results = await batchUpload([{ file, fileKey, type }]);
+    return results ? (results.get(fileKey) ?? null) : null;
   };
 
-  // Batch upload with rollback on failure
   const batchUpload = async (
     items: BatchUploadItem[],
   ): Promise<Map<string, UploadResult> | null> => {
@@ -83,34 +60,61 @@ export function useR2Upload(): UseR2UploadReturn {
     setError(null);
     setProgress({ current: 0, total: items.length });
 
-    const uploadedFiles: UploadResult[] = [];
+    const uploadedR2Keys: string[] = [];
     const resultMap = new Map<string, UploadResult>();
 
     try {
-      for (let i = 0; i < items.length; i++) {
-        const { file, fileKey, type } = items[i];
+      // 1. Get all presigned URLs in one request
+      const presignRes = await fetch('/api/upload/presign', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: items.map(({ file, fileKey, type }) => ({
+            fileKey,
+            fileType: file.type,
+            fileSize: file.size,
+            type, // ← now passed so server can generate correct folder
+          })),
+        }),
+      });
 
-        setProgress({ current: i + 1, total: items.length });
-
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('fileKey', fileKey);
-        formData.append('type', type);
-
-        const response = await fetch(WORKER_URL, {
-          method: 'POST',
-          body: formData,
-        });
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || `Upload failed for ${fileKey}`);
-        }
-
-        const result: UploadResult = await response.json();
-        uploadedFiles.push(result);
-        resultMap.set(fileKey, result);
+      if (!presignRes.ok) {
+        const data = await presignRes.json();
+        throw new Error(data.error || 'Failed to get upload URLs');
       }
+
+      const { items: presignedItems }: { items: PresignedItem[] } =
+        await presignRes.json();
+
+      await Promise.all(
+        presignedItems.map(
+          async ({ fileKey, r2Key, presignedUrl, publicUrl }) => {
+            const file = items.find(i => i.fileKey === fileKey)!.file;
+
+            const uploadRes = await fetch(presignedUrl, {
+              method: 'PUT',
+              body: file,
+              headers: { 'Content-Type': file.type },
+            });
+
+            if (!uploadRes.ok) {
+              throw new Error(`Upload to R2 failed for ${fileKey}`);
+            }
+
+            uploadedR2Keys.push(r2Key);
+            resultMap.set(fileKey, {
+              success: true,
+              url: publicUrl,
+              fileKey,
+              r2Key,
+            });
+
+            setProgress(prev =>
+              prev ? { ...prev, current: prev.current + 1 } : null,
+            );
+          },
+        ),
+      );
 
       setProgress(null);
       return resultMap;
@@ -119,10 +123,10 @@ export function useR2Upload(): UseR2UploadReturn {
         err instanceof Error ? err.message : 'Batch upload failed';
       setError(errorMessage);
 
-      // ROLLBACK: Delete all successfully uploaded files
+      // Rollback using actual R2 keys
       console.log('Upload failed, rolling back...');
-      for (const uploaded of uploadedFiles) {
-        await deleteFile(uploaded.r2Key);
+      for (const r2Key of uploadedR2Keys) {
+        await deleteFile(r2Key);
       }
 
       setProgress(null);
@@ -132,19 +136,15 @@ export function useR2Upload(): UseR2UploadReturn {
     }
   };
 
-  // Delete file from R2
   const deleteFile = async (r2Key: string): Promise<boolean> => {
     try {
-      const response = await fetch(`${WORKER_URL}/delete`, {
-        method: 'POST',
+      const response = await fetch('/api/upload/delete', {
+        method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ r2Key }),
       });
 
-      if (!response.ok) {
-        throw new Error('Delete failed');
-      }
-
+      if (!response.ok) throw new Error('Delete failed');
       return true;
     } catch (err) {
       console.error('Delete failed:', err);
