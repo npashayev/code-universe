@@ -167,18 +167,21 @@ export type PlanetSummary = Pick<PlanetData, 'id' | 'step' | 'status'> & {
   localized: Record<SupportedLanguage, LocalizedPlanetSummary>;
 };
 
+interface PlanetListBase {
+  category: PlanetCategory;
+  planets: PlanetSummary[];
+}
+
 export interface PlanetListStats {
   total: number;
   published: number;
   drafts: number;
 }
 
-export interface PlanetFullListResponse {
-  planets: PlanetSummary[];
+export interface PlanetFullListResponse extends PlanetListBase {
   stats: PlanetListStats;
 }
 
-export interface PlanetListResponse {
-  planets: PlanetSummary[];
-  total: number;
+export interface PlanetListResponse extends PlanetListBase {
+  stats: PlanetListStats;
 }
