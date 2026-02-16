@@ -15,17 +15,17 @@ export const urlSchema = (message = 'Invalid URL') =>
 
 const statusEnum = z.enum(['draft', 'published']);
 const categoryEnum = z.enum(['HTML', 'CSS', 'Javascript']);
-const supportedLanguages = z.enum(['az', 'en']);
-const titleLevelEnum = z.enum(['p', 'h2', 'h3', 'h4', 'h5', 'h6']);
-const variantEnum = z.enum(['normal', 'note', 'warning', 'tip']);
+const supportedLanguageEnum = z.enum(['az', 'en']);
+const titleLevelEnum = z.enum(['h2', 'h3', 'h4', 'h5', 'h6']);
+const textVariantEnum = z.enum(['normal', 'note', 'warning', 'tip']);
 const programmingLanguageEnum = z.enum([
-  'Javascript',
-  'TypeScript',
-  'HTML',
-  'CSS',
-  'JSON',
-  'Shell',
-  'Markdown',
+  'javascript',
+  'typescript',
+  'html',
+  'css',
+  'json',
+  'shell',
+  'markdown',
 ]);
 
 const imageMetadataSchema = z.object({
@@ -33,7 +33,7 @@ const imageMetadataSchema = z.object({
   height: z.number().int().positive(),
 });
 
-const localizedStringSchema = z.record(supportedLanguages, z.string());
+const localizedStringSchema = z.record(supportedLanguageEnum, z.string());
 
 const tagSchema = z.object({
   id: z.string(),
@@ -74,11 +74,16 @@ const baseContentSchema = z.object({
   label: z.string().optional(),
 });
 
+const fullBaseContentSchema = baseContentSchema.extend({
+  title: z.string().optional(),
+  description: z.string().optional(),
+});
+
 const textContentSchema = baseContentSchema.extend({
   type: z.literal('text'),
   title: z.object({ level: titleLevelEnum, text: z.string() }).optional(),
   text: z.string(),
-  variant: variantEnum,
+  variant: textVariantEnum,
 });
 
 const implementationTaskContentSchema = baseContentSchema.extend({
@@ -87,29 +92,27 @@ const implementationTaskContentSchema = baseContentSchema.extend({
   task: z.string(),
 });
 
-const codeContentSchema = baseContentSchema.extend({
+const codeContentSchema = fullBaseContentSchema.extend({
   type: z.literal('code'),
-  title: z.string().optional(),
   code: codeSnippetSchema,
 });
 
-const htmlElementContentSchema = baseContentSchema.extend({
+const htmlElementContentSchema = fullBaseContentSchema.extend({
   type: z.literal('html-element'),
-  title: z.string().optional(),
   element: htmlElementSnippetSchema,
 });
 
-const imageContentSchema = baseContentSchema.extend({
+const imageContentSchema = fullBaseContentSchema.extend({
   type: z.literal('image'),
-  title: z.string().optional(),
   image: z.object({
     url: urlSchema(),
     alt: z.string(),
     metadata: imageMetadataSchema,
   }),
+  pendingImageId: z.string().optional(),
 });
 
-const planetContentSchema = z.union([
+const planetContentSchema = z.discriminatedUnion('type', [
   textContentSchema,
   implementationTaskContentSchema,
   codeContentSchema,
@@ -138,7 +141,7 @@ export const createPlanetDataSchema = z.object({
     metadata: imageMetadataSchema,
     alt: localizedStringSchema,
   }),
-  localized: z.record(supportedLanguages, localizedPlanetDataSchema),
+  localized: z.record(supportedLanguageEnum, localizedPlanetDataSchema),
 });
 
 export const planetDataSchema = createPlanetDataSchema.extend({

@@ -7,34 +7,45 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Planet {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  category     String
-  status       String
-  step         Int
-  image        Json
-  nextPlanetId String?  @db.ObjectId
-  prevPlanetId String?  @db.ObjectId
-  localized    Json
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  
-  @@map("planets")
+enum PlanetStatus {
+  draft
+  published
+}
+
+enum PlanetCategory {
+  HTML
+  CSS
+  Javascript
 }
 
 enum UserRole {
   ADMIN
 }
 
+model Planet {
+  id           String         @id @default(auto()) @map("_id") @db.ObjectId
+  category     PlanetCategory
+  status       PlanetStatus
+  step         Int
+  image        Json
+  nextPlanetId String?        @db.ObjectId
+  prevPlanetId String?        @db.ObjectId
+  localized    Json
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  @@map("planets")
+}
+
 model User {
-  id             String     @id @default(cuid()) @map("_id") 
-  email          String     @unique
+  id             String   @id @default(cuid()) @map("_id")
+  email          String   @unique
   hashedPassword String
   firstName      String
   lastName       String
-  role           UserRole   @default(ADMIN)
-  createdAt      DateTime   @default(now())
-  updatedAt      DateTime   @updatedAt
+  role           UserRole @default(ADMIN)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   @@map("users")
 }
