@@ -40,13 +40,13 @@ function generateR2Key(
 }
 
 export async function POST(req: NextRequest) {
-  // 1. Check session
+  // check session
   const session = await getServerSession(authOptions);
   if (!session?.user?.email) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  // 2. Check ADMIN role
+  // check ADMIN role
   const user = await prisma.user.findUnique({
     where: { email: session.user.email },
     select: { role: true },
@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }
 
-  // 3. Validate request body
+  // validate request body
   const { items }: { items: PresignRequestItem[] } = await req.json();
 
   if (!items || !Array.isArray(items) || items.length === 0) {
@@ -84,7 +84,7 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  // 4. Generate all presigned URLs in parallel
+  // generate all presigned URLs in parallel
   const results = await Promise.all(
     items.map(async ({ fileKey, fileType, fileSize, type }) => {
       const r2Key = generateR2Key(type, fileType); // unique key generated server-side
@@ -102,8 +102,6 @@ export async function POST(req: NextRequest) {
       const publicUrl = `${process.env.R2_PUBLIC_URL}/${r2Key}`;
 
       return { fileKey, r2Key, presignedUrl, publicUrl };
-      //       ↑ original client key so hook can map back
-      //                ↑ actual unique R2 key
     }),
   );
 
