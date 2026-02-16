@@ -157,6 +157,28 @@ export interface HtmlElementSnippet {
 export interface ImageContent extends BaseContent {
   type: 'image';
   image: ImageData<string>;
-  /** References a pending content image (preview) so multiple locales can share one upload. */
   pendingImageId?: string;
+}
+
+// types for planet lists
+export type LocalizedPlanetSummary = Pick<LocalizedPlanetData, 'name' | 'tags'>;
+
+export type PlanetSummary = Pick<PlanetData, 'id' | 'step' | 'status'> & {
+  localized: Record<SupportedLanguage, LocalizedPlanetSummary>;
+};
+
+export interface PlanetListStats {
+  total: number;
+  published: number;
+  drafts: number;
+}
+
+export interface PlanetFullListResponse {
+  planets: PlanetSummary[];
+  stats: PlanetListStats;
+}
+
+export interface PlanetListResponse {
+  planets: PlanetSummary[];
+  total: number;
 }
