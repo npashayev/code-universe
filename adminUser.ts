@@ -1,3 +1,6 @@
+// npm i -D tsx
+// npx tsx adminUser.ts
+
 import { prisma } from '@/lib/prisma/prisma';
 import { UserRole } from '@prisma/client';
 import bcrypt from 'bcrypt';
