@@ -1,6 +1,7 @@
-import { PlanetFullListResponse, PlanetSummary } from '@/types/planet';
+import { PLANET_CATEGORY, PlanetFullListResponse, PlanetSummary } from '@/types/planet';
 import { use } from 'react';
 import Header from './components/Header';
+import { notFound } from 'next/navigation';
 
 interface Props {
   params: Promise<{
@@ -151,8 +152,12 @@ const MOCK_PLANETS: PlanetSummary[] = [
 
 const Map = ({ params }: Props) => {
   const { category } = use(params);
+  if (!Object.keys(PLANET_CATEGORY).includes(category)) {
+    notFound();
+  }
 
   const MOCK_RESPONSE: PlanetFullListResponse = {
+    category: 'HTML',
     planets: MOCK_PLANETS,
     stats: {
       total: 6,
@@ -160,6 +165,7 @@ const Map = ({ params }: Props) => {
       drafts: 2,
     },
   };
+
   return (
     <div>
       <Header data={MOCK_RESPONSE} />
