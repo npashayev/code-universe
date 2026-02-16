@@ -1,40 +1,10 @@
+import {
+  BatchUploadItem,
+  PresignedItem,
+  UploadResult,
+  UseR2UploadReturn,
+} from '@/types/r2';
 import { useState } from 'react';
-
-export interface UploadResult {
-  success: boolean;
-  url: string;
-  fileKey: string;
-  r2Key: string; // actual key in R2, needed for deletion
-}
-
-export interface BatchUploadItem {
-  file: File;
-  fileKey: string;
-  type: 'planet-main' | 'planet-content';
-}
-
-export interface PresignedItem {
-  fileKey: string;
-  r2Key: string;
-  presignedUrl: string;
-  publicUrl: string;
-}
-
-export interface UseR2UploadReturn {
-  upload: (
-    file: File,
-    fileKey: string,
-    type?: 'planet-main' | 'planet-content',
-  ) => Promise<UploadResult | null>;
-  batchUpload: (
-    items: BatchUploadItem[],
-  ) => Promise<Map<string, UploadResult> | null>;
-  deleteFile: (r2Key: string) => Promise<boolean>;
-  isUploading: boolean;
-  error: string | null;
-  progress: { current: number; total: number } | null;
-  reset: () => void;
-}
 
 export function useR2Upload(): UseR2UploadReturn {
   const [isUploading, setIsUploading] = useState(false);
@@ -64,7 +34,7 @@ export function useR2Upload(): UseR2UploadReturn {
     const resultMap = new Map<string, UploadResult>();
 
     try {
-      // 1. Get all presigned URLs in one request
+      // get all presigned URLs in one request
       const presignRes = await fetch('/api/upload/presign', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -73,7 +43,7 @@ export function useR2Upload(): UseR2UploadReturn {
             fileKey,
             fileType: file.type,
             fileSize: file.size,
-            type, // ← now passed so server can generate correct folder
+            type,
           })),
         }),
       });
