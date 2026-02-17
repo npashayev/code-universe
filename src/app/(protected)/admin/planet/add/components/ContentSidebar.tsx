@@ -8,13 +8,13 @@ import { useLocalizedContent } from '@/lib/hooks/useLocalizedContent';
 import { DragEndEvent } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 import { updateLocalizedArray } from '@/lib/utils/updateLocalizedArray';
-import SortableList from './shared/SortableList';
 import ListElement from './shared/ListElement';
 import { ContentTypeSelector } from './Selectors';
 import { contentTypeOptions } from '@/lib/constants/reactSelectOptions';
 import { cn } from '@/lib/utils/cn';
 import SectionHeader from './shared/SectionHeader';
 import AddButton from './shared/AddButton';
+import SortableList from '@/components/shared/SortableList';
 
 interface Props {
   contents: PlanetContent[];
