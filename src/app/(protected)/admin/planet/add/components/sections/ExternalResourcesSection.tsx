@@ -6,10 +6,10 @@ import Link from 'next/link';
 import { DragEndEvent } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 import { updateLocalizedArray } from '@/lib/utils/updateLocalizedArray';
-import SortableList from '../shared/SortableList';
 import SectionHeader from '../shared/SectionHeader';
 import Input from '../shared/Input';
 import AddButton from '../shared/AddButton';
+import SortableList from '@/components/shared/SortableList';
 
 interface Props {
   resources?: Resource[];

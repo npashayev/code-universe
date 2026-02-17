@@ -6,10 +6,10 @@ import { DragEndEvent } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 import { updateLocalizedArray } from '@/lib/utils/updateLocalizedArray';
 import ListElement from '../shared/ListElement';
-import SortableList from '../shared/SortableList';
 import SectionHeader from '../shared/SectionHeader';
 import Input from '../shared/Input';
 import AddButton from '../shared/AddButton';
+import SortableList from '@/components/shared/SortableList';
 
 interface Props {
   questions: Question[];

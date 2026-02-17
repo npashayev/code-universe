@@ -8,8 +8,8 @@ import { updateLocalizedArray } from '@/lib/utils/updateLocalizedArray';
 import SectionHeader from '../shared/SectionHeader';
 import Input from '../shared/Input';
 import ListElement from '../shared/ListElement';
-import SortableList from '../shared/SortableList';
 import AddButton from '../shared/AddButton';
+import SortableList from '@/components/shared/SortableList';
 
 interface Props {
   planetData: CreatePlanetData;
