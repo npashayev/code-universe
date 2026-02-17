@@ -1,0 +1,68 @@
+'use client';
+import { PlanetFullListResponse, PlanetSummary } from '@/types/planet';
+import Header from './Header';
+import Planet from './Planet';
+import { useState } from 'react';
+import { LanguageOption } from '@/types/reactSelectOptions';
+import { languageOptions } from '@/lib/constants/reactSelectOptions';
+import { useImmer } from 'use-immer';
+import SortableList from '@/components/shared/SortableList';
+import { DragEndEvent } from '@dnd-kit/core';
+import { arrayMove } from '@dnd-kit/sortable';
+
+interface Props {
+  data: PlanetFullListResponse;
+}
+
+const PlanetListClient = ({ data }: Props) => {
+  const [orderedPlanets, setOrderedPlanets] = useImmer(data.planets);
+  const [currentLanguage, setCurrentLanguage] = useState<LanguageOption>(
+    languageOptions[0],
+  );
+  const locale = currentLanguage.value;
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+
+    const oldIndex = orderedPlanets.findIndex(p => p.id === active.id);
+    const newIndex = orderedPlanets.findIndex(p => p.id === over.id);
+
+    const sorted = arrayMove(orderedPlanets, oldIndex, newIndex);
+
+    const minIndex = Math.min(oldIndex, newIndex);
+    const maxIndex = Math.max(oldIndex, newIndex);
+
+    const updatedWithSteps = sorted.map((planet, idx) => {
+      if (idx < minIndex || idx > maxIndex) return planet;
+      return { ...planet, step: idx + 1 };
+    });
+
+    setOrderedPlanets(updatedWithSteps);
+  };
+
+  return (
+    <div className="page">
+      <Header
+        data={data}
+        currentLanguage={currentLanguage}
+        setCurrentLanguage={setCurrentLanguage}
+      />
+      <main className="space-y-3 py-12 px-[10%]">
+        <SortableList<PlanetSummary>
+          elements={orderedPlanets}
+          handleDragEnd={handleDragEnd}
+          renderItem={planet => (
+            <Planet
+              planet={planet}
+              setOrderedPlanets={setOrderedPlanets}
+              locale={locale}
+            />
+          )}
+        />
+      </main>
+    </div>
+  );
+};
+
+export default PlanetListClient;
