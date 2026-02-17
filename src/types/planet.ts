@@ -2,9 +2,9 @@ export type SupportedLanguage = 'az' | 'en';
 export type PlanetStatus = 'draft' | 'published';
 
 export const PLANET_CATEGORY = {
-  html: 'HTML',
-  css: 'CSS',
-  javascript: 'Javascript',
+  html: 'html',
+  css: 'css',
+  javascript: 'javascript',
 } as const;
 
 export type PlanetCategory =
