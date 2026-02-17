@@ -15,6 +15,10 @@ export interface BaseOption<T, U = string> {
 
 export type LanguageOption = BaseOption<SupportedLanguage>;
 export type StatusOption = BaseOption<PlanetStatus, 'Draft' | 'Published'>;
+export type ExtendedStatusOption = BaseOption<
+  PlanetStatus | 'all',
+  'All' | 'Draft' | 'Published'
+>;
 export type CategoryOption = BaseOption<PlanetCategory, PlanetCategory>;
 export type ContentTypeOption = BaseOption<ContentType>;
 export type TitleLevelOption = BaseOption<TitleLevel>;

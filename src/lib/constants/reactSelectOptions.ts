@@ -7,6 +7,7 @@ import {
 import {
   CategoryOption,
   ContentTypeOption,
+  ExtendedStatusOption,
   LanguageOption,
   ProgrammingLanguageOption,
   StatusOption,
@@ -20,6 +21,21 @@ export const languageOptions: LanguageOption[] = [
 ];
 
 export const statusOptions: StatusOption[] = [
+  {
+    label: 'Draft',
+    value: 'draft',
+  },
+  {
+    label: 'Published',
+    value: 'published',
+  },
+];
+
+export const extendedStatusOptions: ExtendedStatusOption[] = [
+  {
+    label: 'All',
+    value: 'all',
+  },
   {
     label: 'Draft',
     value: 'draft',
