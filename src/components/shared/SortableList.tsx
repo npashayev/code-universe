@@ -1,4 +1,5 @@
 import { SortableItem } from '@/components/shared/SortableItem';
+import { cn } from '@/lib/utils/cn';
 import {
   DndContext,
   DragEndEvent,
@@ -14,15 +15,19 @@ import {
 } from '@dnd-kit/sortable';
 
 interface Props<T extends { id: string }> {
+  id: string;
+  className?: string;
   elements: T[];
   handleDragEnd: (event: DragEndEvent) => void;
   renderItem: (element: T) => React.ReactNode;
 }
 
 const SortableList = <T extends { id: string }>({
+  id,
   elements,
   handleDragEnd,
   renderItem,
+  className,
 }: Props<T>) => {
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
@@ -30,6 +35,7 @@ const SortableList = <T extends { id: string }>({
 
   return (
     <DndContext
+      id={id}
       sensors={sensors}
       collisionDetection={closestCenter}
       onDragEnd={handleDragEnd}
@@ -40,7 +46,7 @@ const SortableList = <T extends { id: string }>({
           items={elements.map(e => e.id)}
           strategy={verticalListSortingStrategy}
         >
-          <div className="overflow-hidden space-y-2">
+          <div className={cn('overflow-hidden space-y-2', className)}>
             {elements.map(element => (
               <SortableItem key={element.id} id={element.id}>
                 {renderItem(element)}

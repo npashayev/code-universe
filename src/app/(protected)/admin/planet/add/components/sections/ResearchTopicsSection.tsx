@@ -82,6 +82,7 @@ export const ResearchTopicsSection = ({
       </div>
 
       <SortableList<ResearchTopic>
+        id="research-topic-sortable-list"
         elements={researchTopics}
         handleDragEnd={handleDragEnd}
         renderItem={topic => (

@@ -79,6 +79,7 @@ const TagsSection = ({ planetData, setPlanetData, locale }: Props) => {
       </div>
 
       <SortableList<PlanetTag>
+        id="tag-sortable-list"
         elements={tags}
         handleDragEnd={handleDragEnd}
         renderItem={tag => (

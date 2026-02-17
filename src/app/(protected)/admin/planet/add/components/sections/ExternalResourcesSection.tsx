@@ -111,6 +111,7 @@ export const ExternalResourcesSection = ({
       </div>
 
       <SortableList<Resource>
+        id="resource-sortable-list"
         elements={resources || []}
         handleDragEnd={handleDragEnd}
         renderItem={res => (

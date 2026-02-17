@@ -80,6 +80,7 @@ const ContentSidebar = ({ contents, setPlanetData, locale }: Props) => {
               Discovery Outline
             </h3>
             <SortableList<PlanetContent>
+              id="content-sortable-list"
               elements={contents}
               handleDragEnd={handleDragEnd}
               renderItem={content => (

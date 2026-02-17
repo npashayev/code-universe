@@ -79,6 +79,7 @@ export const QuestionsSection = ({
       </div>
 
       <SortableList<Question>
+        id='question-sortable-list'
         elements={questions}
         handleDragEnd={handleDragEnd}
         renderItem={question => (

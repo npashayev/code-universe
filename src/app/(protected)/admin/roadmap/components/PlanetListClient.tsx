@@ -48,8 +48,10 @@ const PlanetListClient = ({ data }: Props) => {
         currentLanguage={currentLanguage}
         setCurrentLanguage={setCurrentLanguage}
       />
-      <main className="space-y-3 py-12 px-[10%]">
+      <main className="space-y-3 px-[10%]">
         <SortableList<PlanetSummary>
+          id="planet-sortable-list"
+          className="space-y-3 pt-12 pb-24"
           elements={orderedPlanets}
           handleDragEnd={handleDragEnd}
           renderItem={planet => (
