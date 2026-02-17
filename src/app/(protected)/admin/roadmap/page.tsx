@@ -160,7 +160,7 @@ const Map = ({ searchParams }: Props) => {
   const { category } = use(searchParams);
 
   function isPlanetCategory(value: string): value is PlanetCategory {
-    return Object.keys(PLANET_CATEGORY).includes(value);
+    return (Object.values(PLANET_CATEGORY) as string[]).includes(value);
   }
 
   if (!category || !isPlanetCategory(category)) {
@@ -168,7 +168,7 @@ const Map = ({ searchParams }: Props) => {
   }
 
   const MOCK_RESPONSE: PlanetFullListResponse = {
-    category: 'HTML',
+    category: 'html',
     planets: MOCK_PLANETS,
     stats: {
       total: 6,
