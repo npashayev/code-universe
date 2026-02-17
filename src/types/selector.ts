@@ -1,7 +1,13 @@
-import { CodeContent, CreatePlanetData, PlanetSummary } from '@/types/planet';
+import {
+  CodeContent,
+  CreatePlanetData,
+  PlanetCategory,
+  PlanetSummary,
+} from '@/types/planet';
 import { Updater } from 'use-immer';
 import { UpdateContentFn } from '@/lib/hooks/useLocalizedContent';
 import {
+  CategoryOption,
   ContentTypeOption,
   LanguageOption,
   PendingImageOption,
@@ -13,6 +19,11 @@ import {
 export interface PlanetDataProps {
   planetData: CreatePlanetData;
   setPlanetData: Updater<CreatePlanetData>;
+}
+
+export interface CategorySelectorProps {
+  value: CategoryOption;
+  onCategoryChange: (category: PlanetCategory) => void;
 }
 
 export interface StatusUpdateSelectorProps {

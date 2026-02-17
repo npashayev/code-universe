@@ -24,6 +24,7 @@ import {
 import { CheckCircle2, Clock, Code, Eye, Languages } from 'lucide-react';
 import Selector from './shared/Selector';
 import {
+  CategorySelectorProps,
   ContentTypeSelectorProps,
   LanguageSelectorProps,
   PendingImageSelectorProps,
@@ -86,7 +87,7 @@ export const ExtendedStatusSelector = () => {
   const handleChange = (value: ExtendedStatusOption['value']) => {
     const updatedSearchParams = new URLSearchParams(searchParams);
     updatedSearchParams.set('status', value);
-    router.push(`/admin/roadmap?${updatedSearchParams.toString()}`);
+    router.push(`?${updatedSearchParams.toString()}`);
   };
 
   return (
@@ -126,21 +127,16 @@ export const LanguageSelector = ({
 );
 
 export const CategorySelector = ({
-  planetData,
-  setPlanetData,
-}: PlanetDataProps) => (
+  value,
+  onCategoryChange,
+}: CategorySelectorProps) => (
   <Selector<CategoryOption>
     instanceId="category-select"
-    value={
-      categoryOptions.find(o => o.value === planetData.category) ||
-      categoryOptions[0]
-    }
+    value={value}
     options={categoryOptions}
     onChange={option => {
       if (!option) return;
-      setPlanetData(draft => {
-        draft.category = option.value;
-      });
+      onCategoryChange(option.value);
     }}
   >
     <Code size={16} />
