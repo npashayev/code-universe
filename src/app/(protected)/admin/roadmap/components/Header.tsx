@@ -1,12 +1,15 @@
-import { PlanetFullListResponse } from '@/types/planet';
+import { PlanetCategory, PlanetFullListResponse } from '@/types/planet';
 import { Globe, Plus } from 'lucide-react';
 import Link from 'next/link';
 import {
+  CategorySelector,
   ExtendedStatusSelector,
   LanguageSelector,
 } from '../../planet/add/components/Selectors';
 import { LanguageOption } from '@/types/reactSelectOptions';
 import { Dispatch, SetStateAction } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { categoryOptions } from '@/lib/constants/reactSelectOptions';
 
 export interface Props {
   data: PlanetFullListResponse;
@@ -17,6 +20,14 @@ export interface Props {
 const Header = ({ data, currentLanguage, setCurrentLanguage }: Props) => {
   const { category, stats } = data;
   const { total, published, drafts } = stats;
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const onCategoryChange = (category: PlanetCategory) => {
+    const updatedSearchParams = new URLSearchParams(searchParams);
+    updatedSearchParams.set('category', category);
+    router.push(`?${updatedSearchParams.toString()}`);
+  };
 
   return (
     <header className="sticky top-0 z-60 bg-night backdrop-blur-xl border-b border-white/5 py-6 px-12 flex items-center justify-between">
@@ -61,6 +72,15 @@ const Header = ({ data, currentLanguage, setCurrentLanguage }: Props) => {
         <LanguageSelector
           currentLanguage={currentLanguage}
           setCurrentLanguage={setCurrentLanguage}
+        />
+
+        <CategorySelector
+          value={
+            categoryOptions.find(
+              o => o.value === searchParams.get('category'),
+            ) || categoryOptions[0]
+          }
+          onCategoryChange={onCategoryChange}
         />
 
         <ExtendedStatusSelector />
