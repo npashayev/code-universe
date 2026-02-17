@@ -1,4 +1,8 @@
-import { CreatePlanetData, SupportedLanguage } from '@/types/planet';
+import {
+  CreatePlanetData,
+  PlanetCategory,
+  SupportedLanguage,
+} from '@/types/planet';
 import { Download, Globe, Upload } from 'lucide-react';
 import { Updater } from 'use-immer';
 import { Dispatch, SetStateAction, useRef } from 'react';
@@ -11,6 +15,7 @@ import {
   StatusSelector,
 } from './Selectors';
 import { BatchUploadItem } from '@/types/r2';
+import { categoryOptions } from '@/lib/constants/reactSelectOptions';
 
 type PendingContentImageEntry = {
   previewUrl: string;
@@ -196,8 +201,15 @@ const Header = ({
         <StatusSelector planetData={planetData} setPlanetData={setPlanetData} />
 
         <CategorySelector
-          planetData={planetData}
-          setPlanetData={setPlanetData}
+          value={
+            categoryOptions.find(o => o.value === planetData.category) ||
+            categoryOptions[0]
+          }
+          onCategoryChange={(category: PlanetCategory) =>
+            setPlanetData(draft => {
+              draft.category = category;
+            })
+          }
         />
 
         {/* JSON Upload Trigger */}
