@@ -1,16 +1,19 @@
+'use client';
+
 import {
   categoryOptions,
   contentTypeOptions,
+  extendedStatusOptions,
   languageOptions,
   programmingLanguageOptions,
   statusOptions,
   textVariantOptions,
   titleLevelOptions,
 } from '@/lib/constants/reactSelectOptions';
-import { CodeContent, CreatePlanetData } from '@/types/planet';
 import {
   CategoryOption,
   ContentTypeOption,
+  ExtendedStatusOption,
   LanguageOption,
   PendingImageOption,
   ProgrammingLanguageOption,
@@ -18,53 +21,19 @@ import {
   TextVariantOption,
   TitleLevelOption,
 } from '@/types/reactSelectOptions';
-import { Code, Eye, Languages } from 'lucide-react';
-import { Updater } from 'use-immer';
+import { CheckCircle2, Clock, Code, Eye, Languages } from 'lucide-react';
 import Selector from './shared/Selector';
-import { UpdateContentFn } from '@/lib/hooks/useLocalizedContent';
-
-interface PlanetDataProps {
-  planetData: CreatePlanetData;
-  setPlanetData: Updater<CreatePlanetData>;
-}
-
-interface LanguageProps {
-  currentLanguage: LanguageOption;
-  setCurrentLanguage: React.Dispatch<React.SetStateAction<LanguageOption>>;
-}
-
-interface ContentTypeSelectorProps {
-  value: ContentTypeOption;
-  onChange: (opt: ContentTypeOption) => void;
-}
-
-interface TitleLevelSelectorProps {
-  value: TitleLevelOption | null;
-  onUpdate: UpdateContentFn;
-  contentId: string;
-  titleText?: string;
-  isDisabled?: boolean;
-}
-
-interface TextVariantSelectorProps {
-  value: TextVariantOption | null;
-  onUpdate: UpdateContentFn;
-  contentId: string;
-}
-
-interface ProgrammingLanguageSelectorProps {
-  value: ProgrammingLanguageOption | null;
-  onUpdate: UpdateContentFn;
-  contentId: string;
-  code: CodeContent['code'];
-}
-
-interface PendingImageSelectorProps {
-  options: PendingImageOption[];
-  value: PendingImageOption | null;
-  onChange: (option: PendingImageOption | null) => void;
-  placeholder?: string;
-}
+import {
+  ContentTypeSelectorProps,
+  LanguageSelectorProps,
+  PendingImageSelectorProps,
+  PlanetDataProps,
+  ProgrammingLanguageSelectorProps,
+  StatusUpdateSelectorProps,
+  TextVariantSelectorProps,
+  TitleLevelSelectorProps,
+} from '@/types/selector';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export const StatusSelector = ({
   planetData,
@@ -85,10 +54,64 @@ export const StatusSelector = ({
   </Selector>
 );
 
+export const StatusUpdateSelector = ({
+  planet,
+  changePlanetStatus,
+}: StatusUpdateSelectorProps) => (
+  <Selector<StatusOption>
+    instanceId={`status-update-select-${planet.id}`}
+    value={statusOptions.find(o => o.value === planet.status) || null}
+    options={statusOptions}
+    onChange={option => {
+      if (!option) return;
+      changePlanetStatus(draft => {
+        const planetToUpdate = draft.find(p => p.id === planet.id);
+        if (!planetToUpdate) return;
+        planetToUpdate.status = option.value;
+      });
+    }}
+  >
+    {planet.status === 'published' ? (
+      <CheckCircle2 size={12} className="text-green-500" />
+    ) : (
+      <Clock size={12} className="text-orange-500" />
+    )}
+  </Selector>
+);
+
+export const ExtendedStatusSelector = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const handleChange = (value: ExtendedStatusOption['value']) => {
+    const updatedSearchParams = new URLSearchParams(searchParams);
+    updatedSearchParams.set('status', value);
+    router.push(`/admin/roadmap?${updatedSearchParams.toString()}`);
+  };
+
+  return (
+    <Selector<ExtendedStatusOption>
+      instanceId="extended-status-select"
+      value={
+        extendedStatusOptions.find(
+          o => o.value === searchParams.get('status'),
+        ) || extendedStatusOptions[0]
+      }
+      options={extendedStatusOptions}
+      onChange={option => {
+        if (!option) return;
+        handleChange(option.value);
+      }}
+    >
+      <Eye size={14} />
+    </Selector>
+  );
+};
+
 export const LanguageSelector = ({
   currentLanguage,
   setCurrentLanguage,
-}: LanguageProps) => (
+}: LanguageSelectorProps) => (
   <Selector<LanguageOption>
     instanceId="language-select"
     value={currentLanguage}
