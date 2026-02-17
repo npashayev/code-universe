@@ -1,11 +1,17 @@
-import { PLANET_CATEGORY, PlanetFullListResponse, PlanetSummary } from '@/types/planet';
 import { use } from 'react';
-import Header from './components/Header';
 import { notFound } from 'next/navigation';
+import {
+  PLANET_CATEGORY,
+  PlanetCategory,
+  PlanetFullListResponse,
+  PlanetSummary,
+} from '@/types/planet';
+import PlanetListClient from './components/PlanetListClient';
 
 interface Props {
-  params: Promise<{
-    category: string;
+  searchParams: Promise<{
+    category?: string;
+    status?: string;
   }>;
 }
 
@@ -150,9 +156,14 @@ const MOCK_PLANETS: PlanetSummary[] = [
   },
 ];
 
-const Map = ({ params }: Props) => {
-  const { category } = use(params);
-  if (!Object.keys(PLANET_CATEGORY).includes(category)) {
+const Map = ({ searchParams }: Props) => {
+  const { category } = use(searchParams);
+
+  function isPlanetCategory(value: string): value is PlanetCategory {
+    return Object.keys(PLANET_CATEGORY).includes(value);
+  }
+
+  if (!category || !isPlanetCategory(category)) {
     notFound();
   }
 
@@ -166,11 +177,7 @@ const Map = ({ params }: Props) => {
     },
   };
 
-  return (
-    <div>
-      <Header data={MOCK_RESPONSE} />
-    </div>
-  );
+  return <PlanetListClient data={MOCK_RESPONSE} />;
 };
 
 export default Map;
