@@ -1,6 +1,7 @@
 import {
   CONTENT_TYPE,
   PLANET_CATEGORY,
+  PlanetCategory,
   PROGRAMMING_LANGUAGE,
   ProgrammingLanguage,
 } from '@/types/planet';
@@ -48,9 +49,9 @@ export const extendedStatusOptions: ExtendedStatusOption[] = [
 
 export const categoryOptions: CategoryOption[] = Object.entries(
   PLANET_CATEGORY,
-).map(([, value]) => ({
+).map(([key, value]) => ({
   label: value,
-  value,
+  value: key as PlanetCategory,
 }));
 
 export const contentTypeOptions: ContentTypeOption[] = [

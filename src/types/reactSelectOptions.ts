@@ -1,5 +1,6 @@
 import {
   ContentType,
+  PLANET_CATEGORY,
   PlanetCategory,
   PlanetStatus,
   ProgrammingLanguage,
@@ -19,7 +20,10 @@ export type ExtendedStatusOption = BaseOption<
   PlanetStatus | 'all',
   'All' | 'Draft' | 'Published'
 >;
-export type CategoryOption = BaseOption<PlanetCategory, PlanetCategory>;
+export type CategoryOption = BaseOption<
+  PlanetCategory,
+  (typeof PLANET_CATEGORY)[keyof typeof PLANET_CATEGORY]
+>;
 export type ContentTypeOption = BaseOption<ContentType>;
 export type TitleLevelOption = BaseOption<TitleLevel>;
 export type TextVariantOption = BaseOption<TextVariant>;
