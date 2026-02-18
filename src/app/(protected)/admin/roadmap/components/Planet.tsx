@@ -19,23 +19,23 @@ const Planet = ({ planet, setOrderedPlanets, locale }: Props) => {
   return (
     <div
       className={cn(
-        'group flex items-center justify-between gap-6 p-4 rounded-2xl border transition-all duration-300 bg-white/1 border-white/5 opacity-60 hover:opacity-100 hover:border-slate-500/30 text-white',
+        'group flex items-center justify-between gap-6 p-4 rounded-2xl border transition-all duration-300 bg-white/6 border-white/20 opacity-90 hover:opacity-100 hover:border-slate-400/40 text-white',
         isPublished &&
-          'bg-orange-400/10 border-white/10 hover:border-orange-500/30',
+          'bg-orange-500/15 border-orange-500/30 hover:border-orange-500/50',
       )}
     >
       {/* Left side */}
       <div className="flex items-center gap-4 flex-1 min-w-0">
-        <div className="cursor-grab active:cursor-grabbing text-slate-600 group-hover:text-slate-400 transition-colors px-2">
+        <div className="cursor-grab active:cursor-grabbing text-slate-400 group-hover:text-slate-300 transition-colors px-2">
           <MoveVertical size={18} />
         </div>
 
         <div className="shrink-0">
           <div
             className={cn(
-              'w-10 h-10 rounded-lg flex items-center justify-center font-mono text-sm font-bold border bg-slate-500/5 border-slate-500/10 text-slate-500',
+              'w-10 h-10 rounded-lg flex items-center justify-center font-mono text-sm font-bold border bg-slate-500/15 border-slate-500/25 text-slate-400',
               isPublished &&
-                'bg-orange-500/10 border-orange-500/20 text-orange-400',
+                'bg-orange-500/20 border-orange-500/35 text-orange-300',
             )}
           >
             {planet.step.toString().padStart(2, '0')}
@@ -52,7 +52,7 @@ const Planet = ({ planet, setOrderedPlanets, locale }: Props) => {
             {localizedData.tags.map(tag => (
               <span
                 key={tag.id}
-                className="text-[10px] uppercase font-black tracking-widest text-slate-500"
+                className="text-[10px] uppercase font-black tracking-widest text-slate-400"
               >
                 #{tag.tag}
               </span>
@@ -69,7 +69,7 @@ const Planet = ({ planet, setOrderedPlanets, locale }: Props) => {
         />
         <div className="flex items-center gap-1">
           <Link
-            className="p-2 text-slate-600 hover:text-red-400 hover:bg-red-400/10 rounded-lg transition-all"
+            className="p-2 text-slate-400 hover:text-red-400 hover:bg-red-400/15 rounded-lg transition-all"
             href={`/admin/planet/edit/${planet.id}`}
             target="_blank"
             rel="noreferrer"
