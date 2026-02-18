@@ -16,6 +16,7 @@ import {
 } from './Selectors';
 import { BatchUploadItem } from '@/types/r2';
 import { categoryOptions } from '@/lib/constants/reactSelectOptions';
+import DashboardLink from '@/app/(protected)/components/DashboardLink';
 
 type PendingContentImageEntry = {
   previewUrl: string;
@@ -179,14 +180,17 @@ const Header = ({
 
   return (
     <header className="sticky top-0 flex justify-between items-center gap-6 z-100 bg-night backdrop-blur-xl border-b border-white/5 py-4 px-6 md:px-12">
-      <div className="flex items-center">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-orange-500/20 flex items-center justify-center border border-orange-500/30">
-            <Globe className="text-orange-500" size={18} />
+      <div className="flex items-center gap-6">
+        <DashboardLink />
+        <div className="flex items-center">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-orange-500/20 flex items-center justify-center border border-orange-500/30">
+              <Globe className="text-orange-500" size={18} />
+            </div>
+            <h1 className="text-xl md:text-2xl font-bold text-white tracking-tight">
+              Create New Planet
+            </h1>
           </div>
-          <h1 className="text-xl md:text-2xl font-bold text-white tracking-tight">
-            Create New Planet
-          </h1>
         </div>
 
         <div className="h-8 w-px ml-6 bg-white/10 hidden md:block" />
