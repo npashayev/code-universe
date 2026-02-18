@@ -1,7 +1,12 @@
 'use client';
 
-import { PLANET_CATEGORY, CreatePlanetData, PlanetData } from '@/types/planet';
-import { useEffect, useState } from 'react';
+import {
+  CreatePlanetData,
+  PLANET_CATEGORY,
+  PlanetCategory,
+  PlanetData,
+} from '@/types/planet';
+import { use, useEffect, useState } from 'react';
 import { useImmer } from 'use-immer';
 import Header from './components/Header';
 import BasicConfigurationSection from './components/sections/BasicConfigurationSection';
@@ -15,15 +20,28 @@ import { LanguageOption } from '@/types/reactSelectOptions';
 import { languageOptions } from '@/lib/constants/reactSelectOptions';
 import PlanetClient from '@/app/roadmap/[map]/[planetId]/components/PlanetClient';
 
-const AddPlanetPage = () => {
+interface Props {
+  searchParams: Promise<{
+    category?: string;
+  }>;
+}
+
+const AddPlanetPage = ({ searchParams }: Props) => {
+  const { category = 'html' } = use(searchParams);
+
   const [currentLanguage, setCurrentLanguage] = useState<LanguageOption>(
     languageOptions[0],
   );
+  function isPlanetCategory(value: string): value is PlanetCategory {
+    return Object.keys(PLANET_CATEGORY).includes(value);
+  }
+
+  const planetCategory = isPlanetCategory(category) ? category : 'html';
 
   const [previewActive, setPreviewActive] = useState(false);
 
   const [planetData, setPlanetData] = useImmer<CreatePlanetData>({
-    category: PLANET_CATEGORY.html,
+    category: planetCategory,
     status: 'draft',
     image: {
       url: '',
@@ -65,7 +83,7 @@ const AddPlanetPage = () => {
 
   const locale = currentLanguage.value;
 
-  useEffect(() => console.log(planetData), [planetData]);
+  // useEffect(() => console.log(planetData), [planetData]);
 
   if (previewActive) {
     return (
