@@ -1,5 +1,9 @@
 'use client';
-import { PlanetFullListResponse, PlanetSummary } from '@/types/planet';
+import {
+  PlanetCategory,
+  PlanetFullListResponse,
+  PlanetSummary,
+} from '@/types/planet';
 import Header from './Header';
 import Planet from './Planet';
 import { useState } from 'react';
@@ -11,10 +15,11 @@ import { DragEndEvent } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 
 interface Props {
+  category: PlanetCategory;
   data: PlanetFullListResponse;
 }
 
-const PlanetListClient = ({ data }: Props) => {
+const PlanetListClient = ({ category, data }: Props) => {
   const [orderedPlanets, setOrderedPlanets] = useImmer(data.planets);
   const [currentLanguage, setCurrentLanguage] = useState<LanguageOption>(
     languageOptions[0],
@@ -44,6 +49,7 @@ const PlanetListClient = ({ data }: Props) => {
   return (
     <div className="page">
       <Header
+        category={category}
         data={data}
         currentLanguage={currentLanguage}
         setCurrentLanguage={setCurrentLanguage}

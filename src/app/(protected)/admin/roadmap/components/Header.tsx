@@ -12,13 +12,19 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { categoryOptions } from '@/lib/constants/reactSelectOptions';
 
 export interface Props {
+  category: PlanetCategory;
   data: PlanetFullListResponse;
   currentLanguage: LanguageOption;
   setCurrentLanguage: Dispatch<SetStateAction<LanguageOption>>;
 }
 
-const Header = ({ data, currentLanguage, setCurrentLanguage }: Props) => {
-  const { category, stats } = data;
+const Header = ({
+  category,
+  data,
+  currentLanguage,
+  setCurrentLanguage,
+}: Props) => {
+  const { stats } = data;
   const { total, published, drafts } = stats;
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -78,7 +84,9 @@ const Header = ({ data, currentLanguage, setCurrentLanguage }: Props) => {
           value={
             categoryOptions.find(
               o => o.value === searchParams.get('category'),
-            ) || categoryOptions[0]
+            ) ||
+            categoryOptions.find(o => o.value === category) ||
+            categoryOptions[0]
           }
           onCategoryChange={onCategoryChange}
         />

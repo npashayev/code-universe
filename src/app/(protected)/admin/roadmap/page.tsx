@@ -1,5 +1,5 @@
 import { use } from 'react';
-import { notFound } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import {
   PLANET_CATEGORY,
   PlanetCategory,
@@ -156,15 +156,15 @@ const MOCK_PLANETS: PlanetSummary[] = [
   },
 ];
 
-const Map = ({ searchParams }: Props) => {
-  const { category } = use(searchParams);
+const MapPage = ({ searchParams }: Props) => {
+  const { category = 'html' } = use(searchParams);
 
   function isPlanetCategory(value: string): value is PlanetCategory {
-    return (Object.values(PLANET_CATEGORY) as string[]).includes(value);
+    return Object.keys(PLANET_CATEGORY).includes(value);
   }
 
-  if (!category || !isPlanetCategory(category)) {
-    notFound();
+  if (!isPlanetCategory(category)) {
+    redirect('/admin/roadmap?category=html');
   }
 
   const MOCK_RESPONSE: PlanetFullListResponse = {
@@ -177,7 +177,7 @@ const Map = ({ searchParams }: Props) => {
     },
   };
 
-  return <PlanetListClient data={MOCK_RESPONSE} />;
+  return <PlanetListClient category={category} data={MOCK_RESPONSE} />;
 };
 
-export default Map;
+export default MapPage;
