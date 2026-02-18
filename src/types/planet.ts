@@ -2,13 +2,12 @@ export type SupportedLanguage = 'az' | 'en';
 export type PlanetStatus = 'draft' | 'published';
 
 export const PLANET_CATEGORY = {
-  html: 'html',
-  css: 'css',
-  javascript: 'javascript',
+  html: 'HTML',
+  css: 'CSS',
+  javascript: 'Javascript',
 } as const;
 
-export type PlanetCategory =
-  (typeof PLANET_CATEGORY)[keyof typeof PLANET_CATEGORY];
+export type PlanetCategory = keyof typeof PLANET_CATEGORY;
 
 export interface PlanetTag {
   id: string;
