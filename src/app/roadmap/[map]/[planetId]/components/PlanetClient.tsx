@@ -19,16 +19,19 @@ const PlanetClient = ({ planet, locale }: Props) => {
 
   if (!localized?.[locale]) {
     return (
-      <main className="page text-center p-20 text-2xl">
-        No content available for preview
-      </main>
+      <div className="planet-detail-page">
+        <main className="page text-center p-20 text-2xl text-slate-200">
+          No content available for preview
+        </main>
+      </div>
     );
   }
 
   const localizedData = localized[locale];
 
   return (
-    <main className="page pt-36 px-16 pb-14 text-[18px] space-y-8">
+    <div className="planet-detail-page">
+      <main className="page pt-36 px-16 pb-14 text-[18px] text-slate-200 space-y-8">
       <PlanetHeader
         localizedData={localized[locale]}
         image={{
@@ -51,7 +54,8 @@ const PlanetClient = ({ planet, locale }: Props) => {
       {localizedData.questions && localizedData.questions.length > 0 && (
         <Questions questions={localizedData.questions} />
       )}
-    </main>
+      </main>
+    </div>
   );
 };
 
