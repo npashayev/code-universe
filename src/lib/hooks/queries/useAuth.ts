@@ -10,7 +10,7 @@ export interface LoginParams {
 }
 
 export const useLogin = () => {
-    const router = useRouter();
+  const router = useRouter();
   return useMutation({
     mutationFn: async ({ email, password }: LoginParams) => {
       const result = await signIn('credentials', {
@@ -22,8 +22,8 @@ export const useLogin = () => {
       return result;
     },
     onSuccess: () => {
-        toast.success('Successfully logged in')
-        router.push('/admin/dashboard')
+      toast.success('Successfully logged in')
+      router.push('/admin/dashboard')
     }
   });
 };
