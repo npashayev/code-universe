@@ -13,7 +13,7 @@ const MOCK_CATEGORY_STATS: CategoryStatsItem[] = (
   drafts: index === 0 ? 2 : 0,
 }));
 
-const DashboardPage = () => {
+export default function DashboardPage() {
   return (
     <div className="page">
       <Header />
@@ -22,6 +22,4 @@ const DashboardPage = () => {
       </main>
     </div>
   );
-};
-
-export default DashboardPage;
+}

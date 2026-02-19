@@ -3,7 +3,6 @@ import { Nunito } from 'next/font/google';
 import './globals.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-import Navbar from '@/components/layout/Navbar';
 
 config.autoAddCss = false;
 const nunito = Nunito({
@@ -22,10 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${nunito.className} antialiased`}>
-        <Navbar />
-        {children}
-      </body>
+      <body className={`${nunito.className} antialiased`}>{children}</body>
     </html>
   );
 }

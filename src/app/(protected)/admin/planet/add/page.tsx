@@ -18,7 +18,7 @@ import ContentsSection from './components/sections/ContentsSection';
 import ContentSidebar from './components/ContentSidebar';
 import { LanguageOption } from '@/types/reactSelectOptions';
 import { languageOptions } from '@/lib/constants/reactSelectOptions';
-import PlanetClient from '@/app/roadmap/[map]/[planetId]/components/PlanetClient';
+import PlanetClient from '@/app/(public)/roadmap/[map]/[planetId]/components/PlanetClient';
 
 interface Props {
   searchParams: Promise<{
@@ -26,12 +26,13 @@ interface Props {
   }>;
 }
 
-const AddPlanetPage = ({ searchParams }: Props) => {
+export default function AddPlanetPage({ searchParams }: Props) {
   const { category = 'html' } = use(searchParams);
 
   const [currentLanguage, setCurrentLanguage] = useState<LanguageOption>(
     languageOptions[0],
   );
+
   function isPlanetCategory(value: string): value is PlanetCategory {
     return Object.keys(PLANET_CATEGORY).includes(value);
   }
@@ -77,7 +78,7 @@ const AddPlanetPage = ({ searchParams }: Props) => {
     new Map(),
   );
 
-  const [pendingContentImages, setPendingContentImages] = useState<
+  const [pendingContentImages, setPendingContentImages] = useState
     Map<string, { previewUrl: string; file: File }>
   >(new Map());
 
@@ -162,5 +163,4 @@ const AddPlanetPage = ({ searchParams }: Props) => {
       </div>
     </div>
   );
-};
-export default AddPlanetPage;
+}

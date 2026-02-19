@@ -156,7 +156,7 @@ const MOCK_PLANETS: PlanetSummary[] = [
   },
 ];
 
-const MapPage = ({ searchParams }: Props) => {
+export default function MapPage({ searchParams }: Props) {
   const { category = 'html' } = use(searchParams);
 
   function isPlanetCategory(value: string): value is PlanetCategory {
@@ -178,6 +178,4 @@ const MapPage = ({ searchParams }: Props) => {
   };
 
   return <PlanetListClient category={category} data={MOCK_RESPONSE} />;
-};
-
-export default MapPage;
+}

@@ -3,7 +3,7 @@ import SolarSystem from './components/SolarSystem';
 import galaxy from '@/assets/galaxy.webp';
 import SplashCursor from '@/components/react-bits/SplashCursor';
 
-const HomePage = () => {
+export default function HomePage() {
   return (
     <>
       <main className="min-h-screen flex items-center justify-center gap-52 text-white px-40 py-28 pl-64">
@@ -32,10 +32,7 @@ const HomePage = () => {
           </p>
         </div>
       </main>
-
       <SplashCursor />
     </>
   );
-};
-
-export default HomePage;
+}
