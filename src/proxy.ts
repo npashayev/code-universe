@@ -14,7 +14,7 @@ export async function proxy(req: NextRequest) {
   if (pathname.startsWith('/auth/login')) {
     if (token) {
       const url = req.nextUrl.clone();
-      url.pathname = token.role === 'ADMIN' ? '/admin' : '/';
+      url.pathname = token.role === 'ADMIN' ? '/admin/dashboard' : '/';
       return NextResponse.redirect(url);
     }
     return NextResponse.next();
