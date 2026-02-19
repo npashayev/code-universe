@@ -78,9 +78,7 @@ export default function AddPlanetPage({ searchParams }: Props) {
     new Map(),
   );
 
-  const [pendingContentImages, setPendingContentImages] = useState
-    Map<string, { previewUrl: string; file: File }>
-  >(new Map());
+const [pendingContentImages, setPendingContentImages] = useState<Map<string, { previewUrl: string; file: File }>>(new Map());
 
   const locale = currentLanguage.value;
 
