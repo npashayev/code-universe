@@ -17,19 +17,3 @@ export interface PresignedItem {
   presignedUrl: string;
   publicUrl: string;
 }
-
-export interface UseR2UploadReturn {
-  upload: (
-    file: File,
-    fileKey: string,
-    type?: 'planet-main' | 'planet-content',
-  ) => Promise<UploadResult | null>;
-  batchUpload: (
-    items: BatchUploadItem[],
-  ) => Promise<Map<string, UploadResult> | null>;
-  deleteFile: (r2Key: string) => Promise<boolean>;
-  isUploading: boolean;
-  error: string | null;
-  progress: { current: number; total: number } | null;
-  reset: () => void;
-}
