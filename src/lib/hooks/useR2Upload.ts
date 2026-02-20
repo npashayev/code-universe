@@ -2,11 +2,10 @@ import {
   BatchUploadItem,
   PresignedItem,
   UploadResult,
-  UseR2UploadReturn,
 } from '@/types/r2';
 import { useState } from 'react';
 
-export function useR2Upload(): UseR2UploadReturn {
+export const useR2Upload = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [progress, setProgress] = useState<{
