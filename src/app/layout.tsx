@@ -6,6 +6,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import QueryProvider from '@/components/providers/QueryProvider';
 import { Toaster } from 'react-hot-toast';
 import { ReactNode } from 'react';
+import NextAuthProvider from '@/components/providers/NextAuthProvider';
 
 config.autoAddCss = false;
 const nunito = Nunito({
@@ -25,7 +26,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${nunito.className} antialiased`}>
-        <QueryProvider>{children}</QueryProvider>
+        <NextAuthProvider>
+          <QueryProvider>
+            {children}
+          </QueryProvider>
+        </NextAuthProvider>
         <Toaster
           position="top-center"
           toastOptions={{
