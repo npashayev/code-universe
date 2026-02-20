@@ -13,9 +13,9 @@ enum PlanetStatus {
 }
 
 enum PlanetCategory {
-  HTML
-  CSS
-  Javascript
+  html
+  css
+  javascript
 }
 
 enum UserRole {

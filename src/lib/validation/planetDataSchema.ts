@@ -14,7 +14,7 @@ export const urlSchema = (message = 'Invalid URL') =>
   );
 
 const statusEnum = z.enum(['draft', 'published']);
-const categoryEnum = z.enum(['HTML', 'CSS', 'Javascript']);
+const categoryEnum = z.enum(['html', 'css', 'javascript']);
 const supportedLanguageEnum = z.enum(['az', 'en']);
 const titleLevelEnum = z.enum(['h2', 'h3', 'h4', 'h5', 'h6']);
 const textVariantEnum = z.enum(['normal', 'note', 'warning', 'tip']);
