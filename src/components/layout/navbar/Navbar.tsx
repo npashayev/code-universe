@@ -1,10 +1,14 @@
 'use client';
 import { useState } from 'react';
 import { motion as Motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowUpRight, Cpu, Moon, Sun, Home } from 'lucide-react';
-import { navbarItems } from '@/lib/constants/navbarItems';
+import { Menu, X, ArrowUpRight, Cpu, Moon, Sun } from 'lucide-react';
+import { navLinks } from '@/lib/constants/navbarItems';
 import Image from 'next/image';
 import Link from 'next/link';
+import LogoutButton from '../../ui/LogoutButton';
+import DashboardLink from '@/app/(protected)/components/DashboardLink';
+import PrivateComponent from '../../shared/PrivateComponent';
+import HomeLink from '@/components/shared/HomeLink';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +16,7 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-2xl z-50">
+      <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-2xl ">
         <div className="bg-[#030213]/40 backdrop-blur-xl border border-white/10 h-14 rounded-2xl flex items-center px-6 shadow-2xl">
           <button
             onClick={() => setIsOpen(true)}
@@ -28,15 +32,13 @@ const Navbar = () => {
           </button>
 
           <div className="ml-auto flex items-center gap-2">
-            <Link
-              href="/"
-              className="flex items-center gap-2 px-3 h-9 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl text-white transition-all cursor-pointer"
-            >
-              <Home size={16} />
-              <span className="text-[10px] uppercase tracking-widest font-bold hidden sm:block">
-                Home
-              </span>
-            </Link>
+            <HomeLink />
+
+            <PrivateComponent roles={['ADMIN']}>
+              <DashboardLink />
+              <LogoutButton />
+            </PrivateComponent>
+
             <div className="h-6 w-px bg-white/10 mx-1" />
             <button
               onClick={() => setIsDarkMode(!isDarkMode)}
@@ -119,7 +121,7 @@ const Navbar = () => {
                 className="p-8 md:p-12 grid grid-cols-1 md:grid-cols-3 gap-8"
                 aria-label="Main navigation"
               >
-                {navbarItems.map((navItem, navItemIdx) => (
+                {navLinks.map((navItem, navItemIdx) => (
                   <Motion.div
                     key={navItem.title}
                     initial={{ opacity: 0, x: -20 }}

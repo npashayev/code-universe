@@ -11,6 +11,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { categoryOptions } from '@/lib/constants/reactSelectOptions';
 import DashboardLink from '@/app/(protected)/components/DashboardLink';
+import HomeLink from '@/components/shared/HomeLink';
 
 export interface Props {
   category: PlanetCategory;
@@ -39,7 +40,8 @@ const Header = ({
   return (
     <header className="sticky top-0 z-60 bg-night backdrop-blur-xl border-b border-white/5 py-6 px-12 flex items-center justify-between">
       <div className="flex items-center gap-6">
-        <DashboardLink />
+        <HomeLink className='h-10' />
+        <DashboardLink className='h-10' />
         <div className="flex items-center gap-4">
           <div className="w-10 h-10 rounded-xl bg-orange-500/20 flex items-center justify-center border border-orange-500/30 shadow-lg shadow-orange-500/10">
             <Globe className="text-orange-500" size={20} />

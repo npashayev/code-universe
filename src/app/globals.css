@@ -77,6 +77,14 @@
   .list-indented {
     @apply ml-8 list-inside space-y-0.5;
   }
+
+  .nav-item {
+    @apply flex items-center justify-center gap-2 px-3 py-2 min-h-9 h-full bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl text-white transition-all
+  }
+
+  .nav-item-text {
+    @apply text-[10px] uppercase tracking-widest font-bold block leading-none
+  }
 }
 
 body {

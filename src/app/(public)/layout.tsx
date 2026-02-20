@@ -1,4 +1,4 @@
-import Navbar from '@/components/layout/Navbar';
+import Navbar from '@/components/layout/navbar/Navbar';
 import { ReactNode } from 'react';
 
 export default function PublicLayout({

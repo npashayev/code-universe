@@ -1,12 +1,21 @@
 import Link from 'next/link';
+import { cn } from '@/lib/utils/cn';
+import { LayoutDashboard } from 'lucide-react';
 
-const DashboardLink = () => {
+interface Props {
+  className?: string;
+}
+
+const DashboardLink = ({ className }: Props) => {
   return (
     <Link
       href="/admin/dashboard"
-      className="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/10 rounded-xl text-xs font-bold uppercase tracking-widest cursor-pointer transition-all"
+      className={cn("nav-item", className)}
     >
-      Dashboard
+      <LayoutDashboard size={14} />
+      <span className="nav-item-text">
+        Dashboard
+      </span>
     </Link>
   );
 };
