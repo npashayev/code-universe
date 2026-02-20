@@ -24,6 +24,7 @@ const PlanetListClient = ({ category, data }: Props) => {
   const [currentLanguage, setCurrentLanguage] = useState<LanguageOption>(
     languageOptions[0],
   );
+  const [searchQuery, setSearchQuery] = useState('');
   const locale = currentLanguage.value;
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -46,6 +47,12 @@ const PlanetListClient = ({ category, data }: Props) => {
     setOrderedPlanets(updatedWithSteps);
   };
 
+
+  const filteredPlanets = orderedPlanets.filter(planet => {
+    return planet.localized[locale].name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      planet.localized[locale].tags.some(tag => tag.tag.toLowerCase().includes(searchQuery.toLowerCase()));
+  });
+
   return (
     <div className="page">
       <Header
@@ -53,12 +60,14 @@ const PlanetListClient = ({ category, data }: Props) => {
         data={data}
         currentLanguage={currentLanguage}
         setCurrentLanguage={setCurrentLanguage}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
       />
       <main className="space-y-3 px-[10%]">
         <SortableList<PlanetSummary>
           id="planet-sortable-list"
           className="space-y-3 pt-12 pb-24"
-          elements={orderedPlanets}
+          elements={filteredPlanets}
           handleDragEnd={handleDragEnd}
           renderItem={planet => (
             <Planet

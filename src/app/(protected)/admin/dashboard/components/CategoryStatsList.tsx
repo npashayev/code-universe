@@ -1,6 +1,7 @@
 import { PlanetCategory } from '@/types/planet';
 import { categoryOptions } from '@/lib/constants/reactSelectOptions';
 import Link from 'next/link';
+import PlanetStats from '@/components/shared/PlanetStats';
 
 export interface CategoryStatsItem {
   category: PlanetCategory;
@@ -28,33 +29,8 @@ const CategoryStatsList = ({ items }: Props) => {
               <h3 className="text-lg font-bold tracking-tight text-white">
                 {label}
               </h3>
-              <div className="flex items-center gap-8 shrink-0">
-                <div className="flex flex-col text-right">
-                  <span className="text-[10px] text-slate-400 uppercase font-black tracking-tighter">
-                    Total
-                  </span>
-                  <span className="text-xl font-mono font-bold text-white leading-none">
-                    {item.total}
-                  </span>
-                </div>
-                <div className="w-px h-8 bg-white/20" />
-                <div className="flex flex-col text-right">
-                  <span className="text-[10px] text-green-400 uppercase font-black tracking-tighter">
-                    Published
-                  </span>
-                  <span className="text-xl font-mono font-bold text-green-300 leading-none">
-                    {item.published}
-                  </span>
-                </div>
-                <div className="flex flex-col text-right">
-                  <span className="text-[10px] text-orange-400 uppercase font-black tracking-tighter">
-                    Drafts
-                  </span>
-                  <span className="text-xl font-mono font-bold text-orange-300 leading-none">
-                    {item.drafts}
-                  </span>
-                </div>
-              </div>
+
+              <PlanetStats total={item.total} published={item.published} drafts={item.drafts} />
             </Link>
           </li>
         );

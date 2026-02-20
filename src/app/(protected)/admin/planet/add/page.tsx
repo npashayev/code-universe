@@ -4,7 +4,6 @@ import {
   CreatePlanetData,
   PLANET_CATEGORY,
   PlanetCategory,
-  PlanetData,
 } from '@/types/planet';
 import { use, useEffect, useState } from 'react';
 import { useImmer } from 'use-immer';
@@ -19,6 +18,7 @@ import ContentSidebar from './components/ContentSidebar';
 import { LanguageOption } from '@/types/reactSelectOptions';
 import { languageOptions } from '@/lib/constants/reactSelectOptions';
 import PlanetClient from '@/app/(public)/roadmap/[map]/[planetId]/components/PlanetClient';
+import { getInitialPlanetData } from '@/lib/utils/getInitialPlanetData';
 
 interface Props {
   searchParams: Promise<{
@@ -41,44 +41,13 @@ export default function AddPlanetPage({ searchParams }: Props) {
 
   const [previewActive, setPreviewActive] = useState(false);
 
-  const [planetData, setPlanetData] = useImmer<CreatePlanetData>({
-    category: planetCategory,
-    status: 'draft',
-    image: {
-      url: '',
-      metadata: { width: 0, height: 0 },
-      alt: {
-        az: '',
-        en: '',
-      },
-    },
-    localized: {
-      az: {
-        name: '',
-        tags: [],
-        description: '',
-        researchTopics: [],
-        resources: [],
-        questions: [],
-        contents: [],
-      },
-      en: {
-        name: '',
-        tags: [],
-        description: '',
-        researchTopics: [],
-        resources: [],
-        questions: [],
-        contents: [],
-      },
-    },
-  });
+  const [planetData, setPlanetData] = useImmer<CreatePlanetData>(getInitialPlanetData(planetCategory));
 
   const [pendingFiles, setPendingFiles] = useState<Map<string, File>>(
     new Map(),
   );
 
-const [pendingContentImages, setPendingContentImages] = useState<Map<string, { previewUrl: string; file: File }>>(new Map());
+  const [pendingContentImages, setPendingContentImages] = useState<Map<string, { previewUrl: string; file: File }>>(new Map());
 
   const locale = currentLanguage.value;
 
@@ -88,7 +57,7 @@ const [pendingContentImages, setPendingContentImages] = useState<Map<string, { p
     return (
       <div className="fixed w-screen h-screen bg-[radial-gradient(ellipse_at_bottom,#050914_0%,#000000_100%)] text-white">
         <PlanetClient
-          planet={planetData as PlanetData}
+          planet={planetData}
           locale={currentLanguage.value}
         />
       </div>
@@ -96,7 +65,7 @@ const [pendingContentImages, setPendingContentImages] = useState<Map<string, { p
   }
 
   return (
-    <div className="min-h-screen text-slate-200 font-sans selection:bg-orange-500/30 pb-42">
+    <div className="page text-slate-200 font-sans selection:bg-orange-500/30 pb-42">
       <Header
         planetData={planetData}
         setPlanetData={setPlanetData}
@@ -109,7 +78,7 @@ const [pendingContentImages, setPendingContentImages] = useState<Map<string, { p
         setPreviewActive={setPreviewActive}
       />
 
-      <div className="px-6 md:px-[16%] pt-10 grid grid-cols-1 lg:grid-cols-12 gap-10">
+      <main className="px-6 md:px-[16%] pt-10 grid grid-cols-1 lg:grid-cols-12 gap-10">
         <div className="lg:col-span-8 space-y-12">
           <BasicConfigurationSection
             planetData={planetData}
@@ -158,7 +127,7 @@ const [pendingContentImages, setPendingContentImages] = useState<Map<string, { p
           setPlanetData={setPlanetData}
           locale={locale}
         />
-      </div>
+      </main>
     </div>
   );
 }
