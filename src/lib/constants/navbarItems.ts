@@ -13,7 +13,7 @@ import py from '@/assets/nav-icons/py.png';
 import react from '@/assets/nav-icons/react.png';
 import tw from '@/assets/nav-icons/tw.png';
 
-export const navbarItems = [
+export const navLinks = [
   {
     title: 'Frontend',
     icon: Globe,
