@@ -26,20 +26,23 @@ export const QuestionsSection = ({
 
   const addQuestion = () => {
     if (!currentQuestion.trim()) return;
+
     setPlanetData(draft => {
       draft.localized[locale].questions.push({
         id: crypto.randomUUID(),
         question: currentQuestion,
       });
     });
+
     setCurrentQuestion('');
   };
 
   const removeQuestion = (id: string) => {
     setPlanetData(draft => {
-      draft.localized[locale].questions = draft.localized[
-        locale
-      ].questions.filter(q => q.id !== id);
+      draft.localized[locale].questions = draft
+        .localized[locale]
+        .questions
+        .filter(q => q.id !== id);
     });
   };
 
@@ -65,17 +68,15 @@ export const QuestionsSection = ({
       </SectionHeader>
 
       <div className="flex gap-2">
-        <div className="relative flex-1">
-          <Input
-            value={currentQuestion}
-            onChange={e => setCurrentQuestion(e.target.value)}
-            onKeyDown={e => {
-              if (e.key === 'Enter') addQuestion();
-            }}
-            placeholder="Add question"
-          />
-        </div>
-        <AddButton onClick={addQuestion}>Add</AddButton>
+        <Input
+          value={currentQuestion}
+          onChange={e => setCurrentQuestion(e.target.value)}
+          onKeyDown={e => {
+            if (e.key === 'Enter') addQuestion();
+          }}
+          placeholder="Add question"
+        />
+        <AddButton onClick={addQuestion} disabled={!currentQuestion.trim()}>Add</AddButton>
       </div>
 
       <SortableList<Question>

@@ -38,16 +38,12 @@ export default function AddPlanetPage({ searchParams }: Props) {
   }
 
   const planetCategory = isPlanetCategory(category) ? category : 'html';
-
   const [previewActive, setPreviewActive] = useState(false);
-
   const [planetData, setPlanetData] = useImmer<CreatePlanetData>(getInitialPlanetData(planetCategory));
-
-  const [pendingFiles, setPendingFiles] = useState<Map<string, File>>(
-    new Map(),
-  );
-
-  const [pendingContentImages, setPendingContentImages] = useState<Map<string, { previewUrl: string; file: File }>>(new Map());
+  const [pendingFiles, setPendingFiles] = useState<Map<string, File>>(new Map());
+  const [pendingContentImages, setPendingContentImages] = useState<Map<
+    string, { previewUrl: string; file: File }
+  >>(new Map());
 
   const locale = currentLanguage.value;
 
@@ -78,8 +74,8 @@ export default function AddPlanetPage({ searchParams }: Props) {
         setPreviewActive={setPreviewActive}
       />
 
-      <main className="px-6 md:px-[16%] pt-10 grid grid-cols-1 lg:grid-cols-12 gap-10">
-        <div className="lg:col-span-8 space-y-12">
+      <main className="px-[16%] pt-10 flex items-start gap-10">
+        <div className="flex-1 space-y-12">
           <BasicConfigurationSection
             planetData={planetData}
             setPlanetData={setPlanetData}

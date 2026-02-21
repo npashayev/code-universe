@@ -30,20 +30,23 @@ export const ResearchTopicsSection = ({
 
   const addResearchTopic = () => {
     if (!currentTopic.trim()) return;
+
     setPlanetData(draft => {
       draft.localized[locale].researchTopics.push({
         id: crypto.randomUUID(),
         topic: currentTopic,
       });
     });
+
     setCurrentTopic('');
   };
 
   const removeTopic = (id: string) => {
     setPlanetData(draft => {
-      draft.localized[locale].researchTopics = draft.localized[
-        locale
-      ].researchTopics.filter(t => t.id !== id);
+      draft.localized[locale].researchTopics = draft
+        .localized[locale]
+        .researchTopics
+        .filter(t => t.id !== id);
     });
   };
 
@@ -78,7 +81,12 @@ export const ResearchTopicsSection = ({
           onKeyDown={e => e.key === 'Enter' && addResearchTopic()}
           placeholder="Add research topic"
         />
-        <AddButton onClick={addResearchTopic}>Add</AddButton>
+        <AddButton
+          onClick={addResearchTopic}
+          disabled={!currentTopic.trim()}
+        >
+          Add
+        </AddButton>
       </div>
 
       <SortableList<ResearchTopic>

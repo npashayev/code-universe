@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { CreatePlanetData, Resource, SupportedLanguage } from '@/types/planet';
 import { Updater } from 'use-immer';
-import { BookOpen, Trash2 } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 import Link from 'next/link';
 import { DragEndEvent } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
@@ -10,6 +10,7 @@ import SectionHeader from '../shared/SectionHeader';
 import Input from '../shared/Input';
 import AddButton from '../shared/AddButton';
 import SortableList from '@/components/shared/SortableList';
+import ListElement from '../shared/ListElement';
 
 interface Props {
   resources?: Resource[];
@@ -55,24 +56,24 @@ export const ExternalResourcesSection = ({
       const sorted = arrayMove(
         draft.localized[locale].resources || [],
         draft.localized[locale].resources?.findIndex(r => r.id === active.id) ||
-          0,
+        0,
         draft.localized[locale].resources?.findIndex(r => r.id === over.id) ||
-          0,
+        0,
       );
       updateLocalizedArray(draft, locale, 'resources', sorted);
     });
   };
 
-  const isValid = !!currentResource.label && !!currentResource.url;
+  const isValid = !!currentResource.label.trim() && !!currentResource.url.trim();
 
   return (
     <section className="admin-page-section">
-      <SectionHeader className="flex items-center gap-2 text-orange-500 font-bold text-xs uppercase tracking-widest border-b border-white/5 pb-4">
+      <SectionHeader>
         <BookOpen size={14} />
         <h2>External Resources</h2>
       </SectionHeader>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <div className="flex gap-2">
         <Input
           value={currentResource.title}
           onChange={e =>
@@ -93,21 +94,19 @@ export const ExternalResourcesSection = ({
           }}
           placeholder="Link label"
         />
-        <div className="flex gap-2">
-          <Input
-            value={currentResource.url}
-            onChange={e =>
-              setCurrentResource({ ...currentResource, url: e.target.value })
-            }
-            onKeyDown={e => {
-              if (e.key === 'Enter') addResource();
-            }}
-            placeholder="URL"
-          />
-          <AddButton onClick={addResource} disabled={!isValid}>
-            Add
-          </AddButton>
-        </div>
+        <Input
+          value={currentResource.url}
+          onChange={e =>
+            setCurrentResource({ ...currentResource, url: e.target.value })
+          }
+          onKeyDown={e => {
+            if (e.key === 'Enter') addResource();
+          }}
+          placeholder="URL"
+        />
+        <AddButton onClick={addResource} disabled={!isValid}>
+          Add
+        </AddButton>
       </div>
 
       <SortableList<Resource>
@@ -115,7 +114,7 @@ export const ExternalResourcesSection = ({
         elements={resources || []}
         handleDragEnd={handleDragEnd}
         renderItem={res => (
-          <div className="flex items-center justify-between p-4 bg-white/5 border border-white/10 rounded-xl">
+          <ListElement onRemove={() => removeResource(res.id)}>
             <div className="flex items-center gap-4">
               <div className="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center border border-orange-500/20">
                 <BookOpen size={14} className="text-orange-500" />
@@ -136,13 +135,7 @@ export const ExternalResourcesSection = ({
                 </Link>
               </div>
             </div>
-            <button
-              onClick={() => removeResource(res.id)}
-              className="text-slate-600 hover:text-red-400"
-            >
-              <Trash2 size={16} />
-            </button>
-          </div>
+          </ListElement>
         )}
       />
 

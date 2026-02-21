@@ -19,7 +19,7 @@ interface Props<T extends { id: string }> {
   className?: string;
   elements: T[];
   handleDragEnd: (event: DragEndEvent) => void;
-  renderItem: (element: T) => React.ReactNode;
+  renderItem: (element: T, idx: number) => React.ReactNode;
 }
 
 const SortableList = <T extends { id: string }>({
@@ -47,9 +47,9 @@ const SortableList = <T extends { id: string }>({
           strategy={verticalListSortingStrategy}
         >
           <div className={cn('overflow-hidden space-y-2', className)}>
-            {elements.map(element => (
+            {elements.map((element, idx) => (
               <SortableItem key={element.id} id={element.id}>
-                {renderItem(element)}
+                {renderItem(element, idx)}
               </SortableItem>
             ))}
           </div>

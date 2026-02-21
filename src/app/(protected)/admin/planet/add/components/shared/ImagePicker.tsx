@@ -20,8 +20,8 @@ const ImagePicker = ({
   imagePreviewUrl,
 }: Props) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div className="space-y-4">
+    <div className="flex gap-6">
+      <div className="space-y-4 flex-1">
         <div className="space-y-2">
           <div className="relative">
             <input
@@ -53,7 +53,7 @@ const ImagePicker = ({
         </div>
       </div>
 
-      <div className="h-full rounded-xl bg-black/40 border border-white/10 overflow-hidden flex items-center justify-center relative shadow-inner">
+      <div className="rounded-xl bg-black/40 border border-white/10 overflow-hidden flex items-center justify-center relative shadow-inner flex-1">
         {imagePreviewUrl ? (
           <Image
             src={imagePreviewUrl}
