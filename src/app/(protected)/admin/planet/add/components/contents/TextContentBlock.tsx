@@ -45,7 +45,7 @@ const TextContentBlock = ({
             isDisabled={!content.title?.text}
           />
         </div>
-        <div className="md:col-span-3 space-y-2 flex-1">
+        <div className="space-y-2 flex-1">
           <Label htmlFor={`text-title-${content.id}`}>
             Title Text (Optional)
           </Label>
@@ -87,7 +87,7 @@ const TextContentBlock = ({
           onChange={e => onUpdate(content.id, { text: e.target.value })}
         />
       </div>
-      <div className="flex flex-wrap items-center justify-between gap-4 p-4 bg-black/20 rounded-2xl border border-white/5">
+      <div className="p-4 bg-black/20 rounded-2xl border border-white/5">
         <div className="flex items-center gap-6">
           <div className="flex gap-3 items-center">
             <span className="text-[12px] text-slate-600 uppercase font-bold">

@@ -17,7 +17,7 @@ const ContentHeading = ({ idx, content, onRemove, onUpdate }: Props) => {
   return (
     <div
       id={content.id}
-      className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/5 pb-6"
+      className="flex items-center justify-between gap-4 border-b border-white/5 pb-6"
     >
       <div className="flex items-center gap-3">
         <div className="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-500">

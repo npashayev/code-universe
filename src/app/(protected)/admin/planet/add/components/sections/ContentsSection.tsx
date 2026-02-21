@@ -49,54 +49,52 @@ const ContentsSection = ({
         <h2>Contents</h2>
       </div>
       <div className="space-y-10">
-        <div className="space-y-10">
-          {contents.map((content, idx) => (
-            <div
-              key={content.id}
-              id={content.id}
-              className={cn('admin-page-section', 'p-8 rounded-3xl space-y-8')}
-            >
-              <ContentHeading
-                idx={idx}
+        {contents.map((content, idx) => (
+          <div
+            key={content.id}
+            id={content.id}
+            className={cn('admin-page-section', 'p-8 rounded-3xl space-y-8')}
+          >
+            <ContentHeading
+              idx={idx}
+              content={content}
+              onUpdate={updateContent}
+              onRemove={removeContent}
+            />
+
+            {content.type === CONTENT_TYPE.text && (
+              <TextContentBlock
+                content={content}
+                setPlanetData={setPlanetData}
+                locale={locale}
+                onUpdate={updateContent}
+              />
+            )}
+            {content.type === CONTENT_TYPE.implementationTask && (
+              <ImplementationTaskContentBlock
                 content={content}
                 onUpdate={updateContent}
-                onRemove={removeContent}
               />
-
-              {content.type === CONTENT_TYPE.text && (
-                <TextContentBlock
-                  content={content}
-                  setPlanetData={setPlanetData}
-                  locale={locale}
-                  onUpdate={updateContent}
-                />
-              )}
-              {content.type === CONTENT_TYPE.implementationTask && (
-                <ImplementationTaskContentBlock
-                  content={content}
-                  onUpdate={updateContent}
-                />
-              )}
-              {content.type === CONTENT_TYPE.code && (
-                <CodeContentBlock content={content} onUpdate={updateContent} />
-              )}
-              {content.type === CONTENT_TYPE.htmlElement && (
-                <HtmlElementContentBlock
-                  content={content}
-                  onUpdate={updateContent}
-                />
-              )}
-              {content.type === CONTENT_TYPE.image && (
-                <ImageContentBlock
-                  content={content}
-                  onUpdate={updateContent}
-                  pendingContentImages={pendingContentImages}
-                  setPendingContentImages={setPendingContentImages}
-                />
-              )}
-            </div>
-          ))}
-        </div>
+            )}
+            {content.type === CONTENT_TYPE.code && (
+              <CodeContentBlock content={content} onUpdate={updateContent} />
+            )}
+            {content.type === CONTENT_TYPE.htmlElement && (
+              <HtmlElementContentBlock
+                content={content}
+                onUpdate={updateContent}
+              />
+            )}
+            {content.type === CONTENT_TYPE.image && (
+              <ImageContentBlock
+                content={content}
+                onUpdate={updateContent}
+                pendingContentImages={pendingContentImages}
+                setPendingContentImages={setPendingContentImages}
+              />
+            )}
+          </div>
+        ))}
       </div>
     </section>
   );
