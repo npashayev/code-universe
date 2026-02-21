@@ -1,9 +1,4 @@
-import {
-  CONTENT_TYPE,
-  ContentType,
-  PlanetContent,
-  PROGRAMMING_LANGUAGE,
-} from '@/types/planet';
+import { CONTENT_TYPE, ContentType, PlanetContent } from '@/types/planet';
 
 export const createDefaultContent = (
   type: ContentType,
@@ -36,7 +31,7 @@ export const createDefaultContent = (
         label: baseLabel,
         type: 'code',
         code: {
-          language: PROGRAMMING_LANGUAGE.javascript,
+          language: 'javascript',
           code: '',
         },
       };
