@@ -2,9 +2,7 @@ import { HelpCircle } from 'lucide-react';
 import { useState } from 'react';
 import { CreatePlanetData, Question, SupportedLanguage } from '@/types/planet';
 import { Updater } from 'use-immer';
-import { DragEndEvent } from '@dnd-kit/core';
-import { arrayMove } from '@dnd-kit/sortable';
-import { updateLocalizedArray } from '@/lib/utils/updateLocalizedArray';
+import { useLocalizedDragReorder } from '@/lib/hooks/useLocalizedDragReorder';
 import ListElement from '../shared/ListElement';
 import SectionHeader from '../shared/SectionHeader';
 import Input from '../shared/Input';
@@ -46,19 +44,7 @@ export const QuestionsSection = ({
     });
   };
 
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
-    if (!over || active.id === over.id) return;
-
-    setPlanetData(draft => {
-      const sorted = arrayMove(
-        draft.localized[locale].questions,
-        draft.localized[locale].questions.findIndex(q => q.id === active.id),
-        draft.localized[locale].questions.findIndex(q => q.id === over.id),
-      );
-      updateLocalizedArray(draft, locale, 'questions', sorted);
-    });
-  };
+  const handleDragEnd = useLocalizedDragReorder(setPlanetData, locale, 'questions');
 
   return (
     <section className="admin-page-section">

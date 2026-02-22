@@ -418,16 +418,6 @@ export default function SplashCursor({
       return status === gl.FRAMEBUFFER_COMPLETE;
     }
 
-    // function hashCode(s: string) {
-    //   if (!s.length) return 0;
-    //   let hash = 0;
-    //   for (let i = 0; i < s.length; i++) {
-    //     hash = (hash << 5) - hash + s.charCodeAt(i);
-    //     hash |= 0;
-    //   }
-    //   return hash;
-    // }
-
     function addKeywords(source: string, keywords: string[] | null) {
       if (!keywords) return source;
       let keywordsString = '';

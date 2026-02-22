@@ -6,9 +6,7 @@ import {
 } from '@/types/planet';
 import { Updater } from 'use-immer';
 import { Search } from 'lucide-react';
-import { DragEndEvent } from '@dnd-kit/core';
-import { arrayMove } from '@dnd-kit/sortable';
-import { updateLocalizedArray } from '@/lib/utils/updateLocalizedArray';
+import { useLocalizedDragReorder } from '@/lib/hooks/useLocalizedDragReorder';
 import ListElement from '../shared/ListElement';
 import Input from '../shared/Input';
 import SectionHeader from '../shared/SectionHeader';
@@ -50,22 +48,11 @@ export const ResearchTopicsSection = ({
     });
   };
 
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
-    if (!over || active.id === over.id) return;
-
-    setPlanetData(draft => {
-      const sorted = arrayMove(
-        draft.localized[locale].researchTopics,
-        draft.localized[locale].researchTopics.findIndex(
-          t => t.id === active.id,
-        ),
-        draft.localized[locale].researchTopics.findIndex(t => t.id === over.id),
-      );
-
-      updateLocalizedArray(draft, locale, 'researchTopics', sorted);
-    });
-  };
+  const handleDragEnd = useLocalizedDragReorder(
+    setPlanetData,
+    locale,
+    'researchTopics',
+  );
 
   return (
     <section className="admin-page-section">

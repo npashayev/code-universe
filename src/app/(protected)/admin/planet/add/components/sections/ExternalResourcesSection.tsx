@@ -3,9 +3,7 @@ import { CreatePlanetData, Resource, SupportedLanguage } from '@/types/planet';
 import { Updater } from 'use-immer';
 import { BookOpen } from 'lucide-react';
 import Link from 'next/link';
-import { DragEndEvent } from '@dnd-kit/core';
-import { arrayMove } from '@dnd-kit/sortable';
-import { updateLocalizedArray } from '@/lib/utils/updateLocalizedArray';
+import { useLocalizedDragReorder } from '@/lib/hooks/useLocalizedDragReorder';
 import SectionHeader from '../shared/SectionHeader';
 import Input from '../shared/Input';
 import AddButton from '../shared/AddButton';
@@ -48,21 +46,7 @@ export const ExternalResourcesSection = ({
     });
   };
 
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
-    if (!over || active.id === over.id) return;
-
-    setPlanetData(draft => {
-      const sorted = arrayMove(
-        draft.localized[locale].resources || [],
-        draft.localized[locale].resources?.findIndex(r => r.id === active.id) ||
-        0,
-        draft.localized[locale].resources?.findIndex(r => r.id === over.id) ||
-        0,
-      );
-      updateLocalizedArray(draft, locale, 'resources', sorted);
-    });
-  };
+  const handleDragEnd = useLocalizedDragReorder(setPlanetData, locale, 'resources');
 
   const isValid = !!currentResource.label.trim() && !!currentResource.url.trim();
 

@@ -1,13 +1,10 @@
-import { CreatePlanetData, PlanetContent } from '@/types/planet';
-import { SupportedLanguage } from '@/types/planet';
+import { CreatePlanetData, PlanetContent, SupportedLanguage } from '@/types/planet';
 import { Database, Layout, Plus } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Updater } from 'use-immer';
 import { useLocalizedContent } from '@/lib/hooks/useLocalizedContent';
-import { DragEndEvent } from '@dnd-kit/core';
-import { arrayMove } from '@dnd-kit/sortable';
-import { updateLocalizedArray } from '@/lib/utils/updateLocalizedArray';
+import { useLocalizedDragReorder } from '@/lib/hooks/useLocalizedDragReorder';
 import ListElement from './shared/ListElement';
 import { ContentTypeSelector } from './Selectors';
 import { contentTypeOptions } from '@/lib/constants/reactSelectOptions';
@@ -31,20 +28,7 @@ const ContentSidebar = ({ contents, setPlanetData, locale }: Props) => {
       setPlanetData,
       locale,
     });
-
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
-    if (!over || active.id === over.id) return;
-
-    setPlanetData(draft => {
-      const sorted = arrayMove(
-        draft.localized[locale].contents,
-        draft.localized[locale].contents.findIndex(c => c.id === active.id),
-        draft.localized[locale].contents.findIndex(c => c.id === over.id),
-      );
-      updateLocalizedArray(draft, locale, 'contents', sorted);
-    });
-  };
+  const handleDragEnd = useLocalizedDragReorder(setPlanetData, locale, 'contents');
 
   return (
     <aside className={cn('admin-page-section', 'sticky top-28 shadow-2xl shrink-0 w-80')}>

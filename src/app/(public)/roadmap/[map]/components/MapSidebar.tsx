@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import { motion as Motion, AnimatePresence } from 'framer-motion';
-import clsx from 'clsx';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PlanetData } from '@/types/planet';
+import { cn } from '@/lib/utils/cn';
 
 interface Props {
   planets: PlanetData[];
@@ -30,21 +30,21 @@ const MapSidebar = ({ planets }: Props) => {
 
   return (
     <aside
-      className={clsx(
+      className={cn(
         'fixed right-0 top-0 h-screen w-100 transition-transform duration-500 px-6 pt-20 pb-16 flex flex-col items-start justify-start z-100',
-        'bg-[#030213]/60 backdrop-blur-2xl border-l border-white/5 shadow-[-40px_0_80px_-20px_rgba(0,0,0,0.9)]',
+        'bg-night/60 backdrop-blur-2xl border-l border-white/5 shadow-[-40px_0_80px_-20px_rgba(0,0,0,0.9)]',
         !sidebarOpen && 'translate-x-full',
       )}
     >
       <button
-        className={clsx(
+        className={cn(
           'absolute right-full top-1/4 p-2 rounded-tl-xl rounded-bl-xl bg-orange-500/80 backdrop-blur-2xl border border-white/5 shadow-[-40px_0_80px_-20px_rgba(0,0,0,0.9)]',
         )}
         onClick={() => setSidebarOpen(p => !p)}
       >
         <FontAwesomeIcon
           icon={faAngleLeft}
-          className={clsx(
+          className={cn(
             'transition-transform duration-500',
             sidebarOpen && 'rotate-180',
           )}
@@ -56,7 +56,7 @@ const MapSidebar = ({ planets }: Props) => {
         </h2>
         <div className="h-0.5 w-10 bg-linear-to-r from-orange-500 to-transparent" />
       </div>
-      <nav className="h-full w-full overflow-auto scrollbar- bg-amber-100` overscroll-contain flex flex-col gap-1 scrollbar-hide">
+      <nav className="h-full w-full overflow-auto overscroll-contain flex flex-col gap-1 scrollbar-hide">
         {planets.map((planet, index) => {
           const { id } = planet;
           const { name } = planet.localized[locale];
@@ -65,7 +65,7 @@ const MapSidebar = ({ planets }: Props) => {
             <button
               key={id}
               onClick={() => scrollToPlanet(id)}
-              className={clsx(
+              className={cn(
                 'group relative flex items-center shrink-0 px-4 py-2 rounded-lg transition-all duration-300 overflow-hidden',
                 'hover:bg-white/5',
                 isActive
@@ -92,7 +92,7 @@ const MapSidebar = ({ planets }: Props) => {
               </AnimatePresence>
               <div className="flex items-center gap-3 z-10 font-mono tracking-tight">
                 <span
-                  className={clsx(
+                  className={cn(
                     'w-5 opacity-40 group-hover:opacity-100 transition-opacity',
                     isActive && 'opacity-100 text-orange-500/70',
                   )}
@@ -100,7 +100,7 @@ const MapSidebar = ({ planets }: Props) => {
                   {String(index + 1).padStart(2, '0')}
                 </span>
                 <span
-                  className={clsx(
+                  className={cn(
                     'transition-transform duration-300 group-hover:translate-x-1 text-left',
                     isActive && 'translate-x-1',
                   )}

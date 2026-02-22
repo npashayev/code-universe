@@ -47,8 +47,6 @@ export default function AddPlanetPage({ searchParams }: Props) {
 
   const locale = currentLanguage.value;
 
-  // useEffect(() => console.log(planetData), [planetData]);
-
   if (previewActive) {
     return (
       <div className="fixed w-screen h-screen bg-[radial-gradient(ellipse_at_bottom,#050914_0%,#000000_100%)] text-white">
@@ -61,7 +59,7 @@ export default function AddPlanetPage({ searchParams }: Props) {
   }
 
   return (
-    <div className="page text-slate-100 font-sans selection:bg-orange-500/30 pb-42">
+    <div className="page text-slate-100 font-sans selection:bg-orange-500/30 pb-40">
       <Header
         planetData={planetData}
         setPlanetData={setPlanetData}

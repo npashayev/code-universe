@@ -13,7 +13,6 @@ body {
   button {
     @apply cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed transition-all;
   }
-
   h1,
   h2,
   h3,
@@ -80,5 +79,4 @@ body {
   .nav-item-text {
     @apply text-[10px] uppercase tracking-widest font-bold block leading-none;
   }
-
 }
