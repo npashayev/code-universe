@@ -1,5 +1,5 @@
 'use client';
-import { UserRole } from "@/types/auth";
+import { UserRole } from "@/types/next-auth";
 import { useSession } from "next-auth/react";
 import { ReactNode } from "react";
 
