@@ -15,7 +15,7 @@ interface Props {
 const CodeContentBlock = ({ content, onUpdate }: Props) => {
   return (
     <div className="space-y-6">
-      <div className="flex gap-4">
+      <div className="flex gap-2">
         <div className="space-y-2 w-full">
           <Label htmlFor={`code-content-title-${content.id}`}>
             Title (Optional)

@@ -43,14 +43,14 @@ const ContentsSection = ({
   });
 
   return (
-    <section className="space-y-8 pt-8 border-t border-white/10">
+    <div className="space-y-8 pt-8 border-t border-white/10">
       <div className="flex items-center gap-3 text-white font-bold text-xl tracking-tight">
         <Database className="text-orange-500" size={24} />
         <h2>Contents</h2>
       </div>
       <div className="space-y-10">
         {contents.map((content, idx) => (
-          <div
+          <section
             key={content.id}
             id={content.id}
             className={cn('admin-page-section', 'p-8 rounded-3xl space-y-8')}
@@ -93,10 +93,10 @@ const ContentsSection = ({
                 setPendingContentImages={setPendingContentImages}
               />
             )}
-          </div>
+          </section>
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 

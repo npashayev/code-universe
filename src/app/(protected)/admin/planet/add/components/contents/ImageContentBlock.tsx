@@ -27,19 +27,20 @@ const ImageContentBlock = ({
   pendingContentImages,
   setPendingContentImages,
 }: Props) => {
-  const pendingImageOptions: PendingImageOption[] = Array.from(
-    pendingContentImages.entries(),
-  ).map(([fileName]) => ({
-    value: fileName,
-    label: fileName,
-  }));
+
+  const pendingImageOptions: PendingImageOption[] = Array
+    .from(pendingContentImages.keys())
+    .map((fileName) => ({
+      value: fileName,
+      label: fileName,
+    }));
 
   const selectedPendingOption: PendingImageOption | null = content
     .pendingImageId
     ? {
-        value: content.pendingImageId,
-        label: content.pendingImageId,
-      }
+      value: content.pendingImageId,
+      label: content.pendingImageId,
+    }
     : null;
 
   const imagePreviewUrl =
