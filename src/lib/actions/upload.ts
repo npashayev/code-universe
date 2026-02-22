@@ -1,10 +1,13 @@
-import { NextRequest, NextResponse } from 'next/server';
+'use server';
+
 import { getServerSession } from 'next-auth';
 import { PutObjectCommand } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
+import { DeleteObjectCommand } from '@aws-sdk/client-s3';
 import { r2Client } from '@/lib/r2/r2Client';
-import { authOptions } from '../../auth/[...nextauth]/route';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { prisma } from '@/lib/prisma/prisma';
+import type { PresignedItem } from '@/types/r2';
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
@@ -16,7 +19,7 @@ const EXTENSION_MAP: Record<string, string> = {
   'image/gif': 'gif',
 };
 
-interface PresignRequestItem {
+export interface PresignRequestItem {
   fileKey: string;
   fileType: string;
   fileSize: number;
@@ -39,55 +42,46 @@ function generateR2Key(
   }
 }
 
-export async function POST(req: NextRequest) {
-  // check session
+async function ensureAdmin() {
   const session = await getServerSession(authOptions);
   if (!session?.user?.email) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    throw new Error('Unauthorized');
   }
 
-  // check ADMIN role
   const user = await prisma.user.findUnique({
     where: { email: session.user.email },
     select: { role: true },
   });
 
   if (user?.role !== 'ADMIN') {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    throw new Error('Forbidden');
   }
+}
 
-  // validate request body
-  const { items }: { items: PresignRequestItem[] } = await req.json();
+export async function presignUpload(
+  items: PresignRequestItem[],
+): Promise<{ items: PresignedItem[] }> {
+  await ensureAdmin();
 
-  if (!items || !Array.isArray(items) || items.length === 0) {
-    return NextResponse.json({ error: 'Missing items array' }, { status: 400 });
+  if (items.length === 0) {
+    throw new Error('Missing items array');
   }
 
   for (const item of items) {
     if (!item.fileKey || !item.fileType || !item.fileSize || !item.type) {
-      return NextResponse.json(
-        { error: `Missing fields for ${item.fileKey}` },
-        { status: 400 },
-      );
+      throw new Error(`Missing fields for ${item.fileKey}`);
     }
     if (!ALLOWED_TYPES.includes(item.fileType)) {
-      return NextResponse.json(
-        { error: `Invalid file type for ${item.fileKey}` },
-        { status: 400 },
-      );
+      throw new Error(`Invalid file type for ${item.fileKey}`);
     }
     if (item.fileSize > MAX_FILE_SIZE) {
-      return NextResponse.json(
-        { error: `File too large for ${item.fileKey}` },
-        { status: 400 },
-      );
+      throw new Error(`File too large for ${item.fileKey}`);
     }
   }
 
-  // generate all presigned URLs in parallel
   const results = await Promise.all(
     items.map(async ({ fileKey, fileType, fileSize, type }) => {
-      const r2Key = generateR2Key(type, fileType); // unique key generated server-side
+      const r2Key = generateR2Key(type, fileType);
 
       const command = new PutObjectCommand({
         Bucket: process.env.R2_BUCKET_NAME,
@@ -101,9 +95,31 @@ export async function POST(req: NextRequest) {
       });
       const publicUrl = `${process.env.R2_PUBLIC_URL}/${r2Key}`;
 
-      return { fileKey, r2Key, presignedUrl, publicUrl };
+      return {
+        fileKey,
+        r2Key,
+        presignedUrl,
+        publicUrl,
+      } satisfies PresignedItem;
     }),
   );
 
-  return NextResponse.json({ items: results });
+  return { items: results };
+}
+
+export async function deleteUpload(r2Key: string): Promise<{ success: true }> {
+  await ensureAdmin();
+
+  if (!r2Key) {
+    throw new Error('Missing r2Key');
+  }
+
+  await r2Client.send(
+    new DeleteObjectCommand({
+      Bucket: process.env.R2_BUCKET_NAME,
+      Key: r2Key,
+    }),
+  );
+
+  return { success: true };
 }

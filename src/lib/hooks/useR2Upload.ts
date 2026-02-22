@@ -1,9 +1,7 @@
-import {
-  BatchUploadItem,
-  PresignedItem,
-  UploadResult,
-} from '@/types/r2';
+import { BatchUploadItem, UploadResult } from '@/types/r2';
 import { useState } from 'react';
+import { presignUpload, deleteUpload } from '@/lib/actions/upload';
+import toast from 'react-hot-toast';
 
 export const useR2Upload = () => {
   const [isUploading, setIsUploading] = useState(false);
@@ -34,26 +32,14 @@ export const useR2Upload = () => {
 
     try {
       // get all presigned URLs in one request
-      const presignRes = await fetch('/api/upload/presign', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          items: items.map(({ file, fileKey, type }) => ({
-            fileKey,
-            fileType: file.type,
-            fileSize: file.size,
-            type,
-          })),
-        }),
-      });
-
-      if (!presignRes.ok) {
-        const data = await presignRes.json();
-        throw new Error(data.error || 'Failed to get upload URLs');
-      }
-
-      const { items: presignedItems }: { items: PresignedItem[] } =
-        await presignRes.json();
+      const { items: presignedItems } = await presignUpload(
+        items.map(({ file, fileKey, type }) => ({
+          fileKey,
+          fileType: file.type,
+          fileSize: file.size,
+          type,
+        })),
+      );
 
       await Promise.all(
         presignedItems.map(
@@ -93,7 +79,7 @@ export const useR2Upload = () => {
       setError(errorMessage);
 
       // Rollback using actual R2 keys
-      console.log('Upload failed, rolling back...');
+      toast.error('Upload failed, rolling back...');
       for (const r2Key of uploadedR2Keys) {
         await deleteFile(r2Key);
       }
@@ -107,15 +93,10 @@ export const useR2Upload = () => {
 
   const deleteFile = async (r2Key: string): Promise<boolean> => {
     try {
-      const response = await fetch('/api/upload/delete', {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ r2Key }),
-      });
-
-      if (!response.ok) throw new Error('Delete failed');
+      await deleteUpload(r2Key);
       return true;
     } catch (err) {
+      toast.error('Delete failed');
       console.error('Delete failed:', err);
       return false;
     }
@@ -135,4 +116,4 @@ export const useR2Upload = () => {
     progress,
     reset,
   };
-}
+};
