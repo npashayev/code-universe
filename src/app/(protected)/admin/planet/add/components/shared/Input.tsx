@@ -10,7 +10,7 @@ const Input = ({
     <input
       type={type}
       className={cn(
-        'w-full bg-white/5 border border-white/5 focus:border-orange-500/50 rounded-xl px-4 py-3 outline-none transition-all text-white',
+        'w-full bg-white/8 border border-white/12 focus:border-orange-500/60 rounded-xl px-4 py-3 outline-none transition-all text-white',
         className,
       )}
       {...props}

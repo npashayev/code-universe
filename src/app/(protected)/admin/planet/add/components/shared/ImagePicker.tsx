@@ -33,7 +33,7 @@ const ImagePicker = ({
             />
             <label
               htmlFor={`image-picker-${id}`}
-              className="w-full flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 border border-dashed border-white/20 hover:border-orange-500/50 rounded-xl px-4 py-4 outline-none transition-all text-slate-400 cursor-pointer group"
+              className="w-full flex items-center justify-center gap-2 bg-white/8 hover:bg-white/15 border border-dashed border-white/25 hover:border-orange-500/50 rounded-xl px-4 py-4 outline-none transition-all text-slate-300 cursor-pointer group"
             >
               <FileUp
                 className="group-hover:text-orange-500 transition-colors"
@@ -53,7 +53,7 @@ const ImagePicker = ({
         </div>
       </div>
 
-      <div className="rounded-xl bg-black/40 border border-white/10 overflow-hidden flex items-center justify-center relative shadow-inner flex-1">
+      <div className="rounded-xl bg-black/40 border border-white/15 overflow-hidden flex items-center justify-center relative shadow-inner flex-1">
         {imagePreviewUrl ? (
           <Image
             src={imagePreviewUrl}
@@ -62,7 +62,7 @@ const ImagePicker = ({
             className="object-cover object-center"
           />
         ) : (
-          <div className="flex flex-col items-center gap-2 text-slate-700">
+          <div className="flex flex-col items-center gap-2 text-slate-600">
             <ImageIcon size={40} strokeWidth={1} />
             <span className="text-[10px] uppercase tracking-[0.2em] font-bold">
               Waiting for Visual

@@ -11,7 +11,7 @@ const AddButton = ({
       type="button"
       {...props}
       className={cn(
-        'px-6 bg-white/10 disabled:cursor-not-allowed disabled:bg-white/5 hover:bg-white/20 rounded-xl transition-all text-white font-bold text-sm',
+        'px-6 bg-white/12 disabled:cursor-not-allowed disabled:bg-white/6 hover:bg-white/25 rounded-xl transition-all text-white font-bold text-sm',
         className,
       )}
     >

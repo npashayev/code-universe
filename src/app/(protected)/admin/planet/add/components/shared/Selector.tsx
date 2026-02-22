@@ -31,7 +31,7 @@ const Selector = <T extends BaseOption<unknown>>({
 }: Props<T>) => {
   return (
     <div className="relative group">
-      <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 group-hover:text-orange-500 transition-colors">
+      <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-hover:text-orange-500 transition-colors">
         {children}
       </div>
 
@@ -47,7 +47,7 @@ const Selector = <T extends BaseOption<unknown>>({
       />
 
       <ChevronDown
-        className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none"
+        className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
         size={15}
       />
     </div>

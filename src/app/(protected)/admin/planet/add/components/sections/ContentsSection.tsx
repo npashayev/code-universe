@@ -43,7 +43,7 @@ const ContentsSection = ({
   });
 
   return (
-    <div className="space-y-8 pt-8 border-t border-white/10">
+    <div className="space-y-8 pt-8 border-t border-white/16">
       <div className="flex items-center gap-3 text-white font-bold text-xl tracking-tight">
         <Database className="text-orange-500" size={24} />
         <h2>Contents</h2>

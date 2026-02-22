@@ -79,8 +79,8 @@ const BasicConfigurationSection = ({
           />
         </div>
 
-        <div className="pt-4 border-t border-white/5 space-y-6">
-          <div className="flex items-center gap-2 text-slate-400 font-bold text-xs uppercase tracking-widest">
+        <div className="pt-4 border-t border-white/12 space-y-6">
+          <div className="flex items-center gap-2 text-slate-300 font-bold text-xs uppercase tracking-widest">
             <ImageIcon size={14} />
             <span>Main Image</span>
           </div>

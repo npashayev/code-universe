@@ -61,7 +61,7 @@ export default function AddPlanetPage({ searchParams }: Props) {
   }
 
   return (
-    <div className="page text-slate-200 font-sans selection:bg-orange-500/30 pb-42">
+    <div className="page text-slate-100 font-sans selection:bg-orange-500/30 pb-42">
       <Header
         planetData={planetData}
         setPlanetData={setPlanetData}

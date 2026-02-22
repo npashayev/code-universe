@@ -10,7 +10,7 @@ const RemoveButton = ({
     <button
       type="button"
       className={cn(
-        'p-2 text-slate-600 hover:text-red-400 hover:bg-red-400/10 rounded-lg transition-all',
+        'p-2 text-slate-500 hover:text-red-400 hover:bg-red-400/15 rounded-lg transition-all',
         className,
       )}
       {...props}

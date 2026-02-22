@@ -9,7 +9,7 @@ const Textarea = ({
   <textarea
     rows={rows}
     className={cn(
-      'w-full bg-white/5 border border-white/10 focus:border-orange-500/50 rounded-xl px-4 py-3 outline-none transition-all text-white resize-y',
+      'w-full bg-white/8 border border-white/15 focus:border-orange-500/60 rounded-xl px-4 py-3 outline-none transition-all text-white resize-y',
       className,
     )}
     {...props}

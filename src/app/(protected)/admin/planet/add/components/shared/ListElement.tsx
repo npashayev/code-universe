@@ -11,12 +11,12 @@ const ListElement = ({ children, onRemove, className, ...props }: Props) => {
   return (
     <div
       className={cn(
-        'flex items-center justify-between px-4 py-2 bg-white/5 border border-white/10 rounded-xl group',
+        'flex items-center justify-between px-4 py-2 bg-white/8 border border-white/16 rounded-xl group',
         className,
       )}
       {...props}
     >
-      <div className="flex-1 text-sm text-slate-300 font-medium">
+      <div className="flex-1 text-sm text-slate-200 font-medium">
         {children}
       </div>
       <RemoveButton onClick={onRemove} />

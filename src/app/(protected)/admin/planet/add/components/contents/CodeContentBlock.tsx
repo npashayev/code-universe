@@ -27,7 +27,7 @@ const CodeContentBlock = ({ content, onUpdate }: Props) => {
           />
         </div>
         <div className="space-y-2 shrink-0">
-          <div className="block mb-2 text-xs font-bold text-slate-500 uppercase tracking-wider">
+          <div className="block mb-2 text-xs font-bold text-slate-400 uppercase tracking-wider">
             Language
           </div>
           <ProgrammingLanguageSelector

@@ -31,7 +31,7 @@ const TextContentBlock = ({
     <div className="space-y-6">
       <div className="flex gap-2">
         <div className="space-y-2">
-          <div className="block mb-2 text-xs font-bold text-slate-500 uppercase tracking-wider">
+          <div className="block mb-2 text-xs font-bold text-slate-400 uppercase tracking-wider">
             Level
           </div>
           <TitleLevelSelector
@@ -87,10 +87,10 @@ const TextContentBlock = ({
           onChange={e => onUpdate(content.id, { text: e.target.value })}
         />
       </div>
-      <div className="p-4 bg-black/20 rounded-2xl border border-white/5">
+      <div className="p-4 bg-black/25 rounded-2xl border border-white/12">
         <div className="flex items-center gap-6">
           <div className="flex gap-3 items-center">
-            <span className="text-[12px] text-slate-600 uppercase font-bold">
+            <span className="text-[12px] text-slate-500 uppercase font-bold">
               Text Variant
             </span>
             <TextVariantSelector

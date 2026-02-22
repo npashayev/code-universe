@@ -9,7 +9,7 @@ const SectionHeader = ({ children, className, ...props }: Props) => {
   return (
     <header
       className={cn(
-        'flex items-center gap-2 text-orange-500 font-bold text-xs uppercase tracking-widest border-b border-white/5 pb-4 mb-6',
+        'flex items-center gap-2 text-orange-500 font-bold text-xs uppercase tracking-widest border-b border-white/12 pb-4 mb-6',
         className,
       )}
       {...props}

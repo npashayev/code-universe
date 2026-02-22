@@ -116,12 +116,12 @@ export const ExternalResourcesSection = ({
         renderItem={res => (
           <ListElement onRemove={() => removeResource(res.id)}>
             <div className="flex items-center gap-4">
-              <div className="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center border border-orange-500/20">
+              <div className="w-8 h-8 rounded-lg bg-orange-500/15 flex items-center justify-center border border-orange-500/30">
                 <BookOpen size={14} className="text-orange-500" />
               </div>
               <div>
                 {res.title && (
-                  <span className="block text-[12px] text-slate-600 uppercase font-mono tracking-tighter">
+                  <span className="block text-[12px] text-slate-500 uppercase font-mono tracking-tighter">
                     {res.title}
                   </span>
                 )}

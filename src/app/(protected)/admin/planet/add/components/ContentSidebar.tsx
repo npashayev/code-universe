@@ -48,14 +48,14 @@ const ContentSidebar = ({ contents, setPlanetData, locale }: Props) => {
 
   return (
     <aside className={cn('admin-page-section', 'sticky top-28 shadow-2xl shrink-0 w-80')}>
-      <SectionHeader className="flex items-center gap-2 text-orange-500 font-bold text-xs uppercase tracking-widest mb-6 border-b border-white/5 pb-4">
+      <SectionHeader>
         <Layout size={14} />
         <h2>Planet Content</h2>
       </SectionHeader>
 
       <div className="space-y-4">
         <div className="space-y-2">
-          <div className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+          <div className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">
             New Content Module
           </div>
           <ContentTypeSelector
@@ -66,7 +66,7 @@ const ContentSidebar = ({ contents, setPlanetData, locale }: Props) => {
 
         <AddButton
           onClick={() => addContent(selectedContentType.value)}
-          className="w-full flex items-center justify-center gap-2 py-3 hover:bg-orange-500/20 border border-white/10 hover:border-orange-500/30"
+          className="w-full flex items-center justify-center gap-2 py-3 hover:bg-orange-500/30 border border-white/18 hover:border-orange-500/50"
         >
           <Plus size={18} />
           Add Module
@@ -74,8 +74,8 @@ const ContentSidebar = ({ contents, setPlanetData, locale }: Props) => {
       </div>
 
       {contents.length > 0 ? (
-        <div className="overflow-hidden mt-8 space-y-3 max-h-100 overflow-y-auto pr-4 custom-scrollbar border-t border-white/5 pt-6">
-          <h3 className="text-[10px] text-slate-600 uppercase font-black tracking-widest mb-4">
+        <div className="overflow-hidden mt-8 space-y-3 max-h-100 overflow-y-auto pr-4 custom-scrollbar border-t border-white/12 pt-6">
+          <h3 className="text-[10px] text-slate-500 uppercase font-black tracking-widest mb-4">
             Discovery Outline
           </h3>
           <SortableList<PlanetContent>
@@ -92,7 +92,7 @@ const ContentSidebar = ({ contents, setPlanetData, locale }: Props) => {
                     <span className="text-sm text-white font-bold truncate group-hover:text-orange-500 transition-colors">
                       {content.label}
                     </span>
-                    <span className="text-[12px] uppercase font-mono text-slate-500 tracking-tighter mt-0.5">
+                    <span className="text-[12px] uppercase font-mono text-slate-400 tracking-tighter mt-0.5">
                       {content.type}
                     </span>
                   </div>
@@ -102,7 +102,7 @@ const ContentSidebar = ({ contents, setPlanetData, locale }: Props) => {
           />
         </div>
       ) : (
-        <div className="mt-8 py-10 flex flex-col items-center justify-center text-slate-700 border border-dashed border-white/10 rounded-2xl">
+        <div className="mt-8 py-10 flex flex-col items-center justify-center text-slate-600 border border-dashed border-white/18 rounded-2xl">
           <Database size={24} strokeWidth={1} className="mb-2" />
           <span className="text-[10px] uppercase tracking-widest font-black text-center">
             No modules in
