@@ -2,7 +2,6 @@
 // npx tsx adminUser.ts
 
 import { prisma } from '@/lib/prisma/prisma';
-import { UserRole } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import * as readline from 'readline';
 
@@ -42,7 +41,7 @@ async function main(): Promise<void> {
           firstName,
           lastName,
           hashedPassword,
-          role: UserRole.ADMIN,
+          role: 'ADMIN',
         },
       });
 

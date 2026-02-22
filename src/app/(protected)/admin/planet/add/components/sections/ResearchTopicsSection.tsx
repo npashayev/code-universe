@@ -101,9 +101,7 @@ export const ResearchTopicsSection = ({
       />
 
       {researchTopics.length === 0 && (
-        <span className="text-slate-600 text-xs italic">
-          No research topics assigned yet.
-        </span>
+        <span className="admin-empty-state">No research topics assigned yet.</span>
       )}
     </section>
   );

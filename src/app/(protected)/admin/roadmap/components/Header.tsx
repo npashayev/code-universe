@@ -1,6 +1,6 @@
 import { PlanetCategory, PlanetFullListResponse } from '@/types/planet';
-import { Plus, Search } from 'lucide-react';
-import Link from 'next/link';
+import { Search } from 'lucide-react';
+import AddPlanetLink from '../../components/AddPlanetLink';
 import {
   CategorySelector,
   ExtendedStatusSelector,
@@ -63,9 +63,6 @@ const Header = ({
 
           <CategorySelector
             value={
-              categoryOptions.find(
-                o => o.value === searchParams.get('category'),
-              ) ||
               categoryOptions.find(o => o.value === category) ||
               categoryOptions[0]
             }
@@ -83,7 +80,7 @@ const Header = ({
           />
           <input
             type="text"
-            placeholder="Search destinations..."
+            placeholder="Search for topic..."
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
             className="w-full bg-white/5 border border-white/10 hover:border-white/20 rounded-xl pl-9 pr-4 py-2 text-sm outline-none transition-all placeholder:text-slate-600"
@@ -92,15 +89,7 @@ const Header = ({
       </div>
 
       <div className="flex items-center gap-3">
-        <Link
-          href={`/admin/planet/add?category=${category}`}
-          className="header-button bg-orange-500 hover:bg-orange-600"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <Plus size={16} />
-          Add Planet
-        </Link>
+        <AddPlanetLink category={category} />
 
         <button className="header-button bg-green-800 hover:bg-green-600">
           Update

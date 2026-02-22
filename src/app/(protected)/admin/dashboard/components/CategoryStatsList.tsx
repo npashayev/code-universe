@@ -16,7 +16,7 @@ interface Props {
 
 const CategoryStatsList = ({ items }: Props) => {
   return (
-    <ul className="space-y-3 pt-12 pb-24">
+    <ul className="space-y-3">
       {items.map(item => {
         const option = categoryOptions.find(o => o.value === item.category);
         const label = option?.label ?? item.category;

@@ -91,9 +91,7 @@ export const QuestionsSection = ({
       />
 
       {(!questions || questions.length === 0) && (
-        <span className="text-slate-600 text-xs italic">
-          No questions assigned yet.
-        </span>
+        <span className="admin-empty-state">No questions assigned yet.</span>
       )}
     </section>
   );

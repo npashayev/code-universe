@@ -89,9 +89,7 @@ const TagsSection = ({ planetData, setPlanetData, locale }: Props) => {
       />
 
       {tags.length === 0 && (
-        <span className="text-slate-600 text-xs italic">
-          No tags assigned yet.
-        </span>
+        <span className="admin-empty-state">No tags assigned yet.</span>
       )}
     </section>
   );

@@ -60,7 +60,7 @@ const Header = ({
 
 
   return (
-    <header className="sticky top-0 flex justify-between items-center gap-6 z-100 bg-night border-b border-white/5 py-4 px-12">
+    <header className="admin-page-header py-4">
       <div className="flex items-center gap-6">
         <DashboardLink />
         <h1 className="text-xl md:text-2xl font-bold text-white tracking-tight">
@@ -88,43 +88,22 @@ const Header = ({
           }
         />
 
-        {/* JSON Upload Trigger */}
-        <div>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="application/json,.json"
-            className="hidden"
-            onChange={handleFileChange}
-          />
-
-          <button
-            onClick={handleImportClick}
-            className="flex items-center gap-2 px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-xs font-bold text-slate-300 transition-all"
-          >
-            <Upload size={14} />
-            Import JSON
-          </button>
-        </div>
-
-        {/* JSON Export Trigger */}
-        <div>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="application/json,.json"
-            className="hidden"
-            onChange={handleFileChange}
-          />
-
-          <button
-            onClick={handleExportClick}
-            className="flex items-center gap-2 px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-xs font-bold text-slate-300 transition-all"
-          >
-            <Download size={14} />
-            Export JSON
-          </button>
-        </div>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="application/json,.json"
+          className="hidden"
+          onChange={handleFileChange}
+          aria-hidden
+        />
+        <button type="button" onClick={handleImportClick} className="admin-header-icon-btn">
+          <Upload size={14} />
+          Import JSON
+        </button>
+        <button type="button" onClick={handleExportClick} className="admin-header-icon-btn">
+          <Download size={14} />
+          Export JSON
+        </button>
       </div>
 
       <div className="flex gap-4 items-center">

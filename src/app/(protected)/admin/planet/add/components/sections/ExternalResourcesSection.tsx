@@ -140,9 +140,7 @@ export const ExternalResourcesSection = ({
       />
 
       {(!resources || resources.length === 0) && (
-        <span className="text-slate-600 text-xs italic">
-          No resources assigned yet.
-        </span>
+        <span className="admin-empty-state">No resources assigned yet.</span>
       )}
     </section>
   );

@@ -13,7 +13,7 @@ export const SortableItem = ({ id, children }: SortableItemProps) => {
   const isDragging = !!transform;
 
   return (
-    <div
+    <li
       ref={setNodeRef}
       {...attributes}
       {...listeners}
@@ -25,6 +25,6 @@ export const SortableItem = ({ id, children }: SortableItemProps) => {
       }}
     >
       {children}
-    </div>
+    </li>
   );
 };

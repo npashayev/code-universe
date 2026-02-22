@@ -17,7 +17,7 @@ export default function DashboardPage() {
   return (
     <div className="page">
       <Header />
-      <main className="px-[10%]">
+      <main className="admin-main">
         <CategoryStatsList items={MOCK_CATEGORY_STATS} />
       </main>
     </div>

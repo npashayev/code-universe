@@ -46,13 +46,13 @@ const SortableList = <T extends { id: string }>({
           items={elements.map(e => e.id)}
           strategy={verticalListSortingStrategy}
         >
-          <div className={cn('overflow-hidden space-y-2', className)}>
+          <ul className={cn('overflow-hidden space-y-2', className)}>
             {elements.map((element, idx) => (
               <SortableItem key={element.id} id={element.id}>
                 {renderItem(element, idx)}
               </SortableItem>
             ))}
-          </div>
+          </ul>
         </SortableContext>
       )}
     </DndContext>

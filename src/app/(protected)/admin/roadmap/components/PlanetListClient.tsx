@@ -63,7 +63,7 @@ const PlanetListClient = ({ category, data }: Props) => {
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
       />
-      <main className="space-y-3 px-[10%]">
+      <main className="admin-main space-y-3">
         <SortableList<PlanetSummary>
           id="planet-sortable-list"
           className="space-y-3 pt-12 pb-24"
