@@ -57,7 +57,7 @@ export const ExternalResourcesSection = ({
         <h2>External Resources</h2>
       </SectionHeader>
 
-      <div className="flex gap-2">
+      <div className="flex gap-2 min-w-0 flex-wrap">
         <Input
           value={currentResource.title}
           onChange={e =>
@@ -88,7 +88,7 @@ export const ExternalResourcesSection = ({
           }}
           placeholder="URL"
         />
-        <AddButton onClick={addResource} disabled={!isValid}>
+        <AddButton onClick={addResource} disabled={!isValid} className="shrink-0">
           Add
         </AddButton>
       </div>
@@ -99,13 +99,13 @@ export const ExternalResourcesSection = ({
         handleDragEnd={handleDragEnd}
         renderItem={res => (
           <ListElement onRemove={() => removeResource(res.id)}>
-            <div className="flex items-center gap-4">
-              <div className="w-8 h-8 rounded-lg bg-orange-500/15 flex items-center justify-center border border-orange-500/30">
+            <div className="flex items-center gap-4 min-w-0">
+              <div className="w-8 h-8 shrink-0 rounded-lg bg-orange-500/15 flex items-center justify-center border border-orange-500/30">
                 <BookOpen size={14} className="text-orange-500" />
               </div>
-              <div>
+              <div className="min-w-0 overflow-hidden">
                 {res.title && (
-                  <span className="block text-[12px] text-slate-500 uppercase font-mono tracking-tighter">
+                  <span className="block text-[12px] text-slate-500 uppercase font-mono tracking-tighter truncate">
                     {res.title}
                   </span>
                 )}
@@ -113,7 +113,7 @@ export const ExternalResourcesSection = ({
                   href={res.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-orange-400 hover:underline font-medium"
+                  className="block text-sm text-orange-400 hover:underline font-medium truncate"
                 >
                   {res.label}
                 </Link>

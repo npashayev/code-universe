@@ -49,8 +49,8 @@ const TagsSection = ({ planetData, setPlanetData, locale }: Props) => {
         <h2>Tags</h2>
       </SectionHeader>
 
-      <div className="flex gap-2">
-        <div className="relative flex-1">
+      <div className="flex gap-2 min-w-0">
+        <div className="relative flex-1 min-w-0">
           <Input
             placeholder="Add tag"
             value={currentTag}
@@ -60,7 +60,7 @@ const TagsSection = ({ planetData, setPlanetData, locale }: Props) => {
             }}
           />
         </div>
-        <AddButton onClick={addTag} disabled={currentTag.trim() === ''}>Add</AddButton>
+        <AddButton onClick={addTag} disabled={currentTag.trim() === ''} className="shrink-0">Add</AddButton>
       </div>
 
       <SortableList<PlanetTag>
@@ -69,7 +69,7 @@ const TagsSection = ({ planetData, setPlanetData, locale }: Props) => {
         handleDragEnd={handleDragEnd}
         renderItem={(tag, idx) => (
           <ListElement onRemove={() => removeTag(tag.id)} className={cn(idx <= 3 && 'border border-amber-400/30')}>
-            {tag.tag}
+            <span className="block truncate">{tag.tag}</span>
           </ListElement>
         )}
       />

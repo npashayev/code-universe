@@ -53,7 +53,8 @@ export const QuestionsSection = ({
         <h2>Questions</h2>
       </SectionHeader>
 
-      <div className="flex gap-2">
+      <div className="flex gap-2 min-w-0">
+        <div className="flex-1 min-w-0">
         <Input
           value={currentQuestion}
           onChange={e => setCurrentQuestion(e.target.value)}
@@ -62,7 +63,8 @@ export const QuestionsSection = ({
           }}
           placeholder="Add question"
         />
-        <AddButton onClick={addQuestion} disabled={!currentQuestion.trim()}>Add</AddButton>
+        </div>
+        <AddButton onClick={addQuestion} disabled={!currentQuestion.trim()} className="shrink-0">Add</AddButton>
       </div>
 
       <SortableList<Question>
@@ -71,7 +73,7 @@ export const QuestionsSection = ({
         handleDragEnd={handleDragEnd}
         renderItem={question => (
           <ListElement onRemove={() => removeQuestion(question.id)}>
-            {question.question}
+            <span className="block truncate">{question.question}</span>
           </ListElement>
         )}
       />

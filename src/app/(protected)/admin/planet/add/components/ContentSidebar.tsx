@@ -58,7 +58,7 @@ const ContentSidebar = ({ contents, setPlanetData, locale }: Props) => {
       </div>
 
       {contents.length > 0 ? (
-        <div className="overflow-hidden mt-8 space-y-3 max-h-100 overflow-y-auto pr-4 custom-scrollbar border-t border-white/12 pt-6">
+        <div className="overflow-hidden mt-8 space-y-3 max-h-100 overflow-y-auto custom-scrollbar border-t border-white/12 pt-6">
           <h3 className="text-[10px] text-slate-500 uppercase font-black tracking-widest mb-4">
             Discovery Outline
           </h3>
@@ -68,12 +68,11 @@ const ContentSidebar = ({ contents, setPlanetData, locale }: Props) => {
             handleDragEnd={handleDragEnd}
             renderItem={content => (
               <ListElement
-                className="py-3"
                 onRemove={() => removeContentFromHook(content.id)}
               >
-                <Link href={`#${content.id}`} className="flex flex-col">
-                  <div className="flex flex-col">
-                    <span className="text-sm text-white font-bold truncate group-hover:text-orange-500 transition-colors">
+                <Link href={`#${content.id}`} className="flex flex-col min-w-0">
+                  <div className="flex flex-col min-w-0 overflow-hidden">
+                    <span className="text-sm text-white font-bold truncate block group-hover:text-orange-500 transition-colors">
                       {content.label}
                     </span>
                     <span className="text-[12px] uppercase font-mono text-slate-400 tracking-tighter mt-0.5">

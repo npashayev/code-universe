@@ -61,16 +61,19 @@ export const ResearchTopicsSection = ({
         <h2>Research Topics</h2>
       </SectionHeader>
 
-      <div className="flex gap-2">
+      <div className="flex gap-2 min-w-0">
+        <div className="flex-1 min-w-0">
         <Input
           value={currentTopic}
           onChange={e => setCurrentTopic(e.target.value)}
           onKeyDown={e => e.key === 'Enter' && addResearchTopic()}
           placeholder="Add research topic"
         />
+        </div>
         <AddButton
           onClick={addResearchTopic}
           disabled={!currentTopic.trim()}
+          className="shrink-0"
         >
           Add
         </AddButton>
@@ -82,7 +85,7 @@ export const ResearchTopicsSection = ({
         handleDragEnd={handleDragEnd}
         renderItem={topic => (
           <ListElement onRemove={() => removeTopic(topic.id)}>
-            {topic.topic}
+            <span className="block truncate">{topic.topic}</span>
           </ListElement>
         )}
       />

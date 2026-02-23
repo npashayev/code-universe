@@ -101,7 +101,7 @@ export default function AddPlanetPage({ searchParams }: Props) {
       />
 
       <main className="admin-main flex items-start gap-10">
-        <div className="flex-1 space-y-12">
+        <div className="flex-1 min-w-0 space-y-12">
           <BasicConfigurationSection
             planetData={planetData}
             setPlanetData={setPlanetData}

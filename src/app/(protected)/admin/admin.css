@@ -10,7 +10,7 @@
   }
 
   .admin-page-section {
-    @apply bg-white/7 border border-white/18 rounded-2xl p-6 space-y-2 hover:border-orange-500/50 transition-all;
+    @apply bg-white/7 border border-white/18 rounded-2xl p-6 space-y-2 hover:border-orange-500/50 transition-all min-w-0;
   }
 
   .header-button {
