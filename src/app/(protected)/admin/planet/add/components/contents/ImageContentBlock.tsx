@@ -54,9 +54,16 @@ const ImageContentBlock = ({
     const fileName = file.name;
     const previewUrl = URL.createObjectURL(file);
 
-    setPendingContentImages(prev =>
-      new Map(prev).set(fileName, { previewUrl, file }),
-    );
+    setPendingContentImages(prev => {
+      const next = new Map(prev);
+      // Revoke old blob URL when overwriting same filename
+      const existing = next.get(fileName);
+      if (existing) {
+        URL.revokeObjectURL(existing.previewUrl);
+      }
+      next.set(fileName, { previewUrl, file });
+      return next;
+    });
     onUpdate(content.id, {
       pendingImageId: fileName,
       image: { ...content.image },

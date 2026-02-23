@@ -4,6 +4,7 @@ import {
   CreatePlanetData,
   PLANET_CATEGORY,
   PlanetCategory,
+  SupportedLanguage,
 } from '@/types/planet';
 import { use, useEffect, useState } from 'react';
 import { useImmer } from 'use-immer';
@@ -46,6 +47,33 @@ export default function AddPlanetPage({ searchParams }: Props) {
   >>(new Map());
 
   const locale = currentLanguage.value;
+
+  // Remove orphaned content images: keep only images referenced by any content in any locale
+  useEffect(() => {
+    const used = new Set<string>();
+    (['az', 'en'] as SupportedLanguage[]).forEach(loc => {
+      planetData.localized[loc].contents.forEach(c => {
+        if (c.type === 'image' && c.pendingImageId) {
+          used.add(c.pendingImageId);
+        }
+      });
+    });
+
+    queueMicrotask(() => {
+      setPendingContentImages(prev => {
+        let changed = false;
+        const next = new Map(prev);
+        for (const [key, entry] of next.entries()) {
+          if (!used.has(key)) {
+            URL.revokeObjectURL(entry.previewUrl);
+            next.delete(key);
+            changed = true;
+          }
+        }
+        return changed ? next : prev;
+      });
+    });
+  }, [planetData]);
 
   if (previewActive) {
     return (
