@@ -51,7 +51,6 @@ const Header = ({
 
   const { handleSubmit, isUploading, isSubmitting, progress } = useSubmitPlanet({
     planetData,
-    setPlanetData,
     pendingFiles,
     setPendingFiles,
     pendingContentImages,
@@ -115,7 +114,7 @@ const Header = ({
         </button>
         <button
           onClick={handleSubmit}
-          disabled={isUploading}
+          disabled={isUploading || isSubmitting}
           className="header-button bg-orange-500 hover:bg-orange-600"
         >
           {

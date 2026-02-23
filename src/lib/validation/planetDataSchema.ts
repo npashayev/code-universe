@@ -1,17 +1,30 @@
 import { z } from 'zod';
 
+/** Validates URL and normalizes protocol-less URLs (e.g. "example.com" -> "https://example.com") */
 export const urlSchema = (message = 'Invalid URL') =>
-  z.string().refine(
-    val => {
-      try {
-        new URL(val);
-        return true;
-      } catch {
-        return false;
-      }
-    },
-    { message },
-  );
+  z
+    .string()
+    .refine(
+      val => {
+        if (!val || !val.trim()) return false;
+        try {
+          const url = val.trim();
+          const withProtocol =
+            /^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(url)
+              ? url
+              : `https://${url}`;
+          new URL(withProtocol);
+          return true;
+        } catch {
+          return false;
+        }
+      },
+      { message },
+    )
+    .transform(val => {
+      const url = val.trim();
+      return /^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(url) ? url : `https://${url}`;
+    });
 
 const statusEnum = z.enum(['draft', 'published']);
 const categoryEnum = z.enum(['html', 'css', 'javascript']);
@@ -112,6 +125,33 @@ const imageContentSchema = fullBaseContentSchema.extend({
   pendingImageId: z.string().optional(),
 });
 
+/** Allows empty URL for pre-upload validation (when image is pending) */
+const relaxedUrlSchema = z.union([urlSchema(), z.literal('')]);
+
+/** Allows 0,0 for pending images before dimensions are read from file */
+const imageMetadataSchemaPreSubmit = z.object({
+  width: z.number().int().min(0),
+  height: z.number().int().min(0),
+});
+
+const imageContentSchemaPreSubmit = fullBaseContentSchema.extend({
+  type: z.literal('image'),
+  image: z.object({
+    url: relaxedUrlSchema,
+    alt: z.string(),
+    metadata: imageMetadataSchemaPreSubmit,
+  }),
+  pendingImageId: z.string().optional(),
+});
+
+const planetContentSchemaPreSubmit = z.discriminatedUnion('type', [
+  textContentSchema,
+  implementationTaskContentSchema,
+  codeContentSchema,
+  htmlElementContentSchema,
+  imageContentSchemaPreSubmit,
+]);
+
 const planetContentSchema = z.discriminatedUnion('type', [
   textContentSchema,
   implementationTaskContentSchema,
@@ -122,10 +162,7 @@ const planetContentSchema = z.discriminatedUnion('type', [
 
 export const localizedPlanetDataSchema = z.object({
   name: z.string(),
-  tags: z
-    .array(tagSchema)
-    .min(1, 'At least one tag is required.')
-    .max(4, 'You can add up to 4 tags.'),
+  tags: z.array(tagSchema).min(1, 'At least one tag is required.'),
   description: z.string(),
   researchTopics: z.array(researchTopicSchema),
   resources: z.array(resourceSchema).optional(),
@@ -142,6 +179,25 @@ export const createPlanetDataSchema = z.object({
     alt: localizedStringSchema,
   }),
   localized: z.record(supportedLanguageEnum, localizedPlanetDataSchema),
+});
+
+/** Use before image upload to validate structure; allows empty URLs for pending images */
+const localizedPlanetDataSchemaPreSubmit = localizedPlanetDataSchema.extend({
+  contents: z.array(planetContentSchemaPreSubmit),
+});
+
+export const preSubmitPlanetDataSchema = z.object({
+  category: categoryEnum,
+  status: statusEnum,
+  image: z.object({
+    url: relaxedUrlSchema,
+    metadata: imageMetadataSchemaPreSubmit,
+    alt: localizedStringSchema,
+  }),
+  localized: z.record(
+    supportedLanguageEnum,
+    localizedPlanetDataSchemaPreSubmit,
+  ),
 });
 
 export const planetDataSchema = createPlanetDataSchema.extend({

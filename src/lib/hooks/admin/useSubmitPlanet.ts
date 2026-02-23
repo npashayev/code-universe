@@ -1,90 +1,204 @@
-import { Updater } from 'use-immer';
 import { CreatePlanetData, SupportedLanguage } from '@/types/planet';
 import { BatchUploadItem } from '@/types/r2';
 import { useR2Upload } from '@/lib/hooks/useR2Upload';
 import { Dispatch, SetStateAction, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
+import {
+  preSubmitPlanetDataSchema,
+  createPlanetDataSchema,
+} from '@/lib/validation/planetDataSchema';
+import { submitPlanet } from '@/lib/actions/planet';
+
+function getImageDimensions(
+  file: File,
+): Promise<{ width: number; height: number }> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      resolve({ width: img.naturalWidth, height: img.naturalHeight });
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error('Failed to load image'));
+    };
+    img.src = url;
+  });
+}
 
 type PendingContentImageEntry = {
-    previewUrl: string;
-    file: File;
+  previewUrl: string;
+  file: File;
 };
 
 interface UseSubmitPlanetProps {
-    planetData: CreatePlanetData;
-    setPlanetData: Updater<CreatePlanetData>;
-    pendingFiles: Map<string, File>;
-    setPendingFiles: Dispatch<SetStateAction<Map<string, File>>>;
-    pendingContentImages: Map<string, PendingContentImageEntry>;
-    setPendingContentImages: Dispatch<SetStateAction<Map<string, PendingContentImageEntry>>>;
+  planetData: CreatePlanetData;
+  pendingFiles: Map<string, File>;
+  setPendingFiles: Dispatch<SetStateAction<Map<string, File>>>;
+  pendingContentImages: Map<string, PendingContentImageEntry>;
+  setPendingContentImages: Dispatch<
+    SetStateAction<Map<string, PendingContentImageEntry>>
+  >;
 }
 
 export const useSubmitPlanet = ({
-    planetData,
-    setPlanetData,
-    pendingFiles,
-    setPendingFiles,
-    pendingContentImages,
-    setPendingContentImages,
+  planetData,
+  pendingFiles,
+  setPendingFiles,
+  pendingContentImages,
+  setPendingContentImages,
 }: UseSubmitPlanetProps) => {
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const { batchUpload, isUploading, progress } = useR2Upload();
+  const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { batchUpload, deleteFile, isUploading, progress } = useR2Upload();
 
-    const handleSubmit = async () => {
-        const hasMainImage = pendingFiles.has('main-image');
-        const hasContentImages = pendingContentImages.size > 0;
+  const rollbackImages = async (r2Keys: string[]) => {
+    for (const r2Key of r2Keys) {
+      await deleteFile(r2Key);
+    }
+  };
 
-        if (!hasMainImage && !hasContentImages) {
-            alert('No image selected');
-            return;
-        }
+  const handleSubmit = async () => {
+    const hasMainImage = pendingFiles.has('main-image');
 
-        try {
-            const uploadItems: BatchUploadItem[] = [];
+    if (!hasMainImage) {
+      toast.error('Main image is not added!');
+      return;
+    }
 
-            if (hasMainImage) {
-                const file = pendingFiles.get('main-image')!;
-                uploadItems.push({ file, fileKey: 'main-image', type: 'planet-main' });
+    // Validate structure before any image upload
+    const preSubmitResult = preSubmitPlanetDataSchema.safeParse(planetData);
+    if (!preSubmitResult.success) {
+      const { fieldErrors, formErrors } = preSubmitResult.error.flatten();
+      console.error('[handleSubmit] Pre-upload validation failed:', {
+        fieldErrors,
+        formErrors,
+      });
+      toast.error(
+        'Planet data does not satisfy the required structure. Check the console for details.',
+      );
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    const uploadItems: BatchUploadItem[] = [];
+    if (hasMainImage) {
+      const file = pendingFiles.get('main-image')!;
+      uploadItems.push({ file, fileKey: 'main-image', type: 'planet-main' });
+    }
+    Array.from(pendingContentImages.entries()).forEach(([id, { file }]) =>
+      uploadItems.push({ file, fileKey: id, type: 'planet-content' }),
+    );
+
+    const uploadResults = await batchUpload(uploadItems);
+
+    if (!uploadResults) {
+      toast.error('Image upload failed. Please try again.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    const uploadedR2Keys = Array.from(uploadResults.values()).map(r => r.r2Key);
+
+    const mergedData: CreatePlanetData = JSON.parse(JSON.stringify(planetData));
+    uploadResults.forEach((result, fileKey) => {
+      if (fileKey === 'main-image') {
+        mergedData.image.url = result.url;
+      } else {
+        (['az', 'en'] as SupportedLanguage[]).forEach(loc => {
+          mergedData.localized[loc].contents.forEach(c => {
+            if (c.type === 'image' && c.pendingImageId === fileKey) {
+              c.image.url = result.url;
             }
+          });
+        });
+      }
+    });
 
-            Array.from(pendingContentImages.entries()).forEach(([id, { file }]) =>
-                uploadItems.push({ file, fileKey: id, type: 'planet-content' }),
-            );
-
-            const uploadResults = await batchUpload(uploadItems);
-
-            if (!uploadResults) {
-                alert('Upload failed. Please try again.');
-                return;
-            }
-
-            setPlanetData(draft => {
-                uploadResults.forEach((result, fileKey) => {
-                    if (fileKey === 'main-image') {
-                        draft.image.url = result.url;
-                    } else {
-                        (['az', 'en'] as SupportedLanguage[]).forEach(loc => {
-                            draft.localized[loc].contents.forEach(c => {
-                                if (c.type === 'image' && c.pendingImageId === fileKey) {
-                                    c.image.url = result.url;
-                                }
-                            });
-                        });
-                    }
-                });
+    // Populate image metadata from file dimensions before validation (in parallel)
+    try {
+      const metadataTasks: Promise<void>[] = [];
+      if (hasMainImage) {
+        const file = pendingFiles.get('main-image')!;
+        metadataTasks.push(
+          getImageDimensions(file).then(dims => {
+            mergedData.image.metadata = dims;
+          }),
+        );
+      }
+      metadataTasks.push(
+        ...Array.from(pendingContentImages.entries()).map(
+          async ([fileKey, { file }]) => {
+            const dims = await getImageDimensions(file);
+            (['az', 'en'] as SupportedLanguage[]).forEach(loc => {
+              mergedData.localized[loc].contents.forEach(c => {
+                if (c.type === 'image' && c.pendingImageId === fileKey) {
+                  c.image.metadata = dims;
+                }
+              });
             });
+          },
+        ),
+      );
+      await Promise.all(metadataTasks);
+    } catch (err) {
+      console.error('[handleSubmit] Failed to read image dimensions:', err);
+      toast.error('Failed to process image dimensions. Please try again.');
+      await rollbackImages(uploadedR2Keys);
+      setIsSubmitting(false);
+      return;
+    }
 
-            setPendingFiles(new Map());
-            setPendingContentImages(prev => {
-                prev.forEach(({ previewUrl }) => URL.revokeObjectURL(previewUrl));
-                return new Map();
-            });
+    // Validate merged data before server call
+    const mergedResult = createPlanetDataSchema.safeParse(mergedData);
+    if (!mergedResult.success) {
+      const { fieldErrors, formErrors } = mergedResult.error.flatten();
+      console.error('[handleSubmit] Post-upload validation failed:', {
+        fieldErrors,
+        formErrors,
+      });
+      toast.error(
+        'Planet data does not satisfy the required structure. Uploaded images will be removed.',
+      );
+      await rollbackImages(uploadedR2Keys);
+      setIsSubmitting(false);
+      return;
+    }
 
-            alert('Success');
-        } catch (err) {
-            console.error('Submission error:', err);
-            alert('Something went wrong. Please try again.');
-        }
-    };
+    let submitResult: Awaited<ReturnType<typeof submitPlanet>>;
+    try {
+      submitResult = await submitPlanet(mergedResult.data);
+    } catch (err) {
+      console.error('[handleSubmit] Server action error:', err);
+      toast.error(
+        'An unexpected error occurred. Uploaded images will be removed.',
+      );
+      await rollbackImages(uploadedR2Keys);
+      setIsSubmitting(false);
+      return;
+    }
 
-    return { handleSubmit, isSubmitting, isUploading, progress };
+    if (!submitResult.success) {
+      toast.error(submitResult.error);
+      await rollbackImages(uploadedR2Keys);
+      setIsSubmitting(false);
+      return;
+    }
+
+    toast.success('Planet submitted successfully.');
+    setIsSubmitting(false);
+    setPendingFiles(new Map());
+    setPendingContentImages(prev => {
+      prev.forEach(({ previewUrl }) => URL.revokeObjectURL(previewUrl));
+      return new Map();
+    });
+    router.push(
+      `/roadmap/${mergedResult.data.category}/${submitResult.planetId}`,
+    );
+  };
+
+  return { handleSubmit, isSubmitting, isUploading, progress };
 };
