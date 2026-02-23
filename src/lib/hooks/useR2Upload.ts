@@ -1,6 +1,6 @@
 import { BatchUploadItem, UploadResult } from '@/types/r2';
 import { useState } from 'react';
-import { presignUpload, deleteUpload } from '@/lib/actions/upload';
+import { presignUpload, deleteUpload } from '@/app/actions/upload';
 import toast from 'react-hot-toast';
 
 export const useR2Upload = () => {

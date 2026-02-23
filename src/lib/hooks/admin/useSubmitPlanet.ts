@@ -8,7 +8,7 @@ import {
   preSubmitPlanetDataSchema,
   createPlanetDataSchema,
 } from '@/lib/validation/planetDataSchema';
-import { submitPlanet } from '@/lib/actions/planet';
+import { submitPlanet } from '@/app/actions/planet';
 
 function getImageDimensions(
   file: File,
