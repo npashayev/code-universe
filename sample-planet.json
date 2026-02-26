@@ -1,0 +1,221 @@
+{
+  "category": "html",
+  "status": "draft",
+  "image": {
+    "url": "",
+    "metadata": {
+      "width": 0,
+      "height": 0
+    },
+    "alt": {
+      "az": "Əsas şəkil alt",
+      "en": "Main image alt"
+    }
+  },
+  "localized": {
+    "az": {
+      "name": "Mövzu 2",
+      "tags": [
+        {
+          "id": "77a5a150-43b0-4bf5-9438-b336a4733697",
+          "tag": "teq1"
+        },
+        {
+          "id": "33712392-5a9b-4c1c-9c35-c98ad16d45a5",
+          "tag": "teq2"
+        },
+        {
+          "id": "942ce4b2-b00d-462c-81bc-0916c31c6f7a",
+          "tag": "teq3"
+        },
+        {
+          "id": "f400d8bc-7950-4de1-83f3-0c2102be534a",
+          "tag": "teq4"
+        },
+        {
+          "id": "e9f5d9e9-dad2-4c7e-a84b-6a60b813279d",
+          "tag": "teq5"
+        }
+      ],
+      "description": "mövzu təsvir",
+      "researchTopics": [
+        {
+          "id": "a238483c-0725-44b6-9cb5-a507ff5ed1cd",
+          "topic": "araşdırma 1"
+        },
+        {
+          "id": "3ac8e150-8a55-45ab-bdb1-1b5b9df768e1",
+          "topic": "araşdırma 2"
+        }
+      ],
+      "resources": [
+        {
+          "id": "8fbd885e-0a0b-478c-bef3-02c2e8f0526d",
+          "title": "Resurs",
+          "label": "Etiket",
+          "url": "https://google.com"
+        }
+      ],
+      "questions": [
+        {
+          "id": "6f0713ab-5e0f-4032-bc54-8d435d9009b2",
+          "question": "sual 1"
+        },
+        {
+          "id": "e62fac8c-cc66-45e3-8a13-4239c3dc044c",
+          "question": "syal 2"
+        }
+      ],
+      "contents": [
+        {
+          "id": "0e510821-ed62-4a06-8e7e-423114d86dfc",
+          "label": "Html element etiker",
+          "title": "html başlıq",
+          "description": "html təsvir",
+          "type": "html-element",
+          "element": {
+            "html": "html kodu",
+            "css": "css kodu",
+            "js": "js kodu"
+          }
+        },
+        {
+          "id": "00322024-3bbd-4942-9058-dcd7c63f5cf0",
+          "label": "kod etiker",
+          "title": "kod başlıq",
+          "description": "kod təsvir",
+          "type": "code",
+          "code": {
+            "language": "javascript",
+            "code": "kod kod",
+            "output": "kod çıxış"
+          }
+        },
+        {
+          "id": "ebcea04f-4e51-44a6-96bc-a92cf884bdc9",
+          "label": "quruluş təsvir",
+          "type": "implementation-task",
+          "title": "quruluş başlıq",
+          "task": "quruluş addımlar"
+        },
+        {
+          "id": "5f83bca6-af4c-46aa-99bb-6d54b2ee8d9f",
+          "label": "mətn etiket",
+          "type": "text",
+          "title": {
+            "level": "h4",
+            "text": "mətn başlıq"
+          },
+          "text": "mətn kontent",
+          "variant": "tip"
+        }
+      ]
+    },
+    "en": {
+      "name": "Topic 2",
+      "tags": [
+        {
+          "id": "aaf29526-7c5c-43a0-8c42-1432ba816d36",
+          "tag": "Tag 1"
+        },
+        {
+          "id": "8c5851e2-397c-4243-a35e-f01f93e2b0c2",
+          "tag": "tag2 "
+        },
+        {
+          "id": "5da0c3e1-2e22-44cc-98d4-3e432deff545",
+          "tag": "tag3"
+        },
+        {
+          "id": "dda7e805-bbe9-487f-855e-0094252b4862",
+          "tag": "tag4"
+        },
+        {
+          "id": "075b0120-6da4-46ef-b8a3-c7b48f3bcd63",
+          "tag": "tag5"
+        }
+      ],
+      "description": "Topic description",
+      "researchTopics": [
+        {
+          "id": "104749ee-0edf-42db-8777-84c041287f86",
+          "topic": "Research topic 1"
+        },
+        {
+          "id": "8e67dbd6-417f-4bcf-900b-29582cb3f8ab",
+          "topic": "research topic 2"
+        }
+      ],
+      "resources": [
+        {
+          "id": "aed9fcc8-6c7d-4671-8378-069671e4fabb",
+          "title": "resource 1",
+          "label": "Google",
+          "url": "https://google.com"
+        }
+      ],
+      "questions": [
+        {
+          "id": "47391385-adf4-46da-a90b-a635d528e6ca",
+          "question": "quest 1"
+        },
+        {
+          "id": "c419aab2-01ad-4929-9e94-8670f10e0dfc",
+          "question": "quest 2"
+        },
+        {
+          "id": "432253ad-a290-47d2-9874-e4aa544b5eaf",
+          "question": "quest 3"
+        },
+        {
+          "id": "f02784d4-0709-409c-9567-bb90c9bb6e1a",
+          "question": "quest 4"
+        }
+      ],
+      "contents": [
+        {
+          "id": "e463c564-d2c9-4a68-915d-4a407416d6cd",
+          "label": "Text content label",
+          "type": "text",
+          "title": {
+            "level": "h4",
+            "text": "Text content heading"
+          },
+          "text": "Text content body",
+          "variant": "warning"
+        },
+        {
+          "id": "683beec1-2773-4fe3-bcfc-d5bdba2e299c",
+          "label": "Implementation content label",
+          "type": "implementation-task",
+          "title": "Implementation content title",
+          "task": "Implementation content instructions"
+        },
+        {
+          "id": "9c6bd47a-86ec-4f9d-97d1-71a4c2e01400",
+          "label": "Code content label",
+          "title": "Code content title",
+          "description": "Code content description",
+          "type": "code",
+          "code": {
+            "language": "json",
+            "code": "code content code",
+            "output": "code content output"
+          }
+        },
+        {
+          "id": "1a682138-436e-4e0e-a1fb-c38cdedf6963",
+          "label": "html element label",
+          "title": "html element title",
+          "description": "html elemet description",
+          "type": "html-element",
+          "element": {
+            "html": "html ode",
+            "css": "css code",
+            "js": "js code"
+          }
+        }
+      ]
+    }
+  }
+}
