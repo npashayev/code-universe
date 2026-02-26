@@ -195,9 +195,9 @@ export const useSubmitPlanet = ({
       prev.forEach(({ previewUrl }) => URL.revokeObjectURL(previewUrl));
       return new Map();
     });
-    router.push(
-      `/roadmap/${mergedResult.data.category}/${submitResult.planetId}`,
-    );
+    // router.push(
+    //   `/roadmap/${mergedResult.data.category}/${submitResult.planetId}`,
+    // );
   };
 
   return { handleSubmit, isSubmitting, isUploading, progress };
