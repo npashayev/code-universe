@@ -177,9 +177,14 @@ export interface PlanetListStats {
   drafts: number;
 }
 
-export interface PlanetFullListResponse extends PlanetListBase {
+export interface CategoryStatsItem {
+  category: PlanetCategory;
   stats: PlanetListStats;
 }
+
+// export interface PlanetFullListResponse extends PlanetListBase {
+//   stats: PlanetListStats;
+// }
 
 export interface PlanetListResponse extends PlanetListBase {
   stats: PlanetListStats;

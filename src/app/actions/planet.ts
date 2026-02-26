@@ -1,29 +1,12 @@
 'use server';
 
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { ensureAdmin } from '@/lib/auth/ensureAdmin';
 import { prisma } from '@/lib/prisma/prisma';
 import { createPlanetDataSchema } from '@/lib/validation/planetDataSchema';
 
 export type SubmitPlanetResult =
   | { success: true; planetId: string }
   | { success: false; error: string };
-
-async function ensureAdmin() {
-  const session = await getServerSession(authOptions);
-  if (!session?.user?.email) {
-    throw new Error('Unauthorized');
-  }
-
-  const user = await prisma.user.findUnique({
-    where: { email: session.user.email },
-    select: { role: true },
-  });
-
-  if (user?.role !== 'ADMIN') {
-    throw new Error('Forbidden');
-  }
-}
 
 export async function submitPlanet(data: unknown): Promise<SubmitPlanetResult> {
   await ensureAdmin();

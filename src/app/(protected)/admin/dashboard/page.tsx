@@ -1,24 +1,15 @@
-import { PLANET_CATEGORY, PlanetCategory } from '@/types/planet';
 import Header from './components/Header';
-import CategoryStatsList, {
-  CategoryStatsItem,
-} from './components/CategoryStatsList';
-
-const MOCK_CATEGORY_STATS: CategoryStatsItem[] = (
-  Object.keys(PLANET_CATEGORY) as PlanetCategory[]
-).map((category, index) => ({
-  category,
-  total: index === 0 ? 6 : 0,
-  published: index === 0 ? 4 : 0,
-  drafts: index === 0 ? 2 : 0,
-}));
+import CategoryStatsList from './components/CategoryStatsList';
+import { use } from 'react';
+import { getPlanetCategoryStats } from '@/lib/planet/getPlanetCategoryStats';
 
 export default function DashboardPage() {
+  const data = use(getPlanetCategoryStats());
   return (
     <div className="page">
       <Header />
       <main className="admin-main">
-        <CategoryStatsList items={MOCK_CATEGORY_STATS} />
+        <CategoryStatsList items={data} />
       </main>
     </div>
   );
