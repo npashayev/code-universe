@@ -77,12 +77,10 @@ export default function AddPlanetPage({ searchParams }: Props) {
 
   if (previewActive) {
     return (
-      <div className="fixed w-screen h-screen bg-[radial-gradient(ellipse_at_bottom,#050914_0%,#000000_100%)] text-white">
-        <PlanetClient
-          planet={planetData}
-          locale={currentLanguage.value}
-        />
-      </div>
+      <PlanetClient
+        planet={planetData}
+        locale={currentLanguage.value}
+      />
     );
   }
 

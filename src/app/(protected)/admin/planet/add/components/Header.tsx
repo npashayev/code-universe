@@ -4,7 +4,7 @@ import {
 } from '@/types/planet';
 import { Download, Upload } from 'lucide-react';
 import { Updater } from 'use-immer';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { LanguageOption } from '@/types/reactSelectOptions';
 import {
   CategorySelector,
@@ -15,6 +15,7 @@ import { categoryOptions } from '@/lib/constants/reactSelectOptions';
 import DashboardLink from '@/app/(protected)/components/DashboardLink';
 import { usePlanetJsonIO } from '@/lib/hooks/admin/usePlanetJsonIO';
 import { useSubmitPlanet } from '@/lib/hooks/admin/useSubmitPlanet';
+import Modal from '@/components/ui/Modal';
 
 type PendingContentImageEntry = {
   previewUrl: string;
@@ -46,7 +47,7 @@ const Header = ({
   setPendingContentImages,
   setPreviewActive,
 }: Props) => {
-
+  const [modalOpen, setModalOpen] = useState(false);
   const { handleImportClick, handleExportClick, handleFileChange, fileInputRef } = usePlanetJsonIO({ planetData, setPlanetData, currentLanguage });
 
   const { handleSubmit, isUploading, isSubmitting, progress } = useSubmitPlanet({
@@ -60,6 +61,15 @@ const Header = ({
 
   return (
     <header className="admin-page-header py-4">
+      {
+        modalOpen &&
+        <Modal
+          title="Submit Planet"
+          body='Are you sure you want to submit the planet?'
+          onConfirm={handleSubmit}
+          onClose={() => setModalOpen(false)} />
+      }
+
       <div className="flex items-center gap-6">
         <DashboardLink />
         <h1 className="text-xl md:text-2xl font-bold text-white tracking-tight">
@@ -113,7 +123,7 @@ const Header = ({
           Preview
         </button>
         <button
-          onClick={handleSubmit}
+          onClick={() => setModalOpen(true)}
           disabled={isUploading || isSubmitting}
           className="header-button bg-orange-500 hover:bg-orange-600"
         >
