@@ -1,4 +1,3 @@
-import { categoryOptions } from '@/lib/constants/reactSelectOptions';
 import Link from 'next/link';
 import PlanetStats from '@/components/shared/PlanetStats';
 import { CategoryStatsItem, PLANET_CATEGORY } from '@/types/planet';
@@ -8,7 +7,6 @@ interface Props {
 }
 
 const CategoryStatsList = ({ items }: Props) => {
-  console.log('ITEMS: ', items);
   return (
     <ul className="space-y-3">
       {items.map(item => {
