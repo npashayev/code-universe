@@ -8,10 +8,10 @@ interface Props {
     body: ReactNode;
     icon?: ModalIcon;
     onConfirm?: () => void;
-    onCancel?: () => void;
+    onClose?: () => void;
     onOk?: () => void;
     confirmLabel?: string;
-    cancelLabel?: string;
+    closeLabel?: string;
     okLabel?: string;
 }
 
@@ -107,10 +107,10 @@ const Modal = ({
     body,
     icon = 'info',
     onConfirm,
-    onCancel,
+    onClose,
     onOk,
     confirmLabel = 'Confirm',
-    cancelLabel = 'Cancel',
+    closeLabel = 'Cancel',
     okLabel = 'OK',
 }: Props) => {
     const theme = iconConfig[icon];
@@ -134,7 +134,7 @@ const Modal = ({
         <div
             className="fixed inset-0 flex items-center justify-center z-50"
             style={{ background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(4px)' }}
-            onClick={onCancel ?? onOk}
+            onClick={onClose}
         >
             <div
                 className="relative rounded-2xl p-8 w-full max-w-md overflow-hidden"
@@ -188,18 +188,39 @@ const Modal = ({
 
                 {/* Buttons */}
                 <div className="flex gap-3">
-                    {onCancel && (
-                        <ModalButton onClick={onCancel} bg="rgba(99,120,180,0.15)" border="rgba(147,163,220,0.3)" color="#a5b4fc" hoverBg="rgba(99,120,180,0.28)">
-                            {cancelLabel}
+                    {onClose && (
+                        <ModalButton
+                            onClick={onClose}
+                            bg="rgba(99,120,180,0.15)"
+                            border="rgba(147,163,220,0.3)"
+                            color="#a5b4fc"
+                            hoverBg="rgba(99,120,180,0.28)"
+                        >
+                            {closeLabel}
                         </ModalButton>
                     )}
                     {onConfirm && (
-                        <ModalButton onClick={onConfirm} bg={theme.bg} border={theme.border} color={theme.color} hoverBg={`rgba(${hexToRgb(theme.color)}, 0.28)`}>
+                        <ModalButton
+                            onClick={() => {
+                                onConfirm();
+                                onClose?.()
+                            }}
+                            bg={theme.bg}
+                            border={theme.border}
+                            color={theme.color}
+                            hoverBg={`rgba(${hexToRgb(theme.color)}, 0.28)`}
+                        >
                             {confirmLabel}
                         </ModalButton>
                     )}
                     {onOk && !onConfirm && (
-                        <ModalButton onClick={onOk} bg={theme.bg} border={theme.border} color={theme.color} hoverBg={`rgba(${hexToRgb(theme.color)}, 0.28)`}>
+                        <ModalButton
+                            onClick={onOk}
+                            bg={theme.bg}
+                            border={theme.border}
+                            color={theme.color}
+                            hoverBg={`rgba(${hexToRgb(theme.color)}, 0.28)`}
+                        >
                             {okLabel}
                         </ModalButton>
                     )}
