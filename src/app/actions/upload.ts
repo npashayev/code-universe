@@ -1,13 +1,11 @@
 'use server';
 
-import { getServerSession } from 'next-auth';
 import { PutObjectCommand } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { DeleteObjectCommand } from '@aws-sdk/client-s3';
 import { r2Client } from '@/lib/r2/r2Client';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import { prisma } from '@/lib/prisma/prisma';
 import type { PresignedItem } from '@/types/r2';
+import { ensureAdmin } from '@/lib/auth/ensureAdmin';
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
@@ -39,22 +37,6 @@ function generateR2Key(
       return `planets/main/${timestamp}-${unique}.${ext}`;
     case 'planet-content':
       return `planets/content/${timestamp}-${unique}.${ext}`;
-  }
-}
-
-async function ensureAdmin() {
-  const session = await getServerSession(authOptions);
-  if (!session?.user?.email) {
-    throw new Error('Unauthorized');
-  }
-
-  const user = await prisma.user.findUnique({
-    where: { email: session.user.email },
-    select: { role: true },
-  });
-
-  if (user?.role !== 'ADMIN') {
-    throw new Error('Forbidden');
   }
 }
 
