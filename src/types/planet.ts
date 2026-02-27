@@ -166,9 +166,10 @@ export type PlanetSummary = Pick<PlanetData, 'id' | 'step' | 'status'> & {
   localized: Record<SupportedLanguage, LocalizedPlanetSummary>;
 };
 
-interface PlanetListBase {
+export interface PlanetListResponse {
   category: PlanetCategory;
   planets: PlanetSummary[];
+  stats: PlanetListStats;
 }
 
 export interface PlanetListStats {
@@ -179,9 +180,5 @@ export interface PlanetListStats {
 
 export interface CategoryStatsItem {
   category: PlanetCategory;
-  stats: PlanetListStats;
-}
-
-export interface PlanetListResponse extends PlanetListBase {
   stats: PlanetListStats;
 }

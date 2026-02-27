@@ -13,7 +13,7 @@ interface Props {
 }
 
 const Planet = ({ planet, setOrderedPlanets, locale }: Props) => {
-  const localizedData = planet.localized[locale];
+  const { name, tags } = planet.localized[locale];
   const isPublished = planet.status === 'published';
 
   return (
@@ -45,11 +45,11 @@ const Planet = ({ planet, setOrderedPlanets, locale }: Props) => {
         <div className="min-w-0">
           <div className="flex-1 min-w-0 text-left cursor-pointer group/title">
             <h3 className="text-lg font-bold tracking-tight truncate transition-colors text-white">
-              {localizedData.name}
+              {name}
             </h3>
           </div>
           <div className="flex flex-wrap gap-2 mt-1.5">
-            {localizedData.tags.map(tag => (
+            {tags.map(tag => (
               <span
                 key={tag.id}
                 className="text-[10px] uppercase font-black tracking-widest text-slate-400"

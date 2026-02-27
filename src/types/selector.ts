@@ -9,12 +9,14 @@ import { UpdateContentFn } from '@/lib/hooks/useLocalizedContent';
 import {
   CategoryOption,
   ContentTypeOption,
+  ExtendedStatusOption,
   LanguageOption,
   PendingImageOption,
   ProgrammingLanguageOption,
   TextVariantOption,
   TitleLevelOption,
 } from '@/types/reactSelectOptions';
+import { Dispatch, SetStateAction } from 'react';
 
 export interface PlanetDataProps {
   planetData: CreatePlanetData;
@@ -67,4 +69,9 @@ export interface PendingImageSelectorProps {
   value: PendingImageOption | null;
   onChange: (option: PendingImageOption | null) => void;
   placeholder?: string;
+}
+
+export interface ExtendedStatusSelectorProps {
+  status: ExtendedStatusOption;
+  setStatus: Dispatch<SetStateAction<ExtendedStatusOption>>;
 }

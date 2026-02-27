@@ -1,29 +1,28 @@
 'use client';
-import {
-  PlanetCategory,
-  PlanetFullListResponse,
-  PlanetSummary,
-} from '@/types/planet';
+import { PlanetListResponse, PlanetSummary } from '@/types/planet';
 import Header from './Header';
 import Planet from './Planet';
 import { useState } from 'react';
 import { LanguageOption } from '@/types/reactSelectOptions';
-import { languageOptions } from '@/lib/constants/reactSelectOptions';
+import {
+  extendedStatusOptions,
+  languageOptions,
+} from '@/lib/constants/reactSelectOptions';
 import { useImmer } from 'use-immer';
 import SortableList from '@/components/shared/SortableList';
 import { DragEndEvent } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 
 interface Props {
-  category: PlanetCategory;
-  data: PlanetFullListResponse;
+  data: PlanetListResponse;
 }
 
-const PlanetListClient = ({ category, data }: Props) => {
+const PlanetListClient = ({ data }: Props) => {
   const [orderedPlanets, setOrderedPlanets] = useImmer(data.planets);
   const [currentLanguage, setCurrentLanguage] = useState<LanguageOption>(
     languageOptions[0],
   );
+  const [status, setStatus] = useState(extendedStatusOptions[0]);
   const [searchQuery, setSearchQuery] = useState('');
   const locale = currentLanguage.value;
 
@@ -47,21 +46,31 @@ const PlanetListClient = ({ category, data }: Props) => {
     setOrderedPlanets(updatedWithSteps);
   };
 
-
   const filteredPlanets = orderedPlanets.filter(planet => {
-    return planet.localized[locale].name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      planet.localized[locale].tags.some(tag => tag.tag.toLowerCase().includes(searchQuery.toLowerCase()));
+    const matchesSearch =
+      planet.localized[locale].name
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase()) ||
+      planet.localized[locale].tags.some(tag =>
+        tag.tag.toLowerCase().includes(searchQuery.toLowerCase()),
+      );
+
+    const matchesStatus =
+      status.value === 'all' || planet.status === status.value;
+
+    return matchesSearch && matchesStatus;
   });
 
   return (
     <div className="page">
       <Header
-        category={category}
         data={data}
         currentLanguage={currentLanguage}
         setCurrentLanguage={setCurrentLanguage}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
+        status={status}
+        setStatus={setStatus}
       />
       <main className="admin-main space-y-3">
         <SortableList<PlanetSummary>

@@ -26,6 +26,7 @@ import Selector from './shared/Selector';
 import {
   CategorySelectorProps,
   ContentTypeSelectorProps,
+  ExtendedStatusSelectorProps,
   LanguageSelectorProps,
   PendingImageSelectorProps,
   PlanetDataProps,
@@ -34,7 +35,6 @@ import {
   TextVariantSelectorProps,
   TitleLevelSelectorProps,
 } from '@/types/selector';
-import { useRouter, useSearchParams } from 'next/navigation';
 
 export const StatusSelector = ({
   planetData,
@@ -80,28 +80,18 @@ export const StatusUpdateSelector = ({
   </Selector>
 );
 
-export const ExtendedStatusSelector = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const handleChange = (value: ExtendedStatusOption['value']) => {
-    const updatedSearchParams = new URLSearchParams(searchParams);
-    updatedSearchParams.set('status', value);
-    router.push(`?${updatedSearchParams.toString()}`);
-  };
-
+export const ExtendedStatusSelector = ({
+  status,
+  setStatus,
+}: ExtendedStatusSelectorProps) => {
   return (
     <Selector<ExtendedStatusOption>
       instanceId="extended-status-select"
-      value={
-        extendedStatusOptions.find(
-          o => o.value === searchParams.get('status'),
-        ) || extendedStatusOptions[0]
-      }
+      value={status}
       options={extendedStatusOptions}
       onChange={option => {
         if (!option) return;
-        handleChange(option.value);
+        setStatus(option);
       }}
     >
       <Eye size={14} />

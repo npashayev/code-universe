@@ -1,7 +1,7 @@
 import Header from './components/Header';
-import CategoryStatsList from './components/CategoryStatsList';
 import { use } from 'react';
 import { getPlanetCategoryStats } from '@/lib/planet/getPlanetCategoryStats';
+import CategoryStatsList from './components/CategoryStatsList';
 
 export default function DashboardPage() {
   const data = use(getPlanetCategoryStats());

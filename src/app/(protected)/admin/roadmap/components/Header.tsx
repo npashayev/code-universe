@@ -1,4 +1,4 @@
-import { PlanetCategory, PlanetFullListResponse } from '@/types/planet';
+import { PlanetCategory, PlanetListResponse } from '@/types/planet';
 import { Search } from 'lucide-react';
 import AddPlanetLink from '../../components/AddPlanetLink';
 import {
@@ -6,7 +6,10 @@ import {
   ExtendedStatusSelector,
   LanguageSelector,
 } from '../../planet/add/components/Selectors';
-import { LanguageOption } from '@/types/reactSelectOptions';
+import {
+  ExtendedStatusOption,
+  LanguageOption,
+} from '@/types/reactSelectOptions';
 import { Dispatch, SetStateAction } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { categoryOptions } from '@/lib/constants/reactSelectOptions';
@@ -15,25 +18,29 @@ import HomeLink from '@/components/shared/HomeLink';
 import PlanetStats from '@/components/shared/PlanetStats';
 
 export interface Props {
-  category: PlanetCategory;
-  data: PlanetFullListResponse;
+  data: PlanetListResponse;
   currentLanguage: LanguageOption;
   setCurrentLanguage: Dispatch<SetStateAction<LanguageOption>>;
   searchQuery: string;
   setSearchQuery: Dispatch<SetStateAction<string>>;
+  status: ExtendedStatusOption;
+  setStatus: Dispatch<SetStateAction<ExtendedStatusOption>>;
 }
 
 const Header = ({
-  category,
   data,
   currentLanguage,
   setCurrentLanguage,
   searchQuery,
   setSearchQuery,
+  status,
+  setStatus,
 }: Props) => {
-  const { stats } = data;
-  const { total, published, drafts } = stats;
   const router = useRouter();
+
+  const { stats, category } = data;
+  const { total, published, drafts } = stats;
+
   const searchParams = useSearchParams();
 
   const onCategoryChange = (category: PlanetCategory) => {
@@ -44,10 +51,10 @@ const Header = ({
 
   return (
     <header className="admin-page-header flex-col gap-10">
-      <div className='flex items-center justify-between w-full gap-8'>
+      <div className="flex items-center justify-between w-full gap-8">
         <div className="flex items-center gap-4">
-          <HomeLink className='h-10' />
-          <DashboardLink className='h-10' />
+          <HomeLink className="h-10" />
+          <DashboardLink className="h-10" />
           <h1 className="text-2xl font-bold text-white tracking-tight">
             Update Roadmap
           </h1>
@@ -77,7 +84,7 @@ const Header = ({
       <div className="flex items-center justify-between w-full gap-12">
         <PlanetStats total={total} published={published} drafts={drafts} />
 
-        <div className='flex items-center gap-4'>
+        <div className="flex items-center gap-4">
           <LanguageSelector
             currentLanguage={currentLanguage}
             setCurrentLanguage={setCurrentLanguage}
@@ -91,7 +98,7 @@ const Header = ({
             onCategoryChange={onCategoryChange}
           />
 
-          <ExtendedStatusSelector />
+          <ExtendedStatusSelector status={status} setStatus={setStatus} />
         </div>
       </div>
     </header>
