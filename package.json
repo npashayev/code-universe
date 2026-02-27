@@ -40,6 +40,7 @@
     "react-markdown": "^10.1.0",
     "react-select": "^5.10.2",
     "sass": "^1.97.3",
+    "server-only": "^0.0.1",
     "tailwind-merge": "^3.4.0",
     "use-immer": "^0.11.0",
     "zod": "^4.3.6"
