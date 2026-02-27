@@ -72,6 +72,8 @@ async function main(): Promise<void> {
       console.log(`Password updated successfully for ${email}.`);
     } else {
       console.log("Invalid action. Type 'create' or 'update'.");
+      rl.close();
+      process.exit(1);
     }
 
     rl.close();
