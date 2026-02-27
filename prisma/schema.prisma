@@ -80,7 +80,7 @@ model PlanetLocalization {
   questions      Json
   contents       Json
   planetId       String            @db.ObjectId
-  planet         Planet            @relation(fields: [planetId], references: [id])
+  planet         Planet            @relation(fields: [planetId], references: [id], onDelete: Cascade)
 
   @@map("planet_localizations")
 }
