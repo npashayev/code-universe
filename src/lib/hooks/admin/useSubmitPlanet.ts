@@ -5,7 +5,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import {
-  preSubmitPlanetDataSchema,
+  preSubmitCreatePlanetDataSchema,
   createPlanetDataSchema,
 } from '@/lib/validation/planetDataSchema';
 import { submitPlanet } from '@/app/actions/planet';
@@ -69,7 +69,8 @@ export const useSubmitPlanet = ({
     }
 
     // Validate structure before any image upload
-    const preSubmitResult = preSubmitPlanetDataSchema.safeParse(planetData);
+    const preSubmitResult =
+      preSubmitCreatePlanetDataSchema.safeParse(planetData);
     if (!preSubmitResult.success) {
       const { fieldErrors, formErrors } = preSubmitResult.error.flatten();
       console.error('[handleSubmit] Pre-upload validation failed:', {

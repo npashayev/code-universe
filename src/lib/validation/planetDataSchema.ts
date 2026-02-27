@@ -9,10 +9,9 @@ export const urlSchema = (message = 'Invalid URL') =>
         if (!val || !val.trim()) return false;
         try {
           const url = val.trim();
-          const withProtocol =
-            /^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(url)
-              ? url
-              : `https://${url}`;
+          const withProtocol = /^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(url)
+            ? url
+            : `https://${url}`;
           new URL(withProtocol);
           return true;
         } catch {
@@ -186,7 +185,7 @@ const localizedPlanetDataSchemaPreSubmit = localizedPlanetDataSchema.extend({
   contents: z.array(planetContentSchemaPreSubmit),
 });
 
-export const preSubmitPlanetDataSchema = z.object({
+export const preSubmitCreatePlanetDataSchema = z.object({
   category: categoryEnum,
   status: statusEnum,
   image: z.object({
@@ -200,11 +199,7 @@ export const preSubmitPlanetDataSchema = z.object({
   ),
 });
 
-export const planetDataSchema = createPlanetDataSchema.extend({
+export const updatePlanetDataSchema = createPlanetDataSchema.extend({
   id: z.string(),
   step: z.number().int(),
-  nextPlanetId: z.string().nullable(),
-  prevPlanetId: z.string().nullable(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
 });

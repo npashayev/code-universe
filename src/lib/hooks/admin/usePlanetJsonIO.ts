@@ -1,7 +1,7 @@
 import {
   createPlanetDataSchema,
   localizedPlanetDataSchema,
-  preSubmitPlanetDataSchema,
+  preSubmitCreatePlanetDataSchema,
 } from '@/lib/validation/planetDataSchema';
 import { CreatePlanetData } from '@/types/planet';
 import { LanguageOption } from '@/types/reactSelectOptions';
@@ -64,7 +64,7 @@ export const usePlanetJsonIO = ({
         if (typeof reader.result !== 'string') return;
 
         const parsed = JSON.parse(reader.result);
-        const result = preSubmitPlanetDataSchema.safeParse(parsed);
+        const result = preSubmitCreatePlanetDataSchema.safeParse(parsed);
 
         if (!result.success) {
           toast.error(

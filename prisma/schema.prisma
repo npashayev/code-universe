@@ -7,6 +7,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ---------- Enums ----------
+
 enum PlanetStatus {
   draft
   published
@@ -18,23 +20,69 @@ enum PlanetCategory {
   javascript
 }
 
+enum SupportedLanguage {
+  az
+  en
+}
+
 enum UserRole {
   ADMIN
 }
 
+// ---------- Composite Types ----------
+
+type ImageMetadata {
+  width  Int
+  height Int
+}
+
+type LocalizedAlt {
+  az String
+  en String
+}
+
+type PlanetImage {
+  url      String
+  metadata ImageMetadata
+  alt      LocalizedAlt
+}
+
+type PlanetTag {
+  id  String
+  tag String
+}
+
+// ---------- Models ----------
+
 model Planet {
-  id           String         @id @default(auto()) @map("_id") @db.ObjectId
+  id           String               @id @default(auto()) @map("_id") @db.ObjectId
   category     PlanetCategory
   status       PlanetStatus
   step         Int
-  image        Json
-  nextPlanetId String?        @db.ObjectId
-  prevPlanetId String?        @db.ObjectId
-  localized    Json
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
+  image        PlanetImage
+  nextPlanetId String?              @db.ObjectId
+  prevPlanetId String?              @db.ObjectId
+  localized    PlanetLocalization[]
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
 
   @@map("planets")
+}
+
+model PlanetLocalization {
+  id             String            @id @default(auto()) @map("_id") @db.ObjectId
+  lang           SupportedLanguage
+  name           String
+  tags           PlanetTag[]
+  description    String
+  researchTopics Json
+  resources      Json?
+  questions      Json
+  contents       Json
+  planetId       String            @db.ObjectId
+  planet         Planet            @relation(fields: [planetId], references: [id])
+
+  @@map("planet_localizations")
 }
 
 model User {

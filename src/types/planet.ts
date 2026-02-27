@@ -182,10 +182,6 @@ export interface CategoryStatsItem {
   stats: PlanetListStats;
 }
 
-// export interface PlanetFullListResponse extends PlanetListBase {
-//   stats: PlanetListStats;
-// }
-
 export interface PlanetListResponse extends PlanetListBase {
   stats: PlanetListStats;
 }

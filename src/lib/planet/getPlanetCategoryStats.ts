@@ -1,3 +1,5 @@
+import 'server-only';
+
 import { prisma } from '@/lib/prisma/prisma';
 import { PLANET_CATEGORY } from '@/types/planet';
 import type { CategoryStatsItem, PlanetCategory } from '@/types/planet';
