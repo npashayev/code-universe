@@ -77,3 +77,24 @@ export async function submitPlanet(data: unknown): Promise<SubmitPlanetResult> {
 
   return { success: true as const, planetId };
 }
+
+export type DeletePlanetResult =
+  | { success: true }
+  | { success: false; error: string };
+
+export const deletePlanet = async (planetId: string): Promise<void> => {
+  await ensureAdmin();
+
+  if (!planetId) {
+    throw new Error('Missing planet ID.');
+  }
+
+  try {
+    await prisma.planet.delete({
+      where: { id: planetId },
+    });
+  } catch (err) {
+    console.error('[deletePlanet] Database error:', err);
+    throw new Error('Failed to delete planet. Please try again.');
+  }
+};

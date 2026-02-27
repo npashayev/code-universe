@@ -5,6 +5,9 @@ import { Updater } from 'use-immer';
 import { StatusUpdateSelector } from '../../planet/add/components/Selectors';
 import RemoveButton from '../../planet/add/components/shared/RemoveButton';
 import { cn } from '@/lib/utils/cn';
+import { useDeletePlanet } from '@/lib/hooks/queries/usePlanet';
+import { useState } from 'react';
+import Modal from '@/components/ui/Modals';
 
 interface Props {
   locale: SupportedLanguage;
@@ -15,6 +18,9 @@ interface Props {
 const Planet = ({ planet, setOrderedPlanets, locale }: Props) => {
   const { name, tags } = planet.localized[locale];
   const isPublished = planet.status === 'published';
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const { mutate: deletePlanet, isPending } = useDeletePlanet();
 
   return (
     <div
@@ -24,6 +30,15 @@ const Planet = ({ planet, setOrderedPlanets, locale }: Props) => {
           'bg-orange-500/15 border-orange-500/30 hover:border-orange-500/50',
       )}
     >
+      {modalOpen && (
+        <Modal
+          icon="warning"
+          title="Delete Planet"
+          body="Are you sure you want to delete this planet?"
+          onConfirm={() => deletePlanet(planet.id)}
+          onClose={() => setModalOpen(false)}
+        />
+      )}
       {/* Left side */}
       <div className="flex items-center gap-4 flex-1 min-w-0">
         <div className="cursor-grab active:cursor-grabbing text-slate-400 group-hover:text-slate-300 transition-colors px-2">
@@ -77,7 +92,7 @@ const Planet = ({ planet, setOrderedPlanets, locale }: Props) => {
             <Edit size={18} />
           </Link>
 
-          <RemoveButton />
+          <RemoveButton onClick={() => setModalOpen(true)} />
         </div>
       </div>
     </div>
