@@ -1,7 +1,4 @@
-import {
-  CreatePlanetData,
-  PlanetCategory,
-} from '@/types/planet';
+import { CreatePlanetData, PlanetCategory } from '@/types/planet';
 import { Download, Upload } from 'lucide-react';
 import { Updater } from 'use-immer';
 import { Dispatch, SetStateAction, useState } from 'react';
@@ -15,7 +12,7 @@ import { categoryOptions } from '@/lib/constants/reactSelectOptions';
 import DashboardLink from '@/app/(protected)/components/DashboardLink';
 import { usePlanetJsonIO } from '@/lib/hooks/admin/usePlanetJsonIO';
 import { useSubmitPlanet } from '@/lib/hooks/admin/useSubmitPlanet';
-import Modal from '@/components/ui/Modal';
+import Dialog from '@/components/ui/Dialog';
 
 type PendingContentImageEntry = {
   previewUrl: string;
@@ -48,27 +45,33 @@ const Header = ({
   setPreviewActive,
 }: Props) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const { handleImportClick, handleExportClick, handleFileChange, fileInputRef } = usePlanetJsonIO({ planetData, setPlanetData, currentLanguage });
+  const {
+    handleImportClick,
+    handleExportClick,
+    handleFileChange,
+    fileInputRef,
+  } = usePlanetJsonIO({ planetData, setPlanetData, currentLanguage });
 
-  const { handleSubmit, isUploading, isSubmitting, progress } = useSubmitPlanet({
-    planetData,
-    pendingFiles,
-    setPendingFiles,
-    pendingContentImages,
-    setPendingContentImages,
-  });
-
+  const { handleSubmit, isUploading, isSubmitting, progress } = useSubmitPlanet(
+    {
+      planetData,
+      pendingFiles,
+      setPendingFiles,
+      pendingContentImages,
+      setPendingContentImages,
+    },
+  );
 
   return (
     <header className="admin-page-header py-4">
-      {
-        modalOpen &&
-        <Modal
+      {modalOpen && (
+        <Dialog
           title="Submit Planet"
-          body='Are you sure you want to submit the planet?'
+          body="Are you sure you want to submit the planet?"
           onConfirm={handleSubmit}
-          onClose={() => setModalOpen(false)} />
-      }
+          onClose={() => setModalOpen(false)}
+        />
+      )}
 
       <div className="flex items-center gap-6">
         <DashboardLink />
@@ -105,11 +108,19 @@ const Header = ({
           onChange={handleFileChange}
           aria-hidden
         />
-        <button type="button" onClick={handleImportClick} className="admin-header-icon-btn">
+        <button
+          type="button"
+          onClick={handleImportClick}
+          className="admin-header-icon-btn"
+        >
           <Upload size={14} />
           Import JSON
         </button>
-        <button type="button" onClick={handleExportClick} className="admin-header-icon-btn">
+        <button
+          type="button"
+          onClick={handleExportClick}
+          className="admin-header-icon-btn"
+        >
           <Download size={14} />
           Export JSON
         </button>
@@ -127,15 +138,13 @@ const Header = ({
           disabled={isUploading || isSubmitting}
           className="header-button bg-orange-500 hover:bg-orange-600"
         >
-          {
-            progress && progress.total > 0
-              ? `Uploading images ${progress.current} / ${progress.total}`
-              : isUploading
-                ? 'Uploading images...'
-                : isSubmitting
-                  ? 'Submitting...'
-                  : 'Submit'
-          }
+          {progress && progress.total > 0
+            ? `Uploading images ${progress.current} / ${progress.total}`
+            : isUploading
+              ? 'Uploading images...'
+              : isSubmitting
+                ? 'Submitting...'
+                : 'Submit'}
         </button>
       </div>
     </header>

@@ -7,7 +7,8 @@ import RemoveButton from '../../planet/add/components/shared/RemoveButton';
 import { cn } from '@/lib/utils/cn';
 import { useDeletePlanet } from '@/lib/hooks/queries/usePlanet';
 import { useState } from 'react';
-import Modal from '@/components/ui/Modals';
+import Modal from '@/components/ui/Dialog';
+import Dialog from '@/components/ui/Dialog';
 
 interface Props {
   locale: SupportedLanguage;
@@ -31,7 +32,7 @@ const Planet = ({ planet, setOrderedPlanets, locale }: Props) => {
       )}
     >
       {modalOpen && (
-        <Modal
+        <Dialog
           icon="warning"
           title="Delete Planet"
           body="Are you sure you want to delete this planet?"
