@@ -8,13 +8,13 @@ interface Star {
   opacity: number;
 }
 
-export const useModalStars = () => {
+export const useModalStars = (starsCount = 15) => {
   const [stars, setStars] = useState<Star[]>([]);
 
   useLayoutEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setStars(
-      Array.from({ length: 15 }, (_, i) => ({
+      Array.from({ length: starsCount }, (_, i) => ({
         id: i,
         top: Math.random() * 100,
         left: Math.random() * 100,
@@ -22,7 +22,7 @@ export const useModalStars = () => {
         opacity: Math.random() * 0.4 + 0.1,
       })),
     );
-  }, []);
+  }, [starsCount]);
 
   return stars;
 };
