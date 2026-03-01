@@ -1,21 +1,27 @@
 import { cn } from '@/lib/utils/cn';
-import { Trash2 } from 'lucide-react';
+import { Loader, Trash2 } from 'lucide-react';
 import { ComponentPropsWithoutRef } from 'react';
 
 const RemoveButton = ({
   className,
+  isDeleting = false,
   ...props
-}: ComponentPropsWithoutRef<'button'>) => {
+}: ComponentPropsWithoutRef<'button'> & { isDeleting?: boolean }) => {
   return (
     <button
       type="button"
+      {...props}
       className={cn(
-        'p-2 text-slate-500 hover:text-red-400 hover:bg-red-400/15 rounded-lg transition-all',
+        'p-2 text-slate-500 hover:text-red-400 hover:bg-red-400/15 rounded-lg transition-all disabled:cursor-not-allowed',
         className,
       )}
-      {...props}
+      disabled={isDeleting}
     >
-      <Trash2 size={18} />
+      {
+        isDeleting
+          ? <Loader size={18} className='animate-spin' />
+          : <Trash2 size={18} />
+      }
     </button>
   );
 };
