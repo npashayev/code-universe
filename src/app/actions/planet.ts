@@ -2,7 +2,12 @@
 import { ensureAdmin } from '@/lib/auth/ensureAdmin';
 import { prisma } from '@/lib/prisma/prisma';
 import { createPlanetDataSchema } from '@/lib/validation/planetDataSchema';
-import { SupportedLanguage } from '@/types/planet';
+import {
+  PlanetCategory,
+  PlanetSummary,
+  SupportedLanguage,
+} from '@/types/planet';
+import { revalidatePath } from 'next/cache';
 
 export type SubmitPlanetResult =
   | { success: true; planetId: string }
@@ -96,5 +101,37 @@ export const deletePlanet = async (planetId: string): Promise<void> => {
   } catch (err) {
     console.error('[deletePlanet] Database error:', err);
     throw new Error('Failed to delete planet. Please try again.');
+  }
+};
+
+interface UpdatePlanetListParams {
+  category: PlanetCategory;
+  planetList: Pick<PlanetSummary, 'id' | 'step' | 'status'>[];
+}
+
+export const updatePlanetList = async ({
+  category,
+  planetList,
+}: UpdatePlanetListParams): Promise<void> => {
+  await ensureAdmin();
+
+  if (!category || !planetList) {
+    throw new Error('Missing category or planet list.');
+  }
+
+  try {
+    await prisma.$transaction(
+      planetList.map(({ id, step, status }) =>
+        prisma.planet.update({
+          where: { id, category },
+          data: { step, status },
+        }),
+      ),
+    );
+
+    revalidatePath(`/admin/roadmap?category=${category}`);
+  } catch (err) {
+    console.error('[updatePlanetList] Database error:', err);
+    throw new Error('Failed to update planet list. Please try again.');
   }
 };

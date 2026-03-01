@@ -1,4 +1,4 @@
-import { PlanetCategory, PlanetListResponse } from '@/types/planet';
+import { PlanetCategory, PlanetListResponse, PlanetSummary } from '@/types/planet';
 import { Search } from 'lucide-react';
 import AddPlanetLink from '../../components/AddPlanetLink';
 import {
@@ -16,6 +16,7 @@ import { categoryOptions } from '@/lib/constants/reactSelectOptions';
 import DashboardLink from '@/app/(protected)/components/DashboardLink';
 import HomeLink from '@/components/shared/HomeLink';
 import PlanetStats from '@/components/shared/PlanetStats';
+import { useUpdatePlanetList } from '@/lib/hooks/queries/usePlanet';
 
 export interface Props {
   data: PlanetListResponse;
@@ -25,6 +26,7 @@ export interface Props {
   setSearchQuery: Dispatch<SetStateAction<string>>;
   status: ExtendedStatusOption;
   setStatus: Dispatch<SetStateAction<ExtendedStatusOption>>;
+  orderedPlanets: PlanetSummary[];
 }
 
 const Header = ({
@@ -35,6 +37,7 @@ const Header = ({
   setSearchQuery,
   status,
   setStatus,
+  orderedPlanets
 }: Props) => {
   const router = useRouter();
 
@@ -48,6 +51,21 @@ const Header = ({
     updatedSearchParams.set('category', category);
     router.push(`?${updatedSearchParams.toString()}`);
   };
+
+  const { mutate: updateList, isPending } = useUpdatePlanetList();
+
+  const updatePlanetList = () => {
+    const updatedList = orderedPlanets.map(planet => ({
+      id: planet.id,
+      step: planet.step,
+      status: planet.status
+    }))
+
+    updateList({
+      category,
+      planetList: updatedList
+    })
+  }
 
   return (
     <header className="admin-page-header flex-col gap-10">
@@ -76,8 +94,12 @@ const Header = ({
         <div className="flex items-center gap-3">
           <AddPlanetLink category={category} />
 
-          <button className="header-button bg-green-800 hover:bg-green-600">
-            Update
+          <button
+            className="header-button bg-green-800 hover:bg-green-600"
+            onClick={updatePlanetList}
+            disabled={isPending}
+          >
+            {isPending ? "Updating..." : "Update"}
           </button>
         </div>
       </div>

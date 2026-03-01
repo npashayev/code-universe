@@ -60,7 +60,6 @@ const PlanetListClient = ({ data }: Props) => {
 
     return matchesSearch && matchesStatus;
   });
-
   return (
     <div className="page">
       <Header
@@ -71,6 +70,7 @@ const PlanetListClient = ({ data }: Props) => {
         setSearchQuery={setSearchQuery}
         status={status}
         setStatus={setStatus}
+        orderedPlanets={orderedPlanets}
       />
       <main className="admin-main space-y-3">
         <SortableList<PlanetSummary>
