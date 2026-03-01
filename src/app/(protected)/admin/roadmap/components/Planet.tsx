@@ -7,7 +7,6 @@ import RemoveButton from '../../planet/add/components/shared/RemoveButton';
 import { cn } from '@/lib/utils/cn';
 import { useDeletePlanet } from '@/lib/hooks/queries/usePlanet';
 import { useState } from 'react';
-import Modal from '@/components/ui/Dialog';
 import Dialog from '@/components/ui/Dialog';
 
 interface Props {
@@ -28,7 +27,7 @@ const Planet = ({ planet, setOrderedPlanets, locale }: Props) => {
       className={cn(
         'group flex items-center justify-between gap-6 p-4 rounded-2xl border transition-all duration-300 bg-white/6 border-white/20 opacity-90 hover:opacity-100 hover:border-slate-400/40 text-white',
         isPublished &&
-          'bg-orange-500/15 border-orange-500/30 hover:border-orange-500/50',
+        'bg-orange-500/15 border-orange-500/30 hover:border-orange-500/50',
       )}
     >
       {modalOpen && (
@@ -40,6 +39,7 @@ const Planet = ({ planet, setOrderedPlanets, locale }: Props) => {
           onClose={() => setModalOpen(false)}
         />
       )}
+
       {/* Left side */}
       <div className="flex items-center gap-4 flex-1 min-w-0">
         <div className="cursor-grab active:cursor-grabbing text-slate-400 group-hover:text-slate-300 transition-colors px-2">
@@ -51,7 +51,7 @@ const Planet = ({ planet, setOrderedPlanets, locale }: Props) => {
             className={cn(
               'w-10 h-10 rounded-lg flex items-center justify-center font-mono text-sm font-bold border bg-slate-500/15 border-slate-500/25 text-slate-400',
               isPublished &&
-                'bg-orange-500/20 border-orange-500/35 text-orange-300',
+              'bg-orange-500/20 border-orange-500/35 text-orange-300',
             )}
           >
             {planet.step.toString().padStart(2, '0')}
@@ -93,7 +93,7 @@ const Planet = ({ planet, setOrderedPlanets, locale }: Props) => {
             <Edit size={18} />
           </Link>
 
-          <RemoveButton onClick={() => setModalOpen(true)} />
+          <RemoveButton isDeleting={isPending} onClick={() => setModalOpen(true)} />
         </div>
       </div>
     </div>
