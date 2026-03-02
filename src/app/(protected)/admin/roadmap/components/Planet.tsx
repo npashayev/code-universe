@@ -27,7 +27,7 @@ const Planet = ({ planet, setOrderedPlanets, locale }: Props) => {
       className={cn(
         'group flex items-center justify-between gap-6 p-4 rounded-2xl border transition-all duration-300 bg-white/6 border-white/20 opacity-90 hover:opacity-100 hover:border-slate-400/40 text-white',
         isPublished &&
-        'bg-orange-500/15 border-orange-500/30 hover:border-orange-500/50',
+          'bg-orange-500/15 border-orange-500/30 hover:border-orange-500/50',
       )}
     >
       {modalOpen && (
@@ -51,7 +51,7 @@ const Planet = ({ planet, setOrderedPlanets, locale }: Props) => {
             className={cn(
               'w-10 h-10 rounded-lg flex items-center justify-center font-mono text-sm font-bold border bg-slate-500/15 border-slate-500/25 text-slate-400',
               isPublished &&
-              'bg-orange-500/20 border-orange-500/35 text-orange-300',
+                'bg-orange-500/20 border-orange-500/35 text-orange-300',
             )}
           >
             {planet.step.toString().padStart(2, '0')}
@@ -86,14 +86,17 @@ const Planet = ({ planet, setOrderedPlanets, locale }: Props) => {
         <div className="flex items-center gap-1">
           <Link
             className="p-2 text-slate-400 hover:text-red-400 hover:bg-red-400/15 rounded-lg transition-all"
-            href={`/admin/planet/edit/${planet.id}`}
+            href={`/admin/planet/update/${planet.id}`}
             target="_blank"
             rel="noreferrer"
           >
             <Edit size={18} />
           </Link>
 
-          <RemoveButton isDeleting={isPending} onClick={() => setModalOpen(true)} />
+          <RemoveButton
+            isDeleting={isPending}
+            onClick={() => setModalOpen(true)}
+          />
         </div>
       </div>
     </div>

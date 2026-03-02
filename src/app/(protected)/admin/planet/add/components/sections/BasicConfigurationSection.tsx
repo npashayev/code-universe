@@ -88,6 +88,7 @@ const BasicConfigurationSection = ({
           <ImagePicker
             id="main-image"
             handleImageUpload={handleImageUpload}
+            imageRealUrl={planetData.image.url}
             altText={planetData.image.alt?.[locale]}
             onAltChange={(e: ChangeEvent<HTMLInputElement>) =>
               setPlanetData(draft => {

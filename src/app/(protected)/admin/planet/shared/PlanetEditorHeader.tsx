@@ -7,11 +7,10 @@ import {
   CategorySelector,
   LanguageSelector,
   StatusSelector,
-} from './Selectors';
+} from '@/app/(protected)/admin/planet/add/components/Selectors';
 import { categoryOptions } from '@/lib/constants/reactSelectOptions';
 import DashboardLink from '@/app/(protected)/components/DashboardLink';
 import { usePlanetJsonIO } from '@/lib/hooks/admin/usePlanetJsonIO';
-import { useSubmitPlanet } from '@/lib/hooks/admin/useSubmitPlanet';
 import Dialog from '@/components/ui/Dialog';
 
 type PendingContentImageEntry = {
@@ -19,7 +18,7 @@ type PendingContentImageEntry = {
   file: File;
 };
 
-interface Props {
+export interface PlanetEditorHeaderProps {
   planetData: CreatePlanetData;
   setPlanetData: Updater<CreatePlanetData>;
   currentLanguage: LanguageOption;
@@ -31,19 +30,38 @@ interface Props {
     SetStateAction<Map<string, PendingContentImageEntry>>
   >;
   setPreviewActive: Dispatch<SetStateAction<boolean>>;
+
+  title: string;
+  confirmTitle: string;
+  confirmBody: string;
+  submitIdleLabel: string;
+  submitSubmittingLabel: string;
+
+  onSubmit: () => void | Promise<void>;
+  isSubmitting: boolean;
+  isUploading: boolean;
+  progress: {
+    current: number;
+    total: number;
+  } | null;
 }
 
-const Header = ({
+export const PlanetEditorHeader = ({
   planetData,
   setPlanetData,
   currentLanguage,
   setCurrentLanguage,
-  pendingFiles,
-  setPendingFiles,
-  pendingContentImages,
-  setPendingContentImages,
   setPreviewActive,
-}: Props) => {
+  title,
+  confirmTitle,
+  confirmBody,
+  submitIdleLabel,
+  submitSubmittingLabel,
+  onSubmit,
+  isSubmitting,
+  isUploading,
+  progress,
+}: PlanetEditorHeaderProps) => {
   const [modalOpen, setModalOpen] = useState(false);
   const {
     handleImportClick,
@@ -52,23 +70,26 @@ const Header = ({
     fileInputRef,
   } = usePlanetJsonIO({ planetData, setPlanetData, currentLanguage });
 
-  const { handleSubmit, isUploading, isSubmitting, progress } = useSubmitPlanet(
-    {
-      planetData,
-      pendingFiles,
-      setPendingFiles,
-      pendingContentImages,
-      setPendingContentImages,
-    },
-  );
+  const handleConfirm = () => {
+    void onSubmit();
+  };
+
+  const submitLabel =
+    progress && progress.total > 0
+      ? `Uploading images ${progress.current} / ${progress.total}`
+      : isUploading
+        ? 'Uploading images...'
+        : isSubmitting
+          ? submitSubmittingLabel
+          : submitIdleLabel;
 
   return (
     <header className="admin-page-header py-4">
       {modalOpen && (
         <Dialog
-          title="Submit Planet"
-          body="Are you sure you want to submit the planet?"
-          onConfirm={handleSubmit}
+          title={confirmTitle}
+          body={confirmBody}
+          onConfirm={handleConfirm}
           onClose={() => setModalOpen(false)}
         />
       )}
@@ -76,7 +97,7 @@ const Header = ({
       <div className="flex items-center gap-6">
         <DashboardLink />
         <h1 className="text-xl md:text-2xl font-bold text-white tracking-tight">
-          Create New Planet
+          {title}
         </h1>
       </div>
 
@@ -138,17 +159,9 @@ const Header = ({
           disabled={isUploading || isSubmitting}
           className="header-button bg-orange-500 hover:bg-orange-600"
         >
-          {progress && progress.total > 0
-            ? `Uploading images ${progress.current} / ${progress.total}`
-            : isUploading
-              ? 'Uploading images...'
-              : isSubmitting
-                ? 'Submitting...'
-                : 'Submit'}
+          {submitLabel}
         </button>
       </div>
     </header>
   );
 };
-
-export default Header;

@@ -27,21 +27,20 @@ const ImageContentBlock = ({
   pendingContentImages,
   setPendingContentImages,
 }: Props) => {
+  const pendingImageOptions: PendingImageOption[] = Array.from(
+    pendingContentImages.keys(),
+  ).map(fileName => ({
+    value: fileName,
+    label: fileName,
+  }));
 
-  const pendingImageOptions: PendingImageOption[] = Array
-    .from(pendingContentImages.keys())
-    .map((fileName) => ({
-      value: fileName,
-      label: fileName,
-    }));
-
-  const selectedPendingOption: PendingImageOption | null = content
-    .pendingImageId
-    ? {
-      value: content.pendingImageId,
-      label: content.pendingImageId,
-    }
-    : null;
+  const selectedPendingOption: PendingImageOption | null =
+    content.pendingImageId
+      ? {
+          value: content.pendingImageId,
+          label: content.pendingImageId,
+        }
+      : null;
 
   const imagePreviewUrl =
     content.pendingImageId &&
@@ -120,6 +119,7 @@ const ImageContentBlock = ({
         altText={content.image.alt || ''}
         onAltChange={handleAltChange}
         handleImageUpload={handleImageUpload}
+        imageRealUrl={content.image.url}
         imagePreviewUrl={imagePreviewUrl ?? ''}
       />
     </div>

@@ -2,47 +2,44 @@
 
 import {
   CreatePlanetData,
-  PLANET_CATEGORY,
-  PlanetCategory,
   SupportedLanguage,
 } from '@/types/planet';
-import { use, useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useImmer } from 'use-immer';
 import { LanguageOption } from '@/types/reactSelectOptions';
 import { languageOptions } from '@/lib/constants/reactSelectOptions';
 import PlanetClient from '@/app/(public)/roadmap/[map]/[planetId]/components/PlanetClient';
-import { getInitialPlanetData } from '@/lib/utils/getInitialPlanetData';
 import { PlanetEditorLayout } from '@/app/(protected)/admin/planet/shared/PlanetEditorLayout';
-import { useSubmitPlanet } from '@/lib/hooks/admin/useSubmitPlanet';
+import { useUpdatePlanet } from '@/lib/hooks/admin/useUpdatePlanet';
 
-interface Props {
-  searchParams: Promise<{
-    category?: string;
-  }>;
+interface PendingContentImageEntry {
+  previewUrl: string;
+  file: File;
 }
 
-export default function AddPlanetPage({ searchParams }: Props) {
-  const { category = 'html' } = use(searchParams);
+interface Props {
+  planetId: string;
+  step: number;
+  initialData: CreatePlanetData;
+}
 
-  const [currentLanguage, setCurrentLanguage] = useState<LanguageOption>(
-    languageOptions[0],
-  );
+const UpdatePlanetClient = ({ planetId, step, initialData }: Props) => {
+  const [currentLanguage, setCurrentLanguage] =
+    useState<LanguageOption>(languageOptions[0]);
 
-  function isPlanetCategory(value: string): value is PlanetCategory {
-    return Object.keys(PLANET_CATEGORY).includes(value);
-  }
-
-  const planetCategory = isPlanetCategory(category) ? category : 'html';
   const [previewActive, setPreviewActive] = useState(false);
-  const [planetData, setPlanetData] = useImmer<CreatePlanetData>(getInitialPlanetData(planetCategory));
-  const [pendingFiles, setPendingFiles] = useState<Map<string, File>>(new Map());
-  const [pendingContentImages, setPendingContentImages] = useState<Map<
-    string,
-    { previewUrl: string; file: File }
-  >>(new Map());
+  const [planetData, setPlanetData] = useImmer<CreatePlanetData>(initialData);
+  const [pendingFiles, setPendingFiles] = useState<Map<string, File>>(
+    new Map(),
+  );
+  const [pendingContentImages, setPendingContentImages] = useState<
+    Map<string, PendingContentImageEntry>
+  >(new Map());
 
-  const { handleSubmit, isUploading, isSubmitting, progress } = useSubmitPlanet(
+  const { handleSubmit, isSubmitting, isUploading, progress } = useUpdatePlanet(
     {
+      planetId,
+      step,
       planetData,
       pendingFiles,
       setPendingFiles,
@@ -98,15 +95,18 @@ export default function AddPlanetPage({ searchParams }: Props) {
       pendingContentImages={pendingContentImages}
       setPendingContentImages={setPendingContentImages}
       setPreviewActive={setPreviewActive}
-      title="Create New Planet"
-      confirmTitle="Submit Planet"
-      confirmBody="Are you sure you want to submit the planet?"
-      submitIdleLabel="Submit"
-      submitSubmittingLabel="Submitting..."
+      title="Edit Planet"
+      confirmTitle="Update Planet"
+      confirmBody="Are you sure you want to save changes to this planet?"
+      submitIdleLabel="Save changes"
+      submitSubmittingLabel="Saving..."
       onSubmit={handleSubmit}
       isSubmitting={isSubmitting}
       isUploading={isUploading}
       progress={progress}
     />
   );
-}
+};
+
+export default UpdatePlanetClient;
+
