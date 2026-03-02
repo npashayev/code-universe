@@ -7,6 +7,7 @@ import Input from './Input';
 interface Props {
   id: string;
   handleImageUpload: (e: ChangeEvent<HTMLInputElement>) => void;
+  imageRealUrl?: string;
   imagePreviewUrl: string;
   altText: string;
   onAltChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -15,6 +16,7 @@ interface Props {
 const ImagePicker = ({
   id,
   handleImageUpload,
+  imageRealUrl,
   altText,
   onAltChange,
   imagePreviewUrl,
@@ -54,9 +56,9 @@ const ImagePicker = ({
       </div>
 
       <div className="rounded-xl bg-black/40 border border-white/15 overflow-hidden flex items-center justify-center relative shadow-inner flex-1">
-        {imagePreviewUrl ? (
+        {imagePreviewUrl || imageRealUrl ? (
           <Image
-            src={imagePreviewUrl}
+            src={imagePreviewUrl || imageRealUrl || ''}
             fill
             alt="Planet image preview"
             className="object-cover object-center"
