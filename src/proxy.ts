@@ -7,6 +7,7 @@ import { SUPPORTED_LANGS } from '@/lib/constants/locale';
 const intlMiddleware = createMiddleware({
   locales: SUPPORTED_LANGS,
   defaultLocale: 'en',
+  localeDetection: false,
 });
 
 export async function proxy(req: NextRequest) {
