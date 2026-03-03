@@ -2,7 +2,9 @@ import { use } from 'react';
 import styles from './page.module.scss';
 import Planet from './components/Planet';
 import MapSidebar from './components/MapSidebar';
-import { PlanetData } from '@/types/planet';
+import { isPlanetCategory } from '@/lib/utils/isPlanetCategory';
+import { notFound } from 'next/navigation';
+import { getPublicPlanetList } from '@/lib/planet/getPlanetList';
 
 interface Props {
   params: Promise<{
@@ -12,9 +14,13 @@ interface Props {
 
 export default function MapPage({ params }: Props) {
   const { map } = use(params);
-  const planets: PlanetData[] = use(
-    fetch('http://localhost:5000/planets').then(res => res.json()),
-  );
+
+  if (!isPlanetCategory(map)) {
+    notFound();
+  }
+
+  const planets = use(getPublicPlanetList(map));
+  console.log(planets[0]);
   return (
     <main className={styles.page}>
       <div className={styles.wrapper}>

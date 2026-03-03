@@ -1,8 +1,8 @@
 import { use } from 'react';
 import { redirect } from 'next/navigation';
-import { PLANET_CATEGORY, PlanetCategory } from '@/types/planet';
 import PlanetListClient from './components/PlanetListClient';
 import { getPlanetList } from '@/lib/planet/getPlanetList';
+import { isPlanetCategory } from '@/lib/utils/isPlanetCategory';
 
 interface Props {
   searchParams: Promise<{
@@ -14,9 +14,6 @@ interface Props {
 export default function MapPage({ searchParams }: Props) {
   const { category = 'html' } = use(searchParams);
 
-  function isPlanetCategory(value: string): value is PlanetCategory {
-    return Object.keys(PLANET_CATEGORY).includes(value);
-  }
   if (!isPlanetCategory(category)) {
     redirect('/admin/roadmap?category=html');
   }

@@ -1,16 +1,16 @@
 import Link from 'next/link';
 import styles from './Planet.module.scss';
 import Image from 'next/image';
-import { PlanetData } from '@/types/planet';
+import { PlanetSummaryWithImage } from '@/types/planet';
 
 interface Props {
   map: string;
-  planet: PlanetData;
+  planet: PlanetSummaryWithImage;
 }
 
 const Planet = ({ map, planet }: Props) => {
   const locale = 'en';
-
+  console.log(planet.image.url);
   const { tags } = planet.localized[locale];
   return (
     <div className={styles.planetCnr} id={`planet-${planet.id}`}>

@@ -4,11 +4,11 @@ import { useState } from 'react';
 import { motion as Motion, AnimatePresence } from 'framer-motion';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { PlanetData } from '@/types/planet';
+import { PlanetSummaryWithImage } from '@/types/planet';
 import { cn } from '@/lib/utils/cn';
 
 interface Props {
-  planets: PlanetData[];
+  planets: PlanetSummaryWithImage[];
 }
 
 const MapSidebar = ({ planets }: Props) => {
