@@ -1,4 +1,4 @@
-import { Globe, Database, Terminal } from 'lucide-react';
+import { Globe, Database, Terminal, LucideIcon } from 'lucide-react';
 import algorithm from '@/assets/nav-icons/algorithm.png';
 import cs from '@/assets/nav-icons/cs.png';
 import css from '@/assets/nav-icons/css.png';
@@ -12,8 +12,22 @@ import node from '@/assets/nav-icons/node.png';
 import py from '@/assets/nav-icons/py.png';
 import react from '@/assets/nav-icons/react.png';
 import tw from '@/assets/nav-icons/tw.png';
+import { StaticImageData } from 'next/image';
 
-export const navLinks = [
+export type NavLinkItem = {
+  label: string;
+  icon: StaticImageData;
+  path: string;
+  isActive: boolean;
+};
+
+export type NavLinkGroup = {
+  title: string;
+  icon: LucideIcon;
+  items: NavLinkItem[];
+};
+
+export const navLinks: NavLinkGroup[] = [
   {
     title: 'Frontend',
     icon: Globe,
@@ -22,31 +36,37 @@ export const navLinks = [
         label: 'HTML',
         icon: html,
         path: '/roadmap/html',
+        isActive: true,
       },
       {
         label: 'CSS',
         icon: css,
         path: '/roadmap/css',
+        isActive: false,
       },
       {
         label: 'JavaScript',
         icon: js,
         path: '/roadmap/javascript',
+        isActive: false,
       },
       {
         label: 'React',
         icon: react,
         path: '/roadmap/react',
+        isActive: false,
       },
       {
         label: 'Next.js',
         icon: nextjs,
         path: '/roadmap/nextjs',
+        isActive: false,
       },
       {
         label: 'Tailwind',
         icon: tw,
         path: '/roadmap/tailwind',
+        isActive: false,
       },
     ],
   },
@@ -58,21 +78,25 @@ export const navLinks = [
         label: 'Node.js',
         icon: node,
         path: '/roadmap/nodejs',
+        isActive: false,
       },
       {
         label: 'Java',
         icon: java,
         path: '/roadmap/java',
+        isActive: false,
       },
       {
         label: 'C#',
         icon: cs,
         path: '/roadmap/charp',
+        isActive: false,
       },
       {
         label: 'Python',
         icon: py,
         path: '/roadmap/python',
+        isActive: false,
       },
     ],
   },
@@ -84,16 +108,19 @@ export const navLinks = [
         label: 'Algorithms',
         icon: algorithm,
         path: '/roadmap/algorithms',
+        isActive: false,
       },
       {
         label: 'Git',
         icon: git,
         path: '/roadmap/git',
+        isActive: false,
       },
       {
         label: 'Github',
         icon: gh,
         path: '/roadmap/github',
+        isActive: false,
       },
     ],
   },
