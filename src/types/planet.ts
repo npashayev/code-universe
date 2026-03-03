@@ -166,6 +166,10 @@ export type PlanetSummary = Pick<PlanetData, 'id' | 'step' | 'status'> & {
   localized: Record<SupportedLanguage, LocalizedPlanetSummary>;
 };
 
+export type PlanetSummaryWithImage = Omit<PlanetSummary, 'status'> & {
+  image: PlanetData['image'];
+};
+
 export interface PlanetListResponse {
   category: PlanetCategory;
   planets: PlanetSummary[];
