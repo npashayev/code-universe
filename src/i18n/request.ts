@@ -6,11 +6,12 @@ function isSupportedLang(locale: string): locale is SupportedLanguage {
   return (SUPPORTED_LANGS as string[]).includes(locale);
 }
 
-export default getRequestConfig(async () => {
-  const locale = 'en'; // we'll make this dynamic in the routing step
+export default getRequestConfig(async ({ requestLocale }) => {
+  const locale = await requestLocale;
+  const validLocale = locale && isSupportedLang(locale) ? locale : 'en';
 
   return {
-    locale,
-    messages: (await import(`../../messages/${locale}.json`)).default,
+    locale: validLocale,
+    messages: (await import(`../../messages/${validLocale}.json`)).default,
   };
 });
