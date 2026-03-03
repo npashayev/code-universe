@@ -72,10 +72,10 @@ const PlanetListClient = ({ data }: Props) => {
         setStatus={setStatus}
         orderedPlanets={orderedPlanets}
       />
-      <main className="admin-main space-y-3">
+      <main className="admin-main">
         <SortableList<PlanetSummary>
           id="planet-sortable-list"
-          className="space-y-3"
+          className="space-y-3 pb-18"
           elements={filteredPlanets}
           handleDragEnd={handleDragEnd}
           renderItem={planet => (
