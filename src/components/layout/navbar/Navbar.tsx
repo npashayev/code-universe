@@ -1,14 +1,14 @@
 'use client';
 import { useState } from 'react';
 import { motion as Motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowUpRight, Cpu, Moon, Sun } from 'lucide-react';
+import { Menu, X, Cpu, Moon, Sun } from 'lucide-react';
 import { navLinks } from '@/lib/constants/navbarItems';
-import Image from 'next/image';
 import Link from 'next/link';
 import LogoutButton from '../../ui/LogoutButton';
 import DashboardLink from '@/app/(protected)/components/DashboardLink';
 import PrivateComponent from '../../shared/PrivateComponent';
 import HomeLink from '@/components/shared/HomeLink';
+import NavLinkContent from './NavLinkContent';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -143,29 +143,21 @@ const Navbar = () => {
                             whileHover={{ x: 8 }}
                             className="group rounded-xl hover:bg-white/5 transition-all overflow-hidden"
                           >
-                            <Link
-                              href={item.path}
-                              className="flex items-center justify-between p-3 w-full h-full cursor-pointer decoration-none"
-                              onClick={() => {
-                                setIsOpen(false);
-                              }}
-                            >
-                              <div className="text-slate-400 group-hover:text-white transition-colors flex items-center gap-3">
-                                <div className="relative size-4">
-                                  <Image
-                                    src={item.icon}
-                                    fill
-                                    alt={item.label}
-                                    className="object-cover object-center"
-                                  />
-                                </div>
-                                {item.label}
-                              </div>
-                              <ArrowUpRight
-                                size={14}
-                                className="text-orange-500/0 group-hover:text-orange-500 transition-all"
-                              />
-                            </Link>
+                            {item.isActive ? (
+                              <Link
+                                href={item.path}
+                                className="flex items-center justify-between p-3 w-full h-full decoration-none group"
+                                onClick={() => {
+                                  setIsOpen(false);
+                                }}
+                              >
+                                <NavLinkContent item={item} />
+                              </Link>
+                            ) : (
+                              <span className="flex items-center justify-between p-3 w-full h-full cursor-pointer decoration-none opacity-40">
+                                <NavLinkContent item={item} />
+                              </span>
+                            )}
                           </Motion.div>
                         </li>
                       ))}
