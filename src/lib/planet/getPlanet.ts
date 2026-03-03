@@ -10,14 +10,13 @@ import {
   SupportedLanguage,
 } from '@/types/planet';
 import { getInitialPlanetData } from '@/lib/utils/getInitialPlanetData';
+import { SUPPORTED_LANGS } from '../constants/locale';
 
 export interface PlanetForEdit {
   id: string;
   step: number;
   data: CreatePlanetData;
 }
-
-const SUPPORTED_LANGS: SupportedLanguage[] = ['az', 'en'];
 
 export const getPlanetForEdit = async (id: string): Promise<PlanetForEdit> => {
   await ensureAdmin();
