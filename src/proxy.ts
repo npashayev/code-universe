@@ -1,16 +1,18 @@
+import createMiddleware from 'next-intl/middleware';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getToken } from 'next-auth/jwt';
+import { SUPPORTED_LANGS } from '@/lib/constants/locale';
+
+const intlMiddleware = createMiddleware({
+  locales: SUPPORTED_LANGS,
+  defaultLocale: 'en',
+});
 
 export async function proxy(req: NextRequest) {
-  const token = await getToken({
-    req,
-    secret: process.env.NEXTAUTH_SECRET,
-  });
-
+  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
   const { pathname } = req.nextUrl;
 
-  // Redirect authenticated users away from login page
   if (pathname.startsWith('/auth/login')) {
     if (token) {
       const url = req.nextUrl.clone();
@@ -20,7 +22,6 @@ export async function proxy(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // Protect admin routes
   if (pathname.startsWith('/admin')) {
     if (!token) {
       const url = req.nextUrl.clone();
@@ -28,17 +29,17 @@ export async function proxy(req: NextRequest) {
       url.searchParams.set('callbackUrl', pathname);
       return NextResponse.redirect(url);
     }
-
     if (token.role !== 'ADMIN') {
       const url = req.nextUrl.clone();
       url.pathname = '/unauthorized';
       return NextResponse.redirect(url);
     }
+    return NextResponse.next();
   }
 
-  return NextResponse.next();
+  return intlMiddleware(req);
 }
 
 export const config = {
-  matcher: ['/admin/:path*', '/auth/login'],
+  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)'],
 };
