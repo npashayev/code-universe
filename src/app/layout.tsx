@@ -7,6 +7,7 @@ import QueryProvider from '@/components/providers/QueryProvider';
 import { Toaster } from 'react-hot-toast';
 import { ReactNode } from 'react';
 import NextAuthProvider from '@/components/providers/NextAuthProvider';
+import { NextIntlClientProvider } from 'next-intl';
 
 config.autoAddCss = false;
 const nunito = Nunito({
@@ -26,11 +27,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${nunito.className} antialiased`}>
-        <NextAuthProvider>
-          <QueryProvider>
-            {children}
-          </QueryProvider>
-        </NextAuthProvider>
+        <NextIntlClientProvider>
+          <NextAuthProvider>
+            <QueryProvider>{children}</QueryProvider>
+          </NextAuthProvider>
+        </NextIntlClientProvider>
         <Toaster
           position="top-center"
           toastOptions={{
