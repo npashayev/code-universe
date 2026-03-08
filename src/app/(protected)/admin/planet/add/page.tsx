@@ -10,10 +10,10 @@ import { use, useEffect, useState } from 'react';
 import { useImmer } from 'use-immer';
 import { LanguageOption } from '@/types/reactSelectOptions';
 import { languageOptions } from '@/lib/constants/reactSelectOptions';
-import PlanetClient from '@/app/(public)/roadmap/[map]/[planetId]/components/PlanetClient';
 import { getInitialPlanetData } from '@/lib/utils/getInitialPlanetData';
 import { PlanetEditorLayout } from '@/app/(protected)/admin/planet/shared/PlanetEditorLayout';
 import { useSubmitPlanet } from '@/lib/hooks/admin/useSubmitPlanet';
+import PlanetClient from '@/app/(public)/[locale]/roadmap/[map]/[planetId]/components/PlanetClient';
 
 interface Props {
   searchParams: Promise<{
@@ -81,8 +81,17 @@ export default function AddPlanetPage({ searchParams }: Props) {
   if (previewActive) {
     return (
       <PlanetClient
-        planet={planetData}
-        locale={currentLanguage.value}
+        planet={{
+          ...planetData,
+          id: '',
+          image: {
+            ...planetData.image,
+            alt: planetData.image.alt[currentLanguage.value],
+          },
+          localized: planetData.localized[currentLanguage.value],
+          prevPlanetId: null,
+          nextPlanetId: null,
+        }}
       />
     );
   }
