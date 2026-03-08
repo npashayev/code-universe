@@ -1,0 +1,22 @@
+import Link from 'next/link';
+
+export default function NotFound() {
+    return (
+        <div className="min-h-screen bg-black flex flex-col items-center justify-center text-white text-center px-4">
+            <h1 className="text-[10rem] font-black leading-none tracking-tight text-white/90 mb-4">
+                404
+            </h1>
+
+            <p className="text-white/40 text-sm max-w-sm leading-relaxed mb-10">
+                The page doesn&apos;t exist. It may have been moved or never existed.
+            </p>
+
+            <Link
+                href="/"
+                className="px-5 py-2.5 rounded-full text-sm font-semibold bg-orange-500 hover:bg-orange-400 transition-colors text-white"
+            >
+                Home
+            </Link>
+        </div>
+    );
+}
