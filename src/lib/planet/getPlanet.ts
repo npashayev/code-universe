@@ -4,6 +4,7 @@ import { prisma } from '@/lib/prisma/prisma';
 import { ensureAdmin } from '@/lib/auth/ensureAdmin';
 import {
   CreatePlanetData,
+  ImageData,
   LocalizedPlanetData,
   PlanetCategory,
   PlanetData,
@@ -11,6 +12,7 @@ import {
 } from '@/types/planet';
 import { getInitialPlanetData } from '@/lib/utils/getInitialPlanetData';
 import { SUPPORTED_LANGS } from '../constants/locale';
+import { getLocale } from 'next-intl/server';
 
 export interface PlanetForEdit {
   id: string;
@@ -77,15 +79,16 @@ export const getPlanetForEdit = async (id: string): Promise<PlanetForEdit> => {
   };
 };
 
-export interface GetPlanetResponse extends Omit<PlanetData, 'localized'> {
+export interface GetPlanetResponse extends Omit<PlanetData, 'localized' | 'image' | 'step'> {
   localized: LocalizedPlanetData;
+  image: ImageData<string>;
 }
 
 export const getPlanet = async (
   id: string,
-  locale: SupportedLanguage,
 ): Promise<GetPlanetResponse> => {
   try {
+    const locale = await getLocale();
     const planet = await prisma.planet.findUnique({
       where: { id },
       include: {
@@ -106,12 +109,16 @@ export const getPlanet = async (
       throw new Error(`Localization for "${locale}" not found.`);
     }
 
+    const rawImage = planet.image as PlanetData['image'];
+
     return {
       id: planet.id,
       category: planet.category as PlanetCategory,
       status: planet.status,
-      step: planet.step,
-      image: planet.image as PlanetData['image'],
+      image: {
+        ...rawImage,
+        alt: rawImage.alt[locale as SupportedLanguage],
+      },
       nextPlanetId: planet.nextPlanetId ?? null,
       prevPlanetId: planet.prevPlanetId ?? null,
       localized: {
@@ -127,8 +134,6 @@ export const getPlanet = async (
         contents:
           localization.contents as unknown as LocalizedPlanetData['contents'],
       },
-      createdAt: planet.createdAt,
-      updatedAt: planet.updatedAt,
     };
   } catch (err) {
     console.error('[getPlanet] Database error:', err);
