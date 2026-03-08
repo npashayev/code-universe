@@ -47,8 +47,6 @@ export interface PlanetData extends CreatePlanetData {
   step: number;
   nextPlanetId: string | null;
   prevPlanetId: string | null;
-  createdAt: Date;
-  updatedAt: Date;
 }
 
 export interface LocalizedPlanetData {
