@@ -20,7 +20,7 @@ export default function MapPage({ params }: Props) {
   }
 
   const planets = use(getPublicPlanetList(map));
-  console.log(planets[0]);
+
   return (
     <main className={styles.page}>
       <div className={styles.wrapper}>
