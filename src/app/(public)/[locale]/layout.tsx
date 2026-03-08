@@ -5,12 +5,8 @@ import { ReactNode, use } from 'react';
 
 export default function PublicLayout({
   children,
-  params,
 }: {
   children: ReactNode;
-  params: Promise<{
-    locale: string;
-  }>;
 }) {
   const messages = use(getMessages());
   return (
