@@ -7,73 +7,66 @@ import type {
   PlanetListResponse,
   PlanetSummary,
   PlanetSummaryWithImage,
+  PlanetTag,
+  LocalizedPlanetSummary,
   SupportedLanguage,
+  ImageData,
+  LocalizedString,
 } from '@/types/planet';
 
+// Shared localized query result type
+type LocalizedQueryResult = {
+  lang: SupportedLanguage;
+  name: string;
+  tags: PlanetTag[];
+};
+
 // Prisma query result type for admin (includes status)
-type PlanetListQueryResult = {
+interface PlanetListQueryResult {
   id: string;
   step: number;
   status: 'draft' | 'published';
-  image: {
-    url: string;
-    metadata: { width: number; height: number };
-    alt: Record<SupportedLanguage, string>;
-  };
-  localized: {
-    lang: SupportedLanguage;
-    name: string;
-    tags: { id: string; tag: string }[];
-  }[];
+  localized: LocalizedQueryResult[];
 };
 
-// Prisma query result type for public (status not needed)
-type PlanetListQueryResultPublic = Omit<PlanetListQueryResult, 'status'>;
+// Prisma query result type for public
+interface PlanetListQueryResultPublic extends Omit<PlanetListQueryResult, 'status'> {
+  image: ImageData<LocalizedString>;
+};
+
+// Shared helper to map localized array to Record
+const mapLocalizedArray = (
+  localized: LocalizedQueryResult[],
+): Record<SupportedLanguage, LocalizedPlanetSummary> =>
+  localized.reduce(
+    (acc, { lang, name, tags }) => {
+      acc[lang] = { name, tags };
+      return acc;
+    },
+    {} as Record<SupportedLanguage, LocalizedPlanetSummary>,
+  );
 
 // Mapper for admin (includes status)
 const mapToPlanetSummary = (
   planets: PlanetListQueryResult[],
-): PlanetSummary[] => {
-  return planets.map(planet => {
-    const localized = planet.localized.reduce(
-      (acc, { lang, name, tags }) => {
-        acc[lang] = { name, tags };
-        return acc;
-      },
-      {} as PlanetSummary['localized'],
-    );
-
-    return {
-      id: planet.id,
-      step: planet.step,
-      status: planet.status,
-      image: planet.image,
-      localized,
-    };
-  });
-};
+): PlanetSummary[] =>
+  planets.map(({ id, step, status, localized }) => ({
+    id,
+    step,
+    status,
+    localized: mapLocalizedArray(localized),
+  }));
 
 // Mapper for public (excludes status)
 const mapToPlanetSummaryWithImage = (
   planets: PlanetListQueryResultPublic[],
-): PlanetSummaryWithImage[] => {
-  return planets.map(planet => {
-    const localized = planet.localized.reduce(
-      (acc, { lang, name, tags }) => {
-        acc[lang] = { name, tags };
-        return acc;
-      },
-      {} as PlanetSummaryWithImage['localized'],
-    );
-
-    return {
-      id: planet.id,
-      step: planet.step,
-      image: planet.image,
-      localized,
-    };
-  });
-};
+): PlanetSummaryWithImage[] =>
+  planets.map(({ id, step, image, localized }) => ({
+    id,
+    step,
+    image,
+    localized: mapLocalizedArray(localized),
+  }));
 
 // Admin list with stats
 export const getPlanetList = async (
@@ -89,7 +82,6 @@ export const getPlanetList = async (
         id: true,
         step: true,
         status: true,
-        image: true,
         localized: { select: { lang: true, name: true, tags: true } },
       },
     })
@@ -99,7 +91,6 @@ export const getPlanetList = async (
     });
 
   const mapped = mapToPlanetSummary(planets);
-
   const published = mapped.filter(p => p.status === 'published').length;
   const drafts = mapped.filter(p => p.status === 'draft').length;
 
