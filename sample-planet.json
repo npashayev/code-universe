@@ -1,218 +1,314 @@
 {
-  "category": "html",
-  "status": "draft",
+  "id": "planet-js-events-001",
+  "category": "javascript",
+  "status": "published",
+  "step": 8,
+  "nextPlanetId": "planet-js-async-001",
+  "prevPlanetId": "planet-js-dom-001",
   "image": {
     "url": "",
     "metadata": {
-      "width": 0,
-      "height": 0
+      "width": 1200,
+      "height": 630
     },
     "alt": {
-      "az": "Əsas şəkil alt",
-      "en": "Main image alt"
+      "en": "Illustration showing a web browser reacting to user clicks via JavaScript Event Listeners",
+      "az": "Veb brauzerin JavaScript Hadisə İzləyiciləri vasitəsilə istifadəçi kliklərinə reaksiyasını göstərən illüstrasiya"
     }
   },
   "localized": {
-    "az": {
-      "name": "Mövzu 2",
+    "en": {
+      "name": "JavaScript Event Listeners",
+      "description": "Master the art of interactive web pages by diving deep into JavaScript Event Listeners. This fundamental concept bridges the gap between static HTML and dynamic, engaging user experiences. In the modern web, almost every user interaction, from a simple button click to complex drag-and-drop mechanics, relies on events. You will learn how the browser dispatches these events and how your code can intercept them. We will explore the differences between older, inline event handlers and the robust addEventListener method used in professional environments. Understanding the event flow, including the capture and bubbling phases, will give you fine-grained control over your application's behavior. By mastering event delegation, you will write cleaner, more efficient code that scales effortlessly as your DOM grows. Ultimately, this knowledge is essential for building intuitive interfaces that react instantly to user input. Throughout this journey, you will practice with real-world scenarios to solidify your understanding. Get ready to bring your web pages to life!",
       "tags": [
         {
-          "id": "77a5a150-43b0-4bf5-9438-b336a4733697",
-          "tag": "teq1"
+          "id": "tag-en-1",
+          "tag": "javascript"
         },
         {
-          "id": "33712392-5a9b-4c1c-9c35-c98ad16d45a5",
-          "tag": "teq2"
+          "id": "tag-en-2",
+          "tag": "dom-manipulation"
         },
         {
-          "id": "942ce4b2-b00d-462c-81bc-0916c31c6f7a",
-          "tag": "teq3"
+          "id": "tag-en-3",
+          "tag": "events"
         },
         {
-          "id": "f400d8bc-7950-4de1-83f3-0c2102be534a",
-          "tag": "teq4"
-        },
-        {
-          "id": "e9f5d9e9-dad2-4c7e-a84b-6a60b813279d",
-          "tag": "teq5"
+          "id": "tag-en-4",
+          "tag": "interactivity"
         }
       ],
-      "description": "mövzu təsvir",
       "researchTopics": [
         {
-          "id": "a238483c-0725-44b6-9cb5-a507ff5ed1cd",
-          "topic": "araşdırma 1"
+          "id": "rt-en-1",
+          "topic": "Event Bubbling vs Event Capturing Phases"
         },
         {
-          "id": "3ac8e150-8a55-45ab-bdb1-1b5b9df768e1",
-          "topic": "araşdırma 2"
+          "id": "rt-en-2",
+          "topic": "The 'event' Object properties and methods (e.g., preventDefault, stopPropagation)"
+        },
+        {
+          "id": "rt-en-3",
+          "topic": "Creating and Dispatching Custom Events in JS"
         }
       ],
       "resources": [
         {
-          "id": "8fbd885e-0a0b-478c-bef3-02c2e8f0526d",
-          "title": "Resurs",
-          "label": "Etiket",
-          "url": "https://google.com"
+          "id": "res-en-1",
+          "title": "MDN Web Docs",
+          "label": "EventTarget.addEventListener()",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener"
+        },
+        {
+          "id": "res-en-2",
+          "title": "JavaScript.info",
+          "label": "Introduction to Browser Events",
+          "url": "https://javascript.info/events"
         }
       ],
       "questions": [
         {
-          "id": "6f0713ab-5e0f-4032-bc54-8d435d9009b2",
-          "question": "sual 1"
+          "id": "q-en-1",
+          "question": "What is the primary difference in maintainability and functionality between using `addEventListener` and an `onclick` HTML attribute?"
         },
         {
-          "id": "e62fac8c-cc66-45e3-8a13-4239c3dc044c",
-          "question": "syal 2"
+          "id": "q-en-2",
+          "question": "How do you effectively prevent an event from bubbling up the DOM tree, and when is this actually necessary?"
+        },
+        {
+          "id": "q-en-3",
+          "question": "Why is Event Delegation considered a performance-friendly technique, especially in applications with large, dynamic lists?"
         }
       ],
       "contents": [
         {
-          "id": "0e510821-ed62-4a06-8e7e-423114d86dfc",
-          "label": "Html element etiker",
-          "title": "html başlıq",
-          "description": "html təsvir",
-          "type": "html-element",
-          "element": {
-            "html": "html kodu",
-            "css": "css kodu",
-            "js": "js kodu"
-          }
+          "id": "content-en-1",
+          "type": "text",
+          "title": {
+            "level": "h2",
+            "text": "Understanding the Core of Interactivity"
+          },
+          "text": "Event listeners are the absolute core of interactivity within any modern web application. They serve as vigilant watchdogs, allowing you to 'listen' for highly specific user actions or system events on individual HTML elements. Whether a user is submitting a complex form, moving their mouse across a canvas, pressing a specific keyboard shortcut, or simply waiting for a page to finish loading, an event is fired under the hood. By utilizing JavaScript to hook into these events, you transform a static, lifeless document into a reactive, application-like experience. When the targeted event occurs, the browser immediately executes the callback function you provided, granting you the power to manipulate the DOM, fetch new data, or trigger animations precisely when needed.",
+          "variant": "normal"
         },
         {
-          "id": "00322024-3bbd-4942-9058-dcd7c63f5cf0",
-          "label": "kod etiker",
-          "title": "kod başlıq",
-          "description": "kod təsvir",
+          "id": "content-en-2",
           "type": "code",
+          "label": "Basic Syntax",
+          "title": "Adding an Event Listener",
+          "description": "The most common, flexible, and strictly recommended way to register an event listener is by leveraging the native `addEventListener` method available on all DOM nodes.",
           "code": {
             "language": "javascript",
-            "code": "kod kod",
-            "output": "kod çıxış"
+            "code": "const submitButton = document.querySelector('.submit-btn');\n\n// We pass the event type 'click' and a callback function\nsubmitButton.addEventListener('click', function(event) {\n  console.log('The button was clicked!');\n  console.log('Event details:', event);\n});",
+            "output": "The button was clicked!\nEvent details: PointerEvent { ... }"
           }
         },
         {
-          "id": "ebcea04f-4e51-44a6-96bc-a92cf884bdc9",
-          "label": "quruluş təsvir",
-          "type": "implementation-task",
-          "title": "quruluş başlıq",
-          "task": "quruluş addımlar"
-        },
-        {
-          "id": "5f83bca6-af4c-46aa-99bb-6d54b2ee8d9f",
-          "label": "mətn etiket",
+          "id": "content-en-3",
           "type": "text",
-          "title": {
-            "level": "h4",
-            "text": "mətn başlıq"
-          },
-          "text": "mətn kontent",
-          "variant": "tip"
-        }
-      ]
-    },
-    "en": {
-      "name": "Topic 2",
-      "tags": [
-        {
-          "id": "aaf29526-7c5c-43a0-8c42-1432ba816d36",
-          "tag": "Tag 1"
-        },
-        {
-          "id": "8c5851e2-397c-4243-a35e-f01f93e2b0c2",
-          "tag": "tag2 "
-        },
-        {
-          "id": "5da0c3e1-2e22-44cc-98d4-3e432deff545",
-          "tag": "tag3"
-        },
-        {
-          "id": "dda7e805-bbe9-487f-855e-0094252b4862",
-          "tag": "tag4"
-        },
-        {
-          "id": "075b0120-6da4-46ef-b8a3-c7b48f3bcd63",
-          "tag": "tag5"
-        }
-      ],
-      "description": "Topic description",
-      "researchTopics": [
-        {
-          "id": "104749ee-0edf-42db-8777-84c041287f86",
-          "topic": "Research topic 1"
-        },
-        {
-          "id": "8e67dbd6-417f-4bcf-900b-29582cb3f8ab",
-          "topic": "research topic 2"
-        }
-      ],
-      "resources": [
-        {
-          "id": "aed9fcc8-6c7d-4671-8378-069671e4fabb",
-          "title": "resource 1",
-          "label": "Google",
-          "url": "https://google.com"
-        }
-      ],
-      "questions": [
-        {
-          "id": "47391385-adf4-46da-a90b-a635d528e6ca",
-          "question": "quest 1"
-        },
-        {
-          "id": "c419aab2-01ad-4929-9e94-8670f10e0dfc",
-          "question": "quest 2"
-        },
-        {
-          "id": "432253ad-a290-47d2-9874-e4aa544b5eaf",
-          "question": "quest 3"
-        },
-        {
-          "id": "f02784d4-0709-409c-9567-bb90c9bb6e1a",
-          "question": "quest 4"
-        }
-      ],
-      "contents": [
-        {
-          "id": "e463c564-d2c9-4a68-915d-4a407416d6cd",
-          "label": "Text content label",
-          "type": "text",
-          "title": {
-            "level": "h4",
-            "text": "Text content heading"
-          },
-          "text": "Text content body",
+          "text": "While it might seem convenient at first to use inline HTML attributes such as `onclick=\"myFunction()\"`, this approach is heavily discouraged in professional development. Inline handlers violate the principle of separation of concerns by tightly coupling your HTML structure directly with your JavaScript behavioral logic, making the codebase significantly harder to read, scale, and maintain over time. Furthermore, the `addEventListener` method provides a crucial advantage: it allows developers to attach multiple, independent listeners of the exact same type to a single element. In stark contrast, attempting to assign multiple functions to an `onclick` property will simply result in the last assignment permanently overwriting all previous handlers.",
           "variant": "warning"
         },
         {
-          "id": "683beec1-2773-4fe3-bcfc-d5bdba2e299c",
-          "label": "Implementation content label",
-          "type": "implementation-task",
-          "title": "Implementation content title",
-          "task": "Implementation content instructions"
-        },
-        {
-          "id": "9c6bd47a-86ec-4f9d-97d1-71a4c2e01400",
-          "label": "Code content label",
-          "title": "Code content title",
-          "description": "Code content description",
-          "type": "code",
-          "code": {
-            "language": "json",
-            "code": "code content code",
-            "output": "code content output"
+          "id": "content-en-4",
+          "type": "html-element",
+          "label": "Interactive UI",
+          "title": "Live DOM Manipulation Example",
+          "description": "Interact with the interactive component below to see exactly how an event listener captures a click and subsequently updates the DOM hierarchy and styling in real-time.",
+          "element": {
+            "html": "<div class=\"demo-box\">\n  <button id=\"demo-btn\">Toggle State</button>\n  <p id=\"status-text\" class=\"status\">Current Status: <span>Inactive</span></p>\n</div>",
+            "css": ".demo-box { padding: 24px; border: 2px solid #e2e8f0; border-radius: 12px; background: #f8fafc; }\nbutton { padding: 12px 20px; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 6px; font-weight: bold; transition: background 0.2s; }\nbutton:hover { background: #2563eb; }\n.status { margin-top: 16px; font-size: 1.1rem; }\n.active-color span { color: #10b981; font-weight: 800; }",
+            "js": "const btn = document.getElementById('demo-btn');\nconst status = document.getElementById('status-text');\nconst span = status.querySelector('span');\n\nbtn.addEventListener('click', () => {\n  status.classList.toggle('active-color');\n  span.textContent = status.classList.contains('active-color') ? 'Active!' : 'Inactive';\n});"
           }
         },
         {
-          "id": "1a682138-436e-4e0e-a1fb-c38cdedf6963",
-          "label": "html element label",
-          "title": "html element title",
-          "description": "html elemet description",
+          "id": "content-en-5",
+          "type": "implementation-task",
+          "label": "Practice Task",
+          "title": "Task 1: Capture and Validate Keyboard Input",
+          "task": "Begin by selecting the input element with the ID 'username-input'. Attach a 'keyup' event listener directly to this element. Inside your callback function, you need to verify if the user pressed the 'Enter' key by checking the `event.key` property. If the condition evaluates to true, retrieve the current string value of the input field, check if it is longer than 3 characters, and log a success message to the console containing the user's input."
+        },
+        {
+          "id": "content-en-6",
+          "type": "image",
+          "label": "Advanced Concepts",
+          "title": "Demystifying Event Flow: Bubbling and Capturing",
+          "description": "When an event occurs on a deeply nested element, it doesn't just trigger there. The browser routes the event through three distinct phases: the capturing phase (traveling down the DOM tree), the target phase (reaching the specific element), and finally the bubbling phase (traveling back up to the root).",
+          "image": {
+            "url": "",
+            "metadata": {
+              "width": 1024,
+              "height": 768
+            },
+            "alt": "Detailed architectural diagram illustrating the three phases of DOM event flow: the Capturing phase moving downwards, the Target phase at the element, and the Bubbling phase moving upwards."
+          }
+        },
+        {
+          "id": "content-en-7",
+          "type": "text",
+          "title": {
+            "level": "h3",
+            "text": "The Power of Event Delegation"
+          },
+          "text": "Instead of painstakingly attaching individual event listeners to dozens or hundreds of child elements (such as rows in a massive data table or items in a dynamic to-do list), you can employ a highly efficient pattern called Event Delegation. By attaching a single, centralized event listener to a common parent element, you leverage the natural mechanism of event bubbling. The parent container will effortlessly catch any matching events triggered by its descendants as they bubble up the DOM tree. This drastically reduces the memory footprint of your application and automatically handles any new child elements that are injected into the DOM later via JavaScript, eliminating the need to bind new listeners on the fly!",
+          "variant": "tip"
+        },
+        {
+          "id": "content-en-8",
+          "type": "code",
+          "title": "Implementing Event Delegation",
+          "description": "Observe how we attach only one listener to the `ul` container. We then inspect the `event.target` property to definitively determine exactly which `li` element originated the click before applying our logic.",
+          "code": {
+            "language": "javascript",
+            "code": "const todoList = document.getElementById('todo-list');\n\n// A single listener handles all clicks inside the list\ntodoList.addEventListener('click', (event) => {\n  // Ensure we only react if an actual list item was clicked\n  if (event.target.tagName === 'LI') {\n    event.target.classList.toggle('task-completed');\n    console.log(`Toggled status for: ${event.target.textContent}`);\n  }\n});"
+          }
+        }
+      ]
+    },
+    "az": {
+      "name": "JavaScript Hadisə İzləyiciləri",
+      "description": "JavaScript Hadisə İzləyicilərini (Event Listeners) dərindən öyrənərək interaktiv veb səhifələr yaratmaq sənətinə yiyələnin. Bu fundamental konsepsiya statik HTML ilə dinamik, cəlbedici istifadəçi təcrübələri arasındakı körpüdür. Müasir vebdə sadə bir düymə klikindən tutmuş mürəkkəb sürüklə-burax (drag-and-drop) mexanizmlərinə qədər demək olar ki, hər bir istifadəçi qarşılıqlı əlaqəsi hadisələrə əsaslanır. Brauzerin bu hadisələri necə göndərdiyini və kodunuzun onları necə tuta biləcəyini öyrənəcəksiniz. Köhnə, sətirdaxili hadisə idarəediciləri ilə peşəkar mühitlərdə istifadə olunan güclü addEventListener metodu arasındakı fərqləri araşdıracağıq. Hadisə axınını, o cümlədən tutulma (capture) və qabarma (bubbling) mərhələlərini anlamaq tətbiqinizin davranışına incə nəzarət etmək imkanı verəcək. Hadisə nümayəndəliyinə (event delegation) yiyələnməklə, DOM böyüdükcə asanlıqla miqyaslanan daha təmiz, daha səmərəli kod yazacaqsınız. Nəhayət, bu biliklər istifadəçi daxiletmələrinə anında reaksiya verən intuitiv interfeyslər qurmaq üçün vacibdir. Bu səyahət boyunca anlayışınızı möhkəmləndirmək üçün real dünya ssenariləri ilə məşq edəcəksiniz. Veb səhifələrinizi canlandırmağa hazır olun!",
+      "tags": [
+        {
+          "id": "tag-az-1",
+          "tag": "javascript"
+        },
+        {
+          "id": "tag-az-2",
+          "tag": "dom-manipulyasiyası"
+        },
+        {
+          "id": "tag-az-3",
+          "tag": "hadisələr"
+        },
+        {
+          "id": "tag-az-4",
+          "tag": "interaktivlik"
+        }
+      ],
+      "researchTopics": [
+        {
+          "id": "rt-az-1",
+          "topic": "Hadisələrin qabarması (Bubbling) və tutulması (Capturing) mərhələləri"
+        },
+        {
+          "id": "rt-az-2",
+          "topic": "'event' obyektinin xüsusiyyətləri və metodları (məsələn, preventDefault, stopPropagation)"
+        },
+        {
+          "id": "rt-az-3",
+          "topic": "JS-də xüsusi (Custom) hadisələrin yaradılması və göndərilməsi"
+        }
+      ],
+      "resources": [
+        {
+          "id": "res-az-1",
+          "title": "MDN Web Docs",
+          "label": "EventTarget.addEventListener() (İngiliscə)",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener"
+        },
+        {
+          "id": "res-az-2",
+          "title": "JavaScript.info",
+          "label": "Brauzer Hadisələrinə Giriş",
+          "url": "https://javascript.info/events"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q-az-1",
+          "question": "`addEventListener` və HTML daxilindəki `onclick` atributunun istifadəsi arasında kodun saxlanması və funksionallıq baxımından əsas fərq nədir?"
+        },
+        {
+          "id": "q-az-2",
+          "question": "Bir hadisənin DOM ağacında yuxarıya doğru qabarmasının (bubbling) qarşısını effektiv şəkildə necə ala bilərsiniz və bu, əslində nə vaxt lazımdır?"
+        },
+        {
+          "id": "q-az-3",
+          "question": "Xüsusilə böyük və dinamik siyahıları olan tətbiqlərdə Hadisə Nümayəndəliyi (Event Delegation) nə üçün performansa müsbət təsir edən bir texnika hesab olunur?"
+        }
+      ],
+      "contents": [
+        {
+          "id": "content-az-1",
+          "type": "text",
+          "title": {
+            "level": "h2",
+            "text": "İnteraktivliyin Əsasını Anlamaq"
+          },
+          "text": "Hadisə izləyiciləri istənilən müasir veb tətbiqində interaktivliyin mütləq əsasını təşkil edir. Onlar ayıq gözətçilər kimi fəaliyyət göstərərək, fərdi HTML elementlərində xüsusi istifadəçi hərəkətlərini və ya sistem hadisələrini 'dinləməyə' imkan verir. İstifadəçi mürəkkəb bir formanı göndərdikdə, siçanı kətan üzərində hərəkət etdirdikdə, xüsusi klaviatura qısayoluna basdıqda və ya sadəcə səhifənin yüklənməsini gözlədikdə, arxa planda bir hadisə tetiklənir. Bu hadisələrə qoşulmaq üçün JavaScript-dən istifadə edərək, siz statik, cansız bir sənədi reaktiv, tətbiqə bənzər bir təcrübəyə çevirirsiniz. Hədəflənmiş hadisə baş verdikdə, brauzer təqdim etdiyiniz geri çağırış (callback) funksiyasını dərhal icra edir və sizə DOM-u manipulyasiya etmək, yeni məlumatlar gətirmək və ya tam ehtiyac duyulan anda animasiyaları başlatmaq gücü verir.",
+          "variant": "normal"
+        },
+        {
+          "id": "content-az-2",
+          "type": "code",
+          "label": "Əsas Sintaksis",
+          "title": "Hadisə İzləyicisinin Əlavə Edilməsi",
+          "description": "Hadisə izləyicisini qeydiyyatdan keçirməyin ən çox yayılan, çevik və qətiyyətlə tövsiyə olunan yolu bütün DOM qovşaqlarında mövcud olan yerli `addEventListener` metodundan istifadə etməkdir.",
+          "code": {
+            "language": "javascript",
+            "code": "const submitButton = document.querySelector('.submit-btn');\n\n// 'click' hadisə növünü və geri çağırış funksiyasını ötürürük\nsubmitButton.addEventListener('click', function(event) {\n  console.log('Düyməyə klikləndi!');\n  console.log('Hadisə detalları:', event);\n});",
+            "output": "Düyməyə klikləndi!\nHadisə detalları: PointerEvent { ... }"
+          }
+        },
+        {
+          "id": "content-az-3",
+          "type": "text",
+          "text": "Əvvəlcə `onclick=\"myFunction()\"` kimi sətirdaxili HTML atributlarından istifadə etmək rahat görünsə də, bu yanaşma peşəkar inkişafda qətiyyən tövsiyə edilmir. Sətirdaxili idarəedicilər HTML strukturunuzu birbaşa JavaScript davranış məntiqi ilə sıx birləşdirərək narahatlıqların ayrılması (separation of concerns) prinsipini pozur və zamanla kod bazasının oxunmasını, miqyaslanmasını və saxlanmasını əhəmiyyətli dərəcədə çətinləşdirir. Bundan əlavə, `addEventListener` metodu mühüm bir üstünlük təmin edir: tərtibatçılara tək bir elementə eyni növ birdən çox, müstəqil izləyici əlavə etməyə imkan verir. Bunun tam əksinə olaraq, bir `onclick` xüsusiyyətinə birdən çox funksiya təyin etməyə cəhd etmək sadəcə olaraq sonuncu təyinatın əvvəlki bütün idarəedicilərin üzərinə daimi olaraq yazılması ilə nəticələnəcək.",
+          "variant": "warning"
+        },
+        {
+          "id": "content-az-4",
           "type": "html-element",
+          "label": "İnteraktiv UI",
+          "title": "Canlı DOM Manipulyasiyası Nümunəsi",
+          "description": "Hadisə izləyicisinin kliki necə tutduğunu və sonradan DOM iyerarxiyasını və stillərini real vaxt rejimində necə yenilədiyini dəqiq görmək üçün aşağıdakı interaktiv komponentlə qarşılıqlı əlaqədə olun.",
           "element": {
-            "html": "html ode",
-            "css": "css code",
-            "js": "js code"
+            "html": "<div class=\"demo-box\">\n  <button id=\"demo-btn\">Statusu Dəyiş</button>\n  <p id=\"status-text\" class=\"status\">Cari Status: <span>Qeyri-aktiv</span></p>\n</div>",
+            "css": ".demo-box { padding: 24px; border: 2px solid #e2e8f0; border-radius: 12px; background: #f8fafc; }\nbutton { padding: 12px 20px; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 6px; font-weight: bold; transition: background 0.2s; }\nbutton:hover { background: #2563eb; }\n.status { margin-top: 16px; font-size: 1.1rem; }\n.active-color span { color: #10b981; font-weight: 800; }",
+            "js": "const btn = document.getElementById('demo-btn');\nconst status = document.getElementById('status-text');\nconst span = status.querySelector('span');\n\nbtn.addEventListener('click', () => {\n  status.classList.toggle('active-color');\n  span.textContent = status.classList.contains('active-color') ? 'Aktivdir!' : 'Qeyri-aktiv';\n});"
+          }
+        },
+        {
+          "id": "content-az-5",
+          "type": "implementation-task",
+          "label": "Təcrübə Tapşırığı",
+          "title": "Tapşırıq 1: Klaviatura daxiletməsini tutun və yoxlayın",
+          "task": "'username-input' ID-si olan input elementini seçərək başlayın. Bu elementə birbaşa 'keyup' hadisə izləyicisi əlavə edin. Geri çağırış funksiyanızın daxilində `event.key` xüsusiyyətini yoxlayaraq istifadəçinin 'Enter' düyməsini basıb-basmadığını yoxlamalısınız. Əgər şərt doğrudursa, input sahəsinin cari sətir dəyərini əldə edin, onun 3 simvoldan uzun olub-olmadığını yoxlayın və istifadəçinin daxiletməsini ehtiva edən uğur mesajını konsola yazdırın."
+        },
+        {
+          "id": "content-az-6",
+          "type": "image",
+          "label": "İrəli Səviyyə Konsepsiyalar",
+          "title": "Hadisə Axınının İzahı: Qabarma və Tutulma",
+          "description": "Dərin yerləşmiş bir elementdə hadisə baş verdikdə, o, sadəcə orada tetiklənmir. Brauzer hadisəni üç fərqli mərhələdən keçirir: tutulma mərhələsi (DOM ağacından aşağıya doğru hərəkət), hədəf mərhələsi (xüsusi elementə çatma) və nəhayət qabarma mərhələsi (kökə doğru yuxarı hərəkət).",
+          "image": {
+            "url": "",
+            "metadata": {
+              "width": 1024,
+              "height": 768
+            },
+            "alt": "DOM hadisə axınının üç mərhələsini göstərən ətraflı memarlıq diaqramı: Aşağıya doğru hərəkət edən Tutulma mərhələsi, elementdəki Hədəf mərhələsi və yuxarıya doğru hərəkət edən Qabarma mərhələsi."
+          }
+        },
+        {
+          "id": "content-az-7",
+          "type": "text",
+          "title": {
+            "level": "h3",
+            "text": "Hadisə Nümayəndəliyinin (Event Delegation) Gücü"
+          },
+          "text": "Onlarla və ya yüzlərlə alt elementə (məsələn, nəhəng bir məlumat cədvəlindəki sətirlər və ya dinamik görüləcək işlər siyahısındakı elementlər) fərdi hadisə izləyicilərini zəhmətlə əlavə etmək əvəzinə, Hadisə Nümayəndəliyi adlı yüksək səmərəli bir naxışdan istifadə edə bilərsiniz. Ümumi bir valideyn elementinə tək, mərkəzləşdirilmiş bir hadisə izləyicisi əlavə etməklə, hadisə qabarmasının təbii mexanizmindən yararlanırsınız. Valideyn konteyner, alt elementlər DOM ağacında yuxarıya doğru qabardıqca onların tetiklədiyi istənilən uyğun hadisələri asanlıqla tutacaq. Bu, tətbiqinizin yaddaş izini kəskin şəkildə azaldır və daha sonra JavaScript vasitəsilə DOM-a daxil edilən istənilən yeni alt elementləri avtomatik olaraq idarə edir, yeni izləyiciləri dərhal bağlamaq ehtiyacını aradan qaldırır!",
+          "variant": "tip"
+        },
+        {
+          "id": "content-az-8",
+          "type": "code",
+          "title": "Hadisə Nümayəndəliyinin Tətbiqi",
+          "description": "Yalnız `ul` konteynerinə necə tək bir izləyici əlavə etdiyimizə diqqət yetirin. Sonra məntiqimizi tətbiq etməzdən əvvəl klikin dəqiq hansı `li` elementindən qaynaqlandığını qəti şəkildə müəyyən etmək üçün `event.target` xüsusiyyətini yoxlayırıq.",
+          "code": {
+            "language": "javascript",
+            "code": "const todoList = document.getElementById('todo-list');\n\n// Tək bir izləyici siyahı daxilindəki bütün klikləri idarə edir\ntodoList.addEventListener('click', (event) => {\n  // Yalnız həqiqi bir siyahı elementinə klikləndikdə reaksiya verdiyimizə əmin oluruq\n  if (event.target.tagName === 'LI') {\n    event.target.classList.toggle('task-completed');\n    console.log(`Status dəyişdirildi: ${event.target.textContent}`);\n  }\n});"
           }
         }
       ]
