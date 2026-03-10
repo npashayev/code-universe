@@ -1,6 +1,16 @@
 {
+    "common": {
+        "home": "Home",
+        "sections": "Sections"
+    },
     "home": {
-        "title": "Explore the Universe of Web Development",
-        "description": "Start your journey through the cosmos of code — one planet at a time."
+        "title": "Explore the Universe of Code",
+        "firstDescription": "Move beyond tutorials: implement industry-standard solutions within a professional environment.",
+        "secondDescription": "Learn the foundational principles of programming through industry standard tasks and practical examples built for the modern workplace."
+    },
+    "navbar": {
+        "menu": "Menu",
+        "description": "Select what you want to learn",
+        "launchMenu": "Launch menu"
     }
 }

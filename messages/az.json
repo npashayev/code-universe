@@ -1,6 +1,16 @@
 {
+    "common": {
+        "home": "Əsas səhifə",
+        "sections": "Mövzular"
+    },
     "home": {
-        "title": "Web Proqramlaşdırma Uzayını Keşfedin",
-        "description": "Kodun uzayını keşfet — bir planet at a time."
+        "title": "Kod dünyasını kəşf edin",
+        "firstDescription": "Dərsliklərlə kifayətlənməyin: peşəkar mühitdə real sənaye həllərini tətbiq edin.",
+        "secondDescription": "Müasir iş mühiti üçün hazırlanmış real tapşırıqlar və praktiki nümunələrlə proqramlaşdırmanın təməl prinsiplərinə yiyələnin."
+    },
+    "navbar": {
+        "menu": "Menyu",
+        "description": "Öyrənmək istədiyiniz mövzunu seçin",
+        "launchMenu": "Menyunu Aç"
     }
 }
