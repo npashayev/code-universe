@@ -2,10 +2,13 @@ import Image from 'next/image';
 import SolarSystem from './components/SolarSystem';
 import galaxy from '@/assets/galaxy.webp';
 import SplashCursor from '@/components/react-bits/SplashCursor';
+import { getTranslations } from 'next-intl/server';
+import { use } from 'react';
 
 export default function HomePage() {
+  const t = use(getTranslations('home'));
   return (
-    <main className="min-h-screen flex items-center justify-center gap-52 text-white px-40 py-28 pl-64">
+    <main className="page flex items-center justify-center gap-48 text-white px-40 py-28 pl-64">
       <SolarSystem />
       <div>
         <div className="flex items-center justify-center gap-8">
@@ -16,18 +19,12 @@ export default function HomePage() {
             width={512}
             height={512}
           />
-          <h1 className="text-6xl leading-tight">
-            Explore the Universe of Code
-          </h1>
+          <h1 className="text-6xl leading-tight">{t('title')}</h1>
         </div>
-        <p className="text-3xl mt-12">
-          Move beyond tutorials: implement industry-standard solutions within a professional environment.
-        </p>
-        <p className="text-3xl mt-7">
-          Learn the foundational principles of programming through industry standard tasks and practical examples built for the modern workplace.
-        </p>
+        <p className="text-3xl mt-12">{t('firstDescription')}</p>
+        <p className="text-3xl mt-7">{t('secondDescription')}</p>
       </div>
-      <SplashCursor />
+      {/* <SplashCursor /> */}
     </main>
   );
 }
