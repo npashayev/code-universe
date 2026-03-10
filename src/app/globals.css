@@ -32,17 +32,6 @@ body {
   .page {
     @apply min-h-screen;
   }
-
-  .planet-detail-page {
-    min-height: 100vh;
-    background: radial-gradient(
-      ellipse 120% 80% at 50% 0%,
-      rgb(15 18 28 / 0.98) 0%,
-      rgb(10 12 20) 45%,
-      rgb(8 10 18) 100%
-    );
-  }
-
   .scrollbar-hide {
     -ms-overflow-style: none; /* IE/Edge */
     scrollbar-width: none; /* Firefox */
@@ -53,7 +42,7 @@ body {
   }
 
   .heading-main {
-    @apply text-4xl mb-4;
+    @apply text-5xl text-slate-100 mb-4;
   }
 
   .heading-secondary {

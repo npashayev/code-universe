@@ -1,11 +1,15 @@
 'use client';
-import CodeEditor from '@/components/shared/CodeEditor';
 import CodePreview from '@/components/shared/CodePreview';
 import { cn } from '@/lib/utils/cn';
 import { CodeContent } from '@/types/planet';
 import { useState } from 'react';
 import CodeEditorHeader from './CodeEditorHeader';
 import Markdown from 'react-markdown';
+import dynamic from 'next/dynamic';
+
+const CodeEditor = dynamic(() => import('@/components/shared/CodeEditor'), {
+  ssr: false,
+});
 
 interface Props {
   content: CodeContent;

@@ -1,4 +1,5 @@
 import { Resource } from '@/types/planet';
+import { ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 
 interface Props {
@@ -9,18 +10,23 @@ const Resources = ({ resources }: Props) => {
   return (
     <section>
       <h2 className="heading-secondary">Resources</h2>
-      <ul className="list-indented">
+      <ul className="list-none flex gap-4 flex-wrap">
         {resources.map(res => (
           <li key={res.id} className="flex gap-3">
-            {res.title && <p className="font-bold">{res.title}:</p>}
             {
               <Link
                 href={res.url}
-                className="text-blue-300 hover:underline"
+                className="group p-5 rounded-lg border border-slate-700 bg-slate-800/30 hover:border-blue-500 hover:shadow-lg"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {res.label}
+                <div className="flex items-start justify-between gap-3 mb-2">
+                  {res.title && (
+                    <div className="text-sm text-slate-400">{res.title}:</div>
+                  )}
+                  <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-blue-500 transition-colors shrink-0" />
+                </div>
+                <div className="text-slate-300 leading-snug">{res.label}</div>
               </Link>
             }
           </li>

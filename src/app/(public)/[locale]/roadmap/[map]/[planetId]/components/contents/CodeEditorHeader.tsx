@@ -39,7 +39,7 @@ const CodeEditorHeader = ({
       </div>
 
       <div className="flex items-center gap-4">
-        <button
+        {/* <button
           onClick={() => setEditMode(p => !p)}
           className={cn(
             'text-sm font-medium px-4 py-1.5 rounded-lg transition-all border',
@@ -49,7 +49,7 @@ const CodeEditorHeader = ({
           )}
         >
           {editMode ? 'Stop editing' : 'Edit Code'}
-        </button>
+        </button> */}
 
         <button
           onClick={() => setLightMode(p => !p)}

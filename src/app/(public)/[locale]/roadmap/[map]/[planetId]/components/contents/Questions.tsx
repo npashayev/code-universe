@@ -9,8 +9,13 @@ const Questions = ({ questions }: Props) => {
     <section>
       <h2 className="heading-secondary">Questions</h2>
       <ol className="list-decimal list-indented">
-        {questions.map(qn => (
-          <li key={qn.id}>{qn.question}</li>
+        {questions.map((qn, idx) => (
+          <li key={qn.id} className="flex gap-3 text-slate-300 leading-relaxed">
+            <span className="shrink-0 text-slate-500 font-medium">
+              {idx + 1}.
+            </span>
+            <span>{qn.question}</span>
+          </li>
         ))}
       </ol>
     </section>

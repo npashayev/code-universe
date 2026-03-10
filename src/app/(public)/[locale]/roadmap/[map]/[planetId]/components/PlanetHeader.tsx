@@ -1,34 +1,53 @@
-import { ImageData, LocalizedPlanetData } from '@/types/planet';
+import {
+  ImageData,
+  LocalizedPlanetData,
+  PLANET_CATEGORY,
+  PlanetCategory,
+} from '@/types/planet';
 import Image from 'next/image';
 
 interface Props {
+  category: PlanetCategory;
   localizedData: LocalizedPlanetData;
   image: ImageData<string>;
 }
 
-const PlanetHeader = ({ localizedData, image }: Props) => {
+const PlanetHeader = ({ category, localizedData, image }: Props) => {
   const { name, description, tags } = localizedData;
 
   return (
     <header>
-      <h1 className="heading-main text-slate-100">{name}</h1>
-      {tags && tags.length > 0 && (
-        <div className="flex gap-2 mb-4 text-slate-300">
-          <h3>Tags:</h3>
-          {tags
-            .slice(0, 4)
-            .map(t => t.tag)
-            .join(', ')}
-        </div>
-      )}
-      <div className="flex justify-between gap-10 items-center">
-        <p className="text-slate-200">{description}</p>
+      <div className="flex items-center gap-12 mb-12">
         {image.url && (
-          <div className="relative size-50 shrink-0">
-            <Image src={image.url} alt={image.alt ?? 'Planet image'} fill />
+          <div className="relative w-56 h-56 shrink-0">
+            <Image
+              src={image.url}
+              alt={image.alt ?? 'Planet image'}
+              fill
+              className="object-cover object-center shadow-2xl"
+            />
           </div>
         )}
+        <div className="flex-1">
+          <div className="px-3 py-1 w-max rounded-2xl bg-orange-900/30 text-orange-300 text-sm mb-3">
+            {PLANET_CATEGORY[category]}
+          </div>
+          <h1 className="heading-main">{name}</h1>
+          {tags && tags.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {tags.slice(0, 4).map(t => (
+                <span
+                  key={t.id}
+                  className="px-2.5 py-0.5 text-sm border border-slate-600 text-slate-400 rounded"
+                >
+                  {t.tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
+      <p className="text-lg leading-relaxed text-slate-300">{description}</p>
     </header>
   );
 };

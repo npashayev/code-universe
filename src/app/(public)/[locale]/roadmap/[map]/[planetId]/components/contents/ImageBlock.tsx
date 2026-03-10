@@ -16,13 +16,13 @@ const ImageBlock = ({ content }: Props) => {
           <Markdown>{description}</Markdown>
         </div>
       )}
-      <div className="mt-4">
+      <div className="mt-4 flex justify-center">
         <Image
           src={image.url}
           alt={image.alt || 'Content image'}
           height={image.metadata.height}
           width={image.metadata.width}
-          className="max-w-full max-h-150 w-auto h-auto rounded-md"
+          className="max-h-150 w-auto h-auto rounded-md"
         />
       </div>
     </div>
