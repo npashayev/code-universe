@@ -6,6 +6,7 @@ import { motion as Motion, AnimatePresence } from 'framer-motion';
 import { Menu, Moon, Sun } from 'lucide-react';
 import { useState } from 'react';
 import LanguageSelector from './LanguageSelector';
+import { useTranslations } from 'next-intl';
 
 interface Props {
   onOpen: () => void;
@@ -13,7 +14,7 @@ interface Props {
 
 const Header = ({ onOpen }: Props) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
-
+  const t = useTranslations('navbar');
   return (
     <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-[#030213]/40 backdrop-blur-xl border border-white/10 h-14 rounded-2xl flex items-center px-6 shadow-2xl gap-30 min-w-2xl">
       <button
@@ -25,7 +26,7 @@ const Header = ({ onOpen }: Props) => {
           <Menu size={20} />
         </div>
         <span className="text-[10px] uppercase tracking-[0.3em] font-bold">
-          Launch Menu
+          {t('launchMenu')}
         </span>
       </button>
 

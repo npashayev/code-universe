@@ -7,10 +7,11 @@ import Link from 'next/link';
 
 import NavLinkContent from './NavLinkContent';
 import Header from './Header';
+import { useTranslations } from 'next-intl';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const t = useTranslations('navbar');
   return (
     <>
       <Header onOpen={() => setIsOpen(true)} />
@@ -48,10 +49,10 @@ const Navbar = () => {
                       id="menu-title"
                       className="text-white font-bold tracking-tight"
                     >
-                      Menu
+                      {t('menu')}
                     </h2>
                     <p className="text-[10px] text-slate-500 uppercase tracking-widest">
-                      Select what you want to learn
+                      {t('description')}
                     </p>
                   </div>
                 </div>
