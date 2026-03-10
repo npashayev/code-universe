@@ -13,6 +13,7 @@ import type {
 } from '@/types/planet';
 import { getLocale } from 'next-intl/server';
 import { normalizeImage } from '../utils/normalizeImage';
+import { handlePrismaError } from '../utils/handlePrismaError';
 
 export type LocalizedPlanetSummary = Pick<LocalizedPlanetData, 'name' | 'tags'>;
 
@@ -117,17 +118,14 @@ export const getPublicPlanetList = async (
         },
       },
     })
-    .catch((err: unknown) => {
-      console.error('[getPublicPlanetList] Database error:', err);
-      throw new Error('Failed to fetch planets.');
-    });
+    .catch((err: unknown) => handlePrismaError(err, 'getPublicPlanetList'));
 
   return planets.map(planet => {
     const loc = planet.localized[0];
     return {
       id: planet.id,
       step: planet.step,
-      image: normalizeImage(planet.image, locale),
+      image: normalizeImage(planet.image as LocalizedImage, locale),
       localized: { name: loc.name, tags: loc.tags as PlanetTag[] },
     };
   });

@@ -1,10 +1,15 @@
 import 'server-only';
+import {
+  LocalizedImage,
+  NormalizedImage,
+  PlanetStatus,
+  PlanetTag,
+} from './../../types/planet';
 
 import { prisma } from '@/lib/prisma/prisma';
 import { ensureAdmin } from '@/lib/auth/ensureAdmin';
 import {
   CreatePlanetData,
-  ImageData,
   LocalizedPlanetData,
   PlanetCategory,
   PlanetData,
@@ -13,6 +18,10 @@ import {
 import { getInitialPlanetData } from '@/lib/utils/getInitialPlanetData';
 import { SUPPORTED_LANGS } from '../constants/locale';
 import { getLocale } from 'next-intl/server';
+import { normalizeImage } from '../utils/normalizeImage';
+import { notFound } from 'next/navigation';
+import { Prisma } from '@prisma/client';
+import { handlePrismaError } from '../utils/handlePrismaError';
 
 export interface PlanetForEdit {
   id: string;
@@ -79,17 +88,19 @@ export const getPlanetForEdit = async (id: string): Promise<PlanetForEdit> => {
   };
 };
 
-export interface GetPlanetResponse extends Omit<PlanetData, 'localized' | 'image' | 'step'> {
+export type PublicPlanetResponse = Omit<
+  PlanetData,
+  'localized' | 'image' | 'step'
+> & {
   localized: LocalizedPlanetData;
-  image: ImageData<string>;
-}
+  image: NormalizedImage;
+};
 
-export const getPlanet = async (
-  id: string,
-): Promise<GetPlanetResponse> => {
-  try {
-    const locale = await getLocale();
-    const planet = await prisma.planet.findUnique({
+export const getPlanet = async (id: string): Promise<PublicPlanetResponse> => {
+  const locale = (await getLocale()) as SupportedLanguage;
+
+  const planet = await prisma.planet
+    .findUnique({
       where: { id },
       include: {
         localized: {
@@ -97,46 +108,55 @@ export const getPlanet = async (
           take: 1,
         },
       },
-    });
+    })
+    .catch((err: unknown) => handlePrismaError(err, 'getPlanet'));
 
-    if (!planet) {
-      throw new Error('Planet not found.');
-    }
+  if (!planet) notFound();
 
-    const localization = planet.localized[0];
+  const localization = planet.localized[0];
+  if (!localization) throw new Error(`Localization for "${locale}" not found.`);
 
-    if (!localization) {
-      throw new Error(`Localization for "${locale}" not found.`);
-    }
-
-    const rawImage = planet.image as PlanetData['image'];
-
-    return {
-      id: planet.id,
-      category: planet.category as PlanetCategory,
-      status: planet.status,
-      image: {
-        ...rawImage,
-        alt: rawImage.alt[locale as SupportedLanguage],
+  const [prevPlanet, nextPlanet] = await Promise.all([
+    prisma.planet.findFirst({
+      where: {
+        category: planet.category,
+        step: planet.step - 1,
+        status: 'published',
       },
-      nextPlanetId: planet.nextPlanetId ?? null,
-      prevPlanetId: planet.prevPlanetId ?? null,
-      localized: {
-        name: localization.name,
-        tags: localization.tags,
-        description: localization.description,
-        researchTopics:
-          localization.researchTopics as unknown as LocalizedPlanetData['researchTopics'],
-        resources: (localization.resources ??
-          []) as unknown as LocalizedPlanetData['resources'],
-        questions:
-          localization.questions as unknown as LocalizedPlanetData['questions'],
-        contents:
-          localization.contents as unknown as LocalizedPlanetData['contents'],
+      select: { id: true },
+    }),
+    prisma.planet.findFirst({
+      where: {
+        category: planet.category,
+        step: planet.step + 1,
+        status: 'published',
       },
-    };
-  } catch (err) {
-    console.error('[getPlanet] Database error:', err);
+      select: { id: true },
+    }),
+  ]).catch((err: unknown) => {
+    console.error('[getPlanet] Database error fetching siblings:', err);
     throw new Error('Failed to fetch planet.');
-  }
+  });
+
+  return {
+    id: planet.id,
+    category: planet.category as PlanetCategory,
+    status: planet.status as PlanetStatus,
+    image: normalizeImage(planet.image as LocalizedImage, locale),
+    prevPlanetId: prevPlanet?.id ?? null,
+    nextPlanetId: nextPlanet?.id ?? null,
+    localized: {
+      name: localization.name,
+      tags: localization.tags as PlanetTag[],
+      description: localization.description,
+      researchTopics:
+        localization.researchTopics as unknown as LocalizedPlanetData['researchTopics'],
+      resources: (localization.resources ??
+        []) as unknown as LocalizedPlanetData['resources'],
+      questions:
+        localization.questions as unknown as LocalizedPlanetData['questions'],
+      contents:
+        localization.contents as unknown as LocalizedPlanetData['contents'],
+    },
+  };
 };
