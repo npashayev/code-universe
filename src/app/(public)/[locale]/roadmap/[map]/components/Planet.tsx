@@ -1,26 +1,24 @@
 import Link from 'next/link';
 import styles from './Planet.module.scss';
 import Image from 'next/image';
-import { PlanetSummaryWithImage } from '@/types/planet';
+import { PublicPlanetSummary } from '@/lib/planet/getPlanetList';
 
 interface Props {
   map: string;
-  planet: PlanetSummaryWithImage;
+  planet: PublicPlanetSummary;
 }
 
 const Planet = ({ map, planet }: Props) => {
-  const locale = 'en';
-  console.log(planet.image.url);
-  const { tags } = planet.localized[locale];
+  const { tags } = planet.localized;
+
   return (
-    <div className={styles.planetCnr} id={`planet-${planet.id}`}>
+    <section className={styles.planetCnr} id={`planet-${planet.id}`}>
       <Link scroll={false} href={`${map}/${planet.id}`} className={styles.link}>
         <Image
           src={planet.image.url}
-          alt={planet.image.alt[locale]}
+          alt={planet.image.alt}
           fill
           className={styles.planet}
-          loading="lazy"
         />
       </Link>
       <div className={styles.orbit}>
@@ -30,7 +28,7 @@ const Planet = ({ map, planet }: Props) => {
         {tags[3].tag && <div className={styles.satellite}>{tags[3].tag}</div>}
       </div>
       <div className={styles.outerOrbit}></div>
-    </div>
+    </section>
   );
 };
 

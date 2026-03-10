@@ -30,6 +30,9 @@ export interface ImageData<T> {
   alt: T;
 }
 
+export type NormalizedImage = ImageData<string>;
+export type LocalizedImage = ImageData<LocalizedString>;
+
 export interface ImageMetadata {
   width: number;
   height: number;
@@ -38,7 +41,7 @@ export interface ImageMetadata {
 export interface CreatePlanetData {
   category: PlanetCategory;
   status: PlanetStatus;
-  image: ImageData<LocalizedString>;
+  image: LocalizedImage;
   localized: Record<SupportedLanguage, LocalizedPlanetData>;
 }
 
@@ -153,34 +156,11 @@ export interface HtmlElementSnippet {
 
 export interface ImageContent extends BaseContent {
   type: 'image';
-  image: ImageData<string>;
+  image: NormalizedImage;
   pendingImageId?: string;
 }
 
-// types for planet lists
-export type LocalizedPlanetSummary = Pick<LocalizedPlanetData, 'name' | 'tags'>;
-
-export type PlanetSummary = Pick<PlanetData, 'id' | 'step' | 'status'> & {
-  localized: Record<SupportedLanguage, LocalizedPlanetSummary>;
-};
-
-export type PlanetSummaryWithImage = Omit<PlanetSummary, 'status'> & {
-  image: PlanetData['image'];
-};
-
-export interface PlanetListResponse {
-  category: PlanetCategory;
-  planets: PlanetSummary[];
-  stats: PlanetListStats;
-}
-
-export interface PlanetListStats {
-  total: number;
-  published: number;
-  drafts: number;
-}
-
-export interface CategoryStatsItem {
-  category: PlanetCategory;
-  stats: PlanetListStats;
-}
+// export interface CategoryStatsItem {
+//   category: PlanetCategory;
+//   stats: PlanetListStats;
+// }

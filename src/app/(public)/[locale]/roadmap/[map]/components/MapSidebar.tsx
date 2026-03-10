@@ -4,17 +4,18 @@ import { useState } from 'react';
 import { motion as Motion, AnimatePresence } from 'framer-motion';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { PlanetSummaryWithImage } from '@/types/planet';
 import { cn } from '@/lib/utils/cn';
+import { useTranslations } from 'next-intl';
+import { PublicPlanetSummary } from '@/lib/planet/getPlanetList';
 
 interface Props {
-  planets: PlanetSummaryWithImage[];
+  planets: PublicPlanetSummary[];
 }
 
 const MapSidebar = ({ planets }: Props) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeId, setActiveId] = useState(planets[0].id);
-  const locale = 'en';
+  const t = useTranslations('common');
 
   const scrollToPlanet = (planetId: string) => {
     setActiveId(planetId);
@@ -31,15 +32,13 @@ const MapSidebar = ({ planets }: Props) => {
   return (
     <aside
       className={cn(
-        'fixed right-0 top-0 h-screen w-100 transition-transform duration-500 px-6 pt-20 pb-16 flex flex-col items-start justify-start z-100',
+        'fixed right-0 top-0 h-screen w-100 transition-transform duration-500 px-6 pt-20 pb-16 flex flex-col items-start justify-start',
         'bg-night/60 backdrop-blur-2xl border-l border-white/5 shadow-[-40px_0_80px_-20px_rgba(0,0,0,0.9)]',
         !sidebarOpen && 'translate-x-full',
       )}
     >
       <button
-        className={cn(
-          'absolute right-full top-1/4 p-2 rounded-tl-xl rounded-bl-xl bg-orange-500/80 backdrop-blur-2xl border border-white/5 shadow-[-40px_0_80px_-20px_rgba(0,0,0,0.9)]',
-        )}
+        className="absolute right-full top-1/4 p-2 rounded-tl-xl rounded-bl-xl bg-orange-500/80 backdrop-blur-2xl border border-white/5 shadow-[-40px_0_80px_-20px_rgba(0,0,0,0.9)]"
         onClick={() => setSidebarOpen(p => !p)}
       >
         <FontAwesomeIcon
@@ -52,14 +51,14 @@ const MapSidebar = ({ planets }: Props) => {
       </button>
       <div className="mb-6 px-4">
         <h2 className="text-orange-500/80 font-bold uppercase tracking-[0.3em] mb-1">
-          Sections
+          {t('sections')}
         </h2>
         <div className="h-0.5 w-10 bg-linear-to-r from-orange-500 to-transparent" />
       </div>
       <nav className="h-full w-full overflow-auto overscroll-contain flex flex-col gap-1 scrollbar-hide">
         {planets.map((planet, index) => {
           const { id } = planet;
-          const { name } = planet.localized[locale];
+          const { name } = planet.localized;
           const isActive = activeId === id;
           return (
             <button
