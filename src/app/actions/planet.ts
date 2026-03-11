@@ -12,64 +12,6 @@ import {
   SupportedLanguage,
 } from '@/types/planet';
 import { revalidatePath } from 'next/cache';
-import { DeleteObjectCommand } from '@aws-sdk/client-s3';
-import { r2Client } from '@/lib/r2/r2Client';
-
-/**
- * Attempts to delete R2 objects for the given public URLs.
- * Returns an array of URLs that failed to delete (empty = all succeeded).
- */
-async function deleteR2Objects(urls: string[]): Promise<string[]> {
-  if (urls.length === 0) return [];
-
-  const baseUrl = process.env.R2_PUBLIC_URL;
-  const bucket = process.env.R2_BUCKET_NAME;
-  if (!baseUrl || !bucket) {
-    console.error('[deleteR2Objects] R2 configuration is missing (R2_PUBLIC_URL or R2_BUCKET_NAME).');
-    return [...urls];
-  }
-
-  const urlToKey = new Map<string, string>();
-
-  for (const url of urls) {
-    if (!url) continue;
-    try {
-      let r2Key: string | null = null;
-
-      if (url.startsWith(baseUrl)) {
-        const prefix = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
-        r2Key = url.replace(prefix, '');
-      } else {
-        const parsed = new URL(url);
-        r2Key = parsed.pathname.replace(/^\/+/, '');
-      }
-
-      if (r2Key) {
-        urlToKey.set(url, r2Key);
-      }
-    } catch (e) {
-      console.error('[deleteR2Objects] Failed to parse R2 key from URL:', url, e);
-    }
-  }
-
-  const failedUrls: string[] = [];
-
-  for (const [url, key] of urlToKey) {
-    try {
-      await r2Client.send(
-        new DeleteObjectCommand({
-          Bucket: bucket,
-          Key: key,
-        }),
-      );
-    } catch (e) {
-      console.error('[deleteR2Objects] Failed to delete R2 object:', key, e);
-      failedUrls.push(url);
-    }
-  }
-
-  return failedUrls;
-}
 
 export type SubmitPlanetResult =
   | { success: true; planetId: string }
@@ -264,7 +206,9 @@ export async function updatePlanet(data: unknown): Promise<UpdatePlanetResult> {
   // Delete orphaned / replaced images from R2 after DB update
   const failedUrls = await deleteR2Objects(urlsToDelete);
 
-  const r2Cleanup: { success: true; deletedCount: number } | { success: false; failedUrls: string[] } =
+  const r2Cleanup:
+    | { success: true; deletedCount: number }
+    | { success: false; failedUrls: string[] } =
     failedUrls.length === 0
       ? { success: true, deletedCount: urlsToDelete.length }
       : { success: false, failedUrls };
@@ -273,62 +217,6 @@ export async function updatePlanet(data: unknown): Promise<UpdatePlanetResult> {
 
   return { success: true as const, planetId: parsed.data.id, r2Cleanup };
 }
-
-export type DeletePlanetResult =
-  | { success: true }
-  | { success: false; error: string };
-
-export const deletePlanet = async (planetId: string): Promise<void> => {
-  await ensureAdmin();
-
-  if (!planetId) {
-    throw new Error('Missing planet ID.');
-  }
-
-  // 1. Fetch planet + localizations to collect all image URLs before deletion
-  const planet = await prisma.planet.findUnique({
-    where: { id: planetId },
-    include: { localized: true },
-  });
-
-  if (!planet) {
-    throw new Error('Planet not found.');
-  }
-
-  // 2. Collect every R2 image URL (main image + content images)
-  const urlsToDelete: string[] = [];
-
-  if (planet.image.url) {
-    urlsToDelete.push(planet.image.url);
-  }
-
-  planet.localized.forEach(loc => {
-    const contents = (loc.contents ?? []) as unknown as PlanetContent[];
-    contents.forEach(c => {
-      if (c.type === 'image' && c.image?.url) {
-        urlsToDelete.push(c.image.url);
-      }
-    });
-  });
-
-  // 3. Delete images from R2 FIRST — if this fails the planet stays in DB
-  //    so the user can retry via the delete button.
-  const failedUrls = await deleteR2Objects(urlsToDelete);
-  if (failedUrls.length > 0) {
-    console.error('[deletePlanet] Failed to delete R2 images:', failedUrls);
-    throw new Error('Failed to delete planet images from storage. Planet was not deleted.');
-  }
-
-  // 4. Delete planet from DB (cascade deletes localizations)
-  try {
-    await prisma.planet.delete({
-      where: { id: planetId },
-    });
-  } catch (err) {
-    console.error('[deletePlanet] Database error:', err);
-    throw new Error('Failed to delete planet. Please try again.');
-  }
-};
 
 interface UpdatePlanetListParams {
   category: PlanetCategory;
