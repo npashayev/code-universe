@@ -4,6 +4,7 @@ import Resources from './Resources';
 import ContentList from './ContentList';
 import Questions from './contents/Questions';
 import { PublicPlanetResponse } from '@/lib/planet/getPlanet';
+import PlanetNavigation from './PlanetNavigation';
 
 interface Props {
   planet: PublicPlanetResponse;
@@ -27,6 +28,8 @@ const PlanetClient = ({ planet }: Props) => {
       {resources && resources.length > 0 && <Resources resources={resources} />}
       {contents && contents.length > 0 && <ContentList contents={contents} />}
       {questions && questions.length > 0 && <Questions questions={questions} />}
+
+      <PlanetNavigation category={category} prevId={planet.prevPlanetId} nextId={planet.nextPlanetId} />
     </main>
   );
 };
