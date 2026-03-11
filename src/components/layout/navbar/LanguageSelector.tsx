@@ -1,7 +1,8 @@
 'use client';
 import { SUPPORTED_LANGS } from '@/lib/constants/locale';
+import { usePathname, useRouter } from '@/lib/next-intl/navigation';
 import { SupportedLanguage } from '@/types/planet';
-import { useRouter, usePathname, useParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import Select, { SingleValue, StylesConfig } from 'react-select';
 
 interface LanguageOption {
@@ -66,9 +67,7 @@ const LanguageSelector = () => {
 
   const handleChange = (option: SingleValue<LanguageOption>) => {
     if (!option) return;
-    // Replace the current locale prefix in the pathname
-    const newPath = pathname.replace(`/${locale}`, `/${option.value}`);
-    router.push(newPath);
+    router.replace(pathname, { locale: option.value });
   };
 
   return (
