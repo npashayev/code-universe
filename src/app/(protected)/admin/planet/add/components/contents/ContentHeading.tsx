@@ -3,8 +3,8 @@ import {
   UpdateContentFn,
 } from '@/lib/hooks/useLocalizedContent';
 import { PlanetContent } from '@/types/planet';
-import RemoveButton from '../shared/RemoveButton';
 import Label from '../shared/Label';
+import RemoveButton from '@/components/ui/RemoveButton';
 
 interface Props {
   idx: number;

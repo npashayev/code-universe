@@ -18,6 +18,5 @@ export default function PlanetPage({ params }: Props) {
 
   const planet = use(getPlanet(planetId, category));
 
-
   return <PlanetClient planet={planet} />;
 }

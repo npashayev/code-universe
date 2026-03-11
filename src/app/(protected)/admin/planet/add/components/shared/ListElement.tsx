@@ -1,4 +1,4 @@
-import RemoveButton from '@/components/admin/RemoveButton';
+import RemoveButton from '@/components/ui/RemoveButton';
 import { cn } from '@/lib/utils/cn';
 import { ComponentPropsWithoutRef, ReactNode } from 'react';
 

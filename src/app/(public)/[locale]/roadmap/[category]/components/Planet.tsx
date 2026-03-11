@@ -13,7 +13,7 @@ const Planet = ({ category, planet }: Props) => {
 
   return (
     <section className={styles.planetCnr} id={`planet-${planet.id}`}>
-      <Link scroll={false} href={`${category}/${planet.id}`} className={styles.link}>
+      <Link href={`${category}/${planet.id}`} className={styles.link}>
         <Image
           src={planet.image.url}
           alt={planet.image.alt}
