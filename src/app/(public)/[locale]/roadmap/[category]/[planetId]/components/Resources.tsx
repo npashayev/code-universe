@@ -16,7 +16,7 @@ const Resources = ({ resources }: Props) => {
             {
               <Link
                 href={res.url}
-                className="group p-5 rounded-lg border border-slate-700 bg-slate-800/30 hover:border-blue-500 hover:shadow-lg"
+                className="group p-5 min-w-60 rounded-lg border border-slate-700 bg-slate-800/30 hover:border-blue-500 hover:shadow-lg"
                 target="_blank"
                 rel="noopener noreferrer"
               >
