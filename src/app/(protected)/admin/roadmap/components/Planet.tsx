@@ -3,11 +3,9 @@ import { Edit, MoveVertical } from 'lucide-react';
 import Link from 'next/link';
 import { Updater } from 'use-immer';
 import { StatusUpdateSelector } from '../../planet/add/components/Selectors';
-import RemoveButton from '../../planet/add/components/shared/RemoveButton';
 import { cn } from '@/lib/utils/cn';
-import { useDeletePlanet } from '@/lib/hooks/queries/usePlanet';
-import { useState } from 'react';
-import Dialog from '@/components/ui/Dialog';
+import DeletePlanetButton from '@/components/admin/DeletePlanetButton';
+import UpdatePlanetLink from '@/components/admin/UpdatePlanetLink';
 
 interface Props {
   locale: SupportedLanguage;
@@ -18,28 +16,15 @@ interface Props {
 const Planet = ({ planet, setOrderedPlanets, locale }: Props) => {
   const { name, tags } = planet.localized[locale];
   const isPublished = planet.status === 'published';
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const { mutate: deletePlanet, isPending } = useDeletePlanet();
 
   return (
     <div
       className={cn(
         'group flex items-center justify-between gap-6 p-4 rounded-2xl border transition-all duration-300 bg-white/6 border-white/20 opacity-90 hover:opacity-100 hover:border-slate-400/40 text-white',
         isPublished &&
-          'bg-orange-500/15 border-orange-500/30 hover:border-orange-500/50',
+        'bg-orange-500/15 border-orange-500/30 hover:border-orange-500/50',
       )}
     >
-      {modalOpen && (
-        <Dialog
-          icon="warning"
-          title="Delete Planet"
-          body="Are you sure you want to delete this planet?"
-          onConfirm={() => deletePlanet(planet.id)}
-          onClose={() => setModalOpen(false)}
-        />
-      )}
-
       {/* Left side */}
       <div className="flex items-center gap-4 flex-1 min-w-0">
         <div className="cursor-grab active:cursor-grabbing text-slate-400 group-hover:text-slate-300 transition-colors px-2">
@@ -51,7 +36,7 @@ const Planet = ({ planet, setOrderedPlanets, locale }: Props) => {
             className={cn(
               'w-10 h-10 rounded-lg flex items-center justify-center font-mono text-sm font-bold border bg-slate-500/15 border-slate-500/25 text-slate-400',
               isPublished &&
-                'bg-orange-500/20 border-orange-500/35 text-orange-300',
+              'bg-orange-500/20 border-orange-500/35 text-orange-300',
             )}
           >
             {planet.step.toString().padStart(2, '0')}
@@ -84,19 +69,8 @@ const Planet = ({ planet, setOrderedPlanets, locale }: Props) => {
           changePlanetStatus={setOrderedPlanets}
         />
         <div className="flex items-center gap-1">
-          <Link
-            className="p-2 text-slate-400 hover:text-red-400 hover:bg-red-400/15 rounded-lg transition-all"
-            href={`/admin/planet/update/${planet.id}`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Edit size={18} />
-          </Link>
-
-          <RemoveButton
-            isDeleting={isPending}
-            onClick={() => setModalOpen(true)}
-          />
+          <UpdatePlanetLink planetId={planet.id} />
+          <DeletePlanetButton planetId={planet.id} />
         </div>
       </div>
     </div>
