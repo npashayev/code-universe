@@ -1,6 +1,6 @@
+import RemoveButton from '@/components/admin/RemoveButton';
 import { cn } from '@/lib/utils/cn';
 import { ComponentPropsWithoutRef, ReactNode } from 'react';
-import RemoveButton from './RemoveButton';
 
 interface Props extends ComponentPropsWithoutRef<'div'> {
   children: ReactNode;

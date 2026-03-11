@@ -4,9 +4,9 @@ import { ComponentPropsWithoutRef } from 'react';
 
 const RemoveButton = ({
   className,
-  isDeleting = false,
+  isPending = false,
   ...props
-}: ComponentPropsWithoutRef<'button'> & { isDeleting?: boolean }) => {
+}: ComponentPropsWithoutRef<'button'> & { isPending?: boolean }) => {
   return (
     <button
       type="button"
@@ -15,10 +15,10 @@ const RemoveButton = ({
         'p-2 text-slate-500 hover:text-red-400 hover:bg-red-400/15 rounded-lg transition-all disabled:cursor-not-allowed',
         className,
       )}
-      disabled={isDeleting}
+      disabled={isPending}
     >
       {
-        isDeleting
+        isPending
           ? <Loader size={18} className='animate-spin' />
           : <Trash2 size={18} />
       }
