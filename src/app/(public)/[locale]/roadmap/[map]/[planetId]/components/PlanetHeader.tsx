@@ -24,6 +24,7 @@ const PlanetHeader = ({ category, localizedData, image }: Props) => {
               src={image.url}
               alt={image.alt ?? 'Planet image'}
               fill
+              sizes='224px'
               className="object-cover object-center shadow-2xl"
             />
           </div>
