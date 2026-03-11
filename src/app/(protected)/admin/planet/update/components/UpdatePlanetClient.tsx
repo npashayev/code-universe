@@ -8,9 +8,9 @@ import { useState, useEffect } from 'react';
 import { useImmer } from 'use-immer';
 import { LanguageOption } from '@/types/reactSelectOptions';
 import { languageOptions } from '@/lib/constants/reactSelectOptions';
-import PlanetClient from '@/app/(public)/roadmap/[map]/[planetId]/components/PlanetClient';
 import { PlanetEditorLayout } from '@/app/(protected)/admin/planet/shared/PlanetEditorLayout';
 import { useUpdatePlanet } from '@/lib/hooks/admin/useUpdatePlanet';
+import PlanetClient from '@/app/(public)/[locale]/roadmap/[category]/[planetId]/components/PlanetClient';
 
 interface PendingContentImageEntry {
   previewUrl: string;

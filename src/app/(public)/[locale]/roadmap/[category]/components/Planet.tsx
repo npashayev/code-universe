@@ -4,16 +4,16 @@ import Image from 'next/image';
 import { PublicPlanetSummary } from '@/lib/planet/getPlanetList';
 
 interface Props {
-  map: string;
+  category: string;
   planet: PublicPlanetSummary;
 }
 
-const Planet = ({ map, planet }: Props) => {
+const Planet = ({ category, planet }: Props) => {
   const { tags } = planet.localized;
 
   return (
     <section className={styles.planetCnr} id={`planet-${planet.id}`}>
-      <Link scroll={false} href={`${map}/${planet.id}`} className={styles.link}>
+      <Link scroll={false} href={`${category}/${planet.id}`} className={styles.link}>
         <Image
           src={planet.image.url}
           alt={planet.image.alt}

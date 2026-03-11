@@ -8,18 +8,18 @@ import { getPublicPlanetList } from '@/lib/planet/getPlanetList';
 
 interface Props {
   params: Promise<{
-    map: string;
+    category: string;
   }>;
 }
 
 export default function MapPage({ params }: Props) {
-  const { map } = use(params);
+  const { category } = use(params);
 
-  if (!isPlanetCategory(map)) {
+  if (!isPlanetCategory(category)) {
     notFound();
   }
 
-  const planets = use(getPublicPlanetList(map));
+  const planets = use(getPublicPlanetList(category));
 
   return (
     <main className={styles.page}>
@@ -30,7 +30,7 @@ export default function MapPage({ params }: Props) {
       </div>
       <div className={styles.planetsCnr}>
         {planets.map(planet => (
-          <Planet key={planet.id} map={map} planet={planet} />
+          <Planet key={planet.id} category={category} planet={planet} />
         ))}
       </div>
       <MapSidebar planets={planets} />

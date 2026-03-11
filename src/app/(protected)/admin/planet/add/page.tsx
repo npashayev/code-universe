@@ -13,7 +13,7 @@ import { languageOptions } from '@/lib/constants/reactSelectOptions';
 import { getInitialPlanetData } from '@/lib/utils/getInitialPlanetData';
 import { PlanetEditorLayout } from '@/app/(protected)/admin/planet/shared/PlanetEditorLayout';
 import { useSubmitPlanet } from '@/lib/hooks/admin/useSubmitPlanet';
-import PlanetClient from '@/app/(public)/[locale]/roadmap/[map]/[planetId]/components/PlanetClient';
+import PlanetClient from '@/app/(public)/[locale]/roadmap/[category]/[planetId]/components/PlanetClient';
 
 interface Props {
   searchParams: Promise<{
