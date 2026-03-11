@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { motion as Motion, AnimatePresence } from 'framer-motion';
 import { X, Cpu } from 'lucide-react';
 import { navLinks } from '@/lib/constants/navbarItems';
-import Link from 'next/link';
 
 import NavLinkContent from './NavLinkContent';
 import Header from './Header';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/lib/next-intl/navigation';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);

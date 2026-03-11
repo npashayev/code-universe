@@ -1,8 +1,8 @@
 'use client';
 import { Home } from 'lucide-react';
-import Link from 'next/link';
 import { cn } from '@/lib/utils/cn';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/lib/next-intl/navigation';
 
 interface Props {
   className?: string;

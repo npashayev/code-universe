@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import styles from './Planet.module.scss';
 import Image from 'next/image';
 import { PublicPlanetSummary } from '@/lib/planet/getPlanetList';
+import { Link } from '@/lib/next-intl/navigation';
 
 interface Props {
   category: string;
