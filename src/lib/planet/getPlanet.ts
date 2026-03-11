@@ -96,12 +96,15 @@ export type PublicPlanetResponse = Omit<
   image: NormalizedImage;
 };
 
-export const getPlanet = async (id: string): Promise<PublicPlanetResponse> => {
+export const getPlanet = async (
+  id: string,
+  category: PlanetCategory,
+): Promise<PublicPlanetResponse> => {
   const locale = (await getLocale()) as SupportedLanguage;
 
   const planet = await prisma.planet
     .findUnique({
-      where: { id },
+      where: { id, category },
       include: {
         localized: {
           where: { lang: locale },
