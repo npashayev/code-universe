@@ -42,7 +42,7 @@ const Header = ({ onOpen }: Props) => {
 
         <LanguageSelector />
 
-        <button
+        {/* <button
           onClick={() => setIsDarkMode(!isDarkMode)}
           aria-label={
             isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'
@@ -60,7 +60,7 @@ const Header = ({ onOpen }: Props) => {
               {isDarkMode ? <Moon size={18} /> : <Sun size={18} />}
             </Motion.div>
           </AnimatePresence>
-        </button>
+        </button> */}
       </div>
     </header>
   );
