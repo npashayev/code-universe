@@ -21,6 +21,7 @@
       transition:
         filter 0.3s ease,
         transform 0.3s ease;
+      user-select: none;
     }
 
     &:hover {
