@@ -2,7 +2,7 @@
 
 import { useDeletePlanet } from '@/lib/hooks/queries/usePlanet';
 import Dialog from '../ui/Dialog'
-import RemoveButton from './RemoveButton'
+import RemoveButton from '../ui/RemoveButton'
 import { useState } from 'react';
 
 interface Props {
