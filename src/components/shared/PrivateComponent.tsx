@@ -13,7 +13,7 @@ interface Props {
 const PrivateComponent = ({ roles, children, fallback = null }: Props) => {
     const { data: session } = useSession();
 
-    const userRole = session?.user?.role as UserRole;
+    const userRole = session?.user?.role;
 
     if (!userRole || !roles.includes(userRole)) return fallback;
 
