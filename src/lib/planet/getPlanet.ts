@@ -20,7 +20,6 @@ import { SUPPORTED_LANGS } from '../constants/locale';
 import { getLocale } from 'next-intl/server';
 import { normalizeImage } from '../utils/normalizeImage';
 import { notFound } from 'next/navigation';
-import { Prisma } from '@prisma/client';
 import { handlePrismaError } from '../utils/handlePrismaError';
 
 export interface PlanetForEdit {
