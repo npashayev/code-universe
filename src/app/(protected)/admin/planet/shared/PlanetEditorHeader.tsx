@@ -9,7 +9,7 @@ import {
   StatusSelector,
 } from '@/app/(protected)/admin/planet/add/components/Selectors';
 import { categoryOptions } from '@/lib/constants/reactSelectOptions';
-import DashboardLink from '@/app/(protected)/components/DashboardLink';
+import DashboardLink from '@/components/admin/DashboardLink';
 import { usePlanetJsonIO } from '@/lib/hooks/admin/usePlanetJsonIO';
 import Dialog from '@/components/ui/Dialog';
 

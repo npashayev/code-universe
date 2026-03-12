@@ -13,7 +13,7 @@ import {
 import { Dispatch, SetStateAction } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { categoryOptions } from '@/lib/constants/reactSelectOptions';
-import DashboardLink from '@/app/(protected)/components/DashboardLink';
+import DashboardLink from '@/components/admin/DashboardLink';
 import HomeLink from '@/components/shared/HomeLink';
 import PlanetStats from '@/components/shared/PlanetStats';
 import { useUpdatePlanetList } from '@/lib/hooks/queries/usePlanet';

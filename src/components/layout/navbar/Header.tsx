@@ -1,5 +1,5 @@
 import LogoutButton from '../../ui/LogoutButton';
-import DashboardLink from '@/app/(protected)/components/DashboardLink';
+import DashboardLink from '@/components/admin/DashboardLink';
 import PrivateComponent from '../../shared/PrivateComponent';
 import HomeLink from '@/components/shared/HomeLink';
 import { motion as Motion, AnimatePresence } from 'framer-motion';
