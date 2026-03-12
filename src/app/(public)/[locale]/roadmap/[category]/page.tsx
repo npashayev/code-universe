@@ -5,6 +5,7 @@ import MapSidebar from './components/MapSidebar';
 import { isPlanetCategory } from '@/lib/utils/isPlanetCategory';
 import { notFound } from 'next/navigation';
 import { getPublicPlanetList } from '@/lib/planet/getPlanetList';
+import UpdateLink from '@/components/admin/UpdateLink';
 
 interface Props {
   params: Promise<{
@@ -23,6 +24,11 @@ export default function MapPage({ params }: Props) {
 
   return (
     <main className={styles.page}>
+      <UpdateLink
+        className='fixed top-9 left-30'
+        href={`/admin/roadmap?category=${category}`}
+      />
+
       <div className={styles.wrapper}>
         <div className={styles.stars}></div>
         <div className={styles.stars2}></div>

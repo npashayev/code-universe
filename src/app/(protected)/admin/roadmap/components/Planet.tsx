@@ -1,11 +1,10 @@
 import { PlanetSummary, SupportedLanguage } from '@/types/planet';
 import { Edit, MoveVertical } from 'lucide-react';
-import Link from 'next/link';
 import { Updater } from 'use-immer';
 import { StatusUpdateSelector } from '../../planet/add/components/Selectors';
 import { cn } from '@/lib/utils/cn';
 import DeletePlanetButton from '@/components/admin/DeletePlanetButton';
-import UpdatePlanetLink from '@/components/admin/UpdatePlanetLink';
+import UpdateLink from '@/components/admin/UpdateLink';
 
 interface Props {
   locale: SupportedLanguage;
@@ -69,7 +68,7 @@ const Planet = ({ planet, setOrderedPlanets, locale }: Props) => {
           changePlanetStatus={setOrderedPlanets}
         />
         <div className="flex items-center gap-1">
-          <UpdatePlanetLink planetId={planet.id} />
+          <UpdateLink href={`/admin/planet/update/${planet.id}`} />
           <DeletePlanetButton planetId={planet.id} />
         </div>
       </div>
