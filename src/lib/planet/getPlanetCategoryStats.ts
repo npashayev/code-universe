@@ -2,22 +2,27 @@ import 'server-only';
 
 import { prisma } from '@/lib/prisma/prisma';
 import { PLANET_CATEGORY } from '@/types/planet';
-import type { CategoryStatsItem, PlanetCategory } from '@/types/planet';
+import type { PlanetCategory } from '@/types/planet';
 import { ensureAdmin } from '../auth/ensureAdmin';
+import { PlanetListStats } from './getPlanetList';
+import { handlePrismaError } from '../utils/handlePrismaError';
+
+export interface CategoryStatsItem {
+  category: PlanetCategory;
+  stats: PlanetListStats;
+}
 
 export const getPlanetCategoryStats = async (): Promise<
   CategoryStatsItem[]
 > => {
   await ensureAdmin();
+
   const grouped = await prisma.planet
     .groupBy({
       by: ['category', 'status'],
       _count: { _all: true },
     })
-    .catch((err: unknown) => {
-      console.error('[getPlanetCategoryStats] Database error:', err);
-      throw new Error('Failed to fetch planet category stats.');
-    });
+    .catch((err: unknown) => handlePrismaError(err, 'getPlanetCategoryStats'));
 
   const stats = (Object.keys(PLANET_CATEGORY) as PlanetCategory[]).map(
     (category): CategoryStatsItem => {
