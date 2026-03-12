@@ -122,17 +122,19 @@ export const getPlanet = async (
     prisma.planet.findFirst({
       where: {
         category: planet.category,
-        step: planet.step - 1,
+        step: { lt: planet.step },
         status: 'published',
       },
+      orderBy: { step: 'desc' },
       select: { id: true },
     }),
     prisma.planet.findFirst({
       where: {
         category: planet.category,
-        step: planet.step + 1,
+        step: { gt: planet.step },
         status: 'published',
       },
+      orderBy: { step: 'asc' },
       select: { id: true },
     }),
   ]).catch((err: unknown) => {
