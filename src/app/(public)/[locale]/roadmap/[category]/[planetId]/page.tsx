@@ -1,4 +1,3 @@
-import { use } from 'react';
 import PlanetClient from './components/PlanetClient';
 import { getPlanet } from '@/lib/planet/getPlanet';
 import { isPlanetCategory } from '@/lib/utils/isPlanetCategory';
@@ -11,12 +10,12 @@ interface Props {
   }>;
 }
 
-export default function PlanetPage({ params }: Props) {
-  const { planetId, category } = use(params);
+export default async function PlanetPage({ params }: Props) {
+  const { planetId, category } = await params;
 
   if (!isPlanetCategory(category)) notFound()
 
-  const planet = use(getPlanet(planetId, category));
+  const planet = await getPlanet(planetId, category);
 
   return <PlanetClient planet={planet} />;
 }

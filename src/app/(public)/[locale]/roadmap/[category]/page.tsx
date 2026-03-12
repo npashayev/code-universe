@@ -13,14 +13,14 @@ interface Props {
   }>;
 }
 
-export default function MapPage({ params }: Props) {
-  const { category } = use(params);
+export default async function MapPage({ params }: Props) {
+  const { category } = await params;
 
   if (!isPlanetCategory(category)) {
     notFound();
   }
 
-  const planets = use(getPublicPlanetList(category));
+  const planets = await getPublicPlanetList(category);
 
   return (
     <main className={styles.page}>

@@ -11,14 +11,14 @@ interface Props {
   }>;
 }
 
-export default function MapPage({ searchParams }: Props) {
-  const { category = 'html' } = use(searchParams);
+export default async function MapPage({ searchParams }: Props) {
+  const { category = 'html' } = await searchParams;
 
   if (!isPlanetCategory(category)) {
     redirect('/admin/roadmap?category=html');
   }
 
-  const data = use(getPlanetList(category));
+  const data = await getPlanetList(category);
 
   return <PlanetListClient key={category} data={data} />;
 }

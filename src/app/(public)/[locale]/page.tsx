@@ -3,10 +3,9 @@ import SolarSystem from './components/SolarSystem';
 import galaxy from '@/assets/galaxy.webp';
 import SplashCursor from '@/components/react-bits/SplashCursor';
 import { getTranslations } from 'next-intl/server';
-import { use } from 'react';
 
-export default function HomePage() {
-  const t = use(getTranslations('home'));
+export default async function HomePage() {
+  const t = await getTranslations('home');
   return (
     <main className="page flex items-center justify-center gap-48 text-white px-40 py-28 pl-64">
       <SolarSystem />

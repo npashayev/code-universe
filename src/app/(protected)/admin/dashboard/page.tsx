@@ -1,10 +1,10 @@
 import Header from './components/Header';
-import { use } from 'react';
 import { getPlanetCategoryStats } from '@/lib/planet/getPlanetCategoryStats';
 import CategoryStatsList from './components/CategoryStatsList';
 
-export default function DashboardPage() {
-  const data = use(getPlanetCategoryStats());
+export default async function DashboardPage() {
+  const data = await getPlanetCategoryStats();
+
   return (
     <div className="page">
       <Header />
