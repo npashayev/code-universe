@@ -1,6 +1,6 @@
 import { PlanetCategory, PlanetListResponse, PlanetSummary } from '@/types/planet';
 import { Search } from 'lucide-react';
-import AddPlanetLink from '../../components/AddPlanetLink';
+import AddPlanetLink from '../../../../../components/admin/AddPlanetLink';
 import {
   CategorySelector,
   ExtendedStatusSelector,
