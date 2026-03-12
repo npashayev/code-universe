@@ -159,8 +159,3 @@ export interface ImageContent extends BaseContent {
   image: NormalizedImage;
   pendingImageId?: string;
 }
-
-// export interface CategoryStatsItem {
-//   category: PlanetCategory;
-//   stats: PlanetListStats;
-// }
