@@ -1,4 +1,4 @@
-import { PlanetCategory, PlanetListResponse, PlanetSummary } from '@/types/planet';
+import { PlanetCategory } from '@/types/planet';
 import { Search } from 'lucide-react';
 import AddPlanetLink from '../../../../../components/admin/AddPlanetLink';
 import {
@@ -17,16 +17,17 @@ import DashboardLink from '@/components/admin/DashboardLink';
 import HomeLink from '@/components/shared/HomeLink';
 import PlanetStats from '@/components/shared/PlanetStats';
 import { useUpdatePlanetList } from '@/lib/hooks/queries/usePlanet';
+import { AdminPlanetListResponse, AdminPlanetSummary } from '@/lib/planet/getPlanetList';
 
 export interface Props {
-  data: PlanetListResponse;
+  data: AdminPlanetListResponse;
   currentLanguage: LanguageOption;
   setCurrentLanguage: Dispatch<SetStateAction<LanguageOption>>;
   searchQuery: string;
   setSearchQuery: Dispatch<SetStateAction<string>>;
   status: ExtendedStatusOption;
   setStatus: Dispatch<SetStateAction<ExtendedStatusOption>>;
-  orderedPlanets: PlanetSummary[];
+  orderedPlanets: AdminPlanetSummary[];
 }
 
 const Header = ({

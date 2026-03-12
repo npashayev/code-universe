@@ -1,15 +1,16 @@
-import { PlanetSummary, SupportedLanguage } from '@/types/planet';
-import { Edit, MoveVertical } from 'lucide-react';
+import { SupportedLanguage } from '@/types/planet';
+import { MoveVertical } from 'lucide-react';
 import { Updater } from 'use-immer';
 import { StatusUpdateSelector } from '../../planet/add/components/Selectors';
 import { cn } from '@/lib/utils/cn';
 import DeletePlanetButton from '@/components/admin/DeletePlanetButton';
 import UpdateLink from '@/components/admin/UpdateLink';
+import { AdminPlanetSummary } from '@/lib/planet/getPlanetList';
 
 interface Props {
   locale: SupportedLanguage;
-  planet: PlanetSummary;
-  setOrderedPlanets: Updater<PlanetSummary[]>;
+  planet: AdminPlanetSummary;
+  setOrderedPlanets: Updater<AdminPlanetSummary[]>;
 }
 
 const Planet = ({ planet, setOrderedPlanets, locale }: Props) => {

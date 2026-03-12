@@ -217,35 +217,3 @@ export async function updatePlanet(data: unknown): Promise<UpdatePlanetResult> {
 
   return { success: true as const, planetId: parsed.data.id, r2Cleanup };
 }
-
-interface UpdatePlanetListParams {
-  category: PlanetCategory;
-  planetList: Pick<PlanetSummary, 'id' | 'step' | 'status'>[];
-}
-
-export const updatePlanetList = async ({
-  category,
-  planetList,
-}: UpdatePlanetListParams): Promise<void> => {
-  await ensureAdmin();
-
-  if (!category || !planetList) {
-    throw new Error('Missing category or planet list.');
-  }
-
-  try {
-    await prisma.$transaction(
-      planetList.map(({ id, step, status }) =>
-        prisma.planet.update({
-          where: { id, category },
-          data: { step, status },
-        }),
-      ),
-    );
-
-    revalidatePath(`/admin/roadmap?category=${category}`);
-  } catch (err) {
-    console.error('[updatePlanetList] Database error:', err);
-    throw new Error('Failed to update planet list. Please try again.');
-  }
-};

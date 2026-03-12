@@ -1,5 +1,4 @@
 'use client';
-import { PlanetListResponse, PlanetSummary } from '@/types/planet';
 import Header from './Header';
 import Planet from './Planet';
 import { useState } from 'react';
@@ -12,18 +11,23 @@ import { useImmer } from 'use-immer';
 import SortableList from '@/components/shared/SortableList';
 import { DragEndEvent } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
+import { AdminPlanetListResponse, AdminPlanetSummary } from '@/lib/planet/getPlanetList';
 
 interface Props {
-  data: PlanetListResponse;
+  data: AdminPlanetListResponse;
 }
 
 const PlanetListClient = ({ data }: Props) => {
   const [orderedPlanets, setOrderedPlanets] = useImmer(data.planets);
+
   const [currentLanguage, setCurrentLanguage] = useState<LanguageOption>(
     languageOptions[0],
   );
+
   const [status, setStatus] = useState(extendedStatusOptions[0]);
+
   const [searchQuery, setSearchQuery] = useState('');
+
   const locale = currentLanguage.value;
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -73,7 +77,7 @@ const PlanetListClient = ({ data }: Props) => {
         orderedPlanets={orderedPlanets}
       />
       <main className="admin-main">
-        <SortableList<PlanetSummary>
+        <SortableList<AdminPlanetSummary>
           id="planet-sortable-list"
           className="space-y-3 pb-18"
           elements={filteredPlanets}

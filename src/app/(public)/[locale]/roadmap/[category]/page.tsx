@@ -1,4 +1,3 @@
-import { use } from 'react';
 import styles from './page.module.scss';
 import Planet from './components/Planet';
 import MapSidebar from './components/MapSidebar';
@@ -21,7 +20,7 @@ export default async function MapPage({ params }: Props) {
   }
 
   const planets = await getPublicPlanetList(category);
-
+  console.log(planets)
   return (
     <main className={styles.page}>
       <UpdateLink

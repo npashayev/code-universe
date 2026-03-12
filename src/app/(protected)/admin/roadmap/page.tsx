@@ -1,8 +1,7 @@
-import { use } from 'react';
-import { redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import PlanetListClient from './components/PlanetListClient';
-import { getPlanetList } from '@/lib/planet/getPlanetList';
 import { isPlanetCategory } from '@/lib/utils/isPlanetCategory';
+import { getAdminPlanetList } from '@/lib/planet/getPlanetList';
 
 interface Props {
   searchParams: Promise<{
@@ -15,10 +14,10 @@ export default async function MapPage({ searchParams }: Props) {
   const { category = 'html' } = await searchParams;
 
   if (!isPlanetCategory(category)) {
-    redirect('/admin/roadmap?category=html');
+    notFound();
   }
 
-  const data = await getPlanetList(category);
+  const data = await getAdminPlanetList(category);
 
   return <PlanetListClient key={category} data={data} />;
 }

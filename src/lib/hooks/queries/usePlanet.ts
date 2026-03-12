@@ -1,7 +1,7 @@
 'use client';
 
 import { deletePlanet } from '@/app/actions/deletePlanet';
-import { updatePlanetList } from '@/app/actions/planet';
+import { updatePlanetList } from '@/app/actions/updatePlanetList';
 import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 

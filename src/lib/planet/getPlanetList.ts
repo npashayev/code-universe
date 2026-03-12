@@ -33,65 +33,51 @@ export interface AdminPlanetListResponse {
   stats: PlanetListStats;
 }
 
-// // Shared helper to map localized array to Record
-// const mapLocalizedArray = (
-//   localized: LocalizedQueryResult[],
-// ): Record<SupportedLanguage, LocalizedPlanetSummary> =>
-//   localized.reduce(
-//     (acc, { lang, name, tags }) => {
-//       acc[lang] = { name, tags };
-//       return acc;
-//     },
-//     {} as Record<SupportedLanguage, LocalizedPlanetSummary>,
-//   );
+// Admin list with stats
+export const getAdminPlanetList = async (
+  category: PlanetCategory,
+): Promise<AdminPlanetListResponse> => {
+  await ensureAdmin();
 
-// // Mapper for admin (includes status)
-// const mapToPlanetSummary = (
-//   planets: PlanetListQueryResult[],
-// ): PlanetSummary[] =>
-//   planets.map(({ id, step, status, localized }) => ({
-//     id,
-//     step,
-//     status,
-//     localized: mapLocalizedArray(localized),
-//   }));
+  const planets = await prisma.planet
+    .findMany({
+      where: { category },
+      orderBy: { step: 'asc' },
+      select: {
+        id: true,
+        step: true,
+        status: true,
+        localized: { select: { lang: true, name: true, tags: true } },
+      },
+    })
+    .catch((err: unknown) => handlePrismaError(err, 'getAdminPlanetList'));
 
-// // Admin list with stats
-// export const getPlanetList = async (
-//   category: PlanetCategory,
-// ): Promise<PlanetListResponse> => {
-//   await ensureAdmin();
+  const mapped = planets.map(({ id, step, status, localized }) => ({
+    id,
+    step,
+    status,
+    localized: localized.reduce(
+      (acc, { lang, name, tags }) => {
+        acc[lang] = { name, tags };
+        return acc;
+      },
+      {} as Record<SupportedLanguage, LocalizedPlanetSummary>,
+    ),
+  }));
 
-//   const planets = await prisma.planet
-//     .findMany({
-//       where: { category },
-//       orderBy: { step: 'asc' },
-//       select: {
-//         id: true,
-//         step: true,
-//         status: true,
-//         localized: { select: { lang: true, name: true, tags: true } },
-//       },
-//     })
-//     .catch((err: unknown) => {
-//       console.error('[getPlanetList] Database error:', err);
-//       throw new Error('Failed to fetch planets.');
-//     });
+  const published = mapped.filter(p => p.status === 'published').length;
+  const drafts = mapped.filter(p => p.status === 'draft').length;
 
-//   const mapped = mapToPlanetSummary(planets);
-//   const published = mapped.filter(p => p.status === 'published').length;
-//   const drafts = mapped.filter(p => p.status === 'draft').length;
-
-//   return {
-//     category,
-//     planets: mapped,
-//     stats: {
-//       total: mapped.length,
-//       published,
-//       drafts,
-//     },
-//   };
-// };
+  return {
+    category,
+    planets: mapped,
+    stats: {
+      total: mapped.length,
+      published,
+      drafts,
+    },
+  };
+};
 
 export type PublicPlanetSummary = Pick<PlanetData, 'id' | 'step'> & {
   image: NormalizedImage;
