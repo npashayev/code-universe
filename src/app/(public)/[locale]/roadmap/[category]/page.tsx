@@ -5,6 +5,7 @@ import { isPlanetCategory } from '@/lib/utils/isPlanetCategory';
 import { notFound } from 'next/navigation';
 import { getPublicPlanetList } from '@/lib/planet/getPlanetList';
 import UpdateLink from '@/components/admin/UpdateLink';
+import PrivateComponent from '@/components/shared/PrivateComponent';
 
 interface Props {
   params: Promise<{
@@ -23,10 +24,12 @@ export default async function MapPage({ params }: Props) {
   console.log(planets)
   return (
     <main className={styles.page}>
-      <UpdateLink
-        className='fixed top-9 left-30'
-        href={`/admin/roadmap?category=${category}`}
-      />
+      <PrivateComponent roles={['ADMIN']}>
+        <UpdateLink
+          className='fixed top-9 left-30'
+          href={`/admin/roadmap?category=${category}`}
+        />
+      </PrivateComponent>
 
       <div className={styles.wrapper}>
         <div className={styles.stars}></div>
