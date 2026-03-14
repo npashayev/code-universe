@@ -8,6 +8,7 @@ import {
   createPlanetDataSchema,
 } from '@/lib/validation/planetDataSchema';
 import { updatePlanet, type UpdatePlanetResult } from '@/app/actions/planet';
+import { SUPPORTED_LANGS } from '@/lib/constants/locale';
 
 function getImageDimensions(
   file: File,
@@ -72,7 +73,8 @@ export const useUpdatePlanet = ({
     }
 
     // Validate structure before any image upload
-    const preSubmitResult = preSubmitCreatePlanetDataSchema.safeParse(planetData);
+    const preSubmitResult =
+      preSubmitCreatePlanetDataSchema.safeParse(planetData);
     if (!preSubmitResult.success) {
       const { fieldErrors, formErrors } = preSubmitResult.error.flatten();
       console.error('[handleUpdate] Pre-upload validation failed:', {
@@ -105,18 +107,14 @@ export const useUpdatePlanet = ({
       return;
     }
 
-    const uploadedR2Keys = Array.from(uploadResults.values()).map(
-      r => r.r2Key,
-    );
+    const uploadedR2Keys = Array.from(uploadResults.values()).map(r => r.r2Key);
 
-    const mergedData: CreatePlanetData = JSON.parse(
-      JSON.stringify(planetData),
-    );
+    const mergedData: CreatePlanetData = JSON.parse(JSON.stringify(planetData));
     uploadResults.forEach((result, fileKey) => {
       if (fileKey === 'main-image') {
         mergedData.image.url = result.url;
       } else {
-        (['az', 'en'] as SupportedLanguage[]).forEach(loc => {
+        SUPPORTED_LANGS.forEach(loc => {
           mergedData.localized[loc].contents.forEach(c => {
             if (c.type === 'image' && c.pendingImageId === fileKey) {
               c.image.url = result.url;
@@ -141,7 +139,7 @@ export const useUpdatePlanet = ({
         ...Array.from(pendingContentImages.entries()).map(
           async ([fileKey, { file }]) => {
             const dims = await getImageDimensions(file);
-            (['az', 'en'] as SupportedLanguage[]).forEach(loc => {
+            SUPPORTED_LANGS.forEach(loc => {
               mergedData.localized[loc].contents.forEach(c => {
                 if (c.type === 'image' && c.pendingImageId === fileKey) {
                   c.image.metadata = dims;
@@ -223,4 +221,3 @@ export const useUpdatePlanet = ({
 
   return { handleSubmit, isSubmitting, isUploading, progress };
 };
-

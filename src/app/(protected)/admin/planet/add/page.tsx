@@ -4,7 +4,6 @@ import {
   CreatePlanetData,
   PLANET_CATEGORY,
   PlanetCategory,
-  SupportedLanguage,
 } from '@/types/planet';
 import { use, useEffect, useState } from 'react';
 import { useImmer } from 'use-immer';
@@ -14,6 +13,7 @@ import { getInitialPlanetData } from '@/lib/utils/getInitialPlanetData';
 import { PlanetEditorLayout } from '@/app/(protected)/admin/planet/shared/PlanetEditorLayout';
 import { useSubmitPlanet } from '@/lib/hooks/admin/useSubmitPlanet';
 import PlanetClient from '@/app/(public)/[locale]/roadmap/[category]/[planetId]/components/PlanetClient';
+import { SUPPORTED_LANGS } from '@/lib/constants/locale';
 
 interface Props {
   searchParams: Promise<{
@@ -54,7 +54,7 @@ export default function AddPlanetPage({ searchParams }: Props) {
   // Remove orphaned content images: keep only images referenced by any content in any locale
   useEffect(() => {
     const used = new Set<string>();
-    (['az', 'en'] as SupportedLanguage[]).forEach(loc => {
+    SUPPORTED_LANGS.forEach(loc => {
       planetData.localized[loc].contents.forEach(c => {
         if (c.type === 'image' && c.pendingImageId) {
           used.add(c.pendingImageId);
@@ -80,19 +80,28 @@ export default function AddPlanetPage({ searchParams }: Props) {
 
   if (previewActive) {
     return (
-      <PlanetClient
-        planet={{
-          ...planetData,
-          id: '',
-          image: {
-            ...planetData.image,
-            alt: planetData.image.alt[currentLanguage.value],
-          },
-          localized: planetData.localized[currentLanguage.value],
-          prevPlanetId: null,
-          nextPlanetId: null,
-        }}
-      />
+      <>
+        <button
+          className='fixed top-8 left-10 px-2 py-1.5 rounded bg-slate-800 hover:bg-slate-900 border border-white/10'
+          onClick={() => setPreviewActive(false)}
+        >
+          Exit preview
+        </button>
+
+        <PlanetClient
+          planet={{
+            ...planetData,
+            id: '',
+            image: {
+              ...planetData.image,
+              alt: planetData.image.alt[currentLanguage.value],
+            },
+            localized: planetData.localized[currentLanguage.value],
+            prevPlanetId: null,
+            nextPlanetId: null,
+          }}
+        />
+      </>
     );
   }
 

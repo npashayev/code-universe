@@ -1,6 +1,6 @@
 import { CreatePlanetData, SupportedLanguage } from '@/types/planet';
 import { FolderPen, ImageIcon } from 'lucide-react';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, Dispatch, useEffect, useState } from 'react';
 import { Updater } from 'use-immer';
 import ImagePicker from '../shared/ImagePicker';
 import Label from '../shared/Label';
@@ -12,7 +12,7 @@ interface Props {
   planetData: CreatePlanetData;
   setPlanetData: Updater<CreatePlanetData>;
   locale: SupportedLanguage;
-  setPendingFiles: React.Dispatch<React.SetStateAction<Map<string, File>>>;
+  setPendingFiles: Dispatch<React.SetStateAction<Map<string, File>>>;
 }
 
 const BasicConfigurationSection = ({
@@ -67,9 +67,9 @@ const BasicConfigurationSection = ({
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="description">Description</Label>
+          <Label htmlFor="planet-description">Description</Label>
           <Textarea
-            id="description"
+            id="planet-description"
             value={planetData.localized[locale].description}
             onChange={e =>
               setPlanetData(draft => {

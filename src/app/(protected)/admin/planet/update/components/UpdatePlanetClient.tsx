@@ -2,7 +2,6 @@
 
 import {
   CreatePlanetData,
-  SupportedLanguage,
 } from '@/types/planet';
 import { useState, useEffect } from 'react';
 import { useImmer } from 'use-immer';
@@ -11,6 +10,7 @@ import { languageOptions } from '@/lib/constants/reactSelectOptions';
 import { PlanetEditorLayout } from '@/app/(protected)/admin/planet/shared/PlanetEditorLayout';
 import { useUpdatePlanet } from '@/lib/hooks/admin/useUpdatePlanet';
 import PlanetClient from '@/app/(public)/[locale]/roadmap/[category]/[planetId]/components/PlanetClient';
+import { SUPPORTED_LANGS } from '@/lib/constants/locale';
 
 interface PendingContentImageEntry {
   previewUrl: string;
@@ -51,7 +51,7 @@ const UpdatePlanetClient = ({ planetId, step, initialData }: Props) => {
   // Remove orphaned content images: keep only images referenced by any content in any locale
   useEffect(() => {
     const used = new Set<string>();
-    (['az', 'en'] as SupportedLanguage[]).forEach(loc => {
+    SUPPORTED_LANGS.forEach(loc => {
       planetData.localized[loc].contents.forEach(c => {
         if (c.type === 'image' && c.pendingImageId) {
           used.add(c.pendingImageId);

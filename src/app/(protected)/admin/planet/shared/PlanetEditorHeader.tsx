@@ -63,15 +63,16 @@ export const PlanetEditorHeader = ({
   progress,
 }: PlanetEditorHeaderProps) => {
   const [modalOpen, setModalOpen] = useState(false);
+
   const {
     handleImportClick,
     handleExportClick,
     handleFileChange,
     fileInputRef,
-  } = usePlanetJsonIO({ planetData, setPlanetData, currentLanguage });
+  } = usePlanetJsonIO({ planetData, setPlanetData, locale: currentLanguage.value });
 
   const handleConfirm = () => {
-    void onSubmit();
+    onSubmit();
   };
 
   const submitLabel =
@@ -101,50 +102,65 @@ export const PlanetEditorHeader = ({
         </h1>
       </div>
 
-      <div className="flex items-center gap-4">
-        <LanguageSelector
-          currentLanguage={currentLanguage}
-          setCurrentLanguage={setCurrentLanguage}
-        />
+      <div className="flex flex-col gap-4 items-center">
+        <div className='flex items-center gap-4'>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="application/json,.json"
+            className="hidden"
+            onChange={handleFileChange}
+            aria-hidden
+          />
 
-        <StatusSelector planetData={planetData} setPlanetData={setPlanetData} />
+          <button
+            type="button"
+            onClick={() => handleImportClick('full')}
+            className="admin-header-icon-btn"
+          >
+            <Upload size={14} />
+            Import Full JSON
+          </button>
 
-        <CategorySelector
-          value={
-            categoryOptions.find(o => o.value === planetData.category) ||
-            categoryOptions[0]
-          }
-          onCategoryChange={(category: PlanetCategory) =>
-            setPlanetData(draft => {
-              draft.category = category;
-            })
-          }
-        />
+          <button
+            type="button"
+            onClick={() => handleImportClick('locale')}
+            className="admin-header-icon-btn"
+          >
+            <Upload size={14} />
+            Import Locale JSON
+          </button>
 
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept="application/json,.json"
-          className="hidden"
-          onChange={handleFileChange}
-          aria-hidden
-        />
-        <button
-          type="button"
-          onClick={handleImportClick}
-          className="admin-header-icon-btn"
-        >
-          <Upload size={14} />
-          Import JSON
-        </button>
-        <button
-          type="button"
-          onClick={handleExportClick}
-          className="admin-header-icon-btn"
-        >
-          <Download size={14} />
-          Export JSON
-        </button>
+          <button
+            type="button"
+            onClick={handleExportClick}
+            className="admin-header-icon-btn"
+          >
+            <Download size={14} />
+            Export JSON
+          </button>
+        </div>
+
+        <div className='flex items-center gap-4'>
+          <LanguageSelector
+            currentLanguage={currentLanguage}
+            setCurrentLanguage={setCurrentLanguage}
+          />
+
+          <StatusSelector planetData={planetData} setPlanetData={setPlanetData} />
+
+          <CategorySelector
+            value={
+              categoryOptions.find(o => o.value === planetData.category) ||
+              categoryOptions[0]
+            }
+            onCategoryChange={(category: PlanetCategory) =>
+              setPlanetData(draft => {
+                draft.category = category;
+              })
+            }
+          />
+        </div>
       </div>
 
       <div className="flex gap-4 items-center">

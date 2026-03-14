@@ -6,6 +6,7 @@ import Input from '../shared/Input';
 import ImagePicker from '../shared/ImagePicker';
 import Textarea from '../shared/Textarea';
 import { PendingImageSelector } from '../Selectors';
+import { Dispatch } from 'react';
 
 type PendingContentImageEntry = {
   previewUrl: string;
@@ -16,7 +17,7 @@ interface Props {
   content: ImageContent;
   onUpdate: UpdateContentFn;
   pendingContentImages: Map<string, PendingContentImageEntry>;
-  setPendingContentImages: React.Dispatch<
+  setPendingContentImages: Dispatch<
     React.SetStateAction<Map<string, PendingContentImageEntry>>
   >;
 }
@@ -37,9 +38,9 @@ const ImageContentBlock = ({
   const selectedPendingOption: PendingImageOption | null =
     content.pendingImageId
       ? {
-          value: content.pendingImageId,
-          label: content.pendingImageId,
-        }
+        value: content.pendingImageId,
+        label: content.pendingImageId,
+      }
       : null;
 
   const imagePreviewUrl =

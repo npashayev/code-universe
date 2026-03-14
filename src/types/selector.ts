@@ -1,9 +1,4 @@
-import {
-  CodeContent,
-  CreatePlanetData,
-  PlanetCategory,
-  PlanetSummary,
-} from '@/types/planet';
+import { CodeContent, CreatePlanetData, PlanetCategory } from '@/types/planet';
 import { Updater } from 'use-immer';
 import { UpdateContentFn } from '@/lib/hooks/useLocalizedContent';
 import {
@@ -17,6 +12,7 @@ import {
   TitleLevelOption,
 } from '@/types/reactSelectOptions';
 import { Dispatch, SetStateAction } from 'react';
+import { AdminPlanetSummary } from '@/lib/planet/getPlanetList';
 
 export interface PlanetDataProps {
   planetData: CreatePlanetData;
@@ -29,13 +25,13 @@ export interface CategorySelectorProps {
 }
 
 export interface StatusUpdateSelectorProps {
-  planet: PlanetSummary;
-  changePlanetStatus: Updater<PlanetSummary[]>;
+  planet: AdminPlanetSummary;
+  changePlanetStatus: Updater<AdminPlanetSummary[]>;
 }
 
 export interface LanguageSelectorProps {
   currentLanguage: LanguageOption;
-  setCurrentLanguage: React.Dispatch<React.SetStateAction<LanguageOption>>;
+  setCurrentLanguage: Dispatch<React.SetStateAction<LanguageOption>>;
 }
 
 export interface ContentTypeSelectorProps {

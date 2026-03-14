@@ -23,52 +23,56 @@ const ContentSidebar = ({ contents, setPlanetData, locale }: Props) => {
   const [selectedContentType, setSelectedContentType] = useState(
     contentTypeOptions[0],
   );
-  const { addContent, removeContent: removeContentFromHook } =
+  const { addContent, removeContent } =
     useLocalizedContent({
       setPlanetData,
       locale,
     });
+
   const handleDragEnd = useLocalizedDragReorder(setPlanetData, locale, 'contents');
 
   return (
-    <aside className={cn('admin-page-section', 'sticky top-28 shadow-2xl shrink-0 w-80')}>
-      <SectionHeader>
-        <Layout size={14} />
-        <h2>Planet Content</h2>
-      </SectionHeader>
+    <aside className={cn('admin-page-section', 'sticky top-28 shadow-2xl shrink-0 w-80 px-0')}>
+      <div className='px-6'>
+        <SectionHeader>
+          <Layout size={14} />
+          <h2>Planet Content</h2>
+        </SectionHeader>
 
-      <div className="space-y-4">
-        <div className="space-y-2">
-          <div className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">
-            New Content Module
+        <div className="space-y-4">
+          <div className="space-y-2">
+            <div className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+              New Content Module
+            </div>
+            <ContentTypeSelector
+              value={selectedContentType}
+              onChange={setSelectedContentType}
+            />
           </div>
-          <ContentTypeSelector
-            value={selectedContentType}
-            onChange={setSelectedContentType}
-          />
-        </div>
 
-        <AddButton
-          onClick={() => addContent(selectedContentType.value)}
-          className="w-full flex items-center justify-center gap-2 py-3 hover:bg-orange-500/30 border border-white/18 hover:border-orange-500/50"
-        >
-          <Plus size={18} />
-          Add Module
-        </AddButton>
+          <AddButton
+            onClick={() => addContent(selectedContentType.value)}
+            className="w-full flex items-center justify-center gap-2 py-3 hover:bg-orange-500/30 border border-white/18 hover:border-orange-500/50"
+          >
+            <Plus size={18} />
+            Add Module
+          </AddButton>
+        </div>
       </div>
 
       {contents.length > 0 ? (
-        <div className="overflow-hidden mt-8 space-y-3 max-h-100 overflow-y-auto custom-scrollbar border-t border-white/12 pt-6">
-          <h3 className="text-[10px] text-slate-500 uppercase font-black tracking-widest mb-4">
+        <div className="mt-8 px-6 space-y-3 max-h-100 max-[1600px]:max-h-64 overflow-y-auto custom-scrollbar border-t border-white/12 pt-6">
+          <h3 className="text-[10px] text-slate-500 uppercase font-black tracking-widest mb-2">
             Discovery Outline
           </h3>
           <SortableList<PlanetContent>
             id="content-sortable-list"
             elements={contents}
+            className='py-2'
             handleDragEnd={handleDragEnd}
             renderItem={content => (
               <ListElement
-                onRemove={() => removeContentFromHook(content.id)}
+                onRemove={() => removeContent(content.id)}
               >
                 <Link href={`#${content.id}`} className="flex flex-col min-w-0">
                   <div className="flex flex-col min-w-0 overflow-hidden">

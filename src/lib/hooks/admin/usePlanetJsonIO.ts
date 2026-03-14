@@ -1,10 +1,8 @@
 import {
-  createPlanetDataSchema,
-  localizedPlanetDataSchema,
   preSubmitCreatePlanetDataSchema,
+  preSubmitLocalizedPlanetDataSchema,
 } from '@/lib/validation/planetDataSchema';
-import { CreatePlanetData } from '@/types/planet';
-import { LanguageOption } from '@/types/reactSelectOptions';
+import { CreatePlanetData, SupportedLanguage } from '@/types/planet';
 import { useRef } from 'react';
 import toast from 'react-hot-toast';
 import { Updater } from 'use-immer';
@@ -12,17 +10,21 @@ import { Updater } from 'use-immer';
 interface Params {
   planetData: CreatePlanetData;
   setPlanetData: Updater<CreatePlanetData>;
-  currentLanguage: LanguageOption;
+  locale: SupportedLanguage;
 }
+
+type JsonType = 'full' | 'locale';
 
 export const usePlanetJsonIO = ({
   planetData,
   setPlanetData,
-  currentLanguage,
+  locale,
 }: Params) => {
+  const jsonTypeRef = useRef<JsonType>('full');
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleImportClick = () => {
+  const handleImportClick = (type: JsonType) => {
+    jsonTypeRef.current = type;
     fileInputRef.current?.click();
   };
 
@@ -34,10 +36,8 @@ export const usePlanetJsonIO = ({
       const blob = new Blob([jsonString], { type: 'application/json' });
       url = URL.createObjectURL(blob);
 
-      const planetName = planetData.localized[currentLanguage.value]?.name
-        ? planetData.localized[currentLanguage.value].name
-            .toLowerCase()
-            .replace(/\s+/g, '-')
+      const planetName = planetData.localized[locale]?.name
+        ? planetData.localized[locale].name.toLowerCase().replace(/\s+/g, '-')
         : 'planet';
 
       const link = document.createElement('a');
@@ -64,23 +64,41 @@ export const usePlanetJsonIO = ({
         if (typeof reader.result !== 'string') return;
 
         const parsed = JSON.parse(reader.result);
-        const result = preSubmitCreatePlanetDataSchema.safeParse(parsed);
 
-        if (!result.success) {
-          toast.error(
-            "JSON content doesn't satisfy localized planet data structure",
-          );
-          console.error(
-            'JSON validation error for localized data:',
-            result.error.flatten().fieldErrors,
-          );
-          return;
+        if (jsonTypeRef.current === 'full') {
+          const result = preSubmitCreatePlanetDataSchema.safeParse(parsed);
+
+          if (!result.success) {
+            toast.error(
+              "JSON content doesn't satisfy full planet data structure",
+            );
+            console.error(
+              'JSON validation error for full planet data:',
+              result.error.flatten().fieldErrors,
+            );
+            return;
+          }
+
+          setPlanetData(() => {
+            return result.data;
+          });
+        } else if (jsonTypeRef.current === 'locale') {
+          const result = preSubmitLocalizedPlanetDataSchema.safeParse(parsed);
+          if (!result.success) {
+            toast.error(
+              "JSON content doesn't satisfy localized planet data structure",
+            );
+            console.error(
+              'JSON validation error for localized data:',
+              result.error.flatten().fieldErrors,
+            );
+            return;
+          }
+
+          setPlanetData(draft => {
+            draft.localized[locale] = result.data;
+          });
         }
-
-        setPlanetData(draft => {
-          //   draft.localized[currentLanguage.value] = result.data;
-          return result.data;
-        });
       } catch (err) {
         toast.error('Invalid JSON file');
         console.error('Invalid JSON file:', err);

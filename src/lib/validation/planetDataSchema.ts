@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { SUPPORTED_LANGS } from '../constants/locale';
 
 /** Validates URL and normalizes protocol-less URLs (e.g. "example.com" -> "https://example.com") */
 export const urlSchema = (message = 'Invalid URL') =>
@@ -27,7 +28,7 @@ export const urlSchema = (message = 'Invalid URL') =>
 
 export const statusEnum = z.enum(['draft', 'published']);
 export const categoryEnum = z.enum(['html', 'css', 'javascript']);
-const supportedLanguageEnum = z.enum(['az', 'en']);
+const supportedLanguageEnum = z.enum(SUPPORTED_LANGS);
 const titleLevelEnum = z.enum(['h2', 'h3', 'h4', 'h5', 'h6']);
 const textVariantEnum = z.enum(['normal', 'note', 'warning', 'tip']);
 const programmingLanguageEnum = z.enum([
@@ -143,7 +144,7 @@ const imageContentSchemaPreSubmit = fullBaseContentSchema.extend({
   pendingImageId: z.string().optional(),
 });
 
-const planetContentSchemaPreSubmit = z.discriminatedUnion('type', [
+const preSubmitPlanetContentSchema = z.discriminatedUnion('type', [
   textContentSchema,
   implementationTaskContentSchema,
   codeContentSchema,
@@ -181,9 +182,10 @@ export const createPlanetDataSchema = z.object({
 });
 
 /** Use before image upload to validate structure; allows empty URLs for pending images */
-const localizedPlanetDataSchemaPreSubmit = localizedPlanetDataSchema.extend({
-  contents: z.array(planetContentSchemaPreSubmit),
-});
+export const preSubmitLocalizedPlanetDataSchema =
+  localizedPlanetDataSchema.extend({
+    contents: z.array(preSubmitPlanetContentSchema),
+  });
 
 export const preSubmitCreatePlanetDataSchema = z.object({
   category: categoryEnum,
@@ -195,7 +197,7 @@ export const preSubmitCreatePlanetDataSchema = z.object({
   }),
   localized: z.record(
     supportedLanguageEnum,
-    localizedPlanetDataSchemaPreSubmit,
+    preSubmitLocalizedPlanetDataSchema,
   ),
 });
 

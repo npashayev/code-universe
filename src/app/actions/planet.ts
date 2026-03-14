@@ -1,5 +1,6 @@
 'use server';
 import { ensureAdmin } from '@/lib/auth/ensureAdmin';
+import { SUPPORTED_LANGS } from '@/lib/constants/locale';
 import { prisma } from '@/lib/prisma/prisma';
 import {
   createPlanetDataSchema,
@@ -144,7 +145,7 @@ export async function updatePlanet(data: unknown): Promise<UpdatePlanetResult> {
         });
       });
 
-      (['az', 'en'] as SupportedLanguage[]).forEach(lang => {
+      SUPPORTED_LANGS.forEach(lang => {
         const locData = rest.localized[lang];
         locData.contents.forEach(c => {
           if (c.type === 'image' && c.image.url) {
