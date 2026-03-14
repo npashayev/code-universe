@@ -1,4 +1,4 @@
-import { CreatePlanetData, SupportedLanguage } from '@/types/planet';
+import { CreatePlanetData } from '@/types/planet';
 import { BatchUploadItem } from '@/types/r2';
 import { useR2Upload } from '@/lib/hooks/useR2Upload';
 import { Dispatch, SetStateAction, useState } from 'react';
@@ -8,8 +8,8 @@ import {
   preSubmitCreatePlanetDataSchema,
   createPlanetDataSchema,
 } from '@/lib/validation/planetDataSchema';
-import { submitPlanet } from '@/app/actions/planet';
 import { SUPPORTED_LANGS } from '@/lib/constants/locale';
+import { submitPlanet } from '@/app/actions/submitPlanet';
 
 function getImageDimensions(
   file: File,
@@ -110,7 +110,7 @@ export const useSubmitPlanet = ({
       if (fileKey === 'main-image') {
         mergedData.image.url = result.url;
       } else {
-        (SUPPORTED_LANGS.forEach(loc => {
+        SUPPORTED_LANGS.forEach(loc => {
           mergedData.localized[loc].contents.forEach(c => {
             if (c.type === 'image' && c.pendingImageId === fileKey) {
               c.image.url = result.url;
