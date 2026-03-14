@@ -5,7 +5,7 @@ import {
   PLANET_CATEGORY,
   PlanetCategory,
 } from '@/types/planet';
-import { use, useEffect, useState } from 'react';
+import { use, useState } from 'react';
 import { useImmer } from 'use-immer';
 import { LanguageOption } from '@/types/reactSelectOptions';
 import { languageOptions } from '@/lib/constants/reactSelectOptions';
@@ -13,7 +13,8 @@ import { getInitialPlanetData } from '@/lib/utils/getInitialPlanetData';
 import { PlanetEditorLayout } from '@/app/(protected)/admin/planet/shared/PlanetEditorLayout';
 import { useSubmitPlanet } from '@/lib/hooks/admin/useSubmitPlanet';
 import PlanetClient from '@/app/(public)/[locale]/roadmap/[category]/[planetId]/components/PlanetClient';
-import { SUPPORTED_LANGS } from '@/lib/constants/locale';
+import { useOrphanedImageCleanup } from '@/lib/hooks/admin/useOrphanedImageCleanup';
+import ExitPreviewButton from '@/components/shared/ExitPreviewButton';
 
 interface Props {
   searchParams: Promise<{
@@ -51,43 +52,12 @@ export default function AddPlanetPage({ searchParams }: Props) {
     },
   );
 
-  // Remove orphaned content images: keep only images referenced by any content in any locale
-  useEffect(() => {
-    const used = new Set<string>();
-    SUPPORTED_LANGS.forEach(loc => {
-      planetData.localized[loc].contents.forEach(c => {
-        if (c.type === 'image' && c.pendingImageId) {
-          used.add(c.pendingImageId);
-        }
-      });
-    });
-
-    queueMicrotask(() => {
-      setPendingContentImages(prev => {
-        let changed = false;
-        const next = new Map(prev);
-        for (const [key, entry] of next.entries()) {
-          if (!used.has(key)) {
-            URL.revokeObjectURL(entry.previewUrl);
-            next.delete(key);
-            changed = true;
-          }
-        }
-        return changed ? next : prev;
-      });
-    });
-  }, [planetData]);
+  useOrphanedImageCleanup(planetData, setPendingContentImages);
 
   if (previewActive) {
     return (
       <>
-        <button
-          className='fixed top-8 left-10 px-2 py-1.5 rounded bg-slate-800 hover:bg-slate-900 border border-white/10'
-          onClick={() => setPreviewActive(false)}
-        >
-          Exit preview
-        </button>
-
+        <ExitPreviewButton onClick={() => setPreviewActive(false)} />
         <PlanetClient
           planet={{
             ...planetData,
