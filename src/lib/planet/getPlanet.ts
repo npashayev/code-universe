@@ -7,85 +7,16 @@ import {
 } from './../../types/planet';
 
 import { prisma } from '@/lib/prisma/prisma';
-import { ensureAdmin } from '@/lib/auth/ensureAdmin';
 import {
-  CreatePlanetData,
   LocalizedPlanetData,
   PlanetCategory,
   PlanetData,
   SupportedLanguage,
 } from '@/types/planet';
-import { getInitialPlanetData } from '@/lib/utils/getInitialPlanetData';
-import { SUPPORTED_LANGS } from '../constants/locale';
 import { getLocale } from 'next-intl/server';
 import { normalizeImage } from '../utils/normalizeImage';
 import { notFound } from 'next/navigation';
 import { handlePrismaError } from '../utils/handlePrismaError';
-
-export interface PlanetForEdit {
-  id: string;
-  step: number;
-  data: CreatePlanetData;
-}
-
-export const getPlanetForEdit = async (id: string): Promise<PlanetForEdit> => {
-  await ensureAdmin();
-
-  const planet = await prisma.planet
-    .findUnique({
-      where: { id },
-      include: {
-        localized: true,
-      },
-    })
-    .catch((err: unknown) => {
-      console.error('[getPlanetForEdit] Database error:', err);
-      throw new Error('Failed to fetch planet.');
-    });
-
-  if (!planet) {
-    throw new Error('Planet not found.');
-  }
-
-  const base = getInitialPlanetData(planet.category as PlanetCategory);
-  base.status = planet.status;
-  base.image = planet.image as CreatePlanetData['image'];
-
-  const localizedMap: Record<SupportedLanguage, LocalizedPlanetData> = {
-    az: base.localized.az,
-    en: base.localized.en,
-  };
-
-  for (const loc of planet.localized) {
-    const lang = loc.lang as SupportedLanguage;
-    localizedMap[lang] = {
-      name: loc.name,
-      tags: loc.tags,
-      description: loc.description,
-      researchTopics:
-        loc.researchTopics as unknown as LocalizedPlanetData['researchTopics'],
-      resources: (loc.resources ??
-        []) as unknown as LocalizedPlanetData['resources'],
-      questions: loc.questions as unknown as LocalizedPlanetData['questions'],
-      contents: loc.contents as unknown as LocalizedPlanetData['contents'],
-    };
-  }
-
-  // Ensure all supported languages exist
-  SUPPORTED_LANGS.forEach(lang => {
-    if (!localizedMap[lang]) {
-      localizedMap[lang] = base.localized[lang];
-    }
-  });
-
-  base.localized = localizedMap;
-
-  return {
-    id: planet.id,
-    step: planet.step,
-    data: base,
-  };
-};
 
 export type PublicPlanetResponse = Omit<
   PlanetData,
