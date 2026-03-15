@@ -1,8 +1,5 @@
 import {
-  CONTENT_TYPE,
-  PLANET_CATEGORY,
   PlanetCategory,
-  PROGRAMMING_LANGUAGE,
   ProgrammingLanguage,
 } from '@/types/planet';
 import {
@@ -15,6 +12,7 @@ import {
   TextVariantOption,
   TitleLevelOption,
 } from '@/types/reactSelectOptions';
+import { CONTENT_TYPE, PLANET_CATEGORY, PROGRAMMING_LANGUAGE } from './planet';
 
 export const languageOptions: LanguageOption[] = [
   { value: 'en', label: 'English' },
@@ -48,7 +46,7 @@ export const extendedStatusOptions: ExtendedStatusOption[] = [
 ];
 
 export const categoryOptions: CategoryOption[] = Object.entries(
-  PLANET_CATEGORY,
+  PLANET_CATEGORY
 ).map(([key, value]) => ({
   label: value,
   value: key as PlanetCategory,

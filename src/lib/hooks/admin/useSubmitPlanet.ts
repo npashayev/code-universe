@@ -8,8 +8,8 @@ import {
   preSubmitCreatePlanetDataSchema,
   createPlanetDataSchema,
 } from '@/lib/validation/planetDataSchema';
-import { SUPPORTED_LANGS } from '@/lib/constants/locale';
 import { submitPlanet } from '@/app/actions/submitPlanet';
+import { SUPPORTED_LANGS } from '@/lib/constants/planet';
 
 function getImageDimensions(
   file: File,

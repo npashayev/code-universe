@@ -1,12 +1,7 @@
-export type SupportedLanguage = 'az' | 'en';
-export type PlanetStatus = 'draft' | 'published';
+import { CONTENT_TYPE, PLANET_CATEGORY, PLANET_STATUS, PROGRAMMING_LANGUAGE, SUPPORTED_LANGS, TEXT_VARIANTS, TITLE_LEVELS } from "@/lib/constants/planet";
 
-export const PLANET_CATEGORY = {
-  html: 'HTML',
-  css: 'CSS',
-  javascript: 'Javascript',
-} as const;
-
+export type SupportedLanguage = typeof SUPPORTED_LANGS[number];
+export type PlanetStatus = typeof PLANET_STATUS[number];
 export type PlanetCategory = keyof typeof PLANET_CATEGORY;
 
 export interface PlanetTag {
@@ -78,13 +73,6 @@ export type PlanetContent =
   | HtmlElementContent
   | ImageContent;
 
-export const CONTENT_TYPE = {
-  text: 'text',
-  implementationTask: 'implementation-task',
-  code: 'code',
-  htmlElement: 'html-element',
-  image: 'image',
-} as const;
 
 export type ContentType = (typeof CONTENT_TYPE)[keyof typeof CONTENT_TYPE];
 
@@ -109,8 +97,8 @@ export interface TextContent extends Omit<
   variant: TextVariant;
 }
 
-export type TitleLevel = 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-export type TextVariant = 'normal' | 'note' | 'warning' | 'tip';
+export type TitleLevel = typeof TITLE_LEVELS[number];
+export type TextVariant = typeof TEXT_VARIANTS[number];
 
 export interface ImplementationTaskContent extends Omit<
   BaseContent,
@@ -130,16 +118,6 @@ export interface CodeSnippet {
   code: string;
   output?: string;
 }
-
-export const PROGRAMMING_LANGUAGE = {
-  javascript: 'JavaScript',
-  typescript: 'TypeScript',
-  html: 'HTML',
-  css: 'CSS',
-  json: 'JSON',
-  shell: 'Shell',
-  markdown: 'Markdown',
-} as const;
 
 export type ProgrammingLanguage = keyof typeof PROGRAMMING_LANGUAGE;
 
