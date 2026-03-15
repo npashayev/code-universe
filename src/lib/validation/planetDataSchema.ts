@@ -1,13 +1,14 @@
 import { z } from 'zod';
-import { SUPPORTED_LANGS } from '../constants/locale';
+import { PLANET_CATEGORY, PLANET_STATUS, PROGRAMMING_LANGUAGE, SUPPORTED_LANGS, TEXT_VARIANTS, TITLE_LEVELS } from '../constants/planet';
 
-/** Validates URL and normalizes protocol-less URLs (e.g. "example.com" -> "https://example.com") */
+// ---------- URL ----------
+
 export const urlSchema = (message = 'Invalid URL') =>
   z
     .string()
     .refine(
       val => {
-        if (!val || !val.trim()) return false;
+        if (!val?.trim()) return false;
         try {
           const url = val.trim();
           const withProtocol = /^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(url)
@@ -26,42 +27,23 @@ export const urlSchema = (message = 'Invalid URL') =>
       return /^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(url) ? url : `https://${url}`;
     });
 
-export const statusEnum = z.enum(['draft', 'published']);
-export const categoryEnum = z.enum(['html', 'css', 'javascript']);
-const supportedLanguageEnum = z.enum(SUPPORTED_LANGS);
-const titleLevelEnum = z.enum(['h2', 'h3', 'h4', 'h5', 'h6']);
-const textVariantEnum = z.enum(['normal', 'note', 'warning', 'tip']);
-const programmingLanguageEnum = z.enum([
-  'javascript',
-  'typescript',
-  'html',
-  'css',
-  'json',
-  'shell',
-  'markdown',
-]);
+const relaxedUrlSchema = z.union([urlSchema(), z.literal('')]);
 
-const imageMetadataSchema = z.object({
-  width: z.number().int().positive(),
-  height: z.number().int().positive(),
-});
+// ---------- Enums ----------
+
+export const statusEnum = z.enum(PLANET_STATUS);
+export const categoryEnum = z.enum(Object.keys(PLANET_CATEGORY));
+const supportedLanguageEnum = z.enum(SUPPORTED_LANGS);
+const titleLevelEnum = z.enum(TITLE_LEVELS);
+const textVariantEnum = z.enum(TEXT_VARIANTS);
+const programmingLanguageEnum = z.enum(Object.keys(PROGRAMMING_LANGUAGE));
+
+// ---------- Primitives ----------
 
 const localizedStringSchema = z.record(supportedLanguageEnum, z.string());
-
-const tagSchema = z.object({
-  id: z.string(),
-  tag: z.string(),
-});
-
-const researchTopicSchema = z.object({
-  id: z.string(),
-  topic: z.string(),
-});
-
-const questionSchema = z.object({
-  id: z.string(),
-  question: z.string(),
-});
+const tagSchema = z.object({ id: z.string(), tag: z.string() });
+const researchTopicSchema = z.object({ id: z.string(), topic: z.string() });
+const questionSchema = z.object({ id: z.string(), question: z.string() });
 
 const resourceSchema = z.object({
   id: z.string(),
@@ -81,6 +63,20 @@ const htmlElementSnippetSchema = z.object({
   css: z.string().optional(),
   js: z.string().optional(),
 });
+
+// ---------- Image metadata ----------
+
+const imageMetadataSchema = z.object({
+  width: z.number().int().positive(),
+  height: z.number().int().positive(),
+});
+
+const imageMetadataSchemaRelaxed = z.object({
+  width: z.number().int().min(0),
+  height: z.number().int().min(0),
+});
+
+// ---------- Content schemas ----------
 
 const baseContentSchema = z.object({
   id: z.string(),
@@ -115,50 +111,38 @@ const htmlElementContentSchema = fullBaseContentSchema.extend({
   element: htmlElementSnippetSchema,
 });
 
-const imageContentSchema = fullBaseContentSchema.extend({
-  type: z.literal('image'),
-  image: z.object({
-    url: urlSchema(),
-    alt: z.string(),
-    metadata: imageMetadataSchema,
-  }),
-  pendingImageId: z.string().optional(),
-});
+const createImageContentSchema = (relaxed: boolean) =>
+  fullBaseContentSchema.extend({
+    type: z.literal('image'),
+    image: z.object({
+      url: relaxed ? relaxedUrlSchema : urlSchema(),
+      alt: z.string(),
+      metadata: relaxed ? imageMetadataSchemaRelaxed : imageMetadataSchema,
+    }),
+    pendingImageId: z.string().optional(),
+  });
 
-/** Allows empty URL for pre-upload validation (when image is pending) */
-const relaxedUrlSchema = z.union([urlSchema(), z.literal('')]);
+const imageContentSchema = createImageContentSchema(false);
+const imageContentSchemaRelaxed = createImageContentSchema(true);
 
-/** Allows 0,0 for pending images before dimensions are read from file */
-const imageMetadataSchemaPreSubmit = z.object({
-  width: z.number().int().min(0),
-  height: z.number().int().min(0),
-});
-
-const imageContentSchemaPreSubmit = fullBaseContentSchema.extend({
-  type: z.literal('image'),
-  image: z.object({
-    url: relaxedUrlSchema,
-    alt: z.string(),
-    metadata: imageMetadataSchemaPreSubmit,
-  }),
-  pendingImageId: z.string().optional(),
-});
-
-const preSubmitPlanetContentSchema = z.discriminatedUnion('type', [
+const sharedContentSchemas = [
   textContentSchema,
   implementationTaskContentSchema,
   codeContentSchema,
   htmlElementContentSchema,
-  imageContentSchemaPreSubmit,
-]);
+] as const;
 
 const planetContentSchema = z.discriminatedUnion('type', [
-  textContentSchema,
-  implementationTaskContentSchema,
-  codeContentSchema,
-  htmlElementContentSchema,
+  ...sharedContentSchemas,
   imageContentSchema,
 ]);
+
+const preSubmitPlanetContentSchema = z.discriminatedUnion('type', [
+  ...sharedContentSchemas,
+  imageContentSchemaRelaxed,
+]);
+
+// ---------- Localized planet data ----------
 
 export const localizedPlanetDataSchema = z.object({
   name: z.string(),
@@ -170,36 +154,32 @@ export const localizedPlanetDataSchema = z.object({
   contents: z.array(planetContentSchema),
 });
 
-export const createPlanetDataSchema = z.object({
-  category: categoryEnum,
-  status: statusEnum,
-  image: z.object({
-    url: urlSchema(),
-    metadata: imageMetadataSchema,
-    alt: localizedStringSchema,
-  }),
-  localized: z.record(supportedLanguageEnum, localizedPlanetDataSchema),
+const preSubmitLocalizedPlanetDataSchema = localizedPlanetDataSchema.extend({
+  contents: z.array(preSubmitPlanetContentSchema),
 });
 
-/** Use before image upload to validate structure; allows empty URLs for pending images */
-export const preSubmitLocalizedPlanetDataSchema =
-  localizedPlanetDataSchema.extend({
-    contents: z.array(preSubmitPlanetContentSchema),
+// ---------- Planet data ----------
+
+const createImageSchema = (relaxed: boolean) =>
+  z.object({
+    url: relaxed ? relaxedUrlSchema : urlSchema(),
+    metadata: relaxed ? imageMetadataSchemaRelaxed : imageMetadataSchema,
+    alt: localizedStringSchema,
   });
 
-export const preSubmitCreatePlanetDataSchema = z.object({
-  category: categoryEnum,
-  status: statusEnum,
-  image: z.object({
-    url: relaxedUrlSchema,
-    metadata: imageMetadataSchemaPreSubmit,
-    alt: localizedStringSchema,
-  }),
-  localized: z.record(
-    supportedLanguageEnum,
-    preSubmitLocalizedPlanetDataSchema,
-  ),
-});
+const createPlanetBaseSchema = (relaxed: boolean) =>
+  z.object({
+    category: categoryEnum,
+    status: statusEnum,
+    image: createImageSchema(relaxed),
+    localized: z.record(
+      supportedLanguageEnum,
+      relaxed ? preSubmitLocalizedPlanetDataSchema : localizedPlanetDataSchema,
+    ),
+  });
+
+export const createPlanetDataSchema = createPlanetBaseSchema(false);
+export const preSubmitCreatePlanetDataSchema = createPlanetBaseSchema(true);
 
 export const updatePlanetDataSchema = createPlanetDataSchema.extend({
   id: z.string(),
