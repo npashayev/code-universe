@@ -43,7 +43,7 @@ const SortableList = <T extends { id: string }>({
     >
       {elements.length > 0 && (
         <SortableContext
-          items={elements.map(e => e.id)}
+          items={elements.map((e) => e.id)}
           strategy={verticalListSortingStrategy}
         >
           <ul className={cn('overflow-hidden space-y-2', className)}>

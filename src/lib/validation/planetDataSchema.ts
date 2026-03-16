@@ -1,5 +1,12 @@
 import { z } from 'zod';
-import { PLANET_CATEGORY, PLANET_STATUS, PROGRAMMING_LANGUAGE, SUPPORTED_LANGS, TEXT_VARIANTS, TITLE_LEVELS } from '../constants/planet';
+import {
+  PLANET_CATEGORY,
+  PLANET_STATUS,
+  PROGRAMMING_LANGUAGE,
+  SUPPORTED_LANGS,
+  TEXT_VARIANTS,
+  TITLE_LEVELS,
+} from '../constants/planet';
 
 // ---------- URL ----------
 
@@ -7,7 +14,7 @@ export const urlSchema = (message = 'Invalid URL') =>
   z
     .string()
     .refine(
-      val => {
+      (val) => {
         if (!val?.trim()) return false;
         try {
           const url = val.trim();
@@ -22,7 +29,7 @@ export const urlSchema = (message = 'Invalid URL') =>
       },
       { message },
     )
-    .transform(val => {
+    .transform((val) => {
       const url = val.trim();
       return /^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(url) ? url : `https://${url}`;
     });

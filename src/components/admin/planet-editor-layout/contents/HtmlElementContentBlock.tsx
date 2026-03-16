@@ -19,7 +19,7 @@ const HtmlElementContentBlock = ({ content, onUpdate }: Props) => {
         <Input
           id={`html-element-content-title-${content.id}`}
           value={content.title || ''}
-          onChange={e => onUpdate(content.id, { title: e.target.value })}
+          onChange={(e) => onUpdate(content.id, { title: e.target.value })}
         />
       </div>
       <div className="space-y-2">
@@ -29,7 +29,9 @@ const HtmlElementContentBlock = ({ content, onUpdate }: Props) => {
         <Textarea
           id={`html-element-description-${content.id}`}
           value={content.description}
-          onChange={e => onUpdate(content.id, { description: e.target.value })}
+          onChange={(e) =>
+            onUpdate(content.id, { description: e.target.value })
+          }
         />
       </div>
       <div className="space-y-4">
@@ -40,7 +42,7 @@ const HtmlElementContentBlock = ({ content, onUpdate }: Props) => {
           <Textarea
             id={`html-element-html-code-${content.id}`}
             value={content.element.html}
-            onChange={e =>
+            onChange={(e) =>
               onUpdate(content.id, {
                 element: { ...content.element, html: e.target.value },
               })
@@ -55,7 +57,7 @@ const HtmlElementContentBlock = ({ content, onUpdate }: Props) => {
           <Textarea
             id={`html-element-css-code-${content.id}`}
             value={content.element.css || ''}
-            onChange={e =>
+            onChange={(e) =>
               onUpdate(content.id, {
                 element: { ...content.element, css: e.target.value },
               })
@@ -70,7 +72,7 @@ const HtmlElementContentBlock = ({ content, onUpdate }: Props) => {
           <Textarea
             id={`html-element-js-code-${content.id}`}
             value={content.element.js || ''}
-            onChange={e =>
+            onChange={(e) =>
               onUpdate(content.id, {
                 element: { ...content.element, js: e.target.value },
               })

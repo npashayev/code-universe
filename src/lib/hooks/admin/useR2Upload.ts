@@ -44,7 +44,7 @@ export const useR2Upload = () => {
       await Promise.all(
         presignedItems.map(
           async ({ fileKey, r2Key, presignedUrl, publicUrl }) => {
-            const file = items.find(i => i.fileKey === fileKey)!.file;
+            const file = items.find((i) => i.fileKey === fileKey)!.file;
 
             const uploadRes = await fetch(presignedUrl, {
               method: 'PUT',
@@ -64,7 +64,7 @@ export const useR2Upload = () => {
               r2Key,
             });
 
-            setProgress(prev =>
+            setProgress((prev) =>
               prev ? { ...prev, current: prev.current + 1 } : null,
             );
           },

@@ -1,7 +1,15 @@
-import { CONTENT_TYPE, PLANET_CATEGORY, PLANET_STATUS, PROGRAMMING_LANGUAGE, SUPPORTED_LANGS, TEXT_VARIANTS, TITLE_LEVELS } from "@/lib/constants/planet";
+import {
+  CONTENT_TYPE,
+  PLANET_CATEGORY,
+  PLANET_STATUS,
+  PROGRAMMING_LANGUAGE,
+  SUPPORTED_LANGS,
+  TEXT_VARIANTS,
+  TITLE_LEVELS,
+} from '@/lib/constants/planet';
 
-export type SupportedLanguage = typeof SUPPORTED_LANGS[number];
-export type PlanetStatus = typeof PLANET_STATUS[number];
+export type SupportedLanguage = (typeof SUPPORTED_LANGS)[number];
+export type PlanetStatus = (typeof PLANET_STATUS)[number];
 export type PlanetCategory = keyof typeof PLANET_CATEGORY;
 
 export interface PlanetTag {
@@ -73,7 +81,6 @@ export type PlanetContent =
   | HtmlElementContent
   | ImageContent;
 
-
 export type ContentType = (typeof CONTENT_TYPE)[keyof typeof CONTENT_TYPE];
 
 export interface BaseContent {
@@ -97,8 +104,8 @@ export interface TextContent extends Omit<
   variant: TextVariant;
 }
 
-export type TitleLevel = typeof TITLE_LEVELS[number];
-export type TextVariant = typeof TEXT_VARIANTS[number];
+export type TitleLevel = (typeof TITLE_LEVELS)[number];
+export type TextVariant = (typeof TEXT_VARIANTS)[number];
 
 export interface ImplementationTaskContent extends Omit<
   BaseContent,

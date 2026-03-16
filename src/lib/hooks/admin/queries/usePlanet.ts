@@ -12,12 +12,12 @@ export const useDeletePlanet = (onSuccess?: () => void) =>
       toast.success('Planet deleted successfully');
       onSuccess?.();
     },
-    onError: err => toast.error(err.message),
+    onError: (err) => toast.error(err.message),
   });
 
 export const useUpdatePlanetList = () =>
   useMutation({
     mutationFn: updatePlanetList,
     onSuccess: () => toast.success('Planet list updated successfully'),
-    onError: err => toast.error(err.message),
+    onError: (err) => toast.error(err.message),
   });

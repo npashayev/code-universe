@@ -29,7 +29,7 @@ export const ResearchTopicsSection = ({
   const addResearchTopic = () => {
     if (!currentTopic.trim()) return;
 
-    setPlanetData(draft => {
+    setPlanetData((draft) => {
       draft.localized[locale].researchTopics.push({
         id: crypto.randomUUID(),
         topic: currentTopic,
@@ -40,11 +40,10 @@ export const ResearchTopicsSection = ({
   };
 
   const removeTopic = (id: string) => {
-    setPlanetData(draft => {
-      draft.localized[locale].researchTopics = draft
-        .localized[locale]
-        .researchTopics
-        .filter(t => t.id !== id);
+    setPlanetData((draft) => {
+      draft.localized[locale].researchTopics = draft.localized[
+        locale
+      ].researchTopics.filter((t) => t.id !== id);
     });
   };
 
@@ -65,8 +64,8 @@ export const ResearchTopicsSection = ({
         <div className="flex-1 min-w-0">
           <Input
             value={currentTopic}
-            onChange={e => setCurrentTopic(e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && addResearchTopic()}
+            onChange={(e) => setCurrentTopic(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && addResearchTopic()}
             placeholder="Add research topic"
           />
         </div>
@@ -83,7 +82,7 @@ export const ResearchTopicsSection = ({
         id="research-topic-sortable-list"
         elements={researchTopics}
         handleDragEnd={handleDragEnd}
-        renderItem={topic => (
+        renderItem={(topic) => (
           <ListElement onRemove={() => removeTopic(topic.id)}>
             <span className="block truncate">{topic.topic}</span>
           </ListElement>
@@ -91,7 +90,9 @@ export const ResearchTopicsSection = ({
       />
 
       {researchTopics.length === 0 && (
-        <span className="admin-empty-state">No research topics assigned yet.</span>
+        <span className="admin-empty-state">
+          No research topics assigned yet.
+        </span>
       )}
     </section>
   );

@@ -1,4 +1,8 @@
-import { CreatePlanetData, PlanetContent, SupportedLanguage } from '@/types/planet';
+import {
+  CreatePlanetData,
+  PlanetContent,
+  SupportedLanguage,
+} from '@/types/planet';
 import { Database, Layout, Plus } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -23,17 +27,25 @@ const ContentSidebar = ({ contents, setPlanetData, locale }: Props) => {
   const [selectedContentType, setSelectedContentType] = useState(
     contentTypeOptions[0],
   );
-  const { addContent, removeContent } =
-    useLocalizedContent({
-      setPlanetData,
-      locale,
-    });
+  const { addContent, removeContent } = useLocalizedContent({
+    setPlanetData,
+    locale,
+  });
 
-  const handleDragEnd = useLocalizedDragReorder(setPlanetData, locale, 'contents');
+  const handleDragEnd = useLocalizedDragReorder(
+    setPlanetData,
+    locale,
+    'contents',
+  );
 
   return (
-    <aside className={cn('admin-page-section', 'sticky top-28 shadow-2xl shrink-0 w-80 px-0')}>
-      <div className='px-6'>
+    <aside
+      className={cn(
+        'admin-page-section',
+        'sticky top-28 shadow-2xl shrink-0 w-80 px-0',
+      )}
+    >
+      <div className="px-6">
         <SectionHeader>
           <Layout size={14} />
           <h2>Planet Content</h2>
@@ -68,12 +80,10 @@ const ContentSidebar = ({ contents, setPlanetData, locale }: Props) => {
           <SortableList<PlanetContent>
             id="content-sortable-list"
             elements={contents}
-            className='py-2'
+            className="py-2"
             handleDragEnd={handleDragEnd}
-            renderItem={content => (
-              <ListElement
-                onRemove={() => removeContent(content.id)}
-              >
+            renderItem={(content) => (
+              <ListElement onRemove={() => removeContent(content.id)}>
                 <Link href={`#${content.id}`} className="flex flex-col min-w-0">
                   <div className="flex flex-col min-w-0 overflow-hidden">
                     <span className="text-sm text-white font-bold truncate block group-hover:text-orange-500 transition-colors">

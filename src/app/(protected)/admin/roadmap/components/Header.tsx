@@ -10,9 +10,16 @@ import DashboardLink from '@/components/admin/ui/DashboardLink';
 import HomeLink from '@/components/ui/HomeLink';
 import PlanetStats from '@/components/admin/PlanetStats';
 import { useUpdatePlanetList } from '@/lib/hooks/admin/queries/usePlanet';
-import { AdminPlanetListResponse, AdminPlanetSummary } from '@/lib/planet/getPlanetList';
+import {
+  AdminPlanetListResponse,
+  AdminPlanetSummary,
+} from '@/lib/planet/getPlanetList';
 import AddPlanetLink from '@/components/admin/ui/AddPlanetLink';
-import { CategorySelector, ExtendedStatusSelector, LanguageSelector } from '@/components/admin/Selectors';
+import {
+  CategorySelector,
+  ExtendedStatusSelector,
+  LanguageSelector,
+} from '@/components/admin/Selectors';
 
 export interface Props {
   data: AdminPlanetListResponse;
@@ -33,7 +40,7 @@ const Header = ({
   setSearchQuery,
   status,
   setStatus,
-  orderedPlanets
+  orderedPlanets,
 }: Props) => {
   const router = useRouter();
 
@@ -51,17 +58,17 @@ const Header = ({
   const { mutate: updateList, isPending } = useUpdatePlanetList();
 
   const updatePlanetList = () => {
-    const updatedList = orderedPlanets.map(planet => ({
+    const updatedList = orderedPlanets.map((planet) => ({
       id: planet.id,
       step: planet.step,
-      status: planet.status
-    }))
+      status: planet.status,
+    }));
 
     updateList({
       category,
-      planetList: updatedList
-    })
-  }
+      planetList: updatedList,
+    });
+  };
 
   return (
     <header className="admin-page-header flex-col gap-10">
@@ -83,7 +90,7 @@ const Header = ({
             type="text"
             placeholder="Search for topic..."
             value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
+            onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full bg-white/5 border border-white/10 hover:border-white/20 rounded-xl pl-9 pr-4 py-2 text-sm outline-none transition-all placeholder:text-slate-600"
           />
         </div>
@@ -95,7 +102,7 @@ const Header = ({
             onClick={updatePlanetList}
             disabled={isPending}
           >
-            {isPending ? "Updating..." : "Update"}
+            {isPending ? 'Updating...' : 'Update'}
           </button>
         </div>
       </div>

@@ -1,5 +1,13 @@
-import { ContentType, PlanetContent, ProgrammingLanguage } from '@/types/planet';
-import { CONTENT_TYPE, PROGRAMMING_LANGUAGE, TEXT_VARIANTS } from '../constants/planet';
+import {
+  ContentType,
+  PlanetContent,
+  ProgrammingLanguage,
+} from '@/types/planet';
+import {
+  CONTENT_TYPE,
+  PROGRAMMING_LANGUAGE,
+  TEXT_VARIANTS,
+} from '../constants/planet';
 
 export const createDefaultContent = (
   type: ContentType,

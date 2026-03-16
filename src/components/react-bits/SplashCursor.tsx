@@ -1103,7 +1103,7 @@ export default function SplashCursor({
       colorUpdateTimer += dt * config.COLOR_UPDATE_SPEED;
       if (colorUpdateTimer >= 1) {
         colorUpdateTimer = wrap(colorUpdateTimer, 0, 1);
-        pointers.forEach(p => {
+        pointers.forEach((p) => {
           p.color = generateColor();
         });
       }
@@ -1497,7 +1497,7 @@ export default function SplashCursor({
       return ((value - min) % range) + min;
     }
 
-    window.addEventListener('mousedown', e => {
+    window.addEventListener('mousedown', (e) => {
       const pointer = pointers[0];
       const posX = scaleByPixelRatio(e.clientX);
       const posY = scaleByPixelRatio(e.clientY);
@@ -1516,7 +1516,7 @@ export default function SplashCursor({
     }
     document.body.addEventListener('mousemove', handleFirstMouseMove);
 
-    window.addEventListener('mousemove', e => {
+    window.addEventListener('mousemove', (e) => {
       const pointer = pointers[0];
       const posX = scaleByPixelRatio(e.clientX);
       const posY = scaleByPixelRatio(e.clientY);
@@ -1539,7 +1539,7 @@ export default function SplashCursor({
 
     window.addEventListener(
       'touchstart',
-      e => {
+      (e) => {
         const touches = e.targetTouches;
         const pointer = pointers[0];
         for (let i = 0; i < touches.length; i++) {
@@ -1553,7 +1553,7 @@ export default function SplashCursor({
 
     window.addEventListener(
       'touchmove',
-      e => {
+      (e) => {
         const touches = e.targetTouches;
         const pointer = pointers[0];
         for (let i = 0; i < touches.length; i++) {
@@ -1565,7 +1565,7 @@ export default function SplashCursor({
       false,
     );
 
-    window.addEventListener('touchend', e => {
+    window.addEventListener('touchend', (e) => {
       const touches = e.changedTouches;
       const pointer = pointers[0];
       for (let i = 0; i < touches.length; i++) {

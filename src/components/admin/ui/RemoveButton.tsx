@@ -17,11 +17,11 @@ const RemoveButton = ({
       )}
       disabled={isPending}
     >
-      {
-        isPending
-          ? <Loader size={18} className='animate-spin' />
-          : <Trash2 size={18} />
-      }
+      {isPending ? (
+        <Loader size={18} className="animate-spin" />
+      ) : (
+        <Trash2 size={18} />
+      )}
     </button>
   );
 };

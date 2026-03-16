@@ -42,11 +42,11 @@ export const StatusSelector = ({
 }: PlanetDataProps) => (
   <Selector<StatusOption>
     instanceId="status-select"
-    value={statusOptions.find(o => o.value === planetData.status) || null}
+    value={statusOptions.find((o) => o.value === planetData.status) || null}
     options={statusOptions}
-    onChange={option => {
+    onChange={(option) => {
       if (!option) return;
-      setPlanetData(draft => {
+      setPlanetData((draft) => {
         draft.status = option.value;
       });
     }}
@@ -61,12 +61,12 @@ export const StatusUpdateSelector = ({
 }: StatusUpdateSelectorProps) => (
   <Selector<StatusOption>
     instanceId={`status-update-select-${planet.id}`}
-    value={statusOptions.find(o => o.value === planet.status) || null}
+    value={statusOptions.find((o) => o.value === planet.status) || null}
     options={statusOptions}
-    onChange={option => {
+    onChange={(option) => {
       if (!option) return;
-      changePlanetStatus(draft => {
-        const planetToUpdate = draft.find(p => p.id === planet.id);
+      changePlanetStatus((draft) => {
+        const planetToUpdate = draft.find((p) => p.id === planet.id);
         if (!planetToUpdate) return;
         planetToUpdate.status = option.value;
       });
@@ -89,7 +89,7 @@ export const ExtendedStatusSelector = ({
       instanceId="extended-status-select"
       value={status}
       options={extendedStatusOptions}
-      onChange={option => {
+      onChange={(option) => {
         if (!option) return;
         setStatus(option);
       }}
@@ -107,7 +107,7 @@ export const LanguageSelector = ({
     instanceId="language-select"
     value={currentLanguage}
     options={languageOptions}
-    onChange={option => {
+    onChange={(option) => {
       if (!option) return;
       setCurrentLanguage(option);
     }}
@@ -123,11 +123,10 @@ export const CategorySelector = ({
   <Selector<CategoryOption>
     instanceId="category-select"
     value={
-      categoryOptions.find(o => o.value === category) ||
-      categoryOptions[0]
+      categoryOptions.find((o) => o.value === category) || categoryOptions[0]
     }
     options={categoryOptions}
-    onChange={option => {
+    onChange={(option) => {
       if (!option) return;
       onCategoryChange(option.value);
     }}
@@ -144,7 +143,7 @@ export const ContentTypeSelector = ({
     instanceId="content-type-select"
     value={value}
     options={contentTypeOptions}
-    onChange={opt => opt && onChange(opt)}
+    onChange={(opt) => opt && onChange(opt)}
     styles={{
       controlStyles: {
         paddingInlineStart: '12px',
@@ -163,12 +162,12 @@ export const TitleLevelSelector = ({
   <Selector<TitleLevelOption>
     instanceId="title-level-select"
     value={
-      titleLevelOptions.find(tl => tl.value === content.title?.level) ??
+      titleLevelOptions.find((tl) => tl.value === content.title?.level) ??
       titleLevelOptions[0]
     }
     options={titleLevelOptions}
     isDisabled={isDisabled}
-    onChange={option => {
+    onChange={(option) => {
       if (!option) return;
       onUpdate(content.id, {
         title: { level: option.value, text: content.title?.text || '' },
@@ -190,11 +189,10 @@ export const TextVariantSelector = ({
   <Selector<TextVariantOption>
     instanceId="text-variant-select"
     value={
-      textVariantOptions.find(tv => tv.value === content.variant) ??
-      null
+      textVariantOptions.find((tv) => tv.value === content.variant) ?? null
     }
     options={textVariantOptions}
-    onChange={option => {
+    onChange={(option) => {
       if (!option) return;
       onUpdate(content.id, { variant: option.value });
     }}
@@ -208,17 +206,17 @@ export const TextVariantSelector = ({
 
 export const ProgrammingLanguageSelector = ({
   onUpdate,
-  content
+  content,
 }: ProgrammingLanguageSelectorProps) => (
   <Selector<ProgrammingLanguageOption>
     instanceId="programming-language-select"
     value={
       programmingLanguageOptions.find(
-        l => l.value === content.code.language,
+        (l) => l.value === content.code.language,
       ) ?? null
     }
     options={programmingLanguageOptions}
-    onChange={option => {
+    onChange={(option) => {
       if (!option) return;
       onUpdate(content.id, {
         code: { ...content.code, language: option.value },

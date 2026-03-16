@@ -15,8 +15,8 @@ export const useOrphanedImageCleanup = (
 ) => {
   useEffect(() => {
     const used = new Set<string>();
-    SUPPORTED_LANGS.forEach(loc => {
-      planetData.localized[loc].contents.forEach(c => {
+    SUPPORTED_LANGS.forEach((loc) => {
+      planetData.localized[loc].contents.forEach((c) => {
         if (c.type === 'image' && c.pendingImageId) {
           used.add(c.pendingImageId);
         }
@@ -24,7 +24,7 @@ export const useOrphanedImageCleanup = (
     });
 
     queueMicrotask(() => {
-      setPendingContentImages(prev => {
+      setPendingContentImages((prev) => {
         let changed = false;
         const next = new Map(prev);
         for (const [key, entry] of next.entries()) {

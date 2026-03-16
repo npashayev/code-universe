@@ -40,7 +40,7 @@ const CodeEditor = ({
     setAutoHeight(`${finalHeight}px`);
   }, [paddingTop, paddingBottom]);
 
-  const handleEditorDidMount: OnMount = editor => {
+  const handleEditorDidMount: OnMount = (editor) => {
     editorRef.current = editor;
 
     if (!height) {

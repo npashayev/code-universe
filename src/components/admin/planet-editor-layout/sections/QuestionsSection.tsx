@@ -25,7 +25,7 @@ export const QuestionsSection = ({
   const addQuestion = () => {
     if (!currentQuestion.trim()) return;
 
-    setPlanetData(draft => {
+    setPlanetData((draft) => {
       draft.localized[locale].questions.push({
         id: crypto.randomUUID(),
         question: currentQuestion,
@@ -36,15 +36,18 @@ export const QuestionsSection = ({
   };
 
   const removeQuestion = (id: string) => {
-    setPlanetData(draft => {
-      draft.localized[locale].questions = draft
-        .localized[locale]
-        .questions
-        .filter(q => q.id !== id);
+    setPlanetData((draft) => {
+      draft.localized[locale].questions = draft.localized[
+        locale
+      ].questions.filter((q) => q.id !== id);
     });
   };
 
-  const handleDragEnd = useLocalizedDragReorder(setPlanetData, locale, 'questions');
+  const handleDragEnd = useLocalizedDragReorder(
+    setPlanetData,
+    locale,
+    'questions',
+  );
 
   return (
     <section className="admin-page-section">
@@ -57,21 +60,27 @@ export const QuestionsSection = ({
         <div className="flex-1 min-w-0">
           <Input
             value={currentQuestion}
-            onChange={e => setCurrentQuestion(e.target.value)}
-            onKeyDown={e => {
+            onChange={(e) => setCurrentQuestion(e.target.value)}
+            onKeyDown={(e) => {
               if (e.key === 'Enter') addQuestion();
             }}
             placeholder="Add question"
           />
         </div>
-        <AddButton onClick={addQuestion} disabled={!currentQuestion.trim()} className="shrink-0">Add</AddButton>
+        <AddButton
+          onClick={addQuestion}
+          disabled={!currentQuestion.trim()}
+          className="shrink-0"
+        >
+          Add
+        </AddButton>
       </div>
 
       <SortableList<Question>
-        id='question-sortable-list'
+        id="question-sortable-list"
         elements={questions}
         handleDragEnd={handleDragEnd}
-        renderItem={question => (
+        renderItem={(question) => (
           <ListElement onRemove={() => removeQuestion(question.id)}>
             <span className="block truncate">{question.question}</span>
           </ListElement>

@@ -43,13 +43,13 @@ const TextContentBlock = ({
           <Input
             id={`text-title-${content.id}`}
             value={content.title?.text || ''}
-            onChange={e => {
+            onChange={(e) => {
               const value = e.target.value;
 
               if (value.trim() === '') {
-                setPlanetData(draft => {
+                setPlanetData((draft) => {
                   const item = draft.localized[locale].contents.find(
-                    cn => cn.id === content.id,
+                    (cn) => cn.id === content.id,
                   );
 
                   if (!item) return;
@@ -75,7 +75,7 @@ const TextContentBlock = ({
         <Textarea
           id={`text-content-${content.id}`}
           value={content.text}
-          onChange={e => onUpdate(content.id, { text: e.target.value })}
+          onChange={(e) => onUpdate(content.id, { text: e.target.value })}
         />
       </div>
       <div className="p-4 bg-black/25 rounded-2xl border border-white/12">
@@ -84,10 +84,7 @@ const TextContentBlock = ({
             <span className="text-[12px] text-slate-500 uppercase font-bold">
               Text Variant
             </span>
-            <TextVariantSelector
-              content={content}
-              onUpdate={onUpdate}
-            />
+            <TextVariantSelector content={content} onUpdate={onUpdate} />
           </div>
         </div>
       </div>

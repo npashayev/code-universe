@@ -65,8 +65,8 @@ export const getAdminPlanetList = async (
     ),
   }));
 
-  const published = mapped.filter(p => p.status === 'published').length;
-  const drafts = mapped.filter(p => p.status === 'draft').length;
+  const published = mapped.filter((p) => p.status === 'published').length;
+  const drafts = mapped.filter((p) => p.status === 'draft').length;
 
   return {
     category,
@@ -106,7 +106,7 @@ export const getPublicPlanetList = async (
     })
     .catch((err: unknown) => handlePrismaError(err, 'getPublicPlanetList'));
 
-  return planets.map(planet => {
+  return planets.map((planet) => {
     const loc = planet.localized[0];
     return {
       id: planet.id,

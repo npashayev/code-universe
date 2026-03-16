@@ -4,16 +4,22 @@ import { SUPPORTED_LANGS } from '@/lib/constants/planet';
 import { prisma } from '@/lib/prisma/prisma';
 import { deleteR2Objects } from '@/lib/r2/deleteR2Objects';
 import { updatePlanetDataSchema } from '@/lib/validation/planetDataSchema';
-import { LocalizedImage, PlanetCategory, PlanetContent, PlanetStatus, SupportedLanguage } from '@/types/planet';
+import {
+  LocalizedImage,
+  PlanetCategory,
+  PlanetContent,
+  PlanetStatus,
+  SupportedLanguage,
+} from '@/types/planet';
 
 export type UpdatePlanetResult =
   | {
-    success: true;
-    planetId: string;
-    r2Cleanup:
-    | { success: true; deletedCount: number }
-    | { success: false; failedUrls: string[] };
-  }
+      success: true;
+      planetId: string;
+      r2Cleanup:
+        | { success: true; deletedCount: number }
+        | { success: false; failedUrls: string[] };
+    }
   | { success: false; error: string };
 
 export async function updatePlanet(data: unknown): Promise<UpdatePlanetResult> {
@@ -38,7 +44,7 @@ export async function updatePlanet(data: unknown): Promise<UpdatePlanetResult> {
   let urlsToDelete: string[] = [];
 
   try {
-    await prisma.$transaction(async tx => {
+    await prisma.$transaction(async (tx) => {
       const existing = await tx.planet.findUnique({
         where: { id },
         include: { localized: true },
@@ -54,18 +60,18 @@ export async function updatePlanet(data: unknown): Promise<UpdatePlanetResult> {
       const oldContentUrls = new Set<string>();
       const newContentUrls = new Set<string>();
 
-      existing.localized.forEach(loc => {
+      existing.localized.forEach((loc) => {
         const contents = (loc.contents ?? []) as unknown as PlanetContent[];
-        contents.forEach(c => {
+        contents.forEach((c) => {
           if (c.type === 'image' && c.image?.url) {
             oldContentUrls.add(c.image.url);
           }
         });
       });
 
-      SUPPORTED_LANGS.forEach(lang => {
+      SUPPORTED_LANGS.forEach((lang) => {
         const locData = rest.localized[lang];
-        locData.contents.forEach(c => {
+        locData.contents.forEach((c) => {
           if (c.type === 'image' && c.image.url) {
             newContentUrls.add(c.image.url);
           }
@@ -78,7 +84,7 @@ export async function updatePlanet(data: unknown): Promise<UpdatePlanetResult> {
         urlSet.add(oldMainUrl);
       }
 
-      oldContentUrls.forEach(url => {
+      oldContentUrls.forEach((url) => {
         if (!newContentUrls.has(url)) {
           urlSet.add(url);
         }

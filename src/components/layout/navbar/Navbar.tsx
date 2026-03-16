@@ -89,7 +89,7 @@ const Navbar = () => {
                     </div>
 
                     <ul className="flex flex-col gap-1 list-none p-0 m-0">
-                      {navItem.items.map(item => (
+                      {navItem.items.map((item) => (
                         <li key={item.label}>
                           <Motion.div
                             whileHover={{ x: 8 }}

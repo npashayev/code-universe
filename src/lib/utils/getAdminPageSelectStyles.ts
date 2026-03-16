@@ -26,27 +26,27 @@ export const getAdminPageSelectStyles = <T>({
     ...controlStyles,
   }),
 
-  valueContainer: base => ({
+  valueContainer: (base) => ({
     ...base,
     padding: '0 0.25rem',
   }),
 
-  singleValue: base => ({
+  singleValue: (base) => ({
     ...base,
     color: 'white',
   }),
 
-  input: base => ({
+  input: (base) => ({
     ...base,
     color: 'white',
   }),
 
-  placeholder: base => ({
+  placeholder: (base) => ({
     ...base,
     color: 'rgba(255,255,255,0.5)',
   }),
 
-  menu: base => ({
+  menu: (base) => ({
     ...base,
     backgroundColor: '#020617',
     borderRadius: '0.5rem',
@@ -54,7 +54,7 @@ export const getAdminPageSelectStyles = <T>({
     border: '1px solid rgba(255,255,255,0.1)',
   }),
 
-  menuList: base => ({
+  menuList: (base) => ({
     ...base,
     padding: '0.25rem',
   }),

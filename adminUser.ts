@@ -11,7 +11,7 @@ const rl = readline.createInterface({
 });
 
 function question(query: string): Promise<string> {
-  return new Promise(resolve => rl.question(query, resolve));
+  return new Promise((resolve) => rl.question(query, resolve));
 }
 
 async function main(): Promise<void> {

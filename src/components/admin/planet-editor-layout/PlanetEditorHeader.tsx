@@ -6,7 +6,11 @@ import { LanguageOption } from '@/types/reactSelectOptions';
 import DashboardLink from '@/components/admin/ui/DashboardLink';
 import { usePlanetJsonIO } from '@/lib/hooks/admin/usePlanetJsonIO';
 import Dialog from '@/components/ui/modal/Dialog';
-import { CategorySelector, LanguageSelector, StatusSelector } from '../Selectors';
+import {
+  CategorySelector,
+  LanguageSelector,
+  StatusSelector,
+} from '../Selectors';
 
 type PendingContentImageEntry = {
   previewUrl: string;
@@ -64,7 +68,11 @@ export const PlanetEditorHeader = ({
     handleExportClick,
     handleFileChange,
     fileInputRef,
-  } = usePlanetJsonIO({ planetData, setPlanetData, locale: currentLanguage.value });
+  } = usePlanetJsonIO({
+    planetData,
+    setPlanetData,
+    locale: currentLanguage.value,
+  });
 
   const handleConfirm = () => {
     onSubmit();
@@ -98,7 +106,7 @@ export const PlanetEditorHeader = ({
       </div>
 
       <div className="flex flex-col gap-4 items-center">
-        <div className='flex items-center gap-4'>
+        <div className="flex items-center gap-4">
           <input
             ref={fileInputRef}
             type="file"
@@ -136,18 +144,21 @@ export const PlanetEditorHeader = ({
           </button>
         </div>
 
-        <div className='flex items-center gap-4'>
+        <div className="flex items-center gap-4">
           <LanguageSelector
             currentLanguage={currentLanguage}
             setCurrentLanguage={setCurrentLanguage}
           />
 
-          <StatusSelector planetData={planetData} setPlanetData={setPlanetData} />
+          <StatusSelector
+            planetData={planetData}
+            setPlanetData={setPlanetData}
+          />
 
           <CategorySelector
             category={planetData.category}
             onCategoryChange={(category: PlanetCategory) =>
-              setPlanetData(draft => {
+              setPlanetData((draft) => {
                 draft.category = category;
               })
             }

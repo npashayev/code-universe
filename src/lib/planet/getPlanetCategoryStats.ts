@@ -26,10 +26,10 @@ export const getPlanetCategoryStats = async (): Promise<
 
   const stats = (Object.keys(PLANET_CATEGORY) as PlanetCategory[]).map(
     (category): CategoryStatsItem => {
-      const rows = grouped.filter(r => r.category === category);
+      const rows = grouped.filter((r) => r.category === category);
       const published =
-        rows.find(r => r.status === 'published')?._count._all ?? 0;
-      const drafts = rows.find(r => r.status === 'draft')?._count._all ?? 0;
+        rows.find((r) => r.status === 'published')?._count._all ?? 0;
+      const drafts = rows.find((r) => r.status === 'draft')?._count._all ?? 0;
 
       return {
         category,

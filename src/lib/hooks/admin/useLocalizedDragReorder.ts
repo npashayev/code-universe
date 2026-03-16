@@ -25,12 +25,12 @@ export const useLocalizedDragReorder =
     const { active, over } = event;
     if (!over || active.id === over.id) return;
 
-    setPlanetData(draft => {
+    setPlanetData((draft) => {
       const arr = (draft.localized[locale][key] ?? []) as { id: string }[];
       const sorted = arrayMove(
         arr,
-        arr.findIndex(item => item.id === active.id),
-        arr.findIndex(item => item.id === over.id),
+        arr.findIndex((item) => item.id === active.id),
+        arr.findIndex((item) => item.id === over.id),
       );
       updateLocalizedArray(
         draft,

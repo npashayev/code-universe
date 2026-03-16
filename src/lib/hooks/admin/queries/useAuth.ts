@@ -25,16 +25,17 @@ export const useLogin = () => {
         password,
       });
       if (result?.error) {
-        const message = result.error in ERROR_MESSAGES
-          ? ERROR_MESSAGES[result.error as keyof typeof ERROR_MESSAGES]
-          : ERROR_MESSAGES.DEFAULT;
+        const message =
+          result.error in ERROR_MESSAGES
+            ? ERROR_MESSAGES[result.error as keyof typeof ERROR_MESSAGES]
+            : ERROR_MESSAGES.DEFAULT;
         throw new Error(message);
       }
       return result;
     },
     onSuccess: () => {
-      toast.success('Successfully logged in')
-      router.push('/admin/dashboard')
-    }
+      toast.success('Successfully logged in');
+      router.push('/admin/dashboard');
+    },
   });
 };

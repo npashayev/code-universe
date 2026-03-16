@@ -39,7 +39,7 @@ const MapSidebar = ({ planets }: Props) => {
     >
       <button
         className="absolute right-full top-1/4 p-2 rounded-tl-xl rounded-bl-xl bg-orange-500/80 backdrop-blur-2xl border border-white/5 shadow-[-40px_0_80px_-20px_rgba(0,0,0,0.9)]"
-        onClick={() => setSidebarOpen(p => !p)}
+        onClick={() => setSidebarOpen((p) => !p)}
       >
         <FontAwesomeIcon
           icon={faAngleLeft}

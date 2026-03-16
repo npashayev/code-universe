@@ -32,7 +32,7 @@ const BasicConfigurationSection = ({
 
     // Different fileKey for main image
     const fileKey = 'main-image';
-    setPendingFiles(prev => {
+    setPendingFiles((prev) => {
       const newMap = new Map(prev);
       newMap.set(fileKey, file);
       return newMap;
@@ -58,8 +58,8 @@ const BasicConfigurationSection = ({
           <Input
             id="planet-name"
             value={planetData.localized[locale].name}
-            onChange={e =>
-              setPlanetData(draft => {
+            onChange={(e) =>
+              setPlanetData((draft) => {
                 draft.localized[locale].name = e.target.value;
               })
             }
@@ -71,8 +71,8 @@ const BasicConfigurationSection = ({
           <Textarea
             id="planet-description"
             value={planetData.localized[locale].description}
-            onChange={e =>
-              setPlanetData(draft => {
+            onChange={(e) =>
+              setPlanetData((draft) => {
                 draft.localized[locale].description = e.target.value;
               })
             }
@@ -91,7 +91,7 @@ const BasicConfigurationSection = ({
             imageRealUrl={planetData.image.url}
             altText={planetData.image.alt?.[locale]}
             onAltChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setPlanetData(draft => {
+              setPlanetData((draft) => {
                 if (draft.image.alt) {
                   draft.image.alt[locale] = e.target.value;
                 }

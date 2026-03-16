@@ -57,7 +57,7 @@ export const getPlanetForEdit = async (id: string): Promise<PlanetForEdit> => {
   }
 
   // Ensure all supported languages exist
-  SUPPORTED_LANGS.forEach(lang => {
+  SUPPORTED_LANGS.forEach((lang) => {
     if (!localizedMap[lang]) {
       localizedMap[lang] = base.localized[lang];
     }

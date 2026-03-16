@@ -95,7 +95,7 @@ export const usePlanetJsonIO = ({
             return;
           }
 
-          setPlanetData(draft => {
+          setPlanetData((draft) => {
             draft.localized[locale] = result.data;
           });
         }

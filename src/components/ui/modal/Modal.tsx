@@ -17,10 +17,10 @@ const Modal = ({ children, className, onClose }: Props) => {
       onClick={onClose}
     >
       <div
-        onClick={e => e.stopPropagation()}
+        onClick={(e) => e.stopPropagation()}
         className={cn(
-          "relative rounded-2xl p-8 w-max max-w-md overflow-hidden bg-[rgba(5,9,20,0.97)] border border-blue-400/25 shadow-[0_0_40px_rgba(96,165,250,0.06),0_24px_48px_rgba(0,0,0,0.6)] animate-[modalIn_0.2s_ease]",
-          className
+          'relative rounded-2xl p-8 w-max max-w-md overflow-hidden bg-[rgba(5,9,20,0.97)] border border-blue-400/25 shadow-[0_0_40px_rgba(96,165,250,0.06),0_24px_48px_rgba(0,0,0,0.6)] animate-[modalIn_0.2s_ease]',
+          className,
         )}
       >
         <ModalStars />

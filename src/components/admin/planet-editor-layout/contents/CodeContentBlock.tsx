@@ -22,17 +22,14 @@ const CodeContentBlock = ({ content, onUpdate }: Props) => {
           <Input
             id={`code-content-title-${content.id}`}
             value={content.title || ''}
-            onChange={e => onUpdate(content.id, { title: e.target.value })}
+            onChange={(e) => onUpdate(content.id, { title: e.target.value })}
           />
         </div>
         <div className="space-y-2 shrink-0">
           <div className="block mb-2 text-xs font-bold text-slate-400 uppercase tracking-wider">
             Language
           </div>
-          <ProgrammingLanguageSelector
-            content={content}
-            onUpdate={onUpdate}
-          />
+          <ProgrammingLanguageSelector content={content} onUpdate={onUpdate} />
         </div>
       </div>
       <div className="space-y-6">
@@ -43,7 +40,7 @@ const CodeContentBlock = ({ content, onUpdate }: Props) => {
           <Textarea
             id={`code-content-description-${content.id}`}
             value={content.description}
-            onChange={e =>
+            onChange={(e) =>
               onUpdate(content.id, { description: e.target.value })
             }
           />
@@ -58,7 +55,7 @@ const CodeContentBlock = ({ content, onUpdate }: Props) => {
           <Textarea
             id={`code-content-code-${content.id}`}
             value={content.code.code}
-            onChange={e =>
+            onChange={(e) =>
               onUpdate(content.id, {
                 code: { ...content.code, code: e.target.value },
               })
@@ -76,7 +73,7 @@ const CodeContentBlock = ({ content, onUpdate }: Props) => {
           <Textarea
             id={`code-content-output-${content.id}`}
             value={content.code.output || ''}
-            onChange={e =>
+            onChange={(e) =>
               onUpdate(content.id, {
                 code: { ...content.code, output: e.target.value },
               })

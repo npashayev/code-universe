@@ -53,7 +53,7 @@ const CodeEditorHeader = ({
         </button> */}
 
         <button
-          onClick={() => setLightMode(p => !p)}
+          onClick={() => setLightMode((p) => !p)}
           className={cn(
             'p-2 rounded-full border transition-all flex items-center justify-center',
             lightMode

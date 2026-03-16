@@ -29,9 +29,9 @@ export const deletePlanet = async (planetId: string) => {
     urlsToDelete.push(planet.image.url);
   }
 
-  planet.localized.forEach(loc => {
+  planet.localized.forEach((loc) => {
     const contents = (loc.contents ?? []) as unknown as PlanetContent[];
-    contents.forEach(c => {
+    contents.forEach((c) => {
       if (c.type === 'image' && c.image?.url) {
         urlsToDelete.push(c.image.url);
       }

@@ -1,22 +1,21 @@
 'use client';
-import { UserRole } from "@/types/next-auth";
-import { useSession } from "next-auth/react";
-import { ReactNode } from "react";
-
+import { UserRole } from '@/types/next-auth';
+import { useSession } from 'next-auth/react';
+import { ReactNode } from 'react';
 
 interface Props {
-    roles: UserRole[];
-    children: ReactNode;
-    fallback?: ReactNode;
+  roles: UserRole[];
+  children: ReactNode;
+  fallback?: ReactNode;
 }
 
 const PrivateComponent = ({ roles, children, fallback = null }: Props) => {
-    const { data: session } = useSession();
+  const { data: session } = useSession();
 
-    const userRole = session?.user?.role;
+  const userRole = session?.user?.role;
 
-    if (!userRole || !roles.includes(userRole)) return fallback;
+  if (!userRole || !roles.includes(userRole)) return fallback;
 
-    return children;
-}
+  return children;
+};
 export default PrivateComponent;

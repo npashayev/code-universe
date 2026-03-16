@@ -107,15 +107,17 @@ export const useUpdatePlanet = ({
       return;
     }
 
-    const uploadedR2Keys = Array.from(uploadResults.values()).map(r => r.r2Key);
+    const uploadedR2Keys = Array.from(uploadResults.values()).map(
+      (r) => r.r2Key,
+    );
 
     const mergedData: CreatePlanetData = JSON.parse(JSON.stringify(planetData));
     uploadResults.forEach((result, fileKey) => {
       if (fileKey === 'main-image') {
         mergedData.image.url = result.url;
       } else {
-        SUPPORTED_LANGS.forEach(loc => {
-          mergedData.localized[loc].contents.forEach(c => {
+        SUPPORTED_LANGS.forEach((loc) => {
+          mergedData.localized[loc].contents.forEach((c) => {
             if (c.type === 'image' && c.pendingImageId === fileKey) {
               c.image.url = result.url;
             }
@@ -130,7 +132,7 @@ export const useUpdatePlanet = ({
       if (hasPendingMainImage) {
         const file = pendingFiles.get('main-image')!;
         metadataTasks.push(
-          getImageDimensions(file).then(dims => {
+          getImageDimensions(file).then((dims) => {
             mergedData.image.metadata = dims;
           }),
         );
@@ -139,8 +141,8 @@ export const useUpdatePlanet = ({
         ...Array.from(pendingContentImages.entries()).map(
           async ([fileKey, { file }]) => {
             const dims = await getImageDimensions(file);
-            SUPPORTED_LANGS.forEach(loc => {
-              mergedData.localized[loc].contents.forEach(c => {
+            SUPPORTED_LANGS.forEach((loc) => {
+              mergedData.localized[loc].contents.forEach((c) => {
                 if (c.type === 'image' && c.pendingImageId === fileKey) {
                   c.image.metadata = dims;
                 }
@@ -213,7 +215,7 @@ export const useUpdatePlanet = ({
     }
     setIsSubmitting(false);
     setPendingFiles(new Map());
-    setPendingContentImages(prev => {
+    setPendingContentImages((prev) => {
       prev.forEach(({ previewUrl }) => URL.revokeObjectURL(previewUrl));
       return new Map();
     });

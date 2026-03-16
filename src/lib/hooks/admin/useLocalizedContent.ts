@@ -24,7 +24,7 @@ export const useLocalizedContent = ({
   locale,
 }: UseLocalizedContentOptions) => {
   const addContent = (contentType: ContentType) => {
-    setPlanetData(draft => {
+    setPlanetData((draft) => {
       const contents = draft.localized[locale].contents;
       const newContent = createDefaultContent(contentType, contents.length);
       contents.push(newContent);
@@ -32,16 +32,16 @@ export const useLocalizedContent = ({
   };
 
   const removeContent = (id: string) => {
-    setPlanetData(draft => {
+    setPlanetData((draft) => {
       draft.localized[locale].contents = draft.localized[
         locale
-      ].contents.filter(c => c.id !== id);
+      ].contents.filter((c) => c.id !== id);
     });
   };
 
   const updateContent = (id: string, updates: Partial<PlanetContent>) => {
-    setPlanetData(draft => {
-      const content = draft.localized[locale].contents.find(c => c.id === id);
+    setPlanetData((draft) => {
+      const content = draft.localized[locale].contents.find((c) => c.id === id);
       if (!content) return;
       Object.assign(content, updates);
     });

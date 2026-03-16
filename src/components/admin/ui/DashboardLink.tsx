@@ -8,14 +8,9 @@ interface Props {
 
 const DashboardLink = ({ className }: Props) => {
   return (
-    <Link
-      href="/admin/dashboard"
-      className={cn("nav-item", className)}
-    >
+    <Link href="/admin/dashboard" className={cn('nav-item', className)}>
       <LayoutDashboard size={14} />
-      <span className="nav-item-text">
-        Dashboard
-      </span>
+      <span className="nav-item-text">Dashboard</span>
     </Link>
   );
 };

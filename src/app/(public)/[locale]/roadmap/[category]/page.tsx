@@ -21,12 +21,12 @@ export default async function MapPage({ params }: Props) {
   }
 
   const planets = await getPublicPlanetList(category);
-  console.log(planets)
+  console.log(planets);
   return (
     <main className={styles.page}>
       <PrivateComponent roles={['ADMIN']}>
         <UpdateLink
-          className='fixed top-9 left-30'
+          className="fixed top-9 left-30"
           href={`/admin/roadmap?category=${category}`}
         />
       </PrivateComponent>
@@ -37,7 +37,7 @@ export default async function MapPage({ params }: Props) {
         <div className={styles.stars3}></div>
       </div>
       <div className={styles.planetsCnr}>
-        {planets.map(planet => (
+        {planets.map((planet) => (
           <Planet key={planet.id} category={category} planet={planet} />
         ))}
       </div>

@@ -1,13 +1,7 @@
 'use client';
 
-import {
-  CreatePlanetData,
-  SupportedLanguage,
-} from '@/types/planet';
-import {
-  Dispatch,
-  SetStateAction,
-} from 'react';
+import { CreatePlanetData, SupportedLanguage } from '@/types/planet';
+import { Dispatch, SetStateAction } from 'react';
 import { Updater } from 'use-immer';
 import { LanguageOption } from '@/types/reactSelectOptions';
 
@@ -140,4 +134,3 @@ export const PlanetEditorLayout = ({
     </div>
   );
 };
-

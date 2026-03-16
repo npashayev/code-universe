@@ -9,10 +9,14 @@ interface Props {
 
 const getVariantStyles = (variant: TextVariant): string | undefined => {
   switch (variant) {
-    case 'note': return 'text-blue-200';
-    case 'warning': return 'text-yellow-600';
-    case 'tip': return 'text-green-600';
-    default: return undefined;
+    case 'note':
+      return 'text-blue-200';
+    case 'warning':
+      return 'text-yellow-600';
+    case 'tip':
+      return 'text-green-600';
+    default:
+      return undefined;
   }
 };
 
@@ -24,12 +28,17 @@ const headingClassMap: Partial<Record<TitleLevel, string>> = {
   h4: 'heading-minor',
 };
 
-const getContentTitle = (title: { level: TitleLevel; text: string } | undefined): ReactNode => {
+const getContentTitle = (
+  title: { level: TitleLevel; text: string } | undefined,
+): ReactNode => {
   if (!title) return null;
   const Tag = title.level;
-  return <Tag className={cn(baseClasses, headingClassMap[title.level])}>{title.text}</Tag>;
+  return (
+    <Tag className={cn(baseClasses, headingClassMap[title.level])}>
+      {title.text}
+    </Tag>
+  );
 };
-
 
 const TextContentBlock = ({ content }: Props) => {
   const { title, text, variant } = content;

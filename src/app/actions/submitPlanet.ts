@@ -37,7 +37,7 @@ export async function submitPlanet(data: unknown): Promise<SubmitPlanetResult> {
 
     const step = maxStepPlanet ? maxStepPlanet.step + 1 : 1;
 
-    const result = await prisma.$transaction(async tx => {
+    const result = await prisma.$transaction(async (tx) => {
       const planet = await tx.planet.create({
         data: {
           category: validData.category,

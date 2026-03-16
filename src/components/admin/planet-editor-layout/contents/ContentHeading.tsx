@@ -36,7 +36,7 @@ const ContentHeading = ({ idx, content, onRemove, onUpdate }: Props) => {
             id="preview-name"
             placeholder="Label..."
             value={content.label || ''}
-            onChange={e => {
+            onChange={(e) => {
               const trimmedValue = e.target.value.trimStart();
               onUpdate(content.id, { label: trimmedValue });
             }}

@@ -10,7 +10,7 @@ interface LanguageOption {
   value: SupportedLanguage;
 }
 
-const languageOptions: LanguageOption[] = SUPPORTED_LANGS.map(lang => ({
+const languageOptions: LanguageOption[] = SUPPORTED_LANGS.map((lang) => ({
   label: lang.toUpperCase(),
   value: lang,
 }));
@@ -34,7 +34,7 @@ const styles: StylesConfig<LanguageOption, false> = {
   }),
   indicatorSeparator: () => ({ display: 'none' }),
   dropdownIndicator: () => ({ display: 'none' }),
-  singleValue: base => ({
+  singleValue: (base) => ({
     ...base,
     color: 'white',
     fontSize: '12px',
@@ -49,7 +49,7 @@ const styles: StylesConfig<LanguageOption, false> = {
     fontSize: '12px',
     textAlign: 'center',
   }),
-  menu: base => ({
+  menu: (base) => ({
     ...base,
     background: 'rgba(15,20,40,0.95)',
     border: '1px solid rgba(255,255,255,0.2)',
@@ -57,7 +57,7 @@ const styles: StylesConfig<LanguageOption, false> = {
     overflow: 'hidden',
     backdropFilter: 'blur(10px)',
   }),
-  menuList: base => ({ ...base, padding: 0 }),
+  menuList: (base) => ({ ...base, padding: 0 }),
 };
 
 const LanguageSelector = () => {
@@ -73,7 +73,7 @@ const LanguageSelector = () => {
   return (
     <Select<LanguageOption, false>
       instanceId="language-selector"
-      value={languageOptions.find(o => o.value === locale) || null}
+      value={languageOptions.find((o) => o.value === locale) || null}
       options={languageOptions}
       onChange={handleChange}
       isSearchable={false}

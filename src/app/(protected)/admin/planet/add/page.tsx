@@ -1,9 +1,6 @@
 'use client';
 
-import {
-  CreatePlanetData,
-  PlanetCategory,
-} from '@/types/planet';
+import { CreatePlanetData, PlanetCategory } from '@/types/planet';
 import { use, useState } from 'react';
 import { useImmer } from 'use-immer';
 import { LanguageOption } from '@/types/reactSelectOptions';
@@ -35,12 +32,15 @@ export default function AddPlanetPage({ searchParams }: Props) {
 
   const planetCategory = isPlanetCategory(category) ? category : 'html';
   const [previewActive, setPreviewActive] = useState(false);
-  const [planetData, setPlanetData] = useImmer<CreatePlanetData>(getInitialPlanetData(planetCategory));
-  const [pendingFiles, setPendingFiles] = useState<Map<string, File>>(new Map());
-  const [pendingContentImages, setPendingContentImages] = useState<Map<
-    string,
-    { previewUrl: string; file: File }
-  >>(new Map());
+  const [planetData, setPlanetData] = useImmer<CreatePlanetData>(
+    getInitialPlanetData(planetCategory),
+  );
+  const [pendingFiles, setPendingFiles] = useState<Map<string, File>>(
+    new Map(),
+  );
+  const [pendingContentImages, setPendingContentImages] = useState<
+    Map<string, { previewUrl: string; file: File }>
+  >(new Map());
 
   const { handleSubmit, isUploading, isSubmitting, progress } = useSubmitPlanet(
     {

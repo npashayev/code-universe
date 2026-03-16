@@ -29,7 +29,11 @@ const PlanetDetails = ({ planet }: Props) => {
       {contents && contents.length > 0 && <ContentList contents={contents} />}
       {questions && questions.length > 0 && <Questions questions={questions} />}
 
-      <PlanetNavigation category={category} prevId={planet.prevPlanetId} nextId={planet.nextPlanetId} />
+      <PlanetNavigation
+        category={category}
+        prevId={planet.prevPlanetId}
+        nextId={planet.nextPlanetId}
+      />
     </main>
   );
 };

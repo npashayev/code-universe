@@ -8,7 +8,7 @@ interface Props {
 const ContentList = ({ contents }: Props) => {
   return (
     <section className="space-y-8">
-      {contents.map(content => (
+      {contents.map((content) => (
         <Content key={content.id} content={content} />
       ))}
     </section>

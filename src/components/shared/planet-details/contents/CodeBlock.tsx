@@ -7,9 +7,12 @@ import CodeEditorHeader from './CodeEditorHeader';
 import Markdown from 'react-markdown';
 import dynamic from 'next/dynamic';
 
-const CodeEditor = dynamic(() => import('@/components/shared/planet-details/CodeEditor'), {
-  ssr: false,
-});
+const CodeEditor = dynamic(
+  () => import('@/components/shared/planet-details/CodeEditor'),
+  {
+    ssr: false,
+  },
+);
 
 interface Props {
   content: CodeContent;

@@ -11,7 +11,10 @@ import { useImmer } from 'use-immer';
 import SortableList from '@/components/admin/planet-editor-layout/SortableList';
 import { DragEndEvent } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
-import { AdminPlanetListResponse, AdminPlanetSummary } from '@/lib/planet/getPlanetList';
+import {
+  AdminPlanetListResponse,
+  AdminPlanetSummary,
+} from '@/lib/planet/getPlanetList';
 
 interface Props {
   data: AdminPlanetListResponse;
@@ -34,8 +37,8 @@ const PlanetListClient = ({ data }: Props) => {
     const { active, over } = event;
     if (!over || active.id === over.id) return;
 
-    const oldIndex = orderedPlanets.findIndex(p => p.id === active.id);
-    const newIndex = orderedPlanets.findIndex(p => p.id === over.id);
+    const oldIndex = orderedPlanets.findIndex((p) => p.id === active.id);
+    const newIndex = orderedPlanets.findIndex((p) => p.id === over.id);
 
     const sorted = arrayMove(orderedPlanets, oldIndex, newIndex);
 
@@ -50,12 +53,12 @@ const PlanetListClient = ({ data }: Props) => {
     setOrderedPlanets(updatedWithSteps);
   };
 
-  const filteredPlanets = orderedPlanets.filter(planet => {
+  const filteredPlanets = orderedPlanets.filter((planet) => {
     const matchesSearch =
       planet.localized[locale].name
         .toLowerCase()
         .includes(searchQuery.toLowerCase()) ||
-      planet.localized[locale].tags.some(tag =>
+      planet.localized[locale].tags.some((tag) =>
         tag.tag.toLowerCase().includes(searchQuery.toLowerCase()),
       );
 
@@ -82,7 +85,7 @@ const PlanetListClient = ({ data }: Props) => {
           className="space-y-3 pb-18"
           elements={filteredPlanets}
           handleDragEnd={handleDragEnd}
-          renderItem={planet => (
+          renderItem={(planet) => (
             <Planet
               planet={planet}
               setOrderedPlanets={setOrderedPlanets}

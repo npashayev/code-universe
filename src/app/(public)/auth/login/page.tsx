@@ -9,14 +9,18 @@ import FormError from './components/FormError';
 const loginSchema = z.object({
   email: z.email(),
   password: z.string().min(1, 'Password is required'),
-})
+});
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
 
-  const { mutate: login, isPending: isLoggingIn, error: loginError } = useLogin();
+  const {
+    mutate: login,
+    isPending: isLoggingIn,
+    error: loginError,
+  } = useLogin();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -37,29 +41,25 @@ export default function LoginPage() {
         onSubmit={handleSubmit}
         className="bg-gray-800 shadow-md rounded p-10 w-full max-w-sm"
       >
-        <h1 className="text-3xl font-bold mb-4 text-gray-100">
-          Login
-        </h1>
-        {
-          loginError && (
-            <FormError error={loginError.message} className='mt-0 mb-2' />
-          )
-        }
+        <h1 className="text-3xl font-bold mb-4 text-gray-100">Login</h1>
+        {loginError && (
+          <FormError error={loginError.message} className="mt-0 mb-2" />
+        )}
         <FormField
-          id='email'
+          id="email"
           label="Email"
           type="email"
           value={email}
-          onChange={e => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
           error={fieldErrors.email?.[0]}
         />
 
         <FormField
-          id='password'
+          id="password"
           label="Password"
           type="password"
           value={password}
-          onChange={e => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
           error={fieldErrors.password?.[0]}
         />
 

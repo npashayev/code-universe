@@ -19,7 +19,7 @@ const ImplementationTaskContentBlock = ({ content, onUpdate }: Props) => {
         <Input
           id={`implementation-task-title-${content.id}`}
           value={content.title || ''}
-          onChange={e => onUpdate(content.id, { title: e.target.value })}
+          onChange={(e) => onUpdate(content.id, { title: e.target.value })}
         />
       </div>
       <div className="space-y-2">
@@ -29,7 +29,7 @@ const ImplementationTaskContentBlock = ({ content, onUpdate }: Props) => {
         <Textarea
           id={`implementation-task-instructions-${content.id}`}
           value={content.task}
-          onChange={e => onUpdate(content.id, { task: e.target.value })}
+          onChange={(e) => onUpdate(content.id, { task: e.target.value })}
         />
       </div>
     </div>

@@ -1,8 +1,6 @@
 'use client';
 
-import {
-  CreatePlanetData,
-} from '@/types/planet';
+import { CreatePlanetData } from '@/types/planet';
 import { useState } from 'react';
 import { useImmer } from 'use-immer';
 import { LanguageOption } from '@/types/reactSelectOptions';
@@ -25,8 +23,9 @@ interface Props {
 }
 
 const UpdatePlanetClient = ({ planetId, step, initialData }: Props) => {
-  const [currentLanguage, setCurrentLanguage] =
-    useState<LanguageOption>(languageOptions[0]);
+  const [currentLanguage, setCurrentLanguage] = useState<LanguageOption>(
+    languageOptions[0],
+  );
 
   const [previewActive, setPreviewActive] = useState(false);
   const [planetData, setPlanetData] = useImmer<CreatePlanetData>(initialData);
@@ -62,11 +61,11 @@ const UpdatePlanetClient = ({ planetId, step, initialData }: Props) => {
             id: planetId,
             image: {
               ...planetData.image,
-              alt: planetData.image.alt[currentLanguage.value]
+              alt: planetData.image.alt[currentLanguage.value],
             },
             localized: planetData.localized[currentLanguage.value],
             prevPlanetId: null,
-            nextPlanetId: null
+            nextPlanetId: null,
           }}
         />
       </>
@@ -98,4 +97,3 @@ const UpdatePlanetClient = ({ planetId, step, initialData }: Props) => {
 };
 
 export default UpdatePlanetClient;
-

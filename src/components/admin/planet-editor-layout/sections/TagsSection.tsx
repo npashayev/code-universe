@@ -23,7 +23,7 @@ const TagsSection = ({ planetData, setPlanetData, locale }: Props) => {
   const addTag = () => {
     if (!currentTag.trim()) return;
 
-    setPlanetData(draft => {
+    setPlanetData((draft) => {
       draft.localized[locale].tags.push({
         id: crypto.randomUUID(),
         tag: currentTag,
@@ -34,9 +34,9 @@ const TagsSection = ({ planetData, setPlanetData, locale }: Props) => {
   };
 
   const removeTag = (id: string) =>
-    setPlanetData(draft => {
+    setPlanetData((draft) => {
       draft.localized[locale].tags = draft.localized[locale].tags.filter(
-        t => t.id !== id,
+        (t) => t.id !== id,
       );
     });
 
@@ -54,13 +54,19 @@ const TagsSection = ({ planetData, setPlanetData, locale }: Props) => {
           <Input
             placeholder="Add tag"
             value={currentTag}
-            onChange={e => setCurrentTag(e.target.value)}
-            onKeyDown={e => {
+            onChange={(e) => setCurrentTag(e.target.value)}
+            onKeyDown={(e) => {
               if (e.key === 'Enter') addTag();
             }}
           />
         </div>
-        <AddButton onClick={addTag} disabled={currentTag.trim() === ''} className="shrink-0">Add</AddButton>
+        <AddButton
+          onClick={addTag}
+          disabled={currentTag.trim() === ''}
+          className="shrink-0"
+        >
+          Add
+        </AddButton>
       </div>
 
       <SortableList<PlanetTag>
@@ -68,7 +74,10 @@ const TagsSection = ({ planetData, setPlanetData, locale }: Props) => {
         elements={tags}
         handleDragEnd={handleDragEnd}
         renderItem={(tag, idx) => (
-          <ListElement onRemove={() => removeTag(tag.id)} className={cn(idx <= 3 && 'border border-amber-400/30')}>
+          <ListElement
+            onRemove={() => removeTag(tag.id)}
+            className={cn(idx <= 3 && 'border border-amber-400/30')}
+          >
             <span className="block truncate">{tag.tag}</span>
           </ListElement>
         )}

@@ -10,7 +10,7 @@ interface Props {
 const CategoryStatsList = ({ items }: Props) => {
   return (
     <ul className="space-y-3">
-      {items.map(item => {
+      {items.map((item) => {
         const { total, drafts, published } = item.stats;
         return (
           <li key={item.category}>

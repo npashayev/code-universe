@@ -9,7 +9,7 @@ const ResearchTopics = ({ researchTopics }: Props) => {
     <section>
       <h2 className="heading-secondary">Research Topics</h2>
       <ul className="list-indented list-disc">
-        {researchTopics.map(topic => (
+        {researchTopics.map((topic) => (
           <li key={topic.id}>{topic.topic}</li>
         ))}
       </ul>

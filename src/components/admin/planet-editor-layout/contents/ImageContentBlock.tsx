@@ -30,7 +30,7 @@ const ImageContentBlock = ({
 }: Props) => {
   const pendingImageOptions: PendingImageOption[] = Array.from(
     pendingContentImages.keys(),
-  ).map(fileName => ({
+  ).map((fileName) => ({
     value: fileName,
     label: fileName,
   }));
@@ -38,9 +38,9 @@ const ImageContentBlock = ({
   const selectedPendingOption: PendingImageOption | null =
     content.pendingImageId
       ? {
-        value: content.pendingImageId,
-        label: content.pendingImageId,
-      }
+          value: content.pendingImageId,
+          label: content.pendingImageId,
+        }
       : null;
 
   const imagePreviewUrl =
@@ -54,7 +54,7 @@ const ImageContentBlock = ({
     const fileName = file.name;
     const previewUrl = URL.createObjectURL(file);
 
-    setPendingContentImages(prev => {
+    setPendingContentImages((prev) => {
       const next = new Map(prev);
       // Revoke old blob URL when overwriting same filename
       const existing = next.get(fileName);
@@ -85,7 +85,7 @@ const ImageContentBlock = ({
         <Input
           id={`image-content-title-${content.id}`}
           value={content.title || ''}
-          onChange={e => onUpdate(content.id, { title: e.target.value })}
+          onChange={(e) => onUpdate(content.id, { title: e.target.value })}
         />
       </div>
       <div className="space-y-2">
@@ -96,7 +96,9 @@ const ImageContentBlock = ({
           id={`image-content-description-${content.id}`}
           rows={2}
           value={content.description ?? ''}
-          onChange={e => onUpdate(content.id, { description: e.target.value })}
+          onChange={(e) =>
+            onUpdate(content.id, { description: e.target.value })
+          }
         />
       </div>
 
@@ -106,7 +108,7 @@ const ImageContentBlock = ({
           <PendingImageSelector
             options={pendingImageOptions}
             value={selectedPendingOption}
-            onChange={option =>
+            onChange={(option) =>
               onUpdate(content.id, {
                 pendingImageId: option?.value,
               })

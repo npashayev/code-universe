@@ -11,7 +11,7 @@ const Resources = ({ resources }: Props) => {
     <section>
       <h2 className="heading-secondary">Resources</h2>
       <ul className="list-none flex gap-4 flex-wrap">
-        {resources.map(res => (
+        {resources.map((res) => (
           <li key={res.id} className="flex gap-3">
             {
               <Link

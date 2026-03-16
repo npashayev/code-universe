@@ -29,7 +29,7 @@ export const ExternalResourcesSection = ({
 
   const addResource = () => {
     if (!currentResource.label || !currentResource.url) return;
-    setPlanetData(draft => {
+    setPlanetData((draft) => {
       draft.localized[locale].resources?.push({
         id: crypto.randomUUID(),
         ...currentResource,
@@ -39,16 +39,21 @@ export const ExternalResourcesSection = ({
   };
 
   const removeResource = (id: string) => {
-    setPlanetData(draft => {
+    setPlanetData((draft) => {
       draft.localized[locale].resources = draft.localized[
         locale
-      ].resources?.filter(r => r.id !== id);
+      ].resources?.filter((r) => r.id !== id);
     });
   };
 
-  const handleDragEnd = useLocalizedDragReorder(setPlanetData, locale, 'resources');
+  const handleDragEnd = useLocalizedDragReorder(
+    setPlanetData,
+    locale,
+    'resources',
+  );
 
-  const isValid = !!currentResource.label.trim() && !!currentResource.url.trim();
+  const isValid =
+    !!currentResource.label.trim() && !!currentResource.url.trim();
 
   return (
     <section className="admin-page-section">
@@ -60,35 +65,39 @@ export const ExternalResourcesSection = ({
       <div className="flex gap-2 min-w-0 flex-wrap">
         <Input
           value={currentResource.title}
-          onChange={e =>
+          onChange={(e) =>
             setCurrentResource({ ...currentResource, title: e.target.value })
           }
-          onKeyDown={e => {
+          onKeyDown={(e) => {
             if (e.key === 'Enter') addResource();
           }}
           placeholder="Title (Optional)"
         />
         <Input
           value={currentResource.label}
-          onChange={e =>
+          onChange={(e) =>
             setCurrentResource({ ...currentResource, label: e.target.value })
           }
-          onKeyDown={e => {
+          onKeyDown={(e) => {
             if (e.key === 'Enter') addResource();
           }}
           placeholder="Link label"
         />
         <Input
           value={currentResource.url}
-          onChange={e =>
+          onChange={(e) =>
             setCurrentResource({ ...currentResource, url: e.target.value })
           }
-          onKeyDown={e => {
+          onKeyDown={(e) => {
             if (e.key === 'Enter') addResource();
           }}
           placeholder="URL"
         />
-        <AddButton onClick={addResource} disabled={!isValid} className="shrink-0">
+        <AddButton
+          onClick={addResource}
+          disabled={!isValid}
+          className="shrink-0"
+        >
           Add
         </AddButton>
       </div>
@@ -97,7 +106,7 @@ export const ExternalResourcesSection = ({
         id="resource-sortable-list"
         elements={resources || []}
         handleDragEnd={handleDragEnd}
-        renderItem={res => (
+        renderItem={(res) => (
           <ListElement onRemove={() => removeResource(res.id)}>
             <div className="flex items-center gap-4 min-w-0">
               <div className="w-8 h-8 shrink-0 rounded-lg bg-orange-500/15 flex items-center justify-center border border-orange-500/30">
