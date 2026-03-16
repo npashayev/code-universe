@@ -8,6 +8,10 @@ import { PlanetContent } from '@/types/planet';
 export const deletePlanet = async (planetId: string) => {
   await ensureAdmin();
 
+  if (!planetId) {
+    throw new Error('Invalid planet ID.');
+  }
+
   // Fetch planet + localizations to collect all image URLs before deletion
   const planet = await prisma.planet.findUnique({
     where: { id: planetId },
