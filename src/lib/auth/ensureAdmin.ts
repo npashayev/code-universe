@@ -1,7 +1,9 @@
 'use server';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+
+import { authOptions } from '@/lib/next-auth/authOptions';
 import { prisma } from '@/lib/prisma/prisma';
+
 import { handlePrismaError } from '../utils/handlePrismaError';
 
 export const ensureAdmin = async () => {

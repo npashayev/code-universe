@@ -1,4 +1,4 @@
-import { PlanetListStats } from '@/lib/planet/getPlanetList';
+import type { PlanetListStats } from '@/lib/planet/getPlanetList';
 
 const PlanetStats = ({ total, published, drafts }: PlanetListStats) => {
   return (

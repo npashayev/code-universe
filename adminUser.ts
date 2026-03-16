@@ -1,9 +1,11 @@
 // npm i -D tsx
 // npx tsx adminUser.ts
 
-import { prisma } from '@/lib/prisma/prisma';
-import bcrypt from 'bcrypt';
 import * as readline from 'readline';
+
+import bcrypt from 'bcrypt';
+
+import { prisma } from '@/lib/prisma/prisma';
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -30,7 +32,7 @@ async function main(): Promise<void> {
 
       const existingUser = await prisma.user.findUnique({ where: { email } });
       if (existingUser) {
-        console.log('User with this email already exists!');
+        console.error('User with this email already exists!');
         rl.close();
         process.exit(1);
       }
@@ -45,6 +47,7 @@ async function main(): Promise<void> {
         },
       });
 
+      // eslint-disable-next-line no-console
       console.log('Admin user created successfully:', {
         id: user.id,
         email: user.email,
@@ -57,7 +60,7 @@ async function main(): Promise<void> {
 
       const user = await prisma.user.findUnique({ where: { email } });
       if (!user) {
-        console.log('No user found with this email.');
+        console.error('No user found with this email.');
         rl.close();
         process.exit(1);
       }
@@ -69,9 +72,10 @@ async function main(): Promise<void> {
         data: { hashedPassword },
       });
 
+      // eslint-disable-next-line no-console
       console.log(`Password updated successfully for ${email}.`);
     } else {
-      console.log("Invalid action. Type 'create' or 'update'.");
+      console.error("Invalid action. Type 'create' or 'update'.");
       rl.close();
       process.exit(1);
     }
@@ -85,4 +89,4 @@ async function main(): Promise<void> {
   }
 }
 
-main();
+void main();

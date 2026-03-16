@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Draft } from 'immer';
-import {
+import type { Draft } from 'immer';
+
+import type {
   CreatePlanetData,
   SupportedLanguage,
   LocalizedPlanetData,

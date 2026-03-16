@@ -1,6 +1,7 @@
 import { Home } from 'lucide-react';
-import { cn } from '@/lib/utils/cn';
 import { useTranslations } from 'next-intl';
+
+import { cn } from '@/lib/utils/cn';
 import { Link } from '@/lib/next-intl/navigation';
 
 interface Props {

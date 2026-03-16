@@ -1,13 +1,15 @@
 import { HelpCircle } from 'lucide-react';
 import { useState } from 'react';
-import { CreatePlanetData, Question, SupportedLanguage } from '@/types/planet';
-import { Updater } from 'use-immer';
+import type { Updater } from 'use-immer';
+
+import type { CreatePlanetData, Question, SupportedLanguage } from '@/types/planet';
 import { useLocalizedDragReorder } from '@/lib/hooks/admin/useLocalizedDragReorder';
+import SortableList from '@/components/admin/planet-editor-layout/SortableList';
+
 import ListElement from '../shared/ListElement';
 import SectionHeader from '../shared/SectionHeader';
 import Input from '../shared/Input';
 import AddButton from '../shared/AddButton';
-import SortableList from '@/components/admin/planet-editor-layout/SortableList';
 
 interface Props {
   questions: Question[];

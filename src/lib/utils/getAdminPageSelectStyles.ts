@@ -1,4 +1,4 @@
-import { CSSObjectWithLabel, StylesConfig } from 'react-select';
+import type { CSSObjectWithLabel, StylesConfig } from 'react-select';
 
 export const getAdminPageSelectStyles = <T>({
   controlStyles = {},

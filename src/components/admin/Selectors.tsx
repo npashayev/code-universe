@@ -1,5 +1,7 @@
 'use client';
 
+import { CheckCircle2, Clock, Code, Eye, Languages } from 'lucide-react';
+
 import {
   categoryOptions,
   contentTypeOptions,
@@ -10,7 +12,7 @@ import {
   textVariantOptions,
   titleLevelOptions,
 } from '@/lib/constants/reactSelectOptions';
-import {
+import type {
   CategoryOption,
   ContentTypeOption,
   ExtendedStatusOption,
@@ -21,8 +23,7 @@ import {
   TextVariantOption,
   TitleLevelOption,
 } from '@/types/reactSelectOptions';
-import { CheckCircle2, Clock, Code, Eye, Languages } from 'lucide-react';
-import {
+import type {
   CategorySelectorProps,
   ContentTypeSelectorProps,
   ExtendedStatusSelectorProps,
@@ -34,6 +35,7 @@ import {
   TextVariantSelectorProps,
   TitleLevelSelectorProps,
 } from '@/types/reactSelectProps';
+
 import Selector from './planet-editor-layout/shared/Selector';
 
 export const StatusSelector = ({
@@ -42,7 +44,7 @@ export const StatusSelector = ({
 }: PlanetDataProps) => (
   <Selector<StatusOption>
     instanceId="status-select"
-    value={statusOptions.find((o) => o.value === planetData.status) || null}
+    value={statusOptions.find((o) => o.value === planetData.status) ?? null}
     options={statusOptions}
     onChange={(option) => {
       if (!option) return;
@@ -61,7 +63,7 @@ export const StatusUpdateSelector = ({
 }: StatusUpdateSelectorProps) => (
   <Selector<StatusOption>
     instanceId={`status-update-select-${planet.id}`}
-    value={statusOptions.find((o) => o.value === planet.status) || null}
+    value={statusOptions.find((o) => o.value === planet.status) ?? null}
     options={statusOptions}
     onChange={(option) => {
       if (!option) return;
@@ -123,7 +125,7 @@ export const CategorySelector = ({
   <Selector<CategoryOption>
     instanceId="category-select"
     value={
-      categoryOptions.find((o) => o.value === category) || categoryOptions[0]
+      categoryOptions.find((o) => o.value === category) ?? null
     }
     options={categoryOptions}
     onChange={(option) => {
@@ -162,8 +164,7 @@ export const TitleLevelSelector = ({
   <Selector<TitleLevelOption>
     instanceId="title-level-select"
     value={
-      titleLevelOptions.find((tl) => tl.value === content.title?.level) ??
-      titleLevelOptions[0]
+      titleLevelOptions.find((tl) => tl.value === content.title?.level) ?? null
     }
     options={titleLevelOptions}
     isDisabled={isDisabled}

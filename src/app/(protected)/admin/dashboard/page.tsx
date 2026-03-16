@@ -1,5 +1,6 @@
-import Header from './components/Header';
 import { getPlanetCategoryStats } from '@/lib/planet/getPlanetCategoryStats';
+
+import Header from './components/Header';
 import CategoryStatsList from './components/CategoryStatsList';
 
 export default async function DashboardPage() {

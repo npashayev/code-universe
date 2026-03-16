@@ -1,9 +1,10 @@
 'use client';
 
-import { CreatePlanetData, PlanetCategory } from '@/types/planet';
 import { use, useState } from 'react';
 import { useImmer } from 'use-immer';
-import { LanguageOption } from '@/types/reactSelectOptions';
+
+import type { CreatePlanetData, PlanetCategory } from '@/types/planet';
+import type { LanguageOption } from '@/types/reactSelectOptions';
 import { languageOptions } from '@/lib/constants/reactSelectOptions';
 import { getInitialPlanetData } from '@/lib/utils/getInitialPlanetData';
 import { PlanetEditorLayout } from '@/components/admin/planet-editor-layout/PlanetEditorLayout';
@@ -23,7 +24,7 @@ export default function AddPlanetPage({ searchParams }: Props) {
   const { category = 'html' } = use(searchParams);
 
   const [currentLanguage, setCurrentLanguage] = useState<LanguageOption>(
-    languageOptions[0],
+    languageOptions[0] as LanguageOption,
   );
 
   function isPlanetCategory(value: string): value is PlanetCategory {

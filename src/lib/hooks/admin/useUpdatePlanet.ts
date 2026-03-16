@@ -1,14 +1,15 @@
-import { CreatePlanetData } from '@/types/planet';
-import { BatchUploadItem } from '@/types/r2';
-import { useR2Upload } from '@/lib/hooks/admin/useR2Upload';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { type Dispatch, type SetStateAction, useState } from 'react';
 import toast from 'react-hot-toast';
+
+import type { CreatePlanetData, PendingContentImageEntry } from '@/types/planet';
+import type { BatchUploadItem } from '@/types/r2';
+import { useR2Upload } from '@/lib/hooks/admin/useR2Upload';
 import {
   preSubmitCreatePlanetDataSchema,
   createPlanetDataSchema,
 } from '@/lib/validation/planetDataSchema';
 import { SUPPORTED_LANGS } from '@/lib/constants/planet';
-import { updatePlanet, UpdatePlanetResult } from '@/app/actions/updatePlanet';
+import { type UpdatePlanetResult, updatePlanet } from '@/app/actions/updatePlanet';
 
 function getImageDimensions(
   file: File,
@@ -27,12 +28,6 @@ function getImageDimensions(
     img.src = url;
   });
 }
-
-type PendingContentImageEntry = {
-  previewUrl: string;
-  file: File;
-};
-
 interface UseUpdatePlanetProps {
   planetId: string;
   step: number;
@@ -91,7 +86,8 @@ export const useUpdatePlanet = ({
 
     const uploadItems: BatchUploadItem[] = [];
     if (hasPendingMainImage) {
-      const file = pendingFiles.get('main-image')!;
+      const file = pendingFiles.get('main-image');
+      if (!file) return;
       uploadItems.push({ file, fileKey: 'main-image', type: 'planet-main' });
     }
     Array.from(pendingContentImages.entries()).forEach(([id, { file }]) =>
@@ -130,7 +126,8 @@ export const useUpdatePlanet = ({
     try {
       const metadataTasks: Promise<void>[] = [];
       if (hasPendingMainImage) {
-        const file = pendingFiles.get('main-image')!;
+        const file = pendingFiles.get('main-image');
+        if (!file) return;
         metadataTasks.push(
           getImageDimensions(file).then((dims) => {
             mergedData.image.metadata = dims;

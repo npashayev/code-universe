@@ -1,14 +1,16 @@
-import { CreatePlanetData, PlanetTag, SupportedLanguage } from '@/types/planet';
 import { TagIcon } from 'lucide-react';
 import { useState } from 'react';
-import { Updater } from 'use-immer';
+import type { Updater } from 'use-immer';
+
+import type { CreatePlanetData, PlanetTag, SupportedLanguage } from '@/types/planet';
 import { useLocalizedDragReorder } from '@/lib/hooks/admin/useLocalizedDragReorder';
+import SortableList from '@/components/admin/planet-editor-layout/SortableList';
+import { cn } from '@/lib/utils/cn';
+
 import SectionHeader from '../shared/SectionHeader';
 import Input from '../shared/Input';
 import ListElement from '../shared/ListElement';
 import AddButton from '../shared/AddButton';
-import SortableList from '@/components/admin/planet-editor-layout/SortableList';
-import { cn } from '@/lib/utils/cn';
 
 interface Props {
   planetData: CreatePlanetData;

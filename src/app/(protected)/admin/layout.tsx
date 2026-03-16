@@ -1,8 +1,10 @@
 import './admin.css';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth/next';
 import { redirect } from 'next/navigation';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
+
+import { authOptions } from '@/lib/next-auth/authOptions';
+
 
 export default async function AdminLayout({
   children,

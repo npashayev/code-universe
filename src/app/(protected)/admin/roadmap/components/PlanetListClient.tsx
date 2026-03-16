@@ -1,20 +1,22 @@
 'use client';
-import Header from './Header';
-import Planet from './Planet';
 import { useState } from 'react';
-import { LanguageOption } from '@/types/reactSelectOptions';
+import { useImmer } from 'use-immer';
+import type { DragEndEvent } from '@dnd-kit/core';
+import { arrayMove } from '@dnd-kit/sortable';
+
+import type { ExtendedStatusOption, LanguageOption } from '@/types/reactSelectOptions';
 import {
   extendedStatusOptions,
   languageOptions,
 } from '@/lib/constants/reactSelectOptions';
-import { useImmer } from 'use-immer';
 import SortableList from '@/components/admin/planet-editor-layout/SortableList';
-import { DragEndEvent } from '@dnd-kit/core';
-import { arrayMove } from '@dnd-kit/sortable';
-import {
+import type {
   AdminPlanetListResponse,
   AdminPlanetSummary,
 } from '@/lib/planet/getPlanetList';
+
+import Planet from './Planet';
+import Header from './Header';
 
 interface Props {
   data: AdminPlanetListResponse;
@@ -24,10 +26,10 @@ const PlanetListClient = ({ data }: Props) => {
   const [orderedPlanets, setOrderedPlanets] = useImmer(data.planets);
 
   const [currentLanguage, setCurrentLanguage] = useState<LanguageOption>(
-    languageOptions[0],
+    languageOptions[0] as LanguageOption,
   );
 
-  const [status, setStatus] = useState(extendedStatusOptions[0]);
+  const [status, setStatus] = useState(extendedStatusOptions[0] as ExtendedStatusOption);
 
   const [searchQuery, setSearchQuery] = useState('');
 

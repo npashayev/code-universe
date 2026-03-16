@@ -1,5 +1,7 @@
 import 'server-only';
 
+import { getLocale } from 'next-intl/server';
+
 import { prisma } from '@/lib/prisma/prisma';
 import { ensureAdmin } from '@/lib/auth/ensureAdmin';
 import type {
@@ -11,7 +13,7 @@ import type {
   NormalizedImage,
   LocalizedImage,
 } from '@/types/planet';
-import { getLocale } from 'next-intl/server';
+
 import { normalizeImage } from '../utils/normalizeImage';
 import { handlePrismaError } from '../utils/handlePrismaError';
 
@@ -108,6 +110,7 @@ export const getPublicPlanetList = async (
 
   return planets.map((planet) => {
     const loc = planet.localized[0];
+    if (!loc) throw new Error('Missing localization for planet.');
     return {
       id: planet.id,
       step: planet.step,

@@ -2,7 +2,7 @@
 import { ensureAdmin } from '@/lib/auth/ensureAdmin';
 import { prisma } from '@/lib/prisma/prisma';
 import { createPlanetDataSchema } from '@/lib/validation/planetDataSchema';
-import { SupportedLanguage } from '@/types/planet';
+import type { PlanetCategory, SupportedLanguage } from '@/types/planet';
 
 export type SubmitPlanetResult =
   | { success: true; planetId: string }
@@ -30,7 +30,7 @@ export async function submitPlanet(data: unknown): Promise<SubmitPlanetResult> {
 
   try {
     const maxStepPlanet = await prisma.planet.findFirst({
-      where: { category: validData.category },
+      where: { category: validData.category as PlanetCategory },
       orderBy: { step: 'desc' },
       select: { step: true },
     });
@@ -40,7 +40,7 @@ export async function submitPlanet(data: unknown): Promise<SubmitPlanetResult> {
     const result = await prisma.$transaction(async (tx) => {
       const planet = await tx.planet.create({
         data: {
-          category: validData.category,
+          category: validData.category as PlanetCategory,
           status: validData.status,
           step,
           image: validData.image,

@@ -1,5 +1,6 @@
-import { UpdateContentFn } from '@/lib/hooks/admin/useLocalizedContent';
-import { ImplementationTaskContent } from '@/types/planet';
+import type { UpdateContentFn } from '@/lib/hooks/admin/useLocalizedContent';
+import type { ImplementationTaskContent } from '@/types/planet';
+
 import Input from '../shared/Input';
 import Label from '../shared/Label';
 import Textarea from '../shared/Textarea';

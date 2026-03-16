@@ -1,7 +1,8 @@
 import Link from 'next/link';
+
 import PlanetStats from '@/components/admin/PlanetStats';
 import { PLANET_CATEGORY } from '@/lib/constants/planet';
-import { CategoryStatsItem } from '@/lib/planet/getPlanetCategoryStats';
+import type { CategoryStatsItem } from '@/lib/planet/getPlanetCategoryStats';
 
 interface Props {
   items: CategoryStatsItem[];

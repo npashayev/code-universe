@@ -1,8 +1,11 @@
 'use client';
-import { useDeletePlanet } from '@/lib/hooks/admin/queries/usePlanet';
-import Dialog from '../../ui/modal/Dialog';
-import RemoveButton from './RemoveButton';
 import { useState } from 'react';
+
+import { useDeletePlanet } from '@/lib/hooks/admin/queries/usePlanet';
+
+import Dialog from '../../ui/modal/Dialog';
+
+import RemoveButton from './RemoveButton';
 
 interface Props {
   planetId: string;

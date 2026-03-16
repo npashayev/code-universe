@@ -1,7 +1,8 @@
-import { cn } from '@/lib/utils/cn';
 import { Edit } from 'lucide-react';
 import Link from 'next/link';
-import { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
+
+import { cn } from '@/lib/utils/cn';
 
 type Props = ComponentPropsWithoutRef<typeof Link>;
 

@@ -1,18 +1,19 @@
-import { SortableItem } from '@/components/admin/planet-editor-layout/SortableItem';
-import { cn } from '@/lib/utils/cn';
 import {
   DndContext,
-  DragEndEvent,
   PointerSensor,
   closestCenter,
   useSensor,
   useSensors,
+  type DragEndEvent
 } from '@dnd-kit/core';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import {
   SortableContext,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
+
+import { cn } from '@/lib/utils/cn';
+import { SortableItem } from '@/components/admin/planet-editor-layout/SortableItem';
 
 interface Props<T extends { id: string }> {
   id: string;

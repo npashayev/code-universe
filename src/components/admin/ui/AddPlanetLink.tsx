@@ -1,6 +1,7 @@
-import { PlanetCategory } from '@/types/planet';
 import { Plus } from 'lucide-react';
 import Link from 'next/link';
+
+import type { PlanetCategory } from '@/types/planet';
 
 interface Props {
   category?: PlanetCategory;

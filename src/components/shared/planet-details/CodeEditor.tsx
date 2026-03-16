@@ -1,6 +1,6 @@
 'use client';
 import { useState, useRef, useEffect, useCallback } from 'react';
-import Editor, { OnChange, OnMount } from '@monaco-editor/react';
+import Editor, { type OnChange, type OnMount } from '@monaco-editor/react';
 
 interface Props {
   defaultValue: string;

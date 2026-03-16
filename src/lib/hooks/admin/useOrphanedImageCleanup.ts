@@ -1,11 +1,12 @@
-import { useEffect } from 'react';
-import { Dispatch, SetStateAction } from 'react';
-import { SUPPORTED_LANGS } from '@/lib/constants/locale';
-import {
+import { useEffect, type Dispatch, type SetStateAction } from 'react';
+
+import type {
   CreatePlanetData,
   PendingContentImageEntry,
   PlanetData,
 } from '@/types/planet';
+import { SUPPORTED_LANGS } from '@/lib/constants/planet';
+
 
 export const useOrphanedImageCleanup = (
   planetData: PlanetData | CreatePlanetData,

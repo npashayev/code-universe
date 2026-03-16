@@ -1,7 +1,9 @@
-import { BatchUploadItem, UploadResult } from '@/types/r2';
 import { useState } from 'react';
-import { presignUpload, deleteUpload } from '@/app/actions/upload';
 import toast from 'react-hot-toast';
+
+import type { BatchUploadItem, UploadResult } from '@/types/r2';
+import { presignUpload, deleteUpload } from '@/app/actions/upload';
+
 
 export const useR2Upload = () => {
   const [isUploading, setIsUploading] = useState(false);
@@ -44,8 +46,8 @@ export const useR2Upload = () => {
       await Promise.all(
         presignedItems.map(
           async ({ fileKey, r2Key, presignedUrl, publicUrl }) => {
-            const file = items.find((i) => i.fileKey === fileKey)!.file;
-
+            const file = items.find((i) => i.fileKey === fileKey)?.file;
+            if (!file) return;
             const uploadRes = await fetch(presignedUrl, {
               method: 'PUT',
               body: file,

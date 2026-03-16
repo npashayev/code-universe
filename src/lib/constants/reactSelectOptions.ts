@@ -1,5 +1,5 @@
-import { PlanetCategory, ProgrammingLanguage } from '@/types/planet';
-import {
+import type { PlanetCategory, ProgrammingLanguage } from '@/types/planet';
+import type {
   CategoryOption,
   ContentTypeOption,
   ExtendedStatusOption,
@@ -9,6 +9,7 @@ import {
   TextVariantOption,
   TitleLevelOption,
 } from '@/types/reactSelectOptions';
+
 import { CONTENT_TYPE, PLANET_CATEGORY, PROGRAMMING_LANGUAGE } from './planet';
 
 export const languageOptions: LanguageOption[] = [

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+
 import {
   PLANET_CATEGORY,
   PLANET_STATUS,
@@ -161,7 +162,7 @@ export const localizedPlanetDataSchema = z.object({
   contents: z.array(planetContentSchema),
 });
 
-const preSubmitLocalizedPlanetDataSchema = localizedPlanetDataSchema.extend({
+export const preSubmitLocalizedPlanetDataSchema = localizedPlanetDataSchema.extend({
   contents: z.array(preSubmitPlanetContentSchema),
 });
 

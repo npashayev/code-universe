@@ -2,12 +2,13 @@
 import { useState } from 'react';
 import { motion as Motion, AnimatePresence } from 'framer-motion';
 import { X, Cpu } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+
 import { navLinks } from '@/lib/constants/navbarItems';
+import { Link } from '@/lib/next-intl/navigation';
 
 import NavLinkContent from './NavLinkContent';
 import Header from './Header';
-import { useTranslations } from 'next-intl';
-import { Link } from '@/lib/next-intl/navigation';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -119,7 +120,7 @@ const Navbar = () => {
               </nav>
 
               {/* Footer Decor */}
-              <div className="p-6 bg-white/2 border-t border-white/5 flex justify-between items-center text-[10px] font-mono text-slate-600"></div>
+              <div className="p-6 bg-white/2 border-t border-white/5 flex justify-between items-center text-[10px] font-mono text-slate-600" />
 
               {/* Background Glows */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/5 blur-[100px] rounded-full -z-10" />

@@ -4,7 +4,7 @@ import { SUPPORTED_LANGS } from '@/lib/constants/planet';
 import { prisma } from '@/lib/prisma/prisma';
 import { deleteR2Objects } from '@/lib/r2/deleteR2Objects';
 import { updatePlanetDataSchema } from '@/lib/validation/planetDataSchema';
-import {
+import type {
   LocalizedImage,
   PlanetCategory,
   PlanetContent,

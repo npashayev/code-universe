@@ -1,17 +1,19 @@
 import { useState } from 'react';
-import {
+import type { Updater } from 'use-immer';
+import { Search } from 'lucide-react';
+
+import type {
   CreatePlanetData,
   ResearchTopic,
   SupportedLanguage,
 } from '@/types/planet';
-import { Updater } from 'use-immer';
-import { Search } from 'lucide-react';
 import { useLocalizedDragReorder } from '@/lib/hooks/admin/useLocalizedDragReorder';
+import SortableList from '@/components/admin/planet-editor-layout/SortableList';
+
 import ListElement from '../shared/ListElement';
 import Input from '../shared/Input';
 import SectionHeader from '../shared/SectionHeader';
 import AddButton from '../shared/AddButton';
-import SortableList from '@/components/admin/planet-editor-layout/SortableList';
 
 interface Props {
   researchTopics: ResearchTopic[];

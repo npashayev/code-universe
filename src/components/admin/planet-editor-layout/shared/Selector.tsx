@@ -1,8 +1,9 @@
-import { getAdminPageSelectStyles } from '@/lib/utils/getAdminPageSelectStyles';
 import { ChevronDown } from 'lucide-react';
-import Select, { CSSObjectWithLabel, SingleValue } from 'react-select';
-import { ReactNode } from 'react';
-import { BaseOption } from '@/types/reactSelectOptions';
+import Select, { type CSSObjectWithLabel, type SingleValue } from 'react-select';
+import type { ReactNode } from 'react';
+
+import { getAdminPageSelectStyles } from '@/lib/utils/getAdminPageSelectStyles';
+import type { BaseOption } from '@/types/reactSelectOptions';
 
 interface Props<T extends BaseOption<unknown>> {
   children?: ReactNode;

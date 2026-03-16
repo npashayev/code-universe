@@ -1,8 +1,9 @@
+import { Moon, Sun } from 'lucide-react';
+import type { Dispatch, SetStateAction } from 'react';
+
 import { PROGRAMMING_LANGUAGE } from '@/lib/constants/planet';
 import { cn } from '@/lib/utils/cn';
-import { ProgrammingLanguage } from '@/types/planet';
-import { Moon, Sun } from 'lucide-react';
-import { Dispatch, SetStateAction } from 'react';
+import type { ProgrammingLanguage } from '@/types/planet';
 
 interface Props {
   editMode: boolean;

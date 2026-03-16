@@ -1,6 +1,7 @@
-import { Resource } from '@/types/planet';
 import { ExternalLink } from 'lucide-react';
 import Link from 'next/link';
+
+import type { Resource } from '@/types/planet';
 
 interface Props {
   resources: Resource[];

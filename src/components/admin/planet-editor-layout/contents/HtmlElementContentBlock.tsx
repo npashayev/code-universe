@@ -1,5 +1,6 @@
-import { UpdateContentFn } from '@/lib/hooks/admin/useLocalizedContent';
-import { HtmlElementContent } from '@/types/planet';
+import type { UpdateContentFn } from '@/lib/hooks/admin/useLocalizedContent';
+import type { HtmlElementContent } from '@/types/planet';
+
 import Label from '../shared/Label';
 import Input from '../shared/Input';
 import Textarea from '../shared/Textarea';

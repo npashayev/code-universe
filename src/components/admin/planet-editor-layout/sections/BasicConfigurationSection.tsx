@@ -1,7 +1,9 @@
-import { CreatePlanetData, SupportedLanguage } from '@/types/planet';
 import { FolderPen, ImageIcon } from 'lucide-react';
-import { ChangeEvent, Dispatch, useEffect, useState } from 'react';
-import { Updater } from 'use-immer';
+import { useEffect, useState, type ChangeEvent, type Dispatch } from 'react';
+import type { Updater } from 'use-immer';
+
+import type { CreatePlanetData, SupportedLanguage } from '@/types/planet';
+
 import ImagePicker from '../shared/ImagePicker';
 import Label from '../shared/Label';
 import Input from '../shared/Input';

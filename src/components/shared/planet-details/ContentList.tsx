@@ -1,4 +1,5 @@
-import { PlanetContent } from '@/types/planet';
+import type { PlanetContent } from '@/types/planet';
+
 import Content from './contents/Content';
 
 interface Props {

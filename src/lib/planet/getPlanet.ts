@@ -1,22 +1,25 @@
 import 'server-only';
-import {
-  LocalizedImage,
-  NormalizedImage,
-  PlanetStatus,
-  PlanetTag,
-} from './../../types/planet';
+
+import { getLocale } from 'next-intl/server';
+import { notFound } from 'next/navigation';
 
 import { prisma } from '@/lib/prisma/prisma';
-import {
+import type {
   LocalizedPlanetData,
   PlanetCategory,
   PlanetData,
   SupportedLanguage,
 } from '@/types/planet';
-import { getLocale } from 'next-intl/server';
+
 import { normalizeImage } from '../utils/normalizeImage';
-import { notFound } from 'next/navigation';
 import { handlePrismaError } from '../utils/handlePrismaError';
+
+import type {
+  LocalizedImage,
+  NormalizedImage,
+  PlanetStatus,
+  PlanetTag,
+} from './../../types/planet';
 
 export type PublicPlanetResponse = Omit<
   PlanetData,

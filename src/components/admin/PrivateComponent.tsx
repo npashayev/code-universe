@@ -1,7 +1,8 @@
 'use client';
-import { UserRole } from '@/types/next-auth';
 import { useSession } from 'next-auth/react';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
+
+import type { UserRole } from '@/types/next-auth';
 
 interface Props {
   roles: UserRole[];

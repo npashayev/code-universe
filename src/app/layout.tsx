@@ -3,11 +3,12 @@ import { Nunito } from 'next/font/google';
 import './globals.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-import QueryProvider from '@/components/providers/QueryProvider';
 import { Toaster } from 'react-hot-toast';
-import { ReactNode } from 'react';
-import NextAuthProvider from '@/components/providers/NextAuthProvider';
+import type { ReactNode } from 'react';
 import { NextIntlClientProvider } from 'next-intl';
+
+import NextAuthProvider from '@/components/providers/NextAuthProvider';
+import QueryProvider from '@/components/providers/QueryProvider';
 
 config.autoAddCss = false;
 const nunito = Nunito({

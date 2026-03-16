@@ -1,9 +1,10 @@
-import { CreatePlanetData } from '@/types/planet';
-import { BatchUploadItem } from '@/types/r2';
-import { useR2Upload } from '@/lib/hooks/admin/useR2Upload';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState, type Dispatch, type SetStateAction } from 'react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+
+import type { CreatePlanetData, PendingContentImageEntry } from '@/types/planet';
+import type { BatchUploadItem } from '@/types/r2';
+import { useR2Upload } from '@/lib/hooks/admin/useR2Upload';
 import {
   preSubmitCreatePlanetDataSchema,
   createPlanetDataSchema,
@@ -28,11 +29,6 @@ function getImageDimensions(
     img.src = url;
   });
 }
-
-type PendingContentImageEntry = {
-  previewUrl: string;
-  file: File;
-};
 
 interface UseSubmitPlanetProps {
   planetData: CreatePlanetData;
@@ -88,7 +84,8 @@ export const useSubmitPlanet = ({
 
     const uploadItems: BatchUploadItem[] = [];
     if (hasMainImage) {
-      const file = pendingFiles.get('main-image')!;
+      const file = pendingFiles.get('main-image');
+      if (!file) return;
       uploadItems.push({ file, fileKey: 'main-image', type: 'planet-main' });
     }
     Array.from(pendingContentImages.entries()).forEach(([id, { file }]) =>
@@ -126,7 +123,8 @@ export const useSubmitPlanet = ({
     try {
       const metadataTasks: Promise<void>[] = [];
       if (hasMainImage) {
-        const file = pendingFiles.get('main-image')!;
+        const file = pendingFiles.get('main-image');
+        if (!file) return;
         metadataTasks.push(
           getImageDimensions(file).then((dims) => {
             mergedData.image.metadata = dims;
@@ -199,9 +197,9 @@ export const useSubmitPlanet = ({
       prev.forEach(({ previewUrl }) => URL.revokeObjectURL(previewUrl));
       return new Map();
     });
-    // router.push(
-    //   `/roadmap/${mergedResult.data.category}/${submitResult.planetId}`,
-    // );
+    router.push(
+      `/roadmap/${mergedResult.data.category}/${submitResult.planetId}`,
+    );
   };
 
   return { handleSubmit, isSubmitting, isUploading, progress };

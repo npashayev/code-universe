@@ -1,10 +1,12 @@
-import {
+import type { Updater } from 'use-immer';
+
+import type {
   CreatePlanetData,
   SupportedLanguage,
   TextContent,
 } from '@/types/planet';
-import { Updater } from 'use-immer';
-import { UpdateContentFn } from '@/lib/hooks/admin/useLocalizedContent';
+import type { UpdateContentFn } from '@/lib/hooks/admin/useLocalizedContent';
+
 import { TextVariantSelector, TitleLevelSelector } from '../../Selectors';
 import Input from '../shared/Input';
 import Label from '../shared/Label';

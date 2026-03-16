@@ -3,7 +3,7 @@
 import { ensureAdmin } from '@/lib/auth/ensureAdmin';
 import { prisma } from '@/lib/prisma/prisma';
 import { deleteR2Objects } from '@/lib/r2/deleteR2Objects';
-import { PlanetContent } from '@/types/planet';
+import type { PlanetContent } from '@/types/planet';
 
 export const deletePlanet = async (planetId: string) => {
   await ensureAdmin();

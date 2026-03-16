@@ -1,7 +1,7 @@
 import createMiddleware from 'next-intl/middleware';
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { NextResponse, type NextRequest } from 'next/server';
 import { getToken } from 'next-auth/jwt';
+
 import { routing } from './lib/next-intl/routing';
 
 const intlMiddleware = createMiddleware(routing);

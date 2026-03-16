@@ -4,9 +4,10 @@ import { useState } from 'react';
 import { motion as Motion, AnimatePresence } from 'framer-motion';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { cn } from '@/lib/utils/cn';
 import { useTranslations } from 'next-intl';
-import { PublicPlanetSummary } from '@/lib/planet/getPlanetList';
+
+import { cn } from '@/lib/utils/cn';
+import type { PublicPlanetSummary } from '@/lib/planet/getPlanetList';
 
 interface Props {
   planets: PublicPlanetSummary[];
@@ -14,7 +15,7 @@ interface Props {
 
 const MapSidebar = ({ planets }: Props) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [activeId, setActiveId] = useState(planets[0].id);
+  const [activeId, setActiveId] = useState(planets[0]?.id ?? '');
   const t = useTranslations('common');
 
   const scrollToPlanet = (planetId: string) => {

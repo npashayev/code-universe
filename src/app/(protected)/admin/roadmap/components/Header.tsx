@@ -1,16 +1,17 @@
-import { PlanetCategory } from '@/types/planet';
 import { Search } from 'lucide-react';
-import {
+import type { Dispatch, SetStateAction } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+
+import type {
   ExtendedStatusOption,
   LanguageOption,
 } from '@/types/reactSelectOptions';
-import { Dispatch, SetStateAction } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import type { PlanetCategory } from '@/types/planet';
 import DashboardLink from '@/components/admin/ui/DashboardLink';
 import HomeLink from '@/components/ui/HomeLink';
 import PlanetStats from '@/components/admin/PlanetStats';
 import { useUpdatePlanetList } from '@/lib/hooks/admin/queries/usePlanet';
-import {
+import type {
   AdminPlanetListResponse,
   AdminPlanetSummary,
 } from '@/lib/planet/getPlanetList';

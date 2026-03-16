@@ -1,4 +1,5 @@
-import { PlanetCategory } from '@/types/planet';
+import type { PlanetCategory } from '@/types/planet';
+
 import { PLANET_CATEGORY } from '../constants/planet';
 
 export const isPlanetCategory = (value: string): value is PlanetCategory => {

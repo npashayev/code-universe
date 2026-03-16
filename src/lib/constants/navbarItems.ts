@@ -1,4 +1,6 @@
-import { Globe, Database, Terminal, LucideIcon } from 'lucide-react';
+import { Globe, Database, Terminal, type LucideIcon } from 'lucide-react';
+import type { StaticImageData } from 'next/image';
+
 import algorithm from '@/assets/nav-icons/algorithm.png';
 import cs from '@/assets/nav-icons/cs.png';
 import css from '@/assets/nav-icons/css.png';
@@ -12,7 +14,6 @@ import node from '@/assets/nav-icons/node.png';
 import py from '@/assets/nav-icons/py.png';
 import react from '@/assets/nav-icons/react.png';
 import tw from '@/assets/nav-icons/tw.png';
-import { StaticImageData } from 'next/image';
 
 export type NavLinkItem = {
   label: string;

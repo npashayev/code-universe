@@ -1,6 +1,7 @@
-import { NavLinkItem } from '@/lib/constants/navbarItems';
 import { ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
+
+import type { NavLinkItem } from '@/lib/constants/navbarItems';
 
 interface Props {
   item: NavLinkItem;

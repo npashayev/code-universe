@@ -1,6 +1,7 @@
 import { FileUp, ImageIcon } from 'lucide-react';
 import Image from 'next/image';
-import { ChangeEvent } from 'react';
+import type { ChangeEvent } from 'react';
+
 import Label from './Label';
 import Input from './Input';
 

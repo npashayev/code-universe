@@ -1,7 +1,8 @@
-import { DragEndEvent } from '@dnd-kit/core';
+import type { DragEndEvent } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
-import { Updater } from 'use-immer';
-import {
+import type { Updater } from 'use-immer';
+
+import type {
   CreatePlanetData,
   LocalizedPlanetData,
   SupportedLanguage,

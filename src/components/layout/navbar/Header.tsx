@@ -1,11 +1,17 @@
-import LogoutButton from '../../admin/ui/LogoutButton';
-import DashboardLink from '@/components/admin/ui/DashboardLink';
-import PrivateComponent from '../../admin/PrivateComponent';
-import HomeLink from '@/components/ui/HomeLink';
-// import { motion as Motion, AnimatePresence } from 'framer-motion';
 import { Menu } from 'lucide-react';
-import LanguageSelector from './LanguageSelector';
 import { useTranslations } from 'next-intl';
+
+import DashboardLink from '@/components/admin/ui/DashboardLink';
+import HomeLink from '@/components/ui/HomeLink';
+
+import LogoutButton from '../../admin/ui/LogoutButton';
+import PrivateComponent from '../../admin/PrivateComponent';
+
+
+// import { motion as Motion, AnimatePresence } from 'framer-motion';
+
+import LanguageSelector from './LanguageSelector';
+
 
 interface Props {
   onOpen: () => void;

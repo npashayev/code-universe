@@ -1,8 +1,9 @@
-import {
+import type {
   ContentType,
   PlanetContent,
   ProgrammingLanguage,
 } from '@/types/planet';
+
 import {
   CONTENT_TYPE,
   PROGRAMMING_LANGUAGE,

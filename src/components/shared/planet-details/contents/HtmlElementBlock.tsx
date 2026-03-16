@@ -1,7 +1,8 @@
 'use client';
-import { HtmlElementContent } from '@/types/planet';
 import { useEffect, useState, useRef } from 'react';
 import Markdown from 'react-markdown';
+
+import type { HtmlElementContent } from '@/types/planet';
 
 interface Props {
   content: HtmlElementContent;

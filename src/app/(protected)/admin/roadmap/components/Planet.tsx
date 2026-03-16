@@ -1,10 +1,11 @@
-import { SupportedLanguage } from '@/types/planet';
 import { MoveVertical } from 'lucide-react';
-import { Updater } from 'use-immer';
+import type { Updater } from 'use-immer';
+
+import type { SupportedLanguage } from '@/types/planet';
 import { cn } from '@/lib/utils/cn';
 import DeletePlanetButton from '@/components/admin/ui/DeletePlanetButton';
 import UpdateLink from '@/components/admin/ui/UpdateLink';
-import { AdminPlanetSummary } from '@/lib/planet/getPlanetList';
+import type { AdminPlanetSummary } from '@/lib/planet/getPlanetList';
 import { StatusUpdateSelector } from '@/components/admin/Selectors';
 
 interface Props {

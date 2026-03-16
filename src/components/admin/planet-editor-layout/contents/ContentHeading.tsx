@@ -1,10 +1,11 @@
-import {
+import type {
   RemoveContentFn,
   UpdateContentFn,
 } from '@/lib/hooks/admin/useLocalizedContent';
-import { PlanetContent } from '@/types/planet';
-import Label from '../shared/Label';
+import type { PlanetContent } from '@/types/planet';
 import RemoveButton from '@/components/admin/ui/RemoveButton';
+
+import Label from '../shared/Label';
 
 interface Props {
   idx: number;

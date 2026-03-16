@@ -1,6 +1,7 @@
 'use client';
 import { signOut } from 'next-auth/react';
 import { LogOut } from 'lucide-react';
+
 import { cn } from '@/lib/utils/cn';
 
 interface Props {
@@ -10,7 +11,7 @@ interface Props {
 const LogoutButton = ({ className }: Props) => {
   return (
     <button
-      onClick={() => signOut({ callbackUrl: '/' })}
+      onClick={() => { void signOut({ callbackUrl: '/' }); }}
       className={cn('nav-item', className)}
     >
       <LogOut size={14} />

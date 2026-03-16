@@ -1,9 +1,10 @@
 'use client';
+import { useParams } from 'next/navigation';
+import Select, { type SingleValue, type StylesConfig } from 'react-select';
+
 import { SUPPORTED_LANGS } from '@/lib/constants/planet';
 import { usePathname, useRouter } from '@/lib/next-intl/navigation';
-import { SupportedLanguage } from '@/types/planet';
-import { useParams } from 'next/navigation';
-import Select, { SingleValue, StylesConfig } from 'react-select';
+import type { SupportedLanguage } from '@/types/planet';
 
 interface LanguageOption {
   label: string;

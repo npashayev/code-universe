@@ -1,7 +1,8 @@
 'use client';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import DialogIcon, { DialogIconType } from './DialogIcon';
+
+import DialogIcon, { type DialogIconType } from './DialogIcon';
 import ModalButton from './ModalButton';
 import Modal from './Modal';
 

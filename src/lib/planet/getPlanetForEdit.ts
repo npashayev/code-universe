@@ -1,12 +1,13 @@
 import 'server-only';
 import { ensureAdmin } from '@/lib/auth/ensureAdmin';
 import { getInitialPlanetData } from '@/lib/utils/getInitialPlanetData';
-import {
+import type {
   CreatePlanetData,
   LocalizedPlanetData,
   PlanetCategory,
   SupportedLanguage,
 } from '@/types/planet';
+
 import { prisma } from '../prisma/prisma';
 import { handlePrismaError } from '../utils/handlePrismaError';
 import { SUPPORTED_LANGS } from '../constants/planet';

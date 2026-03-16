@@ -1,8 +1,10 @@
 'use client';
 
-import { useLogin } from '@/lib/hooks/admin/queries/useAuth';
-import { FormEvent, useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import z from 'zod';
+
+import { useLogin } from '@/lib/hooks/admin/queries/useAuth';
+
 import FormField from './components/FormField';
 import FormError from './components/FormError';
 
@@ -38,7 +40,7 @@ export default function LoginPage() {
   return (
     <main className="page flex items-center justify-center bg-gray-900">
       <form
-        onSubmit={handleSubmit}
+        onSubmit={(e) => { void handleSubmit(e); }}
         className="bg-gray-800 shadow-md rounded p-10 w-full max-w-sm"
       >
         <h1 className="text-3xl font-bold mb-4 text-gray-100">Login</h1>

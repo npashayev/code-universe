@@ -1,6 +1,7 @@
 'use client';
+import type { ComponentPropsWithoutRef } from 'react';
+
 import { cn } from '@/lib/utils/cn';
-import { ComponentPropsWithoutRef } from 'react';
 
 const baseClasses =
   'flex-1 py-3 rounded-xl text-sm font-semibold tracking-wide transition-all';

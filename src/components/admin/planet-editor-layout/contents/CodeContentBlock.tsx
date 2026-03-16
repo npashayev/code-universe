@@ -1,6 +1,8 @@
-import { CodeContent } from '@/types/planet';
 import { Eye, Terminal } from 'lucide-react';
-import { UpdateContentFn } from '@/lib/hooks/admin/useLocalizedContent';
+
+import type { CodeContent } from '@/types/planet';
+import type { UpdateContentFn } from '@/lib/hooks/admin/useLocalizedContent';
+
 import Label from '../shared/Label';
 import Input from '../shared/Input';
 import Textarea from '../shared/Textarea';

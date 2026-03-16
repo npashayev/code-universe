@@ -1,4 +1,4 @@
-import { Question } from '@/types/planet';
+import type { Question } from '@/types/planet';
 
 interface Props {
   questions: Question[];

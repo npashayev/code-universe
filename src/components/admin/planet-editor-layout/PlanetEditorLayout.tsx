@@ -1,13 +1,13 @@
 'use client';
 
-import { CreatePlanetData, SupportedLanguage } from '@/types/planet';
-import { Dispatch, SetStateAction } from 'react';
-import { Updater } from 'use-immer';
-import { LanguageOption } from '@/types/reactSelectOptions';
+import type { Dispatch, SetStateAction } from 'react';
+import type { Updater } from 'use-immer';
+
+import type { CreatePlanetData, PendingContentImageEntry, SupportedLanguage } from '@/types/planet';
+import type { LanguageOption } from '@/types/reactSelectOptions';
 
 import {
-  PlanetEditorHeader,
-  PlanetEditorHeaderProps,
+  type PlanetEditorHeaderProps, PlanetEditorHeader
 } from './PlanetEditorHeader';
 import BasicConfigurationSection from './sections/BasicConfigurationSection';
 import TagsSection from './sections/TagsSection';
@@ -16,12 +16,6 @@ import ExternalResourcesSection from './sections/ExternalResourcesSection';
 import QuestionsSection from './sections/QuestionsSection';
 import ContentsSection from './sections/ContentsSection';
 import ContentSidebar from './ContentSidebar';
-
-type PendingContentImageEntry = {
-  previewUrl: string;
-  file: File;
-};
-
 interface PlanetEditorLayoutProps extends PlanetEditorHeaderProps {
   planetData: CreatePlanetData;
   setPlanetData: Updater<CreatePlanetData>;

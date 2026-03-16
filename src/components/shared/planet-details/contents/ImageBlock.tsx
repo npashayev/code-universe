@@ -1,6 +1,7 @@
-import { ImageContent } from '@/types/planet';
 import Image from 'next/image';
 import Markdown from 'react-markdown';
+
+import type { ImageContent } from '@/types/planet';
 
 interface Props {
   content: ImageContent;

@@ -1,9 +1,10 @@
+import type { PublicPlanetResponse } from '@/lib/planet/getPlanet';
+
 import PlanetHeader from './PlanetHeader';
 import ResearchTopics from './ResearchTopics';
 import Resources from './Resources';
 import ContentList from './ContentList';
 import Questions from './contents/Questions';
-import { PublicPlanetResponse } from '@/lib/planet/getPlanet';
 import PlanetNavigation from './PlanetNavigation';
 
 interface Props {

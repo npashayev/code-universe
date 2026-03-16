@@ -1,17 +1,14 @@
-import { UpdateContentFn } from '@/lib/hooks/admin/useLocalizedContent';
-import { ImageContent } from '@/types/planet';
-import { PendingImageOption } from '@/types/reactSelectOptions';
+import type { Dispatch } from 'react';
+
+import type { UpdateContentFn } from '@/lib/hooks/admin/useLocalizedContent';
+import type { ImageContent, PendingContentImageEntry } from '@/types/planet';
+import type { PendingImageOption } from '@/types/reactSelectOptions';
+
 import Label from '../shared/Label';
 import Input from '../shared/Input';
 import ImagePicker from '../shared/ImagePicker';
 import Textarea from '../shared/Textarea';
 import { PendingImageSelector } from '../../Selectors';
-import { Dispatch } from 'react';
-
-type PendingContentImageEntry = {
-  previewUrl: string;
-  file: File;
-};
 
 interface Props {
   content: ImageContent;
@@ -38,9 +35,9 @@ const ImageContentBlock = ({
   const selectedPendingOption: PendingImageOption | null =
     content.pendingImageId
       ? {
-          value: content.pendingImageId,
-          label: content.pendingImageId,
-        }
+        value: content.pendingImageId,
+        label: content.pendingImageId,
+      }
       : null;
 
   const imagePreviewUrl =

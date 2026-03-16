@@ -1,20 +1,16 @@
 'use client';
 
-import { CreatePlanetData } from '@/types/planet';
 import { useState } from 'react';
 import { useImmer } from 'use-immer';
-import { LanguageOption } from '@/types/reactSelectOptions';
+
+import type { CreatePlanetData, PendingContentImageEntry } from '@/types/planet';
+import type { LanguageOption } from '@/types/reactSelectOptions';
 import { languageOptions } from '@/lib/constants/reactSelectOptions';
 import { PlanetEditorLayout } from '@/components/admin/planet-editor-layout/PlanetEditorLayout';
 import { useUpdatePlanet } from '@/lib/hooks/admin/useUpdatePlanet';
 import PlanetDetails from '@/components/shared/planet-details/PlanetDetails';
 import { useOrphanedImageCleanup } from '@/lib/hooks/admin/useOrphanedImageCleanup';
 import ExitPreviewButton from '@/components/admin/ui/ExitPreviewButton';
-
-interface PendingContentImageEntry {
-  previewUrl: string;
-  file: File;
-}
 
 interface Props {
   planetId: string;
@@ -24,7 +20,7 @@ interface Props {
 
 const UpdatePlanetClient = ({ planetId, step, initialData }: Props) => {
   const [currentLanguage, setCurrentLanguage] = useState<LanguageOption>(
-    languageOptions[0],
+    languageOptions[0] as LanguageOption,
   );
 
   const [previewActive, setPreviewActive] = useState(false);

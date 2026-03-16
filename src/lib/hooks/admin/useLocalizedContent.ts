@@ -1,10 +1,12 @@
-import { Updater } from 'use-immer';
-import {
+import type { Updater } from 'use-immer';
+
+import type {
   CreatePlanetData,
   PlanetContent,
   ContentType,
   SupportedLanguage,
 } from '@/types/planet';
+
 import { createDefaultContent } from '../../utils/createDefaultContent';
 
 interface UseLocalizedContentOptions {

@@ -1,6 +1,7 @@
-import {
+import { type PLANET_CATEGORY } from '@/lib/constants/planet';
+
+import type {
   ContentType,
-  PLANET_CATEGORY,
   PlanetCategory,
   PlanetStatus,
   ProgrammingLanguage,

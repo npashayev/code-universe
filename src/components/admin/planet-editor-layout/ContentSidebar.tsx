@@ -1,21 +1,26 @@
-import {
+import { Database, Layout, Plus } from 'lucide-react';
+import Link from 'next/link';
+import { useState } from 'react';
+import type { Updater } from 'use-immer';
+
+import type {
   CreatePlanetData,
   PlanetContent,
   SupportedLanguage,
 } from '@/types/planet';
-import { Database, Layout, Plus } from 'lucide-react';
-import Link from 'next/link';
-import { useState } from 'react';
-import { Updater } from 'use-immer';
 import { useLocalizedContent } from '@/lib/hooks/admin/useLocalizedContent';
 import { useLocalizedDragReorder } from '@/lib/hooks/admin/useLocalizedDragReorder';
-import { ContentTypeSelector } from '../Selectors';
 import { contentTypeOptions } from '@/lib/constants/reactSelectOptions';
 import { cn } from '@/lib/utils/cn';
 import SortableList from '@/components/admin/planet-editor-layout/SortableList';
+import { type ContentTypeOption } from '@/types/reactSelectOptions';
+
+import { ContentTypeSelector } from '../Selectors';
+
 import SectionHeader from './shared/SectionHeader';
 import AddButton from './shared/AddButton';
 import ListElement from './shared/ListElement';
+
 
 interface Props {
   contents: PlanetContent[];
@@ -25,7 +30,7 @@ interface Props {
 
 const ContentSidebar = ({ contents, setPlanetData, locale }: Props) => {
   const [selectedContentType, setSelectedContentType] = useState(
-    contentTypeOptions[0],
+    contentTypeOptions[0] as ContentTypeOption,
   );
   const { addContent, removeContent } = useLocalizedContent({
     setPlanetData,

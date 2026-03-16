@@ -1,5 +1,6 @@
-import { ImplementationTaskContent } from '@/types/planet';
 import Markdown from 'react-markdown';
+
+import type { ImplementationTaskContent } from '@/types/planet';
 
 interface Props {
   content: ImplementationTaskContent;

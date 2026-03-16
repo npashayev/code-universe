@@ -1,5 +1,5 @@
 import { Link } from '@/lib/next-intl/navigation';
-import { PlanetCategory } from '@/types/planet';
+import type { PlanetCategory } from '@/types/planet';
 
 interface Props {
   category: PlanetCategory;

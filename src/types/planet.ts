@@ -1,4 +1,4 @@
-import {
+import type {
   CONTENT_TYPE,
   PLANET_CATEGORY,
   PLANET_STATUS,
@@ -143,4 +143,9 @@ export interface ImageContent extends BaseContent {
   type: 'image';
   image: NormalizedImage;
   pendingImageId?: string;
+}
+
+export interface PendingContentImageEntry {
+  previewUrl: string;
+  file: File;
 }

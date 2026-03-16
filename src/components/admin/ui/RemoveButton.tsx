@@ -1,6 +1,7 @@
-import { cn } from '@/lib/utils/cn';
 import { Loader, Trash2 } from 'lucide-react';
-import { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
+
+import { cn } from '@/lib/utils/cn';
 
 const RemoveButton = ({
   className,

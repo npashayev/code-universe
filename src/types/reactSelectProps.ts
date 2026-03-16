@@ -1,24 +1,20 @@
-import {
+import type { Updater } from 'use-immer';
+import type { Dispatch, SetStateAction } from 'react';
+
+import type {
   CodeContent,
   CreatePlanetData,
   PlanetCategory,
-  PlanetContent,
-  ProgrammingLanguage,
-  TextContent,
+  TextContent
 } from '@/types/planet';
-import { Updater } from 'use-immer';
-import { UpdateContentFn } from '@/lib/hooks/admin/useLocalizedContent';
-import {
-  CategoryOption,
+import type { UpdateContentFn } from '@/lib/hooks/admin/useLocalizedContent';
+import type {
   ContentTypeOption,
   ExtendedStatusOption,
   LanguageOption,
-  PendingImageOption,
-  TextVariantOption,
-  TitleLevelOption,
+  PendingImageOption
 } from '@/types/reactSelectOptions';
-import { Dispatch, SetStateAction } from 'react';
-import { AdminPlanetSummary } from '@/lib/planet/getPlanetList';
+import type { AdminPlanetSummary } from '@/lib/planet/getPlanetList';
 
 export interface PlanetDataProps {
   planetData: CreatePlanetData;

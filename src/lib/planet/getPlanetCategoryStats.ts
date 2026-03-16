@@ -1,11 +1,13 @@
 import 'server-only';
 
 import { prisma } from '@/lib/prisma/prisma';
-import { PLANET_CATEGORY } from '@/types/planet';
-import type { PlanetCategory } from '@/types/planet';
+import { type PlanetCategory } from '@/types/planet';
+
 import { ensureAdmin } from '../auth/ensureAdmin';
-import { PlanetListStats } from './getPlanetList';
 import { handlePrismaError } from '../utils/handlePrismaError';
+import { PLANET_CATEGORY } from '../constants/planet';
+
+import type { PlanetListStats } from './getPlanetList';
 
 export interface CategoryStatsItem {
   category: PlanetCategory;

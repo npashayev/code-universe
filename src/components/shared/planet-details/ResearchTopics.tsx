@@ -1,4 +1,4 @@
-import { ResearchTopic } from '@/types/planet';
+import type { ResearchTopic } from '@/types/planet';
 
 interface Props {
   researchTopics: ResearchTopic[];

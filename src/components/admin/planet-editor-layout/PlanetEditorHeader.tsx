@@ -1,21 +1,18 @@
-import { CreatePlanetData, PlanetCategory } from '@/types/planet';
 import { Download, Upload } from 'lucide-react';
-import { Updater } from 'use-immer';
-import { Dispatch, SetStateAction, useState } from 'react';
-import { LanguageOption } from '@/types/reactSelectOptions';
+import type { Updater } from 'use-immer';
+import { type Dispatch, type SetStateAction, useState } from 'react';
+
+import type { CreatePlanetData, PendingContentImageEntry, PlanetCategory } from '@/types/planet';
+import type { LanguageOption } from '@/types/reactSelectOptions';
 import DashboardLink from '@/components/admin/ui/DashboardLink';
 import { usePlanetJsonIO } from '@/lib/hooks/admin/usePlanetJsonIO';
 import Dialog from '@/components/ui/modal/Dialog';
+
 import {
   CategorySelector,
   LanguageSelector,
   StatusSelector,
 } from '../Selectors';
-
-type PendingContentImageEntry = {
-  previewUrl: string;
-  file: File;
-};
 
 export interface PlanetEditorHeaderProps {
   planetData: CreatePlanetData;
@@ -75,7 +72,7 @@ export const PlanetEditorHeader = ({
   });
 
   const handleConfirm = () => {
-    onSubmit();
+    void onSubmit();
   };
 
   const submitLabel =

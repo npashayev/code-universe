@@ -1,24 +1,22 @@
-import {
+import { Database } from 'lucide-react';
+import type { Updater } from 'use-immer';
+
+import type {
   CreatePlanetData,
+  PendingContentImageEntry,
   PlanetContent,
   SupportedLanguage,
 } from '@/types/planet';
-import { Database } from 'lucide-react';
-import { Updater } from 'use-immer';
+import { useLocalizedContent } from '@/lib/hooks/admin/useLocalizedContent';
+import { cn } from '@/lib/utils/cn';
+import { CONTENT_TYPE } from '@/lib/constants/planet';
+
 import TextContentBlock from '../contents/TextContentBlock';
 import ContentHeading from '../contents/ContentHeading';
 import ImplementationTaskContentBlock from '../contents/ImplementationTaskContentBlock';
 import CodeContentBlock from '../contents/CodeContentBlock';
 import HtmlElementContentBlock from '../contents/HtmlElementContentBlock';
 import ImageContentBlock from '../contents/ImageContentBlock';
-import { useLocalizedContent } from '@/lib/hooks/admin/useLocalizedContent';
-import { cn } from '@/lib/utils/cn';
-import { CONTENT_TYPE } from '@/lib/constants/planet';
-
-type PendingContentImageEntry = {
-  previewUrl: string;
-  file: File;
-};
 
 interface Props {
   contents: PlanetContent[];

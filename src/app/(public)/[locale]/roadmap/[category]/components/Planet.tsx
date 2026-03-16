@@ -1,7 +1,9 @@
-import styles from './Planet.module.scss';
 import Image from 'next/image';
-import { PublicPlanetSummary } from '@/lib/planet/getPlanetList';
+
+import type { PublicPlanetSummary } from '@/lib/planet/getPlanetList';
 import { Link } from '@/lib/next-intl/navigation';
+
+import styles from './Planet.module.scss';
 
 interface Props {
   category: string;
@@ -22,12 +24,12 @@ const Planet = ({ category, planet }: Props) => {
         />
       </Link>
       <div className={styles.orbit}>
-        {tags[0].tag && <div className={styles.satellite}>{tags[0].tag}</div>}
-        {tags[1].tag && <div className={styles.satellite}>{tags[1].tag}</div>}
-        {tags[2].tag && <div className={styles.satellite}>{tags[2].tag}</div>}
-        {tags[3].tag && <div className={styles.satellite}>{tags[3].tag}</div>}
+        {tags[0]?.tag && <div className={styles.satellite}>{tags[0].tag}</div>}
+        {tags[1]?.tag && <div className={styles.satellite}>{tags[1].tag}</div>}
+        {tags[2]?.tag && <div className={styles.satellite}>{tags[2].tag}</div>}
+        {tags[3]?.tag && <div className={styles.satellite}>{tags[3].tag}</div>}
       </div>
-      <div className={styles.outerOrbit}></div>
+      <div className={styles.outerOrbit} />
     </section>
   );
 };

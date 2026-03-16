@@ -1,11 +1,12 @@
+import { useRef } from 'react';
+import toast from 'react-hot-toast';
+import type { Updater } from 'use-immer';
+
+import type { CreatePlanetData, SupportedLanguage } from '@/types/planet';
 import {
   preSubmitCreatePlanetDataSchema,
   preSubmitLocalizedPlanetDataSchema,
 } from '@/lib/validation/planetDataSchema';
-import { CreatePlanetData, SupportedLanguage } from '@/types/planet';
-import { useRef } from 'react';
-import toast from 'react-hot-toast';
-import { Updater } from 'use-immer';
 
 interface Params {
   planetData: CreatePlanetData;
@@ -47,8 +48,9 @@ export const usePlanetJsonIO = ({
     } catch (error) {
       console.error('Failed to export planet data:', error);
     } finally {
-      if (url) {
-        setTimeout(() => URL.revokeObjectURL(url!), 1000);
+      const urlToRevoke = url;
+      if (urlToRevoke) {
+        setTimeout(() => URL.revokeObjectURL(urlToRevoke), 1000);
       }
     }
   };
@@ -96,7 +98,7 @@ export const usePlanetJsonIO = ({
           }
 
           setPlanetData((draft) => {
-            draft.localized[locale] = result.data;
+            draft.localized[locale] = result.data as typeof draft.localized[typeof locale];
           });
         }
       } catch (err) {

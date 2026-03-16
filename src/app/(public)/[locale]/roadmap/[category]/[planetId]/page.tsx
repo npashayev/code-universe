@@ -1,6 +1,7 @@
+import { notFound } from 'next/navigation';
+
 import { getPlanet } from '@/lib/planet/getPlanet';
 import { isPlanetCategory } from '@/lib/utils/isPlanetCategory';
-import { notFound } from 'next/navigation';
 import { Link } from '@/lib/next-intl/navigation';
 import UpdateLink from '@/components/admin/ui/UpdateLink';
 import PrivateComponent from '@/components/admin/PrivateComponent';

@@ -1,7 +1,9 @@
 import { notFound } from 'next/navigation';
-import PlanetListClient from './components/PlanetListClient';
+
 import { isPlanetCategory } from '@/lib/utils/isPlanetCategory';
 import { getAdminPlanetList } from '@/lib/planet/getPlanetList';
+
+import PlanetListClient from './components/PlanetListClient';
 
 interface Props {
   searchParams: Promise<{

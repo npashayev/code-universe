@@ -1,6 +1,7 @@
+import type { ComponentPropsWithoutRef, ReactNode } from 'react';
+
 import RemoveButton from '@/components/admin/ui/RemoveButton';
 import { cn } from '@/lib/utils/cn';
-import { ComponentPropsWithoutRef, ReactNode } from 'react';
 
 interface Props extends ComponentPropsWithoutRef<'div'> {
   children: ReactNode;

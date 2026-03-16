@@ -1,8 +1,9 @@
+import type { PlanetContent } from '@/types/planet';
+
 import HtmlElementBlock from './HtmlElementBlock';
 import CodeBlock from './CodeBlock';
 import ImplementationTaskBlock from './ImplementationTaskBlock';
 import TextContentBlock from './TextContentBlock';
-import { PlanetContent } from '@/types/planet';
 import ImageBlock from './ImageBlock';
 
 interface Props {

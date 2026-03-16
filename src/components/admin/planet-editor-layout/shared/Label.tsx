@@ -1,4 +1,5 @@
-import { ReactNode, ComponentPropsWithoutRef } from 'react';
+import type { ReactNode, ComponentPropsWithoutRef } from 'react';
+
 import { cn } from '@/lib/utils/cn';
 
 interface Props extends ComponentPropsWithoutRef<'label'> {

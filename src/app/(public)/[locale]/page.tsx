@@ -1,8 +1,11 @@
 import Image from 'next/image';
-import SolarSystem from './components/SolarSystem';
+import { getTranslations } from 'next-intl/server';
+
 import galaxy from '@/assets/galaxy.webp';
 import SplashCursor from '@/components/react-bits/SplashCursor';
-import { getTranslations } from 'next-intl/server';
+
+import SolarSystem from './components/SolarSystem';
+
 
 export default async function HomePage() {
   const t = await getTranslations('home');

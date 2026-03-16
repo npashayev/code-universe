@@ -1,7 +1,9 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import ModalStars from './ModalStars';
+
 import { cn } from '@/lib/utils/cn';
+
+import ModalStars from './ModalStars';
 
 interface Props {
   children: ReactNode;

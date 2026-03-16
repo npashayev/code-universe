@@ -1,7 +1,8 @@
-import { cn } from '@/lib/utils/cn';
-import { TextContent, TextVariant, TitleLevel } from '@/types/planet';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import Markdown from 'react-markdown';
+
+import { cn } from '@/lib/utils/cn';
+import type { TextContent, TextVariant, TitleLevel } from '@/types/planet';
 
 interface Props {
   content: TextContent;
