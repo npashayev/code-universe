@@ -1,10 +1,9 @@
 'use client';
-
 import { ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import Modal from '../Modal';
-import ModalButton from '../ModalButton';
-import DialogIcon, { DialogIconType } from '../DialogIcon';
+import DialogIcon, { DialogIconType } from './DialogIcon';
+import ModalButton from './ModalButton';
+import Modal from './Modal';
 
 interface Props {
   title: string;

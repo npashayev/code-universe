@@ -1,3 +1,4 @@
+'use client';
 import { ComponentPropsWithoutRef } from "react"
 
 const ExitPreviewButton = (props: ComponentPropsWithoutRef<'button'>) => {

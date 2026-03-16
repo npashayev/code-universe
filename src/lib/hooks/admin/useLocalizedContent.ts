@@ -5,7 +5,7 @@ import {
   ContentType,
   SupportedLanguage,
 } from '@/types/planet';
-import { createDefaultContent } from '../utils/createDefaultContent';
+import { createDefaultContent } from '../../utils/createDefaultContent';
 
 interface UseLocalizedContentOptions {
   setPlanetData: Updater<CreatePlanetData>;

@@ -1,6 +1,6 @@
 import { CodeContent, CreatePlanetData, PlanetCategory, PlanetContent, ProgrammingLanguage, TextContent } from '@/types/planet';
 import { Updater } from 'use-immer';
-import { UpdateContentFn } from '@/lib/hooks/useLocalizedContent';
+import { UpdateContentFn } from '@/lib/hooks/admin/useLocalizedContent';
 import {
   CategoryOption,
   ContentTypeOption,

@@ -3,15 +3,15 @@ import { Database, Layout, Plus } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Updater } from 'use-immer';
-import { useLocalizedContent } from '@/lib/hooks/useLocalizedContent';
-import { useLocalizedDragReorder } from '@/lib/hooks/useLocalizedDragReorder';
-import ListElement from '../../../../../../components/admin/planet-editor-layout/shared/ListElement';
-import { ContentTypeSelector } from './Selectors';
+import { useLocalizedContent } from '@/lib/hooks/admin/useLocalizedContent';
+import { useLocalizedDragReorder } from '@/lib/hooks/admin/useLocalizedDragReorder';
+import { ContentTypeSelector } from '../Selectors';
 import { contentTypeOptions } from '@/lib/constants/reactSelectOptions';
 import { cn } from '@/lib/utils/cn';
-import SectionHeader from '../../../../../../components/admin/planet-editor-layout/shared/SectionHeader';
-import AddButton from '../../../../../../components/admin/planet-editor-layout/shared/AddButton';
 import SortableList from '@/components/admin/planet-editor-layout/SortableList';
+import SectionHeader from './shared/SectionHeader';
+import AddButton from './shared/AddButton';
+import ListElement from './shared/ListElement';
 
 interface Props {
   contents: PlanetContent[];

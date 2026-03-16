@@ -23,7 +23,7 @@ export default async function HomePage() {
         <p className="text-3xl mt-12">{t('firstDescription')}</p>
         <p className="text-3xl mt-7">{t('secondDescription')}</p>
       </div>
-      {/* <SplashCursor /> */}
+      <SplashCursor />
     </main>
   );
 }

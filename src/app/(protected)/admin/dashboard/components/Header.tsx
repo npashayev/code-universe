@@ -1,5 +1,5 @@
+import AddPlanetLink from '@/components/admin/ui/AddPlanetLink';
 import HomeLink from '@/components/ui/HomeLink';
-import AddPlanetLink from '../../../../../components/admin/ui/AddPlanetLink';
 
 const Header = () => {
   return (

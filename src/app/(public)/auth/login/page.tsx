@@ -1,6 +1,6 @@
 'use client';
 
-import { useLogin } from '@/lib/hooks/queries/useAuth';
+import { useLogin } from '@/lib/hooks/admin/queries/useAuth';
 import { FormEvent, useState } from 'react';
 import z from 'zod';
 import FormField from './components/FormField';

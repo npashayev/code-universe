@@ -34,7 +34,7 @@ import {
   TextVariantSelectorProps,
   TitleLevelSelectorProps,
 } from '@/types/reactSelectProps';
-import Selector from './shared/Selector';
+import Selector from './planet-editor-layout/shared/Selector';
 
 export const StatusSelector = ({
   planetData,

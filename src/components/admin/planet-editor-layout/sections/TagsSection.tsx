@@ -2,7 +2,7 @@ import { CreatePlanetData, PlanetTag, SupportedLanguage } from '@/types/planet';
 import { TagIcon } from 'lucide-react';
 import { useState } from 'react';
 import { Updater } from 'use-immer';
-import { useLocalizedDragReorder } from '@/lib/hooks/useLocalizedDragReorder';
+import { useLocalizedDragReorder } from '@/lib/hooks/admin/useLocalizedDragReorder';
 import SectionHeader from '../shared/SectionHeader';
 import Input from '../shared/Input';
 import ListElement from '../shared/ListElement';

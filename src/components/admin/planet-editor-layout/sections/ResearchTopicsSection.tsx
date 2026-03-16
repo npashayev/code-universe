@@ -6,7 +6,7 @@ import {
 } from '@/types/planet';
 import { Updater } from 'use-immer';
 import { Search } from 'lucide-react';
-import { useLocalizedDragReorder } from '@/lib/hooks/useLocalizedDragReorder';
+import { useLocalizedDragReorder } from '@/lib/hooks/admin/useLocalizedDragReorder';
 import ListElement from '../shared/ListElement';
 import Input from '../shared/Input';
 import SectionHeader from '../shared/SectionHeader';

@@ -2,7 +2,7 @@ import { HelpCircle } from 'lucide-react';
 import { useState } from 'react';
 import { CreatePlanetData, Question, SupportedLanguage } from '@/types/planet';
 import { Updater } from 'use-immer';
-import { useLocalizedDragReorder } from '@/lib/hooks/useLocalizedDragReorder';
+import { useLocalizedDragReorder } from '@/lib/hooks/admin/useLocalizedDragReorder';
 import ListElement from '../shared/ListElement';
 import SectionHeader from '../shared/SectionHeader';
 import Input from '../shared/Input';

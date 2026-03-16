@@ -1,4 +1,4 @@
-import { UpdateContentFn } from '@/lib/hooks/useLocalizedContent';
+import { UpdateContentFn } from '@/lib/hooks/admin/useLocalizedContent';
 import { ImplementationTaskContent } from '@/types/planet';
 import Input from '../shared/Input';
 import Label from '../shared/Label';

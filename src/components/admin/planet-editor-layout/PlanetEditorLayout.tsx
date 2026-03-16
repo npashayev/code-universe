@@ -10,17 +10,18 @@ import {
 } from 'react';
 import { Updater } from 'use-immer';
 import { LanguageOption } from '@/types/reactSelectOptions';
-import BasicConfigurationSection from '@/app/(protected)/admin/planet/add/components/sections/BasicConfigurationSection';
-import TagsSection from '@/app/(protected)/admin/planet/add/components/sections/TagsSection';
-import ResearchTopicsSection from '@/app/(protected)/admin/planet/add/components/sections/ResearchTopicsSection';
-import ExternalResourcesSection from '@/app/(protected)/admin/planet/add/components/sections/ExternalResourcesSection';
-import QuestionsSection from '@/app/(protected)/admin/planet/add/components/sections/QuestionsSection';
-import ContentsSection from '@/app/(protected)/admin/planet/add/components/sections/ContentsSection';
-import ContentSidebar from '@/app/(protected)/admin/planet/add/components/ContentSidebar';
+
 import {
   PlanetEditorHeader,
   PlanetEditorHeaderProps,
 } from './PlanetEditorHeader';
+import BasicConfigurationSection from './sections/BasicConfigurationSection';
+import TagsSection from './sections/TagsSection';
+import ResearchTopicsSection from './sections/ResearchTopicsSection';
+import ExternalResourcesSection from './sections/ExternalResourcesSection';
+import QuestionsSection from './sections/QuestionsSection';
+import ContentsSection from './sections/ContentsSection';
+import ContentSidebar from './ContentSidebar';
 
 type PendingContentImageEntry = {
   previewUrl: string;

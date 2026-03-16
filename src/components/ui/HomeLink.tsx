@@ -1,4 +1,3 @@
-'use client';
 import { Home } from 'lucide-react';
 import { cn } from '@/lib/utils/cn';
 import { useTranslations } from 'next-intl';

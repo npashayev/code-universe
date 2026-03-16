@@ -11,7 +11,7 @@ import ImplementationTaskContentBlock from '../contents/ImplementationTaskConten
 import CodeContentBlock from '../contents/CodeContentBlock';
 import HtmlElementContentBlock from '../contents/HtmlElementContentBlock';
 import ImageContentBlock from '../contents/ImageContentBlock';
-import { useLocalizedContent } from '@/lib/hooks/useLocalizedContent';
+import { useLocalizedContent } from '@/lib/hooks/admin/useLocalizedContent';
 import { cn } from '@/lib/utils/cn';
 import { CONTENT_TYPE } from '@/lib/constants/planet';
 

@@ -43,6 +43,7 @@ const CodeBlock = ({ content }: Props) => {
                 isLight={lightMode}
                 defaultLanguage={code.language}
                 defaultValue={code.code}
+                readOnly={true}
               />
             ) : (
               <CodePreview

@@ -1,23 +1,18 @@
 import { PlanetCategory } from '@/types/planet';
 import { Search } from 'lucide-react';
-import AddPlanetLink from '../../../../../components/admin/ui/AddPlanetLink';
-import {
-  CategorySelector,
-  ExtendedStatusSelector,
-  LanguageSelector,
-} from '../../planet/add/components/Selectors';
 import {
   ExtendedStatusOption,
   LanguageOption,
 } from '@/types/reactSelectOptions';
 import { Dispatch, SetStateAction } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { categoryOptions } from '@/lib/constants/reactSelectOptions';
 import DashboardLink from '@/components/admin/ui/DashboardLink';
 import HomeLink from '@/components/ui/HomeLink';
 import PlanetStats from '@/components/admin/PlanetStats';
-import { useUpdatePlanetList } from '@/lib/hooks/queries/usePlanet';
+import { useUpdatePlanetList } from '@/lib/hooks/admin/queries/usePlanet';
 import { AdminPlanetListResponse, AdminPlanetSummary } from '@/lib/planet/getPlanetList';
+import AddPlanetLink from '@/components/admin/ui/AddPlanetLink';
+import { CategorySelector, ExtendedStatusSelector, LanguageSelector } from '@/components/admin/Selectors';
 
 export interface Props {
   data: AdminPlanetListResponse;

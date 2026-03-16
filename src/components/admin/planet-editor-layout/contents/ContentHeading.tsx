@@ -1,7 +1,7 @@
 import {
   RemoveContentFn,
   UpdateContentFn,
-} from '@/lib/hooks/useLocalizedContent';
+} from '@/lib/hooks/admin/useLocalizedContent';
 import { PlanetContent } from '@/types/planet';
 import Label from '../shared/Label';
 import RemoveButton from '@/components/admin/ui/RemoveButton';

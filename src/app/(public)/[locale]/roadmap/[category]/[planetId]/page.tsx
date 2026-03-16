@@ -1,11 +1,11 @@
-import PlanetDetails from '../../../../../../components/shared/planet-details/PlanetDetails';
 import { getPlanet } from '@/lib/planet/getPlanet';
 import { isPlanetCategory } from '@/lib/utils/isPlanetCategory';
 import { notFound } from 'next/navigation';
 import { Link } from '@/lib/next-intl/navigation';
 import UpdateLink from '@/components/admin/ui/UpdateLink';
 import PrivateComponent from '@/components/admin/PrivateComponent';
-import DeletePlanetButtonClient from '../../../../../../components/shared/planet-details/DeletePlanetButtonClient';
+import DeletePlanetButtonClient from '@/components/shared/planet-details/DeletePlanetButtonClient';
+import PlanetDetails from '@/components/shared/planet-details/PlanetDetails';
 
 interface Props {
   params: Promise<{

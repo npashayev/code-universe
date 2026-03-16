@@ -1,6 +1,6 @@
 import { CreatePlanetData } from '@/types/planet';
 import { BatchUploadItem } from '@/types/r2';
-import { useR2Upload } from '@/lib/hooks/useR2Upload';
+import { useR2Upload } from '@/lib/hooks/admin/useR2Upload';
 import { Dispatch, SetStateAction, useState } from 'react';
 import toast from 'react-hot-toast';
 import {

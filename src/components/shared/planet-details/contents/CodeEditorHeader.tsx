@@ -1,5 +1,6 @@
+import { PROGRAMMING_LANGUAGE } from '@/lib/constants/planet';
 import { cn } from '@/lib/utils/cn';
-import { PROGRAMMING_LANGUAGE, ProgrammingLanguage } from '@/types/planet';
+import { ProgrammingLanguage } from '@/types/planet';
 import { Moon, Sun } from 'lucide-react';
 import { Dispatch, SetStateAction } from 'react';
 

@@ -1,11 +1,10 @@
 import { CodeContent } from '@/types/planet';
 import { Eye, Terminal } from 'lucide-react';
-import { UpdateContentFn } from '@/lib/hooks/useLocalizedContent';
-import { programmingLanguageOptions } from '@/lib/constants/reactSelectOptions';
-import { ProgrammingLanguageSelector } from '../Selectors';
+import { UpdateContentFn } from '@/lib/hooks/admin/useLocalizedContent';
 import Label from '../shared/Label';
 import Input from '../shared/Input';
 import Textarea from '../shared/Textarea';
+import { ProgrammingLanguageSelector } from '../../Selectors';
 
 interface Props {
   content: CodeContent;

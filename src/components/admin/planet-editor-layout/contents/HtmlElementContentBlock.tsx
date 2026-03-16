@@ -1,4 +1,4 @@
-import { UpdateContentFn } from '@/lib/hooks/useLocalizedContent';
+import { UpdateContentFn } from '@/lib/hooks/admin/useLocalizedContent';
 import { HtmlElementContent } from '@/types/planet';
 import Label from '../shared/Label';
 import Input from '../shared/Input';

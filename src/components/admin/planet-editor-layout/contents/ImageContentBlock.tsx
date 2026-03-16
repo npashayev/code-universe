@@ -1,11 +1,11 @@
-import { UpdateContentFn } from '@/lib/hooks/useLocalizedContent';
+import { UpdateContentFn } from '@/lib/hooks/admin/useLocalizedContent';
 import { ImageContent } from '@/types/planet';
 import { PendingImageOption } from '@/types/reactSelectOptions';
 import Label from '../shared/Label';
 import Input from '../shared/Input';
 import ImagePicker from '../shared/ImagePicker';
 import Textarea from '../shared/Textarea';
-import { PendingImageSelector } from '../Selectors';
+import { PendingImageSelector } from '../../Selectors';
 import { Dispatch } from 'react';
 
 type PendingContentImageEntry = {

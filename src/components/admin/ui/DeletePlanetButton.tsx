@@ -1,6 +1,5 @@
 'use client'
-
-import { useDeletePlanet } from '@/lib/hooks/queries/usePlanet';
+import { useDeletePlanet } from '@/lib/hooks/admin/queries/usePlanet';
 import Dialog from '../../ui/modal/Dialog'
 import RemoveButton from './RemoveButton'
 import { useState } from 'react';

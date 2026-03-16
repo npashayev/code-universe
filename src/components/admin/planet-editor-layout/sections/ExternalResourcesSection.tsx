@@ -3,7 +3,7 @@ import { CreatePlanetData, Resource, SupportedLanguage } from '@/types/planet';
 import { Updater } from 'use-immer';
 import { BookOpen } from 'lucide-react';
 import Link from 'next/link';
-import { useLocalizedDragReorder } from '@/lib/hooks/useLocalizedDragReorder';
+import { useLocalizedDragReorder } from '@/lib/hooks/admin/useLocalizedDragReorder';
 import SectionHeader from '../shared/SectionHeader';
 import Input from '../shared/Input';
 import AddButton from '../shared/AddButton';

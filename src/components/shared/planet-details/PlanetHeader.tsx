@@ -1,7 +1,7 @@
+import { PLANET_CATEGORY } from '@/lib/constants/planet';
 import {
   ImageData,
   LocalizedPlanetData,
-  PLANET_CATEGORY,
   PlanetCategory,
 } from '@/types/planet';
 import Image from 'next/image';

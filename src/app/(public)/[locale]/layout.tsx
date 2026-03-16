@@ -1,7 +1,7 @@
 import Navbar from '@/components/layout/navbar/Navbar';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
-import { ReactNode, use } from 'react';
+import { ReactNode } from 'react';
 
 export default async function PublicLayout({
   children,

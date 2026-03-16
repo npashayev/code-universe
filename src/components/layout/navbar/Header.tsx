@@ -17,7 +17,7 @@ const Header = ({ onOpen }: Props) => {
 
   const t = useTranslations('navbar');
   return (
-    <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-[#030213]/40 backdrop-blur-xl border border-white/10 h-14 rounded-2xl flex items-center px-6 shadow-2xl gap-30 min-w-2xl">
+    <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-night/40 backdrop-blur-xl border border-white/10 h-14 rounded-2xl flex items-center px-6 shadow-2xl gap-30 min-w-2xl">
       <button
         onClick={onOpen}
         aria-label="Open navigation menu"

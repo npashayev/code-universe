@@ -3,15 +3,10 @@ import { Download, Upload } from 'lucide-react';
 import { Updater } from 'use-immer';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { LanguageOption } from '@/types/reactSelectOptions';
-import {
-  CategorySelector,
-  LanguageSelector,
-  StatusSelector,
-} from '@/app/(protected)/admin/planet/add/components/Selectors';
-import { categoryOptions } from '@/lib/constants/reactSelectOptions';
 import DashboardLink from '@/components/admin/ui/DashboardLink';
 import { usePlanetJsonIO } from '@/lib/hooks/admin/usePlanetJsonIO';
 import Dialog from '@/components/ui/modal/Dialog';
+import { CategorySelector, LanguageSelector, StatusSelector } from '../Selectors';
 
 type PendingContentImageEntry = {
   previewUrl: string;
