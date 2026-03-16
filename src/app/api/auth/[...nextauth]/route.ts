@@ -3,6 +3,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { prisma } from '@/lib/prisma/prisma';
 import bcrypt from 'bcrypt';
+import { UserRole } from '@/types/next-auth';
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -18,7 +19,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          return null;
+          throw new Error('MISSING_CREDENTIALS');
         }
 
         const user = await prisma.user.findUnique({
@@ -26,7 +27,7 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (!user || !user.hashedPassword) {
-          return null;
+          throw new Error('INVALID_CREDENTIALS');
         }
 
         const isValid = await bcrypt.compare(
@@ -35,7 +36,7 @@ export const authOptions: NextAuthOptions = {
         );
 
         if (!isValid) {
-          return null;
+          throw new Error('INVALID_CREDENTIALS');
         }
 
         return {
@@ -50,13 +51,13 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.role = user.role;
+        token.role = user.role as UserRole;
       }
       return token;
     },
     async session({ session, token }) {
       if (token && session.user) {
-        session.user.role = token.role as string;
+        session.user.role = token.role as UserRole;
       }
       return session;
     },

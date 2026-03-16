@@ -9,6 +9,12 @@ export interface LoginParams {
   password: string;
 }
 
+const ERROR_MESSAGES = {
+  MISSING_CREDENTIALS: 'Please enter your email and password.',
+  INVALID_CREDENTIALS: 'Invalid email or password.',
+  DEFAULT: 'Something went wrong. Please try again.',
+} as const;
+
 export const useLogin = () => {
   const router = useRouter();
   return useMutation({
@@ -18,7 +24,12 @@ export const useLogin = () => {
         email,
         password,
       });
-      if (result?.error) throw new Error('Invalid email or password');
+      if (result?.error) {
+        const message = result.error in ERROR_MESSAGES
+          ? ERROR_MESSAGES[result.error as keyof typeof ERROR_MESSAGES]
+          : ERROR_MESSAGES.DEFAULT;
+        throw new Error(message);
+      }
       return result;
     },
     onSuccess: () => {
