@@ -1,11 +1,18 @@
+import { type Metadata } from 'next';
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 
 import galaxy from '@/assets/galaxy.webp';
-import SplashCursor from '@/components/react-bits/SplashCursor';
 
 import SolarSystem from './components/SolarSystem';
 
+export const generateMetadata = async (): Promise<Metadata> => {
+  const t = await getTranslations('home');
+  const description = `${t('firstDescription')} ${t('secondDescription')}`;
+  return {
+    description
+  };
+};
 
 export default async function HomePage() {
   const t = await getTranslations('home');
@@ -26,7 +33,7 @@ export default async function HomePage() {
         <p className="text-3xl mt-12">{t('firstDescription')}</p>
         <p className="text-3xl mt-7">{t('secondDescription')}</p>
       </div>
-      <SplashCursor />
+      {/* <SplashCursor /> */}
     </main>
   );
 }

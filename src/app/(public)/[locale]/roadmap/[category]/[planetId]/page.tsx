@@ -15,6 +15,17 @@ interface Props {
   }>;
 }
 
+export const generateMetadata = async ({ params }: Props) => {
+  const { planetId, category } = await params;
+  if (!isPlanetCategory(category)) notFound();
+  const planet = await getPlanet(planetId, category);
+
+  return {
+    title: planet.localized.name,
+    description: planet.localized.description
+  };
+};
+
 export default async function PlanetPage({ params }: Props) {
   const { planetId, category } = await params;
 

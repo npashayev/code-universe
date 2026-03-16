@@ -1,6 +1,5 @@
 {
   "common": {
-    "home": "Əsas səhifə",
     "sections": "Mövzular"
   },
   "home": {
@@ -11,6 +10,7 @@
   "navbar": {
     "menu": "Menyu",
     "description": "Öyrənmək istədiyiniz mövzunu seçin",
-    "launchMenu": "Menyunu Aç"
+    "launchMenu": "Menyunu Aç",
+    "home": "Əsas səhifə"
   }
 }

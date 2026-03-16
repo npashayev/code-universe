@@ -1,6 +1,5 @@
 {
   "common": {
-    "home": "Home",
     "sections": "Sections"
   },
   "home": {
@@ -11,6 +10,7 @@
   "navbar": {
     "menu": "Menu",
     "description": "Select what you want to learn",
-    "launchMenu": "Launch menu"
+    "launchMenu": "Launch menu",
+    "home": "Home"
   }
 }

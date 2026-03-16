@@ -1,13 +1,11 @@
-import { Menu } from 'lucide-react';
+import { Home, Menu } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
+import { Link } from '@/lib/next-intl/navigation';
 import DashboardLink from '@/components/admin/ui/DashboardLink';
-import HomeLink from '@/components/ui/HomeLink';
 
 import LogoutButton from '../../admin/ui/LogoutButton';
 import PrivateComponent from '../../admin/PrivateComponent';
-
-
 // import { motion as Motion, AnimatePresence } from 'framer-motion';
 
 import LanguageSelector from './LanguageSelector';
@@ -37,7 +35,10 @@ const Header = ({ onOpen }: Props) => {
       </button>
 
       <div className="ml-auto flex items-center gap-2">
-        <HomeLink />
+        <Link href="/" className='nav-item'>
+          <Home size={16} />
+          <span className="nav-item-text">{t('home')}</span>
+        </Link>
 
         <PrivateComponent roles={['ADMIN']}>
           <DashboardLink />

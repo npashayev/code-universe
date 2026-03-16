@@ -8,7 +8,7 @@ import type {
 } from '@/types/reactSelectOptions';
 import type { PlanetCategory } from '@/types/planet';
 import DashboardLink from '@/components/admin/ui/DashboardLink';
-import HomeLink from '@/components/ui/HomeLink';
+import HomeLink from '@/components/admin/ui/HomeLink';
 import PlanetStats from '@/components/admin/PlanetStats';
 import { useUpdatePlanetList } from '@/lib/hooks/admin/queries/usePlanet';
 import type {
