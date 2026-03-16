@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useImmer } from 'use-immer';
 import { LanguageOption } from '@/types/reactSelectOptions';
 import { languageOptions } from '@/lib/constants/reactSelectOptions';
-import { PlanetEditorLayout } from '@/app/(protected)/admin/planet/shared/PlanetEditorLayout';
+import { PlanetEditorLayout } from '@/components/admin/planet-editor-layout/PlanetEditorLayout';
 import { useUpdatePlanet } from '@/lib/hooks/admin/useUpdatePlanet';
 import PlanetClient from '@/app/(public)/[locale]/roadmap/[category]/[planetId]/components/PlanetClient';
 import { useOrphanedImageCleanup } from '@/lib/hooks/admin/useOrphanedImageCleanup';

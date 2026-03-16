@@ -9,7 +9,7 @@ import { useImmer } from 'use-immer';
 import { LanguageOption } from '@/types/reactSelectOptions';
 import { languageOptions } from '@/lib/constants/reactSelectOptions';
 import { getInitialPlanetData } from '@/lib/utils/getInitialPlanetData';
-import { PlanetEditorLayout } from '@/app/(protected)/admin/planet/shared/PlanetEditorLayout';
+import { PlanetEditorLayout } from '@/components/admin/planet-editor-layout/PlanetEditorLayout';
 import { useSubmitPlanet } from '@/lib/hooks/admin/useSubmitPlanet';
 import PlanetClient from '@/app/(public)/[locale]/roadmap/[category]/[planetId]/components/PlanetClient';
 import { useOrphanedImageCleanup } from '@/lib/hooks/admin/useOrphanedImageCleanup';

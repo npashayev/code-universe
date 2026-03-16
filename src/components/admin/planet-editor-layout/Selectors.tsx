@@ -22,7 +22,6 @@ import {
   TitleLevelOption,
 } from '@/types/reactSelectOptions';
 import { CheckCircle2, Clock, Code, Eye, Languages } from 'lucide-react';
-import Selector from './shared/Selector';
 import {
   CategorySelectorProps,
   ContentTypeSelectorProps,
@@ -35,6 +34,7 @@ import {
   TextVariantSelectorProps,
   TitleLevelSelectorProps,
 } from '@/types/selector';
+import Selector from './shared/Selector';
 
 export const StatusSelector = ({
   planetData,

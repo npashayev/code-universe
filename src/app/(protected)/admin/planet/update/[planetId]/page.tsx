@@ -1,5 +1,5 @@
 import { getPlanetForEdit } from '@/lib/planet/getPlanetForEdit';
-import UpdatePlanetClient from '../components/UpdatePlanetClient';
+import UpdatePlanetClient from './components/UpdatePlanetClient';
 
 interface Props {
   params: Promise<{

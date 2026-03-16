@@ -5,12 +5,12 @@ import { useState } from 'react';
 import { Updater } from 'use-immer';
 import { useLocalizedContent } from '@/lib/hooks/useLocalizedContent';
 import { useLocalizedDragReorder } from '@/lib/hooks/useLocalizedDragReorder';
-import ListElement from './shared/ListElement';
+import ListElement from '../../../../../../components/admin/planet-editor-layout/shared/ListElement';
 import { ContentTypeSelector } from './Selectors';
 import { contentTypeOptions } from '@/lib/constants/reactSelectOptions';
 import { cn } from '@/lib/utils/cn';
-import SectionHeader from './shared/SectionHeader';
-import AddButton from './shared/AddButton';
+import SectionHeader from '../../../../../../components/admin/planet-editor-layout/shared/SectionHeader';
+import AddButton from '../../../../../../components/admin/planet-editor-layout/shared/AddButton';
 import SortableList from '@/components/shared/SortableList';
 
 interface Props {

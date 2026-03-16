@@ -15,7 +15,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { categoryOptions } from '@/lib/constants/reactSelectOptions';
 import DashboardLink from '@/components/admin/DashboardLink';
 import HomeLink from '@/components/shared/HomeLink';
-import PlanetStats from '@/components/shared/PlanetStats';
+import PlanetStats from '@/components/admin/PlanetStats';
 import { useUpdatePlanetList } from '@/lib/hooks/queries/usePlanet';
 import { AdminPlanetListResponse, AdminPlanetSummary } from '@/lib/planet/getPlanetList';
 
