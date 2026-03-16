@@ -1,5 +1,5 @@
 import { defineRouting } from 'next-intl/routing';
-import { SUPPORTED_LANGS } from '@/lib/constants/locale';
+import { SUPPORTED_LANGS } from '../constants/planet';
 
 export const routing = defineRouting({
   locales: SUPPORTED_LANGS,

@@ -1,5 +1,5 @@
 'use client';
-import { SUPPORTED_LANGS } from '@/lib/constants/locale';
+import { SUPPORTED_LANGS } from '@/lib/constants/planet';
 import { usePathname, useRouter } from '@/lib/next-intl/navigation';
 import { SupportedLanguage } from '@/types/planet';
 import { useParams } from 'next/navigation';
