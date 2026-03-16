@@ -23,3 +23,9 @@ dist
 
 # Public assets (optional – ignore if you don't want formatting)
 public
+
+# Generated Prisma files
+prisma/generated
+
+# Auto-generated type files
+**/*.generated.ts
