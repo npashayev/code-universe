@@ -1,4 +1,4 @@
-import { CreatePlanetData, SupportedLanguage } from '@/types/planet';
+import { CreatePlanetData } from '@/types/planet';
 import { BatchUploadItem } from '@/types/r2';
 import { useR2Upload } from '@/lib/hooks/useR2Upload';
 import { Dispatch, SetStateAction, useState } from 'react';
@@ -7,8 +7,8 @@ import {
   preSubmitCreatePlanetDataSchema,
   createPlanetDataSchema,
 } from '@/lib/validation/planetDataSchema';
-import { updatePlanet, type UpdatePlanetResult } from '@/app/actions/planet';
-import { SUPPORTED_LANGS } from '@/lib/constants/locale';
+import { SUPPORTED_LANGS } from '@/lib/constants/planet';
+import { updatePlanet, UpdatePlanetResult } from '@/app/actions/updatePlanet';
 
 function getImageDimensions(
   file: File,

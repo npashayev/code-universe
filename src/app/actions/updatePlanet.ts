@@ -1,20 +1,19 @@
 'use server';
 import { ensureAdmin } from '@/lib/auth/ensureAdmin';
-import { SUPPORTED_LANGS } from '@/lib/constants/locale';
+import { SUPPORTED_LANGS } from '@/lib/constants/planet';
 import { prisma } from '@/lib/prisma/prisma';
 import { deleteR2Objects } from '@/lib/r2/deleteR2Objects';
 import { updatePlanetDataSchema } from '@/lib/validation/planetDataSchema';
-import { PlanetContent, SupportedLanguage } from '@/types/planet';
-import { revalidatePath } from 'next/cache';
+import { LocalizedImage, PlanetCategory, PlanetContent, PlanetStatus, SupportedLanguage } from '@/types/planet';
 
 export type UpdatePlanetResult =
   | {
-      success: true;
-      planetId: string;
-      r2Cleanup:
-        | { success: true; deletedCount: number }
-        | { success: false; failedUrls: string[] };
-    }
+    success: true;
+    planetId: string;
+    r2Cleanup:
+    | { success: true; deletedCount: number }
+    | { success: false; failedUrls: string[] };
+  }
   | { success: false; error: string };
 
 export async function updatePlanet(data: unknown): Promise<UpdatePlanetResult> {
@@ -90,10 +89,10 @@ export async function updatePlanet(data: unknown): Promise<UpdatePlanetResult> {
       await tx.planet.update({
         where: { id },
         data: {
-          category: rest.category,
-          status: rest.status,
+          category: rest.category as PlanetCategory,
+          status: rest.status as PlanetStatus,
           step,
-          image: rest.image,
+          image: rest.image as LocalizedImage,
         },
       });
 
@@ -132,8 +131,6 @@ export async function updatePlanet(data: unknown): Promise<UpdatePlanetResult> {
     failedUrls.length === 0
       ? { success: true, deletedCount: urlsToDelete.length }
       : { success: false, failedUrls };
-
-  revalidatePath(`/admin/roadmap?category=${parsed.data.category}`);
 
   return { success: true as const, planetId: parsed.data.id, r2Cleanup };
 }

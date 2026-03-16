@@ -3,14 +3,15 @@
 import {
   CreatePlanetData,
 } from '@/types/planet';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useImmer } from 'use-immer';
 import { LanguageOption } from '@/types/reactSelectOptions';
 import { languageOptions } from '@/lib/constants/reactSelectOptions';
 import { PlanetEditorLayout } from '@/app/(protected)/admin/planet/shared/PlanetEditorLayout';
 import { useUpdatePlanet } from '@/lib/hooks/admin/useUpdatePlanet';
 import PlanetClient from '@/app/(public)/[locale]/roadmap/[category]/[planetId]/components/PlanetClient';
-import { SUPPORTED_LANGS } from '@/lib/constants/locale';
+import { useOrphanedImageCleanup } from '@/lib/hooks/admin/useOrphanedImageCleanup';
+import ExitPreviewButton from '@/components/shared/ExitPreviewButton';
 
 interface PendingContentImageEntry {
   previewUrl: string;
@@ -49,38 +50,26 @@ const UpdatePlanetClient = ({ planetId, step, initialData }: Props) => {
   );
 
   // Remove orphaned content images: keep only images referenced by any content in any locale
-  useEffect(() => {
-    const used = new Set<string>();
-    SUPPORTED_LANGS.forEach(loc => {
-      planetData.localized[loc].contents.forEach(c => {
-        if (c.type === 'image' && c.pendingImageId) {
-          used.add(c.pendingImageId);
-        }
-      });
-    });
-
-    queueMicrotask(() => {
-      setPendingContentImages(prev => {
-        let changed = false;
-        const next = new Map(prev);
-        for (const [key, entry] of next.entries()) {
-          if (!used.has(key)) {
-            URL.revokeObjectURL(entry.previewUrl);
-            next.delete(key);
-            changed = true;
-          }
-        }
-        return changed ? next : prev;
-      });
-    });
-  }, [planetData]);
+  useOrphanedImageCleanup(planetData, setPendingContentImages);
 
   if (previewActive) {
     return (
-      <PlanetClient
-        planet={planetData}
-        locale={currentLanguage.value}
-      />
+      <>
+        <ExitPreviewButton onClick={() => setPreviewActive(false)} />
+        <PlanetClient
+          planet={{
+            ...planetData,
+            id: planetId,
+            image: {
+              ...planetData.image,
+              alt: planetData.image.alt[currentLanguage.value]
+            },
+            localized: planetData.localized[currentLanguage.value],
+            prevPlanetId: null,
+            nextPlanetId: null
+          }}
+        />
+      </>
     );
   }
 

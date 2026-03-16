@@ -2,7 +2,6 @@
 
 import {
   CreatePlanetData,
-  PLANET_CATEGORY,
   PlanetCategory,
 } from '@/types/planet';
 import { use, useState } from 'react';
@@ -15,6 +14,7 @@ import { useSubmitPlanet } from '@/lib/hooks/admin/useSubmitPlanet';
 import PlanetClient from '@/app/(public)/[locale]/roadmap/[category]/[planetId]/components/PlanetClient';
 import { useOrphanedImageCleanup } from '@/lib/hooks/admin/useOrphanedImageCleanup';
 import ExitPreviewButton from '@/components/shared/ExitPreviewButton';
+import { PLANET_CATEGORY } from '@/lib/constants/planet';
 
 interface Props {
   searchParams: Promise<{
