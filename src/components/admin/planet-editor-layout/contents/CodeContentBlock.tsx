@@ -31,14 +31,8 @@ const CodeContentBlock = ({ content, onUpdate }: Props) => {
             Language
           </div>
           <ProgrammingLanguageSelector
-            value={
-              programmingLanguageOptions.find(
-                l => l.value === content.code.language,
-              ) ?? programmingLanguageOptions[0]
-            }
+            content={content}
             onUpdate={onUpdate}
-            contentId={content.id}
-            code={content.code}
           />
         </div>
       </div>

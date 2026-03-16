@@ -1,4 +1,5 @@
-import { CONTENT_TYPE, ContentType, PlanetContent } from '@/types/planet';
+import { CONTENT_TYPE, ContentType, PlanetContent, ProgrammingLanguage } from '@/types/planet';
+import { PROGRAMMING_LANGUAGE, TEXT_VARIANTS } from '../constants/planet';
 
 export const createDefaultContent = (
   type: ContentType,
@@ -12,16 +13,16 @@ export const createDefaultContent = (
       return {
         id: baseId,
         label: baseLabel,
-        type: 'text',
+        type: CONTENT_TYPE.text,
         text: '',
-        variant: 'normal',
+        variant: TEXT_VARIANTS[0],
       };
 
     case CONTENT_TYPE.implementationTask:
       return {
         id: baseId,
         label: baseLabel,
-        type: 'implementation-task',
+        type: CONTENT_TYPE.implementationTask,
         task: '',
       };
 
@@ -29,9 +30,9 @@ export const createDefaultContent = (
       return {
         id: baseId,
         label: baseLabel,
-        type: 'code',
+        type: CONTENT_TYPE.code,
         code: {
-          language: 'javascript',
+          language: Object.keys(PROGRAMMING_LANGUAGE)[0] as ProgrammingLanguage,
           code: '',
         },
       };
@@ -40,7 +41,7 @@ export const createDefaultContent = (
       return {
         id: baseId,
         label: baseLabel,
-        type: 'html-element',
+        type: CONTENT_TYPE.htmlElement,
         element: {
           html: '',
         },
@@ -50,7 +51,7 @@ export const createDefaultContent = (
       return {
         id: baseId,
         label: baseLabel,
-        type: 'image',
+        type: CONTENT_TYPE.image,
         image: {
           url: '',
           alt: '',

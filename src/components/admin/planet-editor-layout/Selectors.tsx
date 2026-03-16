@@ -33,7 +33,7 @@ import {
   StatusUpdateSelectorProps,
   TextVariantSelectorProps,
   TitleLevelSelectorProps,
-} from '@/types/selector';
+} from '@/types/reactSelectProps';
 import Selector from './shared/Selector';
 
 export const StatusSelector = ({
@@ -117,12 +117,15 @@ export const LanguageSelector = ({
 );
 
 export const CategorySelector = ({
-  value,
+  category,
   onCategoryChange,
 }: CategorySelectorProps) => (
   <Selector<CategoryOption>
     instanceId="category-select"
-    value={value}
+    value={
+      categoryOptions.find(o => o.value === category) ||
+      categoryOptions[0]
+    }
     options={categoryOptions}
     onChange={option => {
       if (!option) return;
@@ -153,21 +156,22 @@ export const ContentTypeSelector = ({
 );
 
 export const TitleLevelSelector = ({
-  value,
+  content,
   onUpdate,
-  contentId,
-  titleText,
   isDisabled,
 }: TitleLevelSelectorProps) => (
   <Selector<TitleLevelOption>
     instanceId="title-level-select"
-    value={value}
+    value={
+      titleLevelOptions.find(tl => tl.value === content.title?.level) ??
+      titleLevelOptions[0]
+    }
     options={titleLevelOptions}
     isDisabled={isDisabled}
     onChange={option => {
       if (!option) return;
-      onUpdate(contentId, {
-        title: { level: option.value, text: titleText || '' },
+      onUpdate(content.id, {
+        title: { level: option.value, text: content.title?.text || '' },
       });
     }}
     styles={{
@@ -180,17 +184,19 @@ export const TitleLevelSelector = ({
 );
 
 export const TextVariantSelector = ({
-  value,
+  content,
   onUpdate,
-  contentId,
 }: TextVariantSelectorProps) => (
   <Selector<TextVariantOption>
     instanceId="text-variant-select"
-    value={value}
+    value={
+      textVariantOptions.find(tv => tv.value === content.variant) ??
+      null
+    }
     options={textVariantOptions}
     onChange={option => {
       if (!option) return;
-      onUpdate(contentId, { variant: option.value });
+      onUpdate(content.id, { variant: option.value });
     }}
     styles={{
       controlStyles: {
@@ -201,19 +207,21 @@ export const TextVariantSelector = ({
 );
 
 export const ProgrammingLanguageSelector = ({
-  value,
   onUpdate,
-  contentId,
-  code,
+  content
 }: ProgrammingLanguageSelectorProps) => (
   <Selector<ProgrammingLanguageOption>
     instanceId="programming-language-select"
-    value={value}
+    value={
+      programmingLanguageOptions.find(
+        l => l.value === content.code.language,
+      ) ?? null
+    }
     options={programmingLanguageOptions}
     onChange={option => {
       if (!option) return;
-      onUpdate(contentId, {
-        code: { ...code, language: option.value },
+      onUpdate(content.id, {
+        code: { ...content.code, language: option.value },
       });
     }}
     styles={{

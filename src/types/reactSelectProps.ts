@@ -1,4 +1,4 @@
-import { CodeContent, CreatePlanetData, PlanetCategory } from '@/types/planet';
+import { CodeContent, CreatePlanetData, PlanetCategory, PlanetContent, ProgrammingLanguage, TextContent } from '@/types/planet';
 import { Updater } from 'use-immer';
 import { UpdateContentFn } from '@/lib/hooks/useLocalizedContent';
 import {
@@ -7,7 +7,6 @@ import {
   ExtendedStatusOption,
   LanguageOption,
   PendingImageOption,
-  ProgrammingLanguageOption,
   TextVariantOption,
   TitleLevelOption,
 } from '@/types/reactSelectOptions';
@@ -20,7 +19,7 @@ export interface PlanetDataProps {
 }
 
 export interface CategorySelectorProps {
-  value: CategoryOption;
+  category: PlanetCategory;
   onCategoryChange: (category: PlanetCategory) => void;
 }
 
@@ -40,24 +39,19 @@ export interface ContentTypeSelectorProps {
 }
 
 export interface TitleLevelSelectorProps {
-  value: TitleLevelOption | null;
+  content: TextContent;
   onUpdate: UpdateContentFn;
-  contentId: string;
-  titleText?: string;
   isDisabled?: boolean;
 }
 
 export interface TextVariantSelectorProps {
-  value: TextVariantOption | null;
+  content: TextContent;
   onUpdate: UpdateContentFn;
-  contentId: string;
 }
 
 export interface ProgrammingLanguageSelectorProps {
-  value: ProgrammingLanguageOption | null;
   onUpdate: UpdateContentFn;
-  contentId: string;
-  code: CodeContent['code'];
+  content: CodeContent;
 }
 
 export interface PendingImageSelectorProps {

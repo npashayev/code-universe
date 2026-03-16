@@ -150,10 +150,7 @@ export const PlanetEditorHeader = ({
           <StatusSelector planetData={planetData} setPlanetData={setPlanetData} />
 
           <CategorySelector
-            value={
-              categoryOptions.find(o => o.value === planetData.category) ||
-              categoryOptions[0]
-            }
+            category={planetData.category}
             onCategoryChange={(category: PlanetCategory) =>
               setPlanetData(draft => {
                 draft.category = category;

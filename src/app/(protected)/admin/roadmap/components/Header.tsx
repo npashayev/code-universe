@@ -114,10 +114,7 @@ const Header = ({
           />
 
           <CategorySelector
-            value={
-              categoryOptions.find(o => o.value === category) ||
-              categoryOptions[0]
-            }
+            category={category}
             onCategoryChange={onCategoryChange}
           />
 

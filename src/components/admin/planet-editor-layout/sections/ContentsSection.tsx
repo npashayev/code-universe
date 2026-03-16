@@ -1,5 +1,4 @@
 import {
-  CONTENT_TYPE,
   CreatePlanetData,
   PlanetContent,
   SupportedLanguage,
@@ -14,6 +13,7 @@ import HtmlElementContentBlock from '../contents/HtmlElementContentBlock';
 import ImageContentBlock from '../contents/ImageContentBlock';
 import { useLocalizedContent } from '@/lib/hooks/useLocalizedContent';
 import { cn } from '@/lib/utils/cn';
+import { CONTENT_TYPE } from '@/lib/constants/planet';
 
 type PendingContentImageEntry = {
   previewUrl: string;

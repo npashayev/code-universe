@@ -35,10 +35,7 @@ const TextContentBlock = ({
             Level
           </div>
           <TitleLevelSelector
-            value={
-              titleLevelOptions.find(tl => tl.value === content.title?.level) ??
-              titleLevelOptions[0]
-            }
+
             onUpdate={onUpdate}
             contentId={content.id}
             titleText={content.title?.text}
@@ -94,12 +91,8 @@ const TextContentBlock = ({
               Text Variant
             </span>
             <TextVariantSelector
-              value={
-                textVariantOptions.find(tv => tv.value === content.variant) ??
-                textVariantOptions[0]
-              }
+              content={content}
               onUpdate={onUpdate}
-              contentId={content.id}
             />
           </div>
         </div>
