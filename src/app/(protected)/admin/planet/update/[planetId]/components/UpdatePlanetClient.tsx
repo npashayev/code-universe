@@ -9,9 +9,9 @@ import { LanguageOption } from '@/types/reactSelectOptions';
 import { languageOptions } from '@/lib/constants/reactSelectOptions';
 import { PlanetEditorLayout } from '@/components/admin/planet-editor-layout/PlanetEditorLayout';
 import { useUpdatePlanet } from '@/lib/hooks/admin/useUpdatePlanet';
-import PlanetClient from '@/app/(public)/[locale]/roadmap/[category]/[planetId]/components/PlanetClient';
+import PlanetDetails from '@/components/shared/planet-details/PlanetDetails';
 import { useOrphanedImageCleanup } from '@/lib/hooks/admin/useOrphanedImageCleanup';
-import ExitPreviewButton from '@/components/shared/ExitPreviewButton';
+import ExitPreviewButton from '@/components/admin/ui/ExitPreviewButton';
 
 interface PendingContentImageEntry {
   previewUrl: string;
@@ -56,7 +56,7 @@ const UpdatePlanetClient = ({ planetId, step, initialData }: Props) => {
     return (
       <>
         <ExitPreviewButton onClick={() => setPreviewActive(false)} />
-        <PlanetClient
+        <PlanetDetails
           planet={{
             ...planetData,
             id: planetId,

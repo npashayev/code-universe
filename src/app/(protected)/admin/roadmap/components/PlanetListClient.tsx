@@ -8,7 +8,7 @@ import {
   languageOptions,
 } from '@/lib/constants/reactSelectOptions';
 import { useImmer } from 'use-immer';
-import SortableList from '@/components/shared/SortableList';
+import SortableList from '@/components/admin/planet-editor-layout/SortableList';
 import { DragEndEvent } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 import { AdminPlanetListResponse, AdminPlanetSummary } from '@/lib/planet/getPlanetList';

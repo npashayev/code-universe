@@ -7,7 +7,7 @@ import SectionHeader from '../shared/SectionHeader';
 import Input from '../shared/Input';
 import ListElement from '../shared/ListElement';
 import AddButton from '../shared/AddButton';
-import SortableList from '@/components/shared/SortableList';
+import SortableList from '@/components/admin/planet-editor-layout/SortableList';
 import { cn } from '@/lib/utils/cn';
 
 interface Props {

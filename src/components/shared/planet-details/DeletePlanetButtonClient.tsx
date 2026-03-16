@@ -1,6 +1,6 @@
 'use client'
 
-import DeletePlanetButton from "@/components/admin/DeletePlanetButton"
+import DeletePlanetButton from "@/components/admin/ui/DeletePlanetButton"
 import { useRouter } from "@/lib/next-intl/navigation";
 import { PlanetCategory } from "@/types/planet";
 

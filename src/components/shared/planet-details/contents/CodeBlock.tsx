@@ -1,5 +1,5 @@
 'use client';
-import CodePreview from '@/components/shared/CodePreview';
+import CodePreview from '@/components/shared/planet-details/CodePreview';
 import { cn } from '@/lib/utils/cn';
 import { CodeContent } from '@/types/planet';
 import { useState } from 'react';
@@ -7,7 +7,7 @@ import CodeEditorHeader from './CodeEditorHeader';
 import Markdown from 'react-markdown';
 import dynamic from 'next/dynamic';
 
-const CodeEditor = dynamic(() => import('@/components/shared/CodeEditor'), {
+const CodeEditor = dynamic(() => import('@/components/shared/planet-details/CodeEditor'), {
   ssr: false,
 });
 

@@ -2,9 +2,9 @@
 
 import { ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import Modal from './Modal';
-import ModalButton from './ModalButton';
-import DialogIcon, { DialogIconType } from './DialogIcon';
+import Modal from '../Modal';
+import ModalButton from '../ModalButton';
+import DialogIcon, { DialogIconType } from '../DialogIcon';
 
 interface Props {
   title: string;

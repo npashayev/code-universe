@@ -1,4 +1,4 @@
-import { SortableItem } from '@/components/shared/SortableItem';
+import { SortableItem } from '@/components/admin/planet-editor-layout/SortableItem';
 import { cn } from '@/lib/utils/cn';
 import {
   DndContext,

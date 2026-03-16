@@ -7,7 +7,7 @@ import { useLocalizedDragReorder } from '@/lib/hooks/useLocalizedDragReorder';
 import SectionHeader from '../shared/SectionHeader';
 import Input from '../shared/Input';
 import AddButton from '../shared/AddButton';
-import SortableList from '@/components/shared/SortableList';
+import SortableList from '@/components/admin/planet-editor-layout/SortableList';
 import ListElement from '../shared/ListElement';
 
 interface Props {

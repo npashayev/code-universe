@@ -7,7 +7,7 @@ import ListElement from '../shared/ListElement';
 import SectionHeader from '../shared/SectionHeader';
 import Input from '../shared/Input';
 import AddButton from '../shared/AddButton';
-import SortableList from '@/components/shared/SortableList';
+import SortableList from '@/components/admin/planet-editor-layout/SortableList';
 
 interface Props {
   questions: Question[];
@@ -55,14 +55,14 @@ export const QuestionsSection = ({
 
       <div className="flex gap-2 min-w-0">
         <div className="flex-1 min-w-0">
-        <Input
-          value={currentQuestion}
-          onChange={e => setCurrentQuestion(e.target.value)}
-          onKeyDown={e => {
-            if (e.key === 'Enter') addQuestion();
-          }}
-          placeholder="Add question"
-        />
+          <Input
+            value={currentQuestion}
+            onChange={e => setCurrentQuestion(e.target.value)}
+            onKeyDown={e => {
+              if (e.key === 'Enter') addQuestion();
+            }}
+            placeholder="Add question"
+          />
         </div>
         <AddButton onClick={addQuestion} disabled={!currentQuestion.trim()} className="shrink-0">Add</AddButton>
       </div>

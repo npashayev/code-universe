@@ -4,8 +4,8 @@ import MapSidebar from './components/MapSidebar';
 import { isPlanetCategory } from '@/lib/utils/isPlanetCategory';
 import { notFound } from 'next/navigation';
 import { getPublicPlanetList } from '@/lib/planet/getPlanetList';
-import UpdateLink from '@/components/admin/UpdateLink';
-import PrivateComponent from '@/components/shared/PrivateComponent';
+import UpdateLink from '@/components/admin/ui/UpdateLink';
+import PrivateComponent from '@/components/admin/PrivateComponent';
 
 interface Props {
   params: Promise<{

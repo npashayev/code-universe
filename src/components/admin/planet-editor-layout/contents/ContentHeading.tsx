@@ -4,7 +4,7 @@ import {
 } from '@/lib/hooks/useLocalizedContent';
 import { PlanetContent } from '@/types/planet';
 import Label from '../shared/Label';
-import RemoveButton from '@/components/ui/RemoveButton';
+import RemoveButton from '@/components/admin/ui/RemoveButton';
 
 interface Props {
   idx: number;

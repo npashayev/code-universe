@@ -11,7 +11,7 @@ import { contentTypeOptions } from '@/lib/constants/reactSelectOptions';
 import { cn } from '@/lib/utils/cn';
 import SectionHeader from '../../../../../../components/admin/planet-editor-layout/shared/SectionHeader';
 import AddButton from '../../../../../../components/admin/planet-editor-layout/shared/AddButton';
-import SortableList from '@/components/shared/SortableList';
+import SortableList from '@/components/admin/planet-editor-layout/SortableList';
 
 interface Props {
   contents: PlanetContent[];

@@ -3,8 +3,8 @@ import { MoveVertical } from 'lucide-react';
 import { Updater } from 'use-immer';
 import { StatusUpdateSelector } from '../../planet/add/components/Selectors';
 import { cn } from '@/lib/utils/cn';
-import DeletePlanetButton from '@/components/admin/DeletePlanetButton';
-import UpdateLink from '@/components/admin/UpdateLink';
+import DeletePlanetButton from '@/components/admin/ui/DeletePlanetButton';
+import UpdateLink from '@/components/admin/ui/UpdateLink';
 import { AdminPlanetSummary } from '@/lib/planet/getPlanetList';
 
 interface Props {

@@ -11,9 +11,9 @@ import { languageOptions } from '@/lib/constants/reactSelectOptions';
 import { getInitialPlanetData } from '@/lib/utils/getInitialPlanetData';
 import { PlanetEditorLayout } from '@/components/admin/planet-editor-layout/PlanetEditorLayout';
 import { useSubmitPlanet } from '@/lib/hooks/admin/useSubmitPlanet';
-import PlanetClient from '@/app/(public)/[locale]/roadmap/[category]/[planetId]/components/PlanetClient';
+import PlanetDetails from '@/components/shared/planet-details/PlanetDetails';
 import { useOrphanedImageCleanup } from '@/lib/hooks/admin/useOrphanedImageCleanup';
-import ExitPreviewButton from '@/components/shared/ExitPreviewButton';
+import ExitPreviewButton from '@/components/admin/ui/ExitPreviewButton';
 import { PLANET_CATEGORY } from '@/lib/constants/planet';
 
 interface Props {
@@ -58,7 +58,7 @@ export default function AddPlanetPage({ searchParams }: Props) {
     return (
       <>
         <ExitPreviewButton onClick={() => setPreviewActive(false)} />
-        <PlanetClient
+        <PlanetDetails
           planet={{
             ...planetData,
             id: '',

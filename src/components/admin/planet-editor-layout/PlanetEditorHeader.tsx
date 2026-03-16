@@ -9,9 +9,9 @@ import {
   StatusSelector,
 } from '@/app/(protected)/admin/planet/add/components/Selectors';
 import { categoryOptions } from '@/lib/constants/reactSelectOptions';
-import DashboardLink from '@/components/admin/DashboardLink';
+import DashboardLink from '@/components/admin/ui/DashboardLink';
 import { usePlanetJsonIO } from '@/lib/hooks/admin/usePlanetJsonIO';
-import Dialog from '@/components/ui/Dialog';
+import Dialog from '@/components/ui/modal/Dialog';
 
 type PendingContentImageEntry = {
   previewUrl: string;

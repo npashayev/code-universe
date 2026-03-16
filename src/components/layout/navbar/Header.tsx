@@ -1,7 +1,7 @@
-import LogoutButton from '../../ui/LogoutButton';
-import DashboardLink from '@/components/admin/DashboardLink';
-import PrivateComponent from '../../shared/PrivateComponent';
-import HomeLink from '@/components/shared/HomeLink';
+import LogoutButton from '../../admin/ui/LogoutButton';
+import DashboardLink from '@/components/admin/ui/DashboardLink';
+import PrivateComponent from '../../admin/PrivateComponent';
+import HomeLink from '@/components/ui/HomeLink';
 import { motion as Motion, AnimatePresence } from 'framer-motion';
 import { Menu, Moon, Sun } from 'lucide-react';
 import { useState } from 'react';

@@ -10,7 +10,7 @@ interface Props {
   planet: PublicPlanetResponse;
 }
 
-const PlanetClient = ({ planet }: Props) => {
+const PlanetDetails = ({ planet }: Props) => {
   const { category, image, localized } = planet;
   const { researchTopics, resources, contents, questions } = localized;
 
@@ -34,4 +34,4 @@ const PlanetClient = ({ planet }: Props) => {
   );
 };
 
-export default PlanetClient;
+export default PlanetDetails;

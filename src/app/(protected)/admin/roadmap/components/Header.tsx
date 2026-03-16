@@ -1,6 +1,6 @@
 import { PlanetCategory } from '@/types/planet';
 import { Search } from 'lucide-react';
-import AddPlanetLink from '../../../../../components/admin/AddPlanetLink';
+import AddPlanetLink from '../../../../../components/admin/ui/AddPlanetLink';
 import {
   CategorySelector,
   ExtendedStatusSelector,
@@ -13,8 +13,8 @@ import {
 import { Dispatch, SetStateAction } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { categoryOptions } from '@/lib/constants/reactSelectOptions';
-import DashboardLink from '@/components/admin/DashboardLink';
-import HomeLink from '@/components/shared/HomeLink';
+import DashboardLink from '@/components/admin/ui/DashboardLink';
+import HomeLink from '@/components/ui/HomeLink';
 import PlanetStats from '@/components/admin/PlanetStats';
 import { useUpdatePlanetList } from '@/lib/hooks/queries/usePlanet';
 import { AdminPlanetListResponse, AdminPlanetSummary } from '@/lib/planet/getPlanetList';

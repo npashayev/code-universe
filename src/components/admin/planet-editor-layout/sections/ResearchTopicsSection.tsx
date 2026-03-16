@@ -11,7 +11,7 @@ import ListElement from '../shared/ListElement';
 import Input from '../shared/Input';
 import SectionHeader from '../shared/SectionHeader';
 import AddButton from '../shared/AddButton';
-import SortableList from '@/components/shared/SortableList';
+import SortableList from '@/components/admin/planet-editor-layout/SortableList';
 
 interface Props {
   researchTopics: ResearchTopic[];
@@ -63,12 +63,12 @@ export const ResearchTopicsSection = ({
 
       <div className="flex gap-2 min-w-0">
         <div className="flex-1 min-w-0">
-        <Input
-          value={currentTopic}
-          onChange={e => setCurrentTopic(e.target.value)}
-          onKeyDown={e => e.key === 'Enter' && addResearchTopic()}
-          placeholder="Add research topic"
-        />
+          <Input
+            value={currentTopic}
+            onChange={e => setCurrentTopic(e.target.value)}
+            onKeyDown={e => e.key === 'Enter' && addResearchTopic()}
+            placeholder="Add research topic"
+          />
         </div>
         <AddButton
           onClick={addResearchTopic}
