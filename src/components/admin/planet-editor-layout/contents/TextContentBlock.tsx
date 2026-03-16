@@ -31,10 +31,8 @@ const TextContentBlock = ({
             Level
           </div>
           <TitleLevelSelector
-
+            content={content}
             onUpdate={onUpdate}
-            contentId={content.id}
-            titleText={content.title?.text}
             isDisabled={!content.title?.text}
           />
         </div>

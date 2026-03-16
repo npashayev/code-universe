@@ -13,8 +13,8 @@ interface Props {
 }
 
 const CodeEditorHeader = ({
-  editMode,
-  setEditMode,
+  // editMode,
+  // setEditMode,
   lightMode,
   setLightMode,
   language,

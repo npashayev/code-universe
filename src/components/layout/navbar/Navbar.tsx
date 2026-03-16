@@ -24,7 +24,7 @@ const Navbar = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="absolute inset-0 bg-[#030213]/90 backdrop-blur-3xl"
+              className="absolute inset-0 bg-night/90 backdrop-blur-3xl"
             />
 
             {/* Content Container */}

@@ -1,7 +1,7 @@
 const Loading = () => {
     return (
         <div className="page flex items-center justify-center">
-            <div className="flex items-center justify-center min-h-[220px]">
+            <div className="flex items-center justify-center min-h-55">
                 <div className="relative w-32 h-32 text-[#002D5A]" aria-label="Loading" role="status">
                     <div className="absolute inset-0 rounded-full blur-md opacity-20 bg-linear-to-tr from-[#002D5A] via-[#0892A5] to-[#C9910D]" />
                     <svg viewBox="0 0 120 120" className="relative w-full h-full">
