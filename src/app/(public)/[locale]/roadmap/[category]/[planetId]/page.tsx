@@ -1,4 +1,6 @@
+import { cacheLife, cacheTag } from 'next/cache';
 import { notFound } from 'next/navigation';
+import { setRequestLocale } from 'next-intl/server';
 
 import { getPlanet } from '@/lib/planet/getPlanet';
 import { isPlanetCategory } from '@/lib/utils/isPlanetCategory';
@@ -7,18 +9,23 @@ import UpdateLink from '@/components/admin/ui/UpdateLink';
 import PrivateComponent from '@/components/admin/PrivateComponent';
 import DeletePlanetButtonClient from '@/components/shared/planet-details/DeletePlanetButtonClient';
 import PlanetDetails from '@/components/shared/planet-details/PlanetDetails';
+import { type SupportedLanguage } from '@/types/planet';
 
 interface Props {
   params: Promise<{
     category: string;
     planetId: string;
+    locale: string;
   }>;
 }
 
 export const generateMetadata = async ({ params }: Props) => {
-  const { planetId, category } = await params;
+  'use cache';
+  const { planetId, category, locale } = await params;
+  cacheLife('max');
+  cacheTag(`planet-${planetId}`);
   if (!isPlanetCategory(category)) notFound();
-  const planet = await getPlanet(planetId, category);
+  const planet = await getPlanet(planetId, category, locale as SupportedLanguage);
 
   return {
     title: planet.localized.name,
@@ -27,11 +34,12 @@ export const generateMetadata = async ({ params }: Props) => {
 };
 
 export default async function PlanetPage({ params }: Props) {
-  const { planetId, category } = await params;
+  const { planetId, category, locale } = await params;
+  setRequestLocale(locale);
 
   if (!isPlanetCategory(category)) notFound();
 
-  const planet = await getPlanet(planetId, category);
+  const planet = await getPlanet(planetId, category, locale as SupportedLanguage);
 
   return (
     <>
