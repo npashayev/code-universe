@@ -1,12 +1,21 @@
 import { type Metadata } from 'next';
 import Image from 'next/image';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import galaxy from '@/assets/galaxy.webp';
 
 import SolarSystem from './components/SolarSystem';
 
-export const generateMetadata = async (): Promise<Metadata> => {
+interface Props {
+  params: Promise<{
+    locale: string;
+  }>
+}
+
+export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
+  const { locale } = await (params);
+  setRequestLocale(locale);
+
   const t = await getTranslations('home');
   const description = `${t('firstDescription')} ${t('secondDescription')}`;
   return {
@@ -14,7 +23,10 @@ export const generateMetadata = async (): Promise<Metadata> => {
   };
 };
 
-export default async function HomePage() {
+export default async function HomePage({ params }: Props) {
+  const { locale } = await (params);
+  setRequestLocale(locale);
+
   const t = await getTranslations('home');
   return (
     <main className="page flex items-center justify-center gap-48 text-white px-40 py-28 pl-64">
