@@ -1,7 +1,5 @@
 import 'server-only';
 
-import { getLocale } from 'next-intl/server';
-
 import { prisma } from '@/lib/prisma/prisma';
 import { ensureAdmin } from '@/lib/auth/ensureAdmin';
 import type {
@@ -89,9 +87,8 @@ export type PublicPlanetSummary = Pick<PlanetData, 'id' | 'step'> & {
 // Public planet list
 export const getPublicPlanetList = async (
   category: PlanetCategory,
+  locale: SupportedLanguage,
 ): Promise<PublicPlanetSummary[]> => {
-  const locale = (await getLocale()) as SupportedLanguage;
-
   const planets = await prisma.planet
     .findMany({
       where: { category, status: 'published' },
