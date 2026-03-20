@@ -1,5 +1,7 @@
 import 'server-only';
 
+import { cacheLife, cacheTag } from 'next/cache';
+
 import { prisma } from '@/lib/prisma/prisma';
 import { ensureAdmin } from '@/lib/auth/ensureAdmin';
 import type {
@@ -89,6 +91,10 @@ export const getPublicPlanetList = async (
   category: PlanetCategory,
   locale: SupportedLanguage,
 ): Promise<PublicPlanetSummary[]> => {
+  'use cache';
+  cacheLife('max');
+  cacheTag(`planet-list-${category}`);
+
   const planets = await prisma.planet
     .findMany({
       where: { category, status: 'published' },
