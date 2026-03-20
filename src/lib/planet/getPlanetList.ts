@@ -58,6 +58,7 @@ export const getAdminPlanetList = async (
     id,
     step,
     status,
+    category,
     localized: localized.reduce(
       (acc, { lang, name, tags }) => {
         acc[lang] = { name, tags };
