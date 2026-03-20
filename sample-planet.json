@@ -129,21 +129,6 @@
           "task": "Begin by selecting the input element with the ID 'username-input'. Attach a 'keyup' event listener directly to this element. Inside your callback function, you need to verify if the user pressed the 'Enter' key by checking the `event.key` property. If the condition evaluates to true, retrieve the current string value of the input field, check if it is longer than 3 characters, and log a success message to the console containing the user's input."
         },
         {
-          "id": "content-en-6",
-          "type": "image",
-          "label": "Advanced Concepts",
-          "title": "Demystifying Event Flow: Bubbling and Capturing",
-          "description": "When an event occurs on a deeply nested element, it doesn't just trigger there. The browser routes the event through three distinct phases: the capturing phase (traveling down the DOM tree), the target phase (reaching the specific element), and finally the bubbling phase (traveling back up to the root).",
-          "image": {
-            "url": "",
-            "metadata": {
-              "width": 1024,
-              "height": 768
-            },
-            "alt": "Detailed architectural diagram illustrating the three phases of DOM event flow: the Capturing phase moving downwards, the Target phase at the element, and the Bubbling phase moving upwards."
-          }
-        },
-        {
           "id": "content-en-7",
           "type": "text",
           "title": {
@@ -275,21 +260,6 @@
           "label": "Təcrübə Tapşırığı",
           "title": "Tapşırıq 1: Klaviatura daxiletməsini tutun və yoxlayın",
           "task": "'username-input' ID-si olan input elementini seçərək başlayın. Bu elementə birbaşa 'keyup' hadisə izləyicisi əlavə edin. Geri çağırış funksiyanızın daxilində `event.key` xüsusiyyətini yoxlayaraq istifadəçinin 'Enter' düyməsini basıb-basmadığını yoxlamalısınız. Əgər şərt doğrudursa, input sahəsinin cari sətir dəyərini əldə edin, onun 3 simvoldan uzun olub-olmadığını yoxlayın və istifadəçinin daxiletməsini ehtiva edən uğur mesajını konsola yazdırın."
-        },
-        {
-          "id": "content-az-6",
-          "type": "image",
-          "label": "İrəli Səviyyə Konsepsiyalar",
-          "title": "Hadisə Axınının İzahı: Qabarma və Tutulma",
-          "description": "Dərin yerləşmiş bir elementdə hadisə baş verdikdə, o, sadəcə orada tetiklənmir. Brauzer hadisəni üç fərqli mərhələdən keçirir: tutulma mərhələsi (DOM ağacından aşağıya doğru hərəkət), hədəf mərhələsi (xüsusi elementə çatma) və nəhayət qabarma mərhələsi (kökə doğru yuxarı hərəkət).",
-          "image": {
-            "url": "",
-            "metadata": {
-              "width": 1024,
-              "height": 768
-            },
-            "alt": "DOM hadisə axınının üç mərhələsini göstərən ətraflı memarlıq diaqramı: Aşağıya doğru hərəkət edən Tutulma mərhələsi, elementdəki Hədəf mərhələsi və yuxarıya doğru hərəkət edən Qabarma mərhələsi."
-          }
         },
         {
           "id": "content-az-7",
