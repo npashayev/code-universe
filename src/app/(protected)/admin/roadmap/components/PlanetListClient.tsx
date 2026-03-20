@@ -1,10 +1,13 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useImmer } from 'use-immer';
 import type { DragEndEvent } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 
-import type { ExtendedStatusOption, LanguageOption } from '@/types/reactSelectOptions';
+import type {
+  ExtendedStatusOption,
+  LanguageOption,
+} from '@/types/reactSelectOptions';
 import {
   extendedStatusOptions,
   languageOptions,
@@ -29,11 +32,17 @@ const PlanetListClient = ({ data }: Props) => {
     languageOptions[0] as LanguageOption,
   );
 
-  const [status, setStatus] = useState(extendedStatusOptions[0] as ExtendedStatusOption);
+  const [status, setStatus] = useState(
+    extendedStatusOptions[0] as ExtendedStatusOption,
+  );
 
   const [searchQuery, setSearchQuery] = useState('');
 
   const locale = currentLanguage.value;
+
+  useEffect(() => {
+    setOrderedPlanets(data.planets);
+  }, [data, setOrderedPlanets]);
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;

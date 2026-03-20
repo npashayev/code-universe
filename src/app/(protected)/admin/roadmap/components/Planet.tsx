@@ -3,10 +3,11 @@ import type { Updater } from 'use-immer';
 
 import type { SupportedLanguage } from '@/types/planet';
 import { cn } from '@/lib/utils/cn';
-import DeletePlanetButton from '@/components/admin/ui/DeletePlanetButton';
 import UpdateLink from '@/components/admin/ui/UpdateLink';
 import type { AdminPlanetSummary } from '@/lib/planet/getPlanetList';
 import { StatusUpdateSelector } from '@/components/admin/Selectors';
+
+import DeletePlanetButtonClient from './DeletePlanetButtonClient';
 
 interface Props {
   locale: SupportedLanguage;
@@ -71,7 +72,7 @@ const Planet = ({ planet, setOrderedPlanets, locale }: Props) => {
         />
         <div className="flex items-center gap-1">
           <UpdateLink href={`/admin/planet/update/${planet.id}`} />
-          <DeletePlanetButton planetId={planet.id} />
+          <DeletePlanetButtonClient planetId={planet.id} />
         </div>
       </div>
     </div>
