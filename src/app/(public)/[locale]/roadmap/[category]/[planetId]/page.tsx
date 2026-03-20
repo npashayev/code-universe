@@ -1,6 +1,5 @@
 import { cacheLife, cacheTag } from 'next/cache';
 import { notFound } from 'next/navigation';
-import { setRequestLocale } from 'next-intl/server';
 
 import { getPlanet } from '@/lib/planet/getPlanet';
 import { isPlanetCategory } from '@/lib/utils/isPlanetCategory';
@@ -25,21 +24,28 @@ export const generateMetadata = async ({ params }: Props) => {
   cacheLife('max');
   cacheTag(`planet-${planetId}`);
   if (!isPlanetCategory(category)) notFound();
-  const planet = await getPlanet(planetId, category, locale as SupportedLanguage);
+  const planet = await getPlanet(
+    planetId,
+    category,
+    locale as SupportedLanguage,
+  );
 
   return {
     title: planet.localized.name,
-    description: planet.localized.description
+    description: planet.localized.description,
   };
 };
 
 export default async function PlanetPage({ params }: Props) {
   const { planetId, category, locale } = await params;
-  setRequestLocale(locale);
 
   if (!isPlanetCategory(category)) notFound();
 
-  const planet = await getPlanet(planetId, category, locale as SupportedLanguage);
+  const planet = await getPlanet(
+    planetId,
+    category,
+    locale as SupportedLanguage,
+  );
 
   return (
     <>

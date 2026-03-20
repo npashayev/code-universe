@@ -1,6 +1,5 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
 import z from 'zod';
 
 import { ensureAdmin } from '@/lib/auth/ensureAdmin';
@@ -48,8 +47,6 @@ export const updatePlanetList = async ({
         }),
       ),
     );
-
-    revalidatePath(`/admin/roadmap?category=${category}`);
   } catch (err) {
     console.error('[updatePlanetList] Database error:', err);
     throw new Error('Failed to update planet list. Please try again.');
