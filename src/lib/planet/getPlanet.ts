@@ -39,7 +39,7 @@ export const getPlanet = cache(
 
     const planet = await prisma.planet
       .findUnique({
-        where: { id, category },
+        where: { id, category, status: 'published' },
         include: {
           localized: {
             where: { lang: locale },
