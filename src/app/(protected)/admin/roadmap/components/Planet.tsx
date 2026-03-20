@@ -72,7 +72,10 @@ const Planet = ({ planet, setOrderedPlanets, locale }: Props) => {
         />
         <div className="flex items-center gap-1">
           <UpdateLink href={`/admin/planet/update/${planet.id}`} />
-          <DeletePlanetButtonClient planetId={planet.id} />
+          <DeletePlanetButtonClient
+            planetId={planet.id}
+            category={planet.category}
+          />
         </div>
       </div>
     </div>

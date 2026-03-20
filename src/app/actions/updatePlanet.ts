@@ -1,4 +1,6 @@
 'use server';
+import { updateTag } from 'next/cache';
+
 import { ensureAdmin } from '@/lib/auth/ensureAdmin';
 import { SUPPORTED_LANGS } from '@/lib/constants/planet';
 import { prisma } from '@/lib/prisma/prisma';
@@ -39,7 +41,7 @@ export async function updatePlanet(data: unknown): Promise<UpdatePlanetResult> {
     };
   }
 
-  const { id, step, ...rest } = parsed.data;
+  const { id, step, category, ...rest } = parsed.data;
 
   let urlsToDelete: string[] = [];
 
@@ -95,7 +97,7 @@ export async function updatePlanet(data: unknown): Promise<UpdatePlanetResult> {
       await tx.planet.update({
         where: { id },
         data: {
-          category: rest.category as PlanetCategory,
+          category: category as PlanetCategory,
           status: rest.status as PlanetStatus,
           step,
           image: rest.image as LocalizedImage,
@@ -120,6 +122,9 @@ export async function updatePlanet(data: unknown): Promise<UpdatePlanetResult> {
         })),
       });
     });
+
+    updateTag(`planet-${id}`);
+    updateTag(`planet-list-${category}`);
   } catch (err) {
     console.error('[updatePlanet] Database error:', err);
     return {

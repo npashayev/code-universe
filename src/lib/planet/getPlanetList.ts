@@ -19,7 +19,10 @@ import { handlePrismaError } from '../utils/handlePrismaError';
 
 export type LocalizedPlanetSummary = Pick<LocalizedPlanetData, 'name' | 'tags'>;
 
-export type AdminPlanetSummary = Pick<PlanetData, 'id' | 'step' | 'status'> & {
+export type AdminPlanetSummary = Pick<
+  PlanetData,
+  'id' | 'step' | 'status' | 'category'
+> & {
   localized: Record<SupportedLanguage, LocalizedPlanetSummary>;
 };
 

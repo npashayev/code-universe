@@ -9,7 +9,7 @@ interface Props {
 
 const AddPlanetLink = ({ category = 'html' }: Props) => (
   <Link
-    href={`/admin/planet/add?category=${category}`}
+    href={`/admin/planet/add?initialCategory=${category}`}
     className="header-button bg-orange-500 hover:bg-orange-600"
     target="_blank"
     rel="noreferrer"

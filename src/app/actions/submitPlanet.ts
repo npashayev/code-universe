@@ -1,4 +1,6 @@
 'use server';
+import { updateTag } from 'next/cache';
+
 import { ensureAdmin } from '@/lib/auth/ensureAdmin';
 import { prisma } from '@/lib/prisma/prisma';
 import { createPlanetDataSchema } from '@/lib/validation/planetDataSchema';
@@ -67,6 +69,8 @@ export async function submitPlanet(data: unknown): Promise<SubmitPlanetResult> {
     });
 
     planetId = result.id;
+
+    updateTag(`planet-list-${result.category}`);
   } catch (err) {
     console.error('[submitPlanet] Database error:', err);
     return {

@@ -1,6 +1,7 @@
 'use server';
 
 import z from 'zod';
+import { updateTag } from 'next/cache';
 
 import { ensureAdmin } from '@/lib/auth/ensureAdmin';
 import type { AdminPlanetSummary } from '@/lib/planet/getPlanetList';
@@ -47,6 +48,9 @@ export const updatePlanetList = async ({
         }),
       ),
     );
+
+    planetList.forEach((planet) => updateTag(`planet-${planet.id}`));
+    updateTag(`planet-list-${category}`);
   } catch (err) {
     console.error('[updatePlanetList] Database error:', err);
     throw new Error('Failed to update planet list. Please try again.');

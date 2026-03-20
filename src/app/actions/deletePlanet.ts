@@ -1,11 +1,20 @@
 'use server';
+import { updateTag } from 'next/cache';
 
 import { ensureAdmin } from '@/lib/auth/ensureAdmin';
 import { prisma } from '@/lib/prisma/prisma';
 import { deleteR2Objects } from '@/lib/r2/deleteR2Objects';
-import type { PlanetContent } from '@/types/planet';
+import type { PlanetCategory, PlanetContent } from '@/types/planet';
 
-export const deletePlanet = async (planetId: string) => {
+export interface DeletePlanetPayload {
+  planetId: string;
+  category: PlanetCategory;
+}
+
+export const deletePlanet = async ({
+  planetId,
+  category,
+}: DeletePlanetPayload) => {
   await ensureAdmin();
 
   if (!planetId) {
@@ -53,6 +62,9 @@ export const deletePlanet = async (planetId: string) => {
     await prisma.planet.delete({
       where: { id: planetId },
     });
+
+    updateTag(`planet-${planetId}`);
+    updateTag(`planet-list-${category}`);
   } catch (err) {
     console.error('[deletePlanet] Database error:', err);
     throw new Error('Failed to delete planet. Please try again.');

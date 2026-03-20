@@ -1,8 +1,10 @@
 import { useState, type Dispatch, type SetStateAction } from 'react';
-import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 
-import type { CreatePlanetData, PendingContentImageEntry } from '@/types/planet';
+import type {
+  CreatePlanetData,
+  PendingContentImageEntry,
+} from '@/types/planet';
 import type { BatchUploadItem } from '@/types/r2';
 import { useR2Upload } from '@/lib/hooks/admin/useR2Upload';
 import {
@@ -11,6 +13,7 @@ import {
 } from '@/lib/validation/planetDataSchema';
 import { submitPlanet } from '@/app/actions/submitPlanet';
 import { SUPPORTED_LANGS } from '@/lib/constants/planet';
+import { getInitialPlanetData } from '@/lib/utils/getInitialPlanetData';
 
 function getImageDimensions(
   file: File,
@@ -38,6 +41,7 @@ interface UseSubmitPlanetProps {
   setPendingContentImages: Dispatch<
     SetStateAction<Map<string, PendingContentImageEntry>>
   >;
+  setPlanetData: Dispatch<SetStateAction<CreatePlanetData>>;
 }
 
 export const useSubmitPlanet = ({
@@ -46,8 +50,9 @@ export const useSubmitPlanet = ({
   setPendingFiles,
   pendingContentImages,
   setPendingContentImages,
+  setPlanetData,
 }: UseSubmitPlanetProps) => {
-  const router = useRouter();
+  // const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { batchUpload, deleteFile, isUploading, progress } = useR2Upload();
 
@@ -197,9 +202,13 @@ export const useSubmitPlanet = ({
       prev.forEach(({ previewUrl }) => URL.revokeObjectURL(previewUrl));
       return new Map();
     });
-    router.push(
-      `/roadmap/${mergedResult.data.category}/${submitResult.planetId}`,
-    );
+    setPlanetData(getInitialPlanetData(planetData.category));
+
+    // if (mergedResult.data.status === 'published') {
+    //   router.push(
+    //     `/roadmap/${mergedResult.data.category}/${submitResult.planetId}`,
+    //   );
+    // }
   };
 
   return { handleSubmit, isSubmitting, isUploading, progress };

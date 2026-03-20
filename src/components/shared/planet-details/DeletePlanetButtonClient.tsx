@@ -14,6 +14,7 @@ const DeletePlanetButtonClient = ({ planetId, category }: Props) => {
   return (
     <DeletePlanetButton
       planetId={planetId}
+      category={category}
       onSuccess={() => router.push(`/roadmap/${category}`)}
     />
   );
