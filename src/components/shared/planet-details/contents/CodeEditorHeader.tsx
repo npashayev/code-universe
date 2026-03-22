@@ -9,7 +9,7 @@ interface Props {
   editMode: boolean;
   setEditMode: Dispatch<SetStateAction<boolean>>;
   lightMode: boolean;
-  setLightMode: Dispatch<SetStateAction<boolean>>;
+  toggleLightMode: () => void;
   language: ProgrammingLanguage;
 }
 
@@ -17,7 +17,7 @@ const CodeEditorHeader = ({
   // editMode,
   // setEditMode,
   lightMode,
-  setLightMode,
+  toggleLightMode,
   language,
 }: Props) => {
   return (
@@ -54,7 +54,7 @@ const CodeEditorHeader = ({
         </button> */}
 
         <button
-          onClick={() => setLightMode((p) => !p)}
+          onClick={toggleLightMode}
           className={cn(
             'p-2 rounded-full border transition-all flex items-center justify-center',
             lightMode

@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import CodePreview from '@/components/shared/planet-details/CodePreview';
 import { cn } from '@/lib/utils/cn';
 import type { CodeContent } from '@/types/planet';
+import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
 
 import CodeEditorHeader from './CodeEditorHeader';
 
@@ -23,7 +24,10 @@ interface Props {
 
 const CodeBlock = ({ content }: Props) => {
   const [editMode, setEditMode] = useState(false);
-  const [lightMode, setLightMode] = useState(false);
+  const [lightMode, setLightMode] = useLocalStorage('isCodeLight', false);
+
+  const toggleLightMode = () => setLightMode(!lightMode);
+
   const { title, code, description } = content;
   return (
     <div className="mt-6">
@@ -39,7 +43,7 @@ const CodeBlock = ({ content }: Props) => {
           editMode={editMode}
           setEditMode={setEditMode}
           lightMode={lightMode}
-          setLightMode={setLightMode}
+          toggleLightMode={toggleLightMode}
           language={code.language}
         />
         <div className="flex">
