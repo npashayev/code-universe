@@ -2,8 +2,6 @@ export const SUPPORTED_LANGS = ['az', 'en'] as const;
 export const PLANET_STATUS = ['draft', 'published'] as const;
 
 export const PLANET_CATEGORY = {
-  html: 'HTML',
-  css: 'CSS',
   javascript: 'Javascript',
 } as const;
 
