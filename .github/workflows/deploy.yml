@@ -1,0 +1,84 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - develop
+      - staging
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: Lint & Typecheck
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+  deploy:
+    name: Deploy to Vercel
+    needs: [ci]
+    runs-on: ubuntu-latest
+    environment:
+      ${{ github.ref_name == 'main' && 'production' || github.ref_name ==
+      'staging' && 'staging' || 'development' }}
+    env:
+      VERCEL_ENV: ${{ github.ref_name == 'main' && 'production' || 'preview' }}
+      VERCEL_ARGS: ${{ github.ref_name == 'main' && '--prod' || '' }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Pull Vercel environment info
+        run:
+          npx vercel pull --yes --environment=${{ env.VERCEL_ENV }} --token=${{
+          secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Build
+        run:
+          npx vercel build ${{ env.VERCEL_ARGS }} --token=${{
+          secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Deploy
+        run:
+          npx vercel deploy --prebuilt ${{ env.VERCEL_ARGS }} --token=${{
+          secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
