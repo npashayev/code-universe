@@ -37,14 +37,16 @@ const AddPlanetClient = ({ category }: Props) => {
     Map<string, { previewUrl: string; file: File }>
   >(new Map());
 
-  const { handleSubmit, isUploading, isSubmitting, progress } = useSubmitPlanet({
-    planetData,
-    pendingFiles,
-    setPendingFiles,
-    pendingContentImages,
-    setPendingContentImages,
-    setPlanetData,
-  });
+  const { handleSubmit, isUploading, isSubmitting, progress } = useSubmitPlanet(
+    {
+      planetData,
+      pendingFiles,
+      setPendingFiles,
+      pendingContentImages,
+      setPendingContentImages,
+      setPlanetData,
+    },
+  );
 
   useOrphanedImageCleanup(planetData, setPendingContentImages);
 
