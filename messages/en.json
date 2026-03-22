@@ -1,6 +1,7 @@
 {
   "common": {
-    "sections": "Sections"
+    "sections": "Sections",
+    "goBack": "Go back"
   },
   "home": {
     "title": "Explore the Universe of Code",
@@ -12,5 +13,12 @@
     "description": "Select what you want to learn",
     "launchMenu": "Launch menu",
     "home": "Home"
+  },
+  "planetDetails": {
+    "researchTopics": "Research Topics",
+    "resources": "Resources",
+    "questions": "Questions",
+    "previous": "Previous",
+    "next": "Next"
   }
 }

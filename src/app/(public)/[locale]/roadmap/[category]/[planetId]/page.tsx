@@ -1,5 +1,6 @@
 import { cacheLife, cacheTag } from 'next/cache';
 import { notFound } from 'next/navigation';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import { getPlanet } from '@/lib/planet/getPlanet';
 import { isPlanetCategory } from '@/lib/utils/isPlanetCategory';
@@ -38,7 +39,8 @@ export const generateMetadata = async ({ params }: Props) => {
 
 export default async function PlanetPage({ params }: Props) {
   const { planetId, category, locale } = await params;
-
+  setRequestLocale(locale);
+  const t = await getTranslations('common');
   if (!isPlanetCategory(category)) notFound();
 
   const planet = await getPlanet(
@@ -54,7 +56,7 @@ export default async function PlanetPage({ params }: Props) {
           className="px-3 py-1 rounded bg-slate-800 border border-white/10 hover:bg-slate-900"
           href={`/roadmap/${category}`}
         >
-          Go back
+          {t('goBack')}
         </Link>
 
         <PrivateComponent roles={['ADMIN']}>

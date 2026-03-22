@@ -1,6 +1,7 @@
 {
   "common": {
-    "sections": "Mövzular"
+    "sections": "Mövzular",
+    "goBack": "Geri qayıt"
   },
   "home": {
     "title": "Kod dünyasını kəşf edin",
@@ -12,5 +13,12 @@
     "description": "Öyrənmək istədiyiniz mövzunu seçin",
     "launchMenu": "Menyunu Aç",
     "home": "Əsas səhifə"
+  },
+  "planetDetails": {
+    "researchTopics": "Araşdırma Mövzuları",
+    "resources": "Resurslar",
+    "questions": "Suallar",
+    "previous": "Əvvəlki",
+    "next": "Növbəti"
   }
 }
