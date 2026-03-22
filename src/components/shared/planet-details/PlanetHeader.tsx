@@ -45,7 +45,7 @@ const PlanetHeader = ({ category, localizedData, image }: Props) => {
           )}
         </div>
       </div>
-      <p className="text-lg leading-relaxed text-slate-300">{description}</p>
+      <p className="text-lg leading-relaxed">{description}</p>
     </header>
   );
 };

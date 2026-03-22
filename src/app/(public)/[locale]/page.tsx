@@ -29,21 +29,21 @@ export default async function HomePage({ params }: Props) {
 
   const t = await getTranslations('home');
   return (
-    <main className="page flex items-center justify-center gap-48 text-white px-40 py-28 pl-64">
+    <main className="page flex items-center justify-center gap-48 max-[1680px]:gap-36 text-white pt-28 pb-18 pl-64 max-[1680px]:pl-48 pr-[max(9%,80px)]">
       <SolarSystem />
       <div>
         <div className="flex items-center justify-center gap-8">
           <Image
-            className="h-32 w-auto select-none"
+            className="h-24 w-auto select-none"
             src={galaxy}
             alt="galaxy icon"
             width={512}
             height={512}
           />
-          <h1 className="text-6xl leading-tight">{t('title')}</h1>
+          <h1 className="text-[clamp(40px,3vw,60px)] leading-tight">{t('title')}</h1>
         </div>
-        <p className="text-3xl mt-12">{t('firstDescription')}</p>
-        <p className="text-3xl mt-7">{t('secondDescription')}</p>
+        <p className="text-2xl mt-12">{t('firstDescription')}</p>
+        <p className="text-2xl mt-7">{t('secondDescription')}</p>
       </div>
       {/* <SplashCursor /> */}
     </main>
