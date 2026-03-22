@@ -36,7 +36,9 @@ export default function GlobalError({ error, reset }: GlobalErrorProps) {
 
         <p className="text-white/50 text-base md:text-lg mb-10 leading-relaxed">
           The application encountered an unexpected error.
-          {isDev ? " Check the details below for debugging." : " We've been notified and are looking into it."}
+          {isDev
+            ? ' Check the details below for debugging.'
+            : " We've been notified and are looking into it."}
         </p>
 
         {/* Error Detail Section */}

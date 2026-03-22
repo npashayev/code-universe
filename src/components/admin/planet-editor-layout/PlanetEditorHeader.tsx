@@ -2,7 +2,11 @@ import { Download, Upload } from 'lucide-react';
 import type { Updater } from 'use-immer';
 import { type Dispatch, type SetStateAction, useState } from 'react';
 
-import type { CreatePlanetData, PendingContentImageEntry, PlanetCategory } from '@/types/planet';
+import type {
+  CreatePlanetData,
+  PendingContentImageEntry,
+  PlanetCategory,
+} from '@/types/planet';
 import type { LanguageOption } from '@/types/reactSelectOptions';
 import DashboardLink from '@/components/admin/ui/DashboardLink';
 import { usePlanetJsonIO } from '@/lib/hooks/admin/usePlanetJsonIO';

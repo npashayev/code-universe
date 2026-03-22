@@ -5,14 +5,14 @@ import type {
   CodeContent,
   CreatePlanetData,
   PlanetCategory,
-  TextContent
+  TextContent,
 } from '@/types/planet';
 import type { UpdateContentFn } from '@/lib/hooks/admin/useLocalizedContent';
 import type {
   ContentTypeOption,
   ExtendedStatusOption,
   LanguageOption,
-  PendingImageOption
+  PendingImageOption,
 } from '@/types/reactSelectOptions';
 import type { AdminPlanetSummary } from '@/lib/planet/getPlanetList';
 

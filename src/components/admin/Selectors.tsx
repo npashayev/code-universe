@@ -124,9 +124,7 @@ export const CategorySelector = ({
 }: CategorySelectorProps) => (
   <Selector<CategoryOption>
     instanceId="category-select"
-    value={
-      categoryOptions.find((o) => o.value === category) ?? null
-    }
+    value={categoryOptions.find((o) => o.value === category) ?? null}
     options={categoryOptions}
     onChange={(option) => {
       if (!option) return;

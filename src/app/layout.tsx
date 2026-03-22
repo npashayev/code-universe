@@ -43,14 +43,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${nunito.className} antialiased`}>
         <NextAuthProvider>
-          <QueryProvider>
-            {children}
-          </QueryProvider>
+          <QueryProvider>{children}</QueryProvider>
         </NextAuthProvider>
-        <Toaster
-          position="top-center"
-          toastOptions={toastOptions}
-        />
+        <Toaster position="top-center" toastOptions={toastOptions} />
       </body>
     </html>
   );

@@ -1,5 +1,8 @@
 import { ChevronDown } from 'lucide-react';
-import Select, { type CSSObjectWithLabel, type SingleValue } from 'react-select';
+import Select, {
+  type CSSObjectWithLabel,
+  type SingleValue,
+} from 'react-select';
 import type { ReactNode } from 'react';
 
 import { getAdminPageSelectStyles } from '@/lib/utils/getAdminPageSelectStyles';

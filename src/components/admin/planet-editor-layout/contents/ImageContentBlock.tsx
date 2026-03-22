@@ -35,9 +35,9 @@ const ImageContentBlock = ({
   const selectedPendingOption: PendingImageOption | null =
     content.pendingImageId
       ? {
-        value: content.pendingImageId,
-        label: content.pendingImageId,
-      }
+          value: content.pendingImageId,
+          label: content.pendingImageId,
+        }
       : null;
 
   const imagePreviewUrl =

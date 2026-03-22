@@ -98,7 +98,8 @@ export const usePlanetJsonIO = ({
           }
 
           setPlanetData((draft) => {
-            draft.localized[locale] = result.data as typeof draft.localized[typeof locale];
+            draft.localized[locale] =
+              result.data as (typeof draft.localized)[typeof locale];
           });
         }
       } catch (err) {

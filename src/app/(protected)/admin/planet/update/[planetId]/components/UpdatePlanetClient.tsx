@@ -3,7 +3,10 @@
 import { useState } from 'react';
 import { useImmer } from 'use-immer';
 
-import type { CreatePlanetData, PendingContentImageEntry } from '@/types/planet';
+import type {
+  CreatePlanetData,
+  PendingContentImageEntry,
+} from '@/types/planet';
 import type { LanguageOption } from '@/types/reactSelectOptions';
 import { languageOptions } from '@/lib/constants/reactSelectOptions';
 import { PlanetEditorLayout } from '@/components/admin/planet-editor-layout/PlanetEditorLayout';

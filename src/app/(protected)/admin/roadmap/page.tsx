@@ -7,7 +7,6 @@ import { PLANET_CATEGORY } from '@/lib/constants/planet';
 
 import PlanetListClient from './components/PlanetListClient';
 
-
 interface Props {
   searchParams: Promise<{
     category?: string;
@@ -15,16 +14,18 @@ interface Props {
   }>;
 }
 
-export const generateMetadata = async ({ searchParams }: Props): Promise<Metadata> => {
+export const generateMetadata = async ({
+  searchParams,
+}: Props): Promise<Metadata> => {
   const { category = 'html' } = await searchParams;
   if (!isPlanetCategory(category)) {
     return {
-      title: 'Invalid Category'
+      title: 'Invalid Category',
     };
   }
 
   return {
-    title: `${PLANET_CATEGORY[category]} Roadmap`
+    title: `${PLANET_CATEGORY[category]} Roadmap`,
   };
 };
 

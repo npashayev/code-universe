@@ -11,7 +11,9 @@ interface Props {
 const LogoutButton = ({ className }: Props) => {
   return (
     <button
-      onClick={() => { void signOut({ callbackUrl: '/' }); }}
+      onClick={() => {
+        void signOut({ callbackUrl: '/' });
+      }}
       className={cn('nav-item', className)}
     >
       <LogOut size={14} />

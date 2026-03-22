@@ -4,7 +4,6 @@ import toast from 'react-hot-toast';
 import type { BatchUploadItem, UploadResult } from '@/types/r2';
 import { presignUpload, deleteUpload } from '@/app/actions/upload';
 
-
 export const useR2Upload = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);

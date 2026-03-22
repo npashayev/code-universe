@@ -36,7 +36,7 @@ const PlanetNavigation = async ({ category, prevId, nextId }: Props) => {
         </Link>
       ) : (
         <span className="bg-green-600 text-white px-5 py-2 rounded font-semibold opacity-30 cursor-not-allowed">
-          {t('next')}  ❯
+          {t('next')} ❯
         </span>
       )}
     </div>

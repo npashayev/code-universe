@@ -162,9 +162,10 @@ export const localizedPlanetDataSchema = z.object({
   contents: z.array(planetContentSchema),
 });
 
-export const preSubmitLocalizedPlanetDataSchema = localizedPlanetDataSchema.extend({
-  contents: z.array(preSubmitPlanetContentSchema),
-});
+export const preSubmitLocalizedPlanetDataSchema =
+  localizedPlanetDataSchema.extend({
+    contents: z.array(preSubmitPlanetContentSchema),
+  });
 
 // ---------- Planet data ----------
 

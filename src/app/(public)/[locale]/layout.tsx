@@ -5,9 +5,10 @@ import type { ReactNode } from 'react';
 import Navbar from '@/components/layout/navbar/Navbar';
 import { routing } from '@/lib/next-intl/routing';
 
-export const generateStaticParams = () => routing.locales.map(lang => ({
-  locale: lang
-}));
+export const generateStaticParams = () =>
+  routing.locales.map((lang) => ({
+    locale: lang,
+  }));
 
 export default async function PublicLayout({
   params,

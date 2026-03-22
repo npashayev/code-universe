@@ -7,7 +7,6 @@ import type {
 } from '@/types/planet';
 import { SUPPORTED_LANGS } from '@/lib/constants/planet';
 
-
 export const useOrphanedImageCleanup = (
   planetData: PlanetData | CreatePlanetData,
   setPendingContentImages: Dispatch<

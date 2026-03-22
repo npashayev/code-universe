@@ -10,12 +10,14 @@ interface Props {
   }>;
 }
 
-export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
+export const generateMetadata = async ({
+  params,
+}: Props): Promise<Metadata> => {
   const { planetId } = await params;
   const planet = await getPlanetForEdit(planetId);
 
   return {
-    title: `Update: ${planet.data.localized['en'].name}`
+    title: `Update: ${planet.data.localized['en'].name}`,
   };
 };
 

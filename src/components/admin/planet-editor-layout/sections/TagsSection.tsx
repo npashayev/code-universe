@@ -2,7 +2,11 @@ import { TagIcon } from 'lucide-react';
 import { useState } from 'react';
 import type { Updater } from 'use-immer';
 
-import type { CreatePlanetData, PlanetTag, SupportedLanguage } from '@/types/planet';
+import type {
+  CreatePlanetData,
+  PlanetTag,
+  SupportedLanguage,
+} from '@/types/planet';
 import { useLocalizedDragReorder } from '@/lib/hooks/admin/useLocalizedDragReorder';
 import SortableList from '@/components/admin/planet-editor-layout/SortableList';
 import { cn } from '@/lib/utils/cn';

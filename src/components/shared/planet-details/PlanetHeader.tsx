@@ -1,7 +1,11 @@
 import Image from 'next/image';
 
 import { PLANET_CATEGORY } from '@/lib/constants/planet';
-import type { ImageData, LocalizedPlanetData, PlanetCategory } from '@/types/planet';
+import type {
+  ImageData,
+  LocalizedPlanetData,
+  PlanetCategory,
+} from '@/types/planet';
 
 interface Props {
   category: PlanetCategory;

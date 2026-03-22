@@ -1,7 +1,10 @@
 import { type Dispatch, type SetStateAction, useState } from 'react';
 import toast from 'react-hot-toast';
 
-import type { CreatePlanetData, PendingContentImageEntry } from '@/types/planet';
+import type {
+  CreatePlanetData,
+  PendingContentImageEntry,
+} from '@/types/planet';
 import type { BatchUploadItem } from '@/types/r2';
 import { useR2Upload } from '@/lib/hooks/admin/useR2Upload';
 import {
@@ -9,7 +12,10 @@ import {
   createPlanetDataSchema,
 } from '@/lib/validation/planetDataSchema';
 import { SUPPORTED_LANGS } from '@/lib/constants/planet';
-import { type UpdatePlanetResult, updatePlanet } from '@/app/actions/updatePlanet';
+import {
+  type UpdatePlanetResult,
+  updatePlanet,
+} from '@/app/actions/updatePlanet';
 
 function getImageDimensions(
   file: File,

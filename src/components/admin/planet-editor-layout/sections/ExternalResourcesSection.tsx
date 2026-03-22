@@ -3,7 +3,11 @@ import type { Updater } from 'use-immer';
 import { BookOpen } from 'lucide-react';
 import Link from 'next/link';
 
-import type { CreatePlanetData, Resource, SupportedLanguage } from '@/types/planet';
+import type {
+  CreatePlanetData,
+  Resource,
+  SupportedLanguage,
+} from '@/types/planet';
 import { useLocalizedDragReorder } from '@/lib/hooks/admin/useLocalizedDragReorder';
 import SortableList from '@/components/admin/planet-editor-layout/SortableList';
 

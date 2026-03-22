@@ -3,11 +3,16 @@
 import type { Dispatch, SetStateAction } from 'react';
 import type { Updater } from 'use-immer';
 
-import type { CreatePlanetData, PendingContentImageEntry, SupportedLanguage } from '@/types/planet';
+import type {
+  CreatePlanetData,
+  PendingContentImageEntry,
+  SupportedLanguage,
+} from '@/types/planet';
 import type { LanguageOption } from '@/types/reactSelectOptions';
 
 import {
-  type PlanetEditorHeaderProps, PlanetEditorHeader
+  type PlanetEditorHeaderProps,
+  PlanetEditorHeader,
 } from './PlanetEditorHeader';
 import BasicConfigurationSection from './sections/BasicConfigurationSection';
 import TagsSection from './sections/TagsSection';

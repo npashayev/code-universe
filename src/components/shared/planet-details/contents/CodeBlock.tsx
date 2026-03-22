@@ -10,7 +10,6 @@ import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
 
 import CodeEditorHeader from './CodeEditorHeader';
 
-
 const CodeEditor = dynamic(
   () => import('@/components/shared/planet-details/CodeEditor'),
   {

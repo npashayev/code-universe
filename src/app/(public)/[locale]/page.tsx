@@ -9,22 +9,24 @@ import SolarSystem from './components/SolarSystem';
 interface Props {
   params: Promise<{
     locale: string;
-  }>
+  }>;
 }
 
-export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
-  const { locale } = await (params);
+export const generateMetadata = async ({
+  params,
+}: Props): Promise<Metadata> => {
+  const { locale } = await params;
   setRequestLocale(locale);
 
   const t = await getTranslations('home');
   const description = `${t('firstDescription')} ${t('secondDescription')}`;
   return {
-    description
+    description,
   };
 };
 
 export default async function HomePage({ params }: Props) {
-  const { locale } = await (params);
+  const { locale } = await params;
   setRequestLocale(locale);
 
   const t = await getTranslations('home');
@@ -40,7 +42,9 @@ export default async function HomePage({ params }: Props) {
             width={512}
             height={512}
           />
-          <h1 className="text-[clamp(40px,3vw,60px)] leading-tight">{t('title')}</h1>
+          <h1 className="text-[clamp(40px,3vw,60px)] leading-tight">
+            {t('title')}
+          </h1>
         </div>
         <p className="text-2xl mt-12">{t('firstDescription')}</p>
         <p className="text-2xl mt-7">{t('secondDescription')}</p>

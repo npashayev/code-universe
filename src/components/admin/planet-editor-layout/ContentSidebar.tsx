@@ -21,7 +21,6 @@ import SectionHeader from './shared/SectionHeader';
 import AddButton from './shared/AddButton';
 import ListElement from './shared/ListElement';
 
-
 interface Props {
   contents: PlanetContent[];
   setPlanetData: Updater<CreatePlanetData>;

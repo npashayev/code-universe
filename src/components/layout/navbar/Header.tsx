@@ -10,7 +10,6 @@ import PrivateComponent from '../../admin/PrivateComponent';
 
 import LanguageSelector from './LanguageSelector';
 
-
 interface Props {
   onOpen: () => void;
 }
@@ -35,7 +34,7 @@ const Header = ({ onOpen }: Props) => {
       </button>
 
       <div className="ml-auto flex items-center gap-2">
-        <Link href="/" className='nav-item'>
+        <Link href="/" className="nav-item">
           <Home size={16} />
           <span className="nav-item-text">{t('home')}</span>
         </Link>

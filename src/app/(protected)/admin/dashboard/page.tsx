@@ -6,7 +6,7 @@ import Header from './components/Header';
 import CategoryStatsList from './components/CategoryStatsList';
 
 export const metadata: Metadata = {
-  title: 'Dashboard'
+  title: 'Dashboard',
 };
 
 export default async function DashboardPage() {
