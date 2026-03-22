@@ -1,0 +1,24 @@
+{
+  "common": {
+    "sections": "Sections",
+    "goBack": "Go back"
+  },
+  "home": {
+    "title": "Explore the Universe of Code",
+    "firstDescription": "Move beyond tutorials: implement industry-standard solutions within a professional environment.",
+    "secondDescription": "Learn the foundational principles of programming through industry standard tasks and practical examples built for the modern workplace."
+  },
+  "navbar": {
+    "menu": "Menu",
+    "description": "Select what you want to learn",
+    "launchMenu": "Launch menu",
+    "home": "Home"
+  },
+  "planetDetails": {
+    "researchTopics": "Research Topics",
+    "resources": "Resources",
+    "questions": "Questions",
+    "previous": "Previous",
+    "next": "Next"
+  }
+}
