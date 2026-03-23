@@ -28,7 +28,7 @@ export async function proxy(req: NextRequest) {
     }
     if (token.role !== 'ADMIN') {
       const url = req.nextUrl.clone();
-      url.pathname = '/unauthorized';
+      url.pathname = '/';
       return NextResponse.redirect(url);
     }
     return NextResponse.next();
