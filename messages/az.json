@@ -1,7 +1,23 @@
 {
   "common": {
     "sections": "Mövzular",
-    "goBack": "Geri qayıt"
+    "goBack": "Geri qayıt",
+    "home": "Əsas səhifə"
+  },
+  "notFound": {
+    "notFoundMessage": "Səhifə mövcud deyil. Ola bilsin ki, o, köçürülüb və ya heç vaxt mövcud olmayıb.",
+    "categoryNotFound": "Axtardığınız kateqoriya mövcud deyil.",
+    "planetNotFound": "Axtardığınız planet mövcud deyil və ya silinib."
+  },
+  "error": {
+    "systemError": "Sistem xətası",
+    "somethingWentWrong": "Təəssüf ki, problem yarandı",
+    "unexpectedError": "Tətbiqdə gözlənilməz xəta baş verdi",
+    "checkDetails": "Xətanı araşdırmaq üçün aşağıdakı detalları yoxlayın.",
+    "notified": "Bu barədə bizə məlumat verildi və hazırda problemi araşdırırıq.",
+    "runtimeException": "İcra zamanı xəta (Runtime Exception)",
+    "referenceCode": "İstinad kodu",
+    "tryAgain": "Yenidən cəhd edin"
   },
   "home": {
     "title": "Kod dünyasını kəşf edin",
@@ -11,8 +27,7 @@
   "navbar": {
     "menu": "Menyu",
     "description": "Öyrənmək istədiyiniz mövzunu seçin",
-    "launchMenu": "Menyunu Aç",
-    "home": "Əsas səhifə"
+    "launchMenu": "Menyunu Aç"
   },
   "planetDetails": {
     "researchTopics": "Araşdırma Mövzuları",

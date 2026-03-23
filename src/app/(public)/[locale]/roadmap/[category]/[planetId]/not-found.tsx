@@ -1,7 +1,10 @@
+import { getTranslations } from 'next-intl/server';
+
 import NotFoundContent from '@/components/shared/NotFoundContent';
 
-export default function NotFound() {
+export default async function NotFound() {
+  const t = await getTranslations('notFound');
   return (
-    <NotFoundContent text="The planet you're looking for doesn't exist or has been removed." />
+    <NotFoundContent text={t('planetNotFound')} />
   );
 }
