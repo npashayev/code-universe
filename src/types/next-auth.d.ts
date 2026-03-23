@@ -22,4 +22,4 @@ declare module 'next-auth/jwt' {
   }
 }
 
-export type UserRole = 'ADMIN';
+export type UserRole = 'ADMIN' | 'USER';

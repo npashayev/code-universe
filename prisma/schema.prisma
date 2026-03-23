@@ -28,6 +28,7 @@ enum SupportedLanguage {
 }
 
 enum UserRole {
+  USER
   ADMIN
 }
 
