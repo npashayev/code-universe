@@ -31,7 +31,7 @@ export default async function HomePage({ params }: Props) {
 
   const t = await getTranslations('home');
   return (
-    <main className="page flex items-center justify-center gap-48 max-[1680px]:gap-36 text-white pt-28 pb-18 pl-64 max-[1680px]:pl-48 pr-[max(9%,80px)]">
+    <main className="page flex items-center justify-center gap-48 max-[1680px]:gap-36 text-white pt-24 pb-14 pl-64 max-[1680px]:pl-48 pr-[max(9%,80px)]">
       <SolarSystem />
       <div>
         <div className="flex items-center justify-center gap-8">
