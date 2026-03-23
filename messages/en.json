@@ -1,7 +1,23 @@
 {
   "common": {
     "sections": "Sections",
-    "goBack": "Go back"
+    "goBack": "Go back",
+    "home": "Home"
+  },
+  "notFound": {
+    "notFoundMessage": "The page doesn't exist. It may have been moved or never existed.",
+    "categoryNotFound": "The category you're looking for doesn't exist.",
+    "planetNotFound": "The planet you're looking for doesn't exist or has been removed."
+  },
+  "error": {
+    "systemError": "System Error",
+    "somethingWentWrong": "Something went wrong",
+    "unexpectedError": "The application encountered an unexpected error",
+    "checkDetails": " Check the details below for debugging.",
+    "notified": " We've been notified and are looking into it.",
+    "runtimeException": "Runtime Exception",
+    "referenceCode": "Reference Code",
+    "tryAgain": "Try again"
   },
   "home": {
     "title": "Explore the Universe of Code",
@@ -11,8 +27,7 @@
   "navbar": {
     "menu": "Menu",
     "description": "Select what you want to learn",
-    "launchMenu": "Launch menu",
-    "home": "Home"
+    "launchMenu": "Launch menu"
   },
   "planetDetails": {
     "researchTopics": "Research Topics",

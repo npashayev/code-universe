@@ -18,6 +18,7 @@ const Header = ({ onOpen }: Props) => {
   // const [isDarkMode, setIsDarkMode] = useState(false);
 
   const t = useTranslations('navbar');
+  const c = useTranslations('common');
   return (
     <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-night/40 backdrop-blur-xl border border-white/10 h-14 rounded-2xl flex items-center px-6 shadow-2xl gap-30 min-w-2xl">
       <button
@@ -36,7 +37,7 @@ const Header = ({ onOpen }: Props) => {
       <div className="ml-auto flex items-center gap-2">
         <Link href="/" className="nav-item">
           <Home size={16} />
-          <span className="nav-item-text">{t('home')}</span>
+          <span className="nav-item-text">{c('home')}</span>
         </Link>
 
         <PrivateComponent roles={['ADMIN']}>

@@ -6,6 +6,7 @@ import * as readline from 'readline';
 import bcrypt from 'bcrypt';
 
 import { prisma } from '@/lib/prisma/prisma';
+import { type UserRole } from '@/types/next-auth';
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -19,7 +20,7 @@ function question(query: string): Promise<string> {
 async function main(): Promise<void> {
   try {
     const action = await question(
-      "Type 'create' to create a new admin or 'update' to update a password: ",
+      "Type 'create' to create or 'update' to update a user: ",
     );
 
     if (action === 'create') {
@@ -56,7 +57,6 @@ async function main(): Promise<void> {
       });
     } else if (action === 'update') {
       const email = await question('Email of user to update: ');
-      const newPassword = await question('New Password: ');
 
       const user = await prisma.user.findUnique({ where: { email } });
       if (!user) {
@@ -65,15 +65,42 @@ async function main(): Promise<void> {
         process.exit(1);
       }
 
-      const hashedPassword = await bcrypt.hash(newPassword, 10);
+      const updateType = await question(
+        "Type 'password' to update password or 'role' to update role: ",
+      );
 
-      await prisma.user.update({
-        where: { email },
-        data: { hashedPassword },
-      });
+      if (updateType === 'password') {
+        const newPassword = await question('New Password: ');
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-      // eslint-disable-next-line no-console
-      console.log(`Password updated successfully for ${email}.`);
+        await prisma.user.update({
+          where: { email },
+          data: { hashedPassword },
+        });
+
+        // eslint-disable-next-line no-console
+        console.log(`Password updated successfully for ${email}.`);
+      } else if (updateType === 'role') {
+        const newRole = await question('New Role (ADMIN/USER): ');
+
+        if (!['ADMIN', 'USER'].includes(newRole)) {
+          console.error('Invalid role. Must be ADMIN or USER.');
+          rl.close();
+          process.exit(1);
+        }
+
+        await prisma.user.update({
+          where: { email },
+          data: { role: newRole as UserRole },
+        });
+
+        // eslint-disable-next-line no-console
+        console.log(`Role updated successfully for ${email} to ${newRole}.`);
+      } else {
+        console.error("Invalid option. Type 'password' or 'role'.");
+        rl.close();
+        process.exit(1);
+      }
     } else {
       console.error("Invalid action. Type 'create' or 'update'.");
       rl.close();
