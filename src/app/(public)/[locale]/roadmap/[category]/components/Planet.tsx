@@ -8,9 +8,10 @@ import styles from './Planet.module.scss';
 interface Props {
   category: string;
   planet: PublicPlanetSummary;
+  index: number;
 }
 
-const Planet = ({ category, planet }: Props) => {
+const Planet = ({ category, planet, index }: Props) => {
   const { tags } = planet.localized;
 
   return (
@@ -20,6 +21,8 @@ const Planet = ({ category, planet }: Props) => {
           src={planet.image.url}
           alt={planet.image.alt}
           fill
+          priority={index < 2}
+          sizes="19rem"
           className={styles.planet}
         />
       </Link>

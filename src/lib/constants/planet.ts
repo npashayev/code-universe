@@ -4,8 +4,6 @@ export const PLANET_STATUS = ['draft', 'published'] as const;
 export const PLANET_CATEGORY = {
   common: 'Common',
   html: 'HTML',
-  css: 'CSS',
-  javascript: 'Javascript',
 } as const;
 
 export const CONTENT_TYPE = {

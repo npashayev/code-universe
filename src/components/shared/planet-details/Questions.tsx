@@ -1,17 +1,14 @@
-import { getTranslations } from 'next-intl/server';
-
 import type { Question } from '@/types/planet';
 
 interface Props {
   questions: Question[];
+  labels: Record<string, string>
 }
 
-const Questions = async ({ questions }: Props) => {
-  const t = await getTranslations('planetDetails');
-
+const Questions = ({ questions, labels }: Props) => {
   return (
     <section>
-      <h2 className="heading-secondary">{t('questions')}</h2>
+      <h2 className="heading-secondary">{labels.questions}</h2>
       <ol className="list-decimal list-indented">
         {questions.map((qn, idx) => (
           <li key={qn.id} className="flex gap-3 leading-relaxed">

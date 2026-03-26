@@ -60,8 +60,8 @@ export default async function MapPage({ params }: Props) {
         <div className={styles.stars3} />
       </div>
       <div className={styles.planetsCnr}>
-        {planets.map((planet) => (
-          <Planet key={planet.id} category={category} planet={planet} />
+        {planets.map((planet, index) => (
+          <Planet key={planet.id} category={category} planet={planet} index={index} />
         ))}
       </div>
       <MapSidebar planets={planets} />
