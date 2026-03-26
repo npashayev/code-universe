@@ -37,7 +37,7 @@ export const navLinks: NavLinkGroup[] = [
         label: 'HTML',
         icon: html,
         path: '/roadmap/html',
-        isActive: false,
+        isActive: true,
       },
       {
         label: 'CSS',
@@ -49,7 +49,7 @@ export const navLinks: NavLinkGroup[] = [
         label: 'JavaScript',
         icon: js,
         path: '/roadmap/javascript',
-        isActive: true,
+        isActive: false,
       },
       {
         label: 'React',
