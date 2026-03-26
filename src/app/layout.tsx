@@ -5,6 +5,7 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { Toaster } from 'react-hot-toast';
 import type { ReactNode } from 'react';
+import { Analytics } from '@vercel/analytics/next';
 
 import NextAuthProvider from '@/components/providers/NextAuthProvider';
 import QueryProvider from '@/components/providers/QueryProvider';
@@ -43,7 +44,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${nunito.className} antialiased`}>
         <NextAuthProvider>
-          <QueryProvider>{children}</QueryProvider>
+          <QueryProvider>
+            {children}
+            <Analytics />
+          </QueryProvider>
         </NextAuthProvider>
         <Toaster position="top-center" toastOptions={toastOptions} />
       </body>
