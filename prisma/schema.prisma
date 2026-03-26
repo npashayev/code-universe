@@ -18,8 +18,6 @@ enum PlanetStatus {
 enum PlanetCategory {
   common
   html
-  css
-  javascript
 }
 
 enum SupportedLanguage {
