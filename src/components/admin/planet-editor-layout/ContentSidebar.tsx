@@ -103,7 +103,7 @@ const ContentSidebar = ({ contents, setPlanetData, locale }: Props) => {
           />
         </div>
       ) : (
-        <div className="mt-8 py-10 flex flex-col items-center justify-center text-slate-600 border border-dashed border-white/18 rounded-2xl">
+        <div className="mt-8 py-10 mx-6 flex flex-col items-center justify-center text-slate-600 border border-dashed border-white/18 rounded-2xl">
           <Database size={24} strokeWidth={1} className="mb-2" />
           <span className="text-[10px] uppercase tracking-widest font-black text-center">
             No modules in
