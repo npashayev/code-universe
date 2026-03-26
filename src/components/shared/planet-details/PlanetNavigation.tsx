@@ -1,5 +1,3 @@
-import { getTranslations } from 'next-intl/server';
-
 import { Link } from '@/lib/next-intl/navigation';
 import type { PlanetCategory } from '@/types/planet';
 
@@ -7,11 +5,10 @@ interface Props {
   category: PlanetCategory;
   prevId: string | null;
   nextId: string | null;
+  labels: Record<string, string>
 }
 
-const PlanetNavigation = async ({ category, prevId, nextId }: Props) => {
-  const t = await getTranslations('planetDetails');
-
+const PlanetNavigation = ({ category, prevId, nextId, labels }: Props) => {
   return (
     <div className="flex justify-between gap-10 mt-20 px-[20%]">
       {prevId ? (
@@ -19,11 +16,11 @@ const PlanetNavigation = async ({ category, prevId, nextId }: Props) => {
           href={`/roadmap/${category}/${prevId}`}
           className="bg-green-600 text-white px-5 py-2 rounded font-semibold hover:bg-green-700 transition-colors"
         >
-          ❮ {t('previous')}
+          ❮ {labels.previous}
         </Link>
       ) : (
         <span className="bg-green-600 text-white px-5 py-2 rounded font-semibold opacity-30 cursor-not-allowed">
-          ❮ {t('previous')}
+          ❮ {labels.previous}
         </span>
       )}
 
@@ -32,11 +29,11 @@ const PlanetNavigation = async ({ category, prevId, nextId }: Props) => {
           href={`/roadmap/${category}/${nextId}`}
           className="bg-green-600 text-white px-5 py-2 rounded font-semibold hover:bg-green-700 transition-colors"
         >
-          {t('next')} ❯
+          {labels.next} ❯
         </Link>
       ) : (
         <span className="bg-green-600 text-white px-5 py-2 rounded font-semibold opacity-30 cursor-not-allowed">
-          {t('next')} ❯
+          {labels.next} ❯
         </span>
       )}
     </div>

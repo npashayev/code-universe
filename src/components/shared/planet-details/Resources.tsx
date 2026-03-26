@@ -1,19 +1,17 @@
 import { ExternalLink } from 'lucide-react';
 import Link from 'next/link';
-import { getTranslations } from 'next-intl/server';
 
 import type { Resource } from '@/types/planet';
 
 interface Props {
   resources: Resource[];
+  labels: Record<string, string>
 }
 
-const Resources = async ({ resources }: Props) => {
-  const t = await getTranslations('planetDetails');
-
+const Resources = ({ resources, labels }: Props) => {
   return (
     <section>
-      <h2 className="heading-secondary">{t('resources')}</h2>
+      <h2 className="heading-secondary">{labels.resources}</h2>
       <ul className="list-none flex gap-4 flex-wrap">
         {resources.map((res) => (
           <li key={res.id} className="flex gap-3">

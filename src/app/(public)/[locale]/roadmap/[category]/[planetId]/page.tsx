@@ -40,8 +40,20 @@ export const generateMetadata = async ({ params }: Props) => {
 export default async function PlanetPage({ params }: Props) {
   const { planetId, category, locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations('common');
+
   if (!isPlanetCategory(category)) notFound();
+
+  const c = await getTranslations('common');
+  const t = await getTranslations('planetDetails');
+
+  const planetDetailsLabels = {
+    researchTopics: t('researchTopics'),
+    resources: t('resources'),
+    questions: t('questions'),
+    previous: t('previous'),
+    next: t('next'),
+  };
+
 
   const planet = await getPlanet(
     planetId,
@@ -56,7 +68,7 @@ export default async function PlanetPage({ params }: Props) {
           className="px-3 py-1 rounded bg-slate-800 border border-white/10 hover:bg-slate-900"
           href={`/roadmap/${category}`}
         >
-          {t('goBack')}
+          {c('goBack')}
         </Link>
 
         <PrivateComponent roles={['ADMIN']}>
@@ -70,7 +82,7 @@ export default async function PlanetPage({ params }: Props) {
         </PrivateComponent>
       </div>
 
-      <PlanetDetails planet={planet} />
+      <PlanetDetails planet={planet} labels={planetDetailsLabels} />
     </>
   );
 }

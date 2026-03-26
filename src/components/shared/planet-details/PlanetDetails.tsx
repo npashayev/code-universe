@@ -4,14 +4,15 @@ import PlanetHeader from './PlanetHeader';
 import ResearchTopics from './ResearchTopics';
 import Resources from './Resources';
 import ContentList from './ContentList';
-import Questions from './contents/Questions';
+import Questions from './Questions';
 import PlanetNavigation from './PlanetNavigation';
 
 interface Props {
   planet: PublicPlanetResponse;
+  labels: Record<string, string>
 }
 
-const PlanetDetails = ({ planet }: Props) => {
+const PlanetDetails = ({ planet, labels }: Props) => {
   const { category, image, localized } = planet;
   const { researchTopics, resources, contents, questions } = localized;
 
@@ -24,16 +25,17 @@ const PlanetDetails = ({ planet }: Props) => {
       />
 
       {researchTopics && researchTopics.length > 0 && (
-        <ResearchTopics researchTopics={researchTopics} />
+        <ResearchTopics researchTopics={researchTopics} labels={labels} />
       )}
-      {resources && resources.length > 0 && <Resources resources={resources} />}
+      {resources && resources.length > 0 && <Resources resources={resources} labels={labels} />}
       {contents && contents.length > 0 && <ContentList contents={contents} />}
-      {questions && questions.length > 0 && <Questions questions={questions} />}
+      {questions && questions.length > 0 && <Questions questions={questions} labels={labels} />}
 
       <PlanetNavigation
         category={category}
         prevId={planet.prevPlanetId}
         nextId={planet.nextPlanetId}
+        labels={labels}
       />
     </main>
   );
