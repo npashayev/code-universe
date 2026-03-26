@@ -6,6 +6,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import { Toaster } from 'react-hot-toast';
 import type { ReactNode } from 'react';
 import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import NextAuthProvider from '@/components/providers/NextAuthProvider';
 import QueryProvider from '@/components/providers/QueryProvider';
@@ -17,7 +18,7 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('http://localhost:3000'),
+  metadataBase: new URL('https://code-universe-nu.vercel.app/'),
   title: {
     default: 'Code Universe',
     template: '%s | Code Universe',
@@ -47,9 +48,10 @@ export default function RootLayout({
           <QueryProvider>
             {children}
             <Analytics />
+            <SpeedInsights />
+            <Toaster position="top-center" toastOptions={toastOptions} />
           </QueryProvider>
         </NextAuthProvider>
-        <Toaster position="top-center" toastOptions={toastOptions} />
       </body>
     </html>
   );
