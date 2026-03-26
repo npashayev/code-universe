@@ -50,48 +50,58 @@ const UpdatePlanetClient = ({ planetId, step, initialData }: Props) => {
   // Remove orphaned content images: keep only images referenced by any content in any locale
   useOrphanedImageCleanup(planetData, setPendingContentImages);
 
-  if (previewActive) {
-    return (
-      <>
-        <ExitPreviewButton onClick={() => setPreviewActive(false)} />
-        <PlanetDetails
-          planet={{
-            ...planetData,
-            id: planetId,
-            image: {
-              ...planetData.image,
-              alt: planetData.image.alt[currentLanguage.value],
-            },
-            localized: planetData.localized[currentLanguage.value],
-            prevPlanetId: null,
-            nextPlanetId: null,
-          }}
-        />
-      </>
-    );
-  }
+  const labels = {
+    researchTopics: 'Research Topics',
+    resources: 'Resources',
+    contents: 'Contents',
+    questions: 'Questions',
+    previous: 'Previous',
+    next: 'Next',
+  };
 
   return (
-    <PlanetEditorLayout
-      planetData={planetData}
-      setPlanetData={setPlanetData}
-      currentLanguage={currentLanguage}
-      setCurrentLanguage={setCurrentLanguage}
-      pendingFiles={pendingFiles}
-      setPendingFiles={setPendingFiles}
-      pendingContentImages={pendingContentImages}
-      setPendingContentImages={setPendingContentImages}
-      setPreviewActive={setPreviewActive}
-      title="Edit Planet"
-      confirmTitle="Update Planet"
-      confirmBody="Are you sure you want to save changes to this planet?"
-      submitIdleLabel="Save changes"
-      submitSubmittingLabel="Saving..."
-      onSubmit={handleSubmit}
-      isSubmitting={isSubmitting}
-      isUploading={isUploading}
-      progress={progress}
-    />
+    <>
+      {previewActive && (
+        <div className="absolute top-0 left-0 w-full z-500 min-h-screen">
+          <ExitPreviewButton onClick={() => setPreviewActive(false)} />
+          <PlanetDetails
+            planet={{
+              ...planetData,
+              id: planetId,
+              image: {
+                ...planetData.image,
+                alt: planetData.image.alt[currentLanguage.value],
+              },
+              localized: planetData.localized[currentLanguage.value],
+              prevPlanetId: null,
+              nextPlanetId: null,
+            }}
+            labels={labels}
+          />
+        </div>
+      )}
+
+      <PlanetEditorLayout
+        planetData={planetData}
+        setPlanetData={setPlanetData}
+        currentLanguage={currentLanguage}
+        setCurrentLanguage={setCurrentLanguage}
+        pendingFiles={pendingFiles}
+        setPendingFiles={setPendingFiles}
+        pendingContentImages={pendingContentImages}
+        setPendingContentImages={setPendingContentImages}
+        setPreviewActive={setPreviewActive}
+        title="Edit Planet"
+        confirmTitle="Update Planet"
+        confirmBody="Are you sure you want to save changes to this planet?"
+        submitIdleLabel="Save changes"
+        submitSubmittingLabel="Saving..."
+        onSubmit={handleSubmit}
+        isSubmitting={isSubmitting}
+        isUploading={isUploading}
+        progress={progress}
+      />
+    </>
   );
 };
 

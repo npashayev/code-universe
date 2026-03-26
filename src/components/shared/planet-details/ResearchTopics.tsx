@@ -1,16 +1,14 @@
-import { getTranslations } from 'next-intl/server';
-
 import type { ResearchTopic } from '@/types/planet';
 
 interface Props {
   researchTopics: ResearchTopic[];
+  labels: Record<string, string>
 }
 
-const ResearchTopics = async ({ researchTopics }: Props) => {
-  const t = await getTranslations('planetDetails');
+const ResearchTopics = ({ researchTopics, labels }: Props) => {
   return (
     <section>
-      <h2 className="heading-secondary">{t('researchTopics')}</h2>
+      <h2 className="heading-secondary">{labels.researchTopics}</h2>
       <ul className="list-indented list-disc">
         {researchTopics.map((topic) => (
           <li key={topic.id}>{topic.topic}</li>
