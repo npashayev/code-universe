@@ -52,6 +52,7 @@ export default async function PlanetPage({ params }: Props) {
     questions: t('questions'),
     previous: t('previous'),
     next: t('next'),
+    task: t('task'),
   };
 
   const planet = await getPlanet(

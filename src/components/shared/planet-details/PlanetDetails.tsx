@@ -30,7 +30,9 @@ const PlanetDetails = ({ planet, labels }: Props) => {
       {resources && resources.length > 0 && (
         <Resources resources={resources} labels={labels} />
       )}
-      {contents && contents.length > 0 && <ContentList contents={contents} />}
+      {contents && contents.length > 0 && (
+        <ContentList contents={contents} labels={labels} />
+      )}
       {questions && questions.length > 0 && (
         <Questions questions={questions} labels={labels} />
       )}
