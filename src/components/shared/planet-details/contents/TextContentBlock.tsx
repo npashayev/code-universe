@@ -1,8 +1,11 @@
 import type { ReactNode } from 'react';
-import Markdown from 'react-markdown';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLightbulb } from '@fortawesome/free-regular-svg-icons';
 
 import { cn } from '@/lib/utils/cn';
 import type { TextContent, TextVariant, TitleLevel } from '@/types/planet';
+
+import CustomMarkdown from './CustomMarkdown';
 
 interface Props {
   content: TextContent;
@@ -15,7 +18,7 @@ const getVariantStyles = (variant: TextVariant): string | undefined => {
     case 'warning':
       return 'text-yellow-600';
     case 'tip':
-      return 'text-green-600';
+      return 'text-lime-400';
     default:
       return undefined;
   }
@@ -47,8 +50,16 @@ const TextContentBlock = ({ content }: Props) => {
   return (
     <div>
       {getContentTitle(title)}
-      <div className={cn('prose max-w-none', getVariantStyles(variant))}>
-        <Markdown>{text}</Markdown>
+      <div className="flex gap-4 items-center">
+        {variant === 'tip' && (
+          <FontAwesomeIcon
+            icon={faLightbulb}
+            className="text-lime-400 text-2xl -rotate-20"
+          />
+        )}
+        <div className={cn('prose max-w-none', getVariantStyles(variant))}>
+          <CustomMarkdown text={text} className={getVariantStyles(variant)} />
+        </div>
       </div>
     </div>
   );

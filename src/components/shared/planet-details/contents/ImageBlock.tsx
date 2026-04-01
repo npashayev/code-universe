@@ -1,7 +1,8 @@
 import Image from 'next/image';
-import Markdown from 'react-markdown';
 
 import type { ImageContent } from '@/types/planet';
+
+import CustomMarkdown from './CustomMarkdown';
 
 interface Props {
   content: ImageContent;
@@ -12,11 +13,7 @@ const ImageBlock = ({ content }: Props) => {
   return (
     <div>
       {title && <h3 className="heading-sub">{title}</h3>}
-      {description && (
-        <div className="prose max-w-none">
-          <Markdown>{description}</Markdown>
-        </div>
-      )}
+      {description && <CustomMarkdown text={description} />}
       <div className="mt-4 flex justify-center">
         <Image
           src={image.url}

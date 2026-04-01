@@ -34,6 +34,7 @@
     "resources": "Resources",
     "questions": "Questions",
     "previous": "Previous",
-    "next": "Next"
+    "next": "Next",
+    "task": "Task"
   }
 }

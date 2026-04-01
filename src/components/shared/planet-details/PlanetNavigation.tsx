@@ -5,7 +5,7 @@ interface Props {
   category: PlanetCategory;
   prevId: string | null;
   nextId: string | null;
-  labels: Record<string, string>
+  labels: Record<string, string>;
 }
 
 const PlanetNavigation = ({ category, prevId, nextId, labels }: Props) => {

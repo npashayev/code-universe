@@ -7,6 +7,8 @@ import type {
   PlanetCategory,
 } from '@/types/planet';
 
+import CustomMarkdown from './contents/CustomMarkdown';
+
 interface Props {
   category: PlanetCategory;
   localizedData: LocalizedPlanetData;
@@ -26,7 +28,7 @@ const PlanetHeader = ({ category, localizedData, image }: Props) => {
               alt={image.alt ?? 'Planet image'}
               fill
               sizes="224px"
-              className="object-cover object-center shadow-2xl"
+              className="object-cover object-center"
             />
           </div>
         )}
@@ -49,7 +51,8 @@ const PlanetHeader = ({ category, localizedData, image }: Props) => {
           )}
         </div>
       </div>
-      <p className="text-lg leading-relaxed">{description}</p>
+
+      <CustomMarkdown text={description} />
     </header>
   );
 };

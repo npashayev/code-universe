@@ -10,13 +10,14 @@ interface Props {
 const NavLinkContent = ({ item }: Props) => {
   return (
     <>
-      <div className="text-slate-400 group-hover:text-white transition-colors flex items-center gap-3">
+      <div className="text-white transition-colors flex items-center gap-3">
         <div className="relative size-4">
           <Image
             src={item.icon}
             fill
+            sizes="16px"
             alt={item.label}
-            className="object-cover object-center"
+            className="object-contain object-center"
           />
         </div>
         {item.label}
