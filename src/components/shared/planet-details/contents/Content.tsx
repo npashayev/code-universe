@@ -8,15 +8,16 @@ import ImageBlock from './ImageBlock';
 
 interface Props {
   content: PlanetContent;
+  labels: Record<string, string>;
 }
 
-const Content = ({ content }: Props) => {
+const Content = ({ content, labels }: Props) => {
   switch (content.type) {
     case 'text':
       return <TextContentBlock content={content} />;
 
     case 'implementation-task':
-      return <ImplementationTaskBlock content={content} />;
+      return <ImplementationTaskBlock content={content} labels={labels} />;
 
     case 'html-element':
       return <HtmlElementBlock content={content} />;

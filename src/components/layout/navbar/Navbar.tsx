@@ -18,7 +18,7 @@ const Navbar = () => {
       <Header onOpen={() => setIsOpen(true)} />
       <AnimatePresence>
         {isOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-6 md:p-12">
+          <div className="fixed inset-0 z-navbar flex items-center justify-center p-6 md:p-12">
             {/* Backdrop */}
             <Motion.div
               initial={{ opacity: 0 }}

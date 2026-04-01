@@ -39,9 +39,7 @@ export default function GlobalError({ error, reset }: GlobalErrorProps) {
 
         <p className="text-white/50 text-base md:text-lg mb-10 leading-relaxed">
           {`${t('unexpectedError')}. `}
-          {isDev
-            ? t('checkDetails')
-            : t('notified')}
+          {isDev ? t('checkDetails') : t('notified')}
         </p>
 
         {/* Error Detail Section */}

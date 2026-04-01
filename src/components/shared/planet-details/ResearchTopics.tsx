@@ -2,7 +2,7 @@ import type { ResearchTopic } from '@/types/planet';
 
 interface Props {
   researchTopics: ResearchTopic[];
-  labels: Record<string, string>
+  labels: Record<string, string>;
 }
 
 const ResearchTopics = ({ researchTopics, labels }: Props) => {

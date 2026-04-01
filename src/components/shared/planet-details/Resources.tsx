@@ -5,7 +5,7 @@ import type { Resource } from '@/types/planet';
 
 interface Props {
   resources: Resource[];
-  labels: Record<string, string>
+  labels: Record<string, string>;
 }
 
 const Resources = ({ resources, labels }: Props) => {
