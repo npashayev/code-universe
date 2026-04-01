@@ -33,7 +33,7 @@ const MapSidebar = ({ planets }: Props) => {
   return (
     <aside
       className={cn(
-        'fixed right-0 top-0 h-screen w-100 transition-transform duration-500 px-6 pt-20 pb-16 flex flex-col items-start justify-start',
+        'fixed right-0 top-0 z-map-sidebar h-screen w-100 transition-transform duration-500 px-6 pt-20 pb-16 flex flex-col items-start justify-start',
         'bg-night/60 backdrop-blur-2xl border-l border-white/5 shadow-[-40px_0_80px_-20px_rgba(0,0,0,0.9)]',
         !sidebarOpen && 'translate-x-full',
       )}
