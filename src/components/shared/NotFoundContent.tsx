@@ -14,8 +14,7 @@ const NotFoundContent = async ({ text }: { text?: string }) => {
       </h1>
 
       <p className="text-white/40 text-sm max-w-sm leading-relaxed mb-10">
-        {text ||
-          c('notFoundMessage')}
+        {text || c('notFoundMessage')}
       </p>
 
       <Link

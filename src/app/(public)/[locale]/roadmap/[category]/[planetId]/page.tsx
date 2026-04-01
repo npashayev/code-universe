@@ -54,7 +54,6 @@ export default async function PlanetPage({ params }: Props) {
     next: t('next'),
   };
 
-
   const planet = await getPlanet(
     planetId,
     category,
