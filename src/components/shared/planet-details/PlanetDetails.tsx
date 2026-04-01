@@ -9,7 +9,7 @@ import PlanetNavigation from './PlanetNavigation';
 
 interface Props {
   planet: PublicPlanetResponse;
-  labels: Record<string, string>
+  labels: Record<string, string>;
 }
 
 const PlanetDetails = ({ planet, labels }: Props) => {
@@ -27,9 +27,13 @@ const PlanetDetails = ({ planet, labels }: Props) => {
       {researchTopics && researchTopics.length > 0 && (
         <ResearchTopics researchTopics={researchTopics} labels={labels} />
       )}
-      {resources && resources.length > 0 && <Resources resources={resources} labels={labels} />}
+      {resources && resources.length > 0 && (
+        <Resources resources={resources} labels={labels} />
+      )}
       {contents && contents.length > 0 && <ContentList contents={contents} />}
-      {questions && questions.length > 0 && <Questions questions={questions} labels={labels} />}
+      {questions && questions.length > 0 && (
+        <Questions questions={questions} labels={labels} />
+      )}
 
       <PlanetNavigation
         category={category}

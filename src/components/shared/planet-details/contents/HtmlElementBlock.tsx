@@ -1,8 +1,9 @@
 'use client';
 import { useEffect, useState, useRef } from 'react';
-import Markdown from 'react-markdown';
 
 import type { HtmlElementContent } from '@/types/planet';
+
+import CustomMarkdown from './CustomMarkdown';
 
 interface Props {
   content: HtmlElementContent;
@@ -67,11 +68,7 @@ const HtmlElementBlock = ({ content }: Props) => {
   return (
     <div>
       {title && <h3 className="heading-sub">{title}</h3>}
-      {description && (
-        <div className="prose max-w-none">
-          <Markdown>{description}</Markdown>
-        </div>
-      )}
+      {description && <CustomMarkdown text={description} />}
 
       <div className="mt-4 border border-gray-300 rounded-lg overflow-hidden bg-white resize">
         <iframe
@@ -79,7 +76,7 @@ const HtmlElementBlock = ({ content }: Props) => {
           className="w-full border-0 bg-white block"
           style={{ height: `${iframeHeight}px` }}
           srcDoc={iframeContent}
-          sandbox="allow-scripts allow-modals"
+          sandbox="allow-scripts allow-modals allow-top-navigation-by-user-activation"
           title="HTML Preview"
         />
       </div>
