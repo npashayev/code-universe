@@ -19,7 +19,7 @@ const CodePreview = ({
   height,
   paddingTop = 20,
   paddingBottom = 20,
-  fontSize = 18,
+  fontSize = 16,
   color,
 }: Props) => {
   return (

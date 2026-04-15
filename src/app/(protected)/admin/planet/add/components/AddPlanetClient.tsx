@@ -12,6 +12,7 @@ import PlanetDetails from '@/components/shared/planet-details/PlanetDetails';
 import { useOrphanedImageCleanup } from '@/lib/hooks/admin/useOrphanedImageCleanup';
 import ExitPreviewButton from '@/components/admin/ui/ExitPreviewButton';
 import { PLANET_CATEGORY } from '@/lib/constants/planet';
+import { usePreventScroll } from '@/lib/hooks/ui/usePreventScroll';
 interface Props {
   category: PlanetCategory;
 }
@@ -50,6 +51,8 @@ const AddPlanetClient = ({ category }: Props) => {
 
   useOrphanedImageCleanup(planetData, setPendingContentImages);
 
+  usePreventScroll(previewActive);
+
   const labels = {
     researchTopics: 'Research Topics',
     resources: 'Resources',
@@ -62,7 +65,7 @@ const AddPlanetClient = ({ category }: Props) => {
   return (
     <>
       {previewActive && (
-        <div className="absolute top-0 left-0 w-full z-500 min-h-screen">
+        <div className="fixed top-0 left-0 w-full z-500 h-screen overflow-auto">
           <ExitPreviewButton onClick={() => setPreviewActive(false)} />
           <PlanetDetails
             planet={{
