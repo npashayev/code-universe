@@ -1,5 +1,7 @@
 import type { Question } from '@/types/planet';
 
+import CustomMarkdown from './contents/CustomMarkdown';
+
 interface Props {
   questions: Question[];
   labels: Record<string, string>;
@@ -15,7 +17,7 @@ const Questions = ({ questions, labels }: Props) => {
             <span className="shrink-0 text-slate-400 font-medium">
               {idx + 1}.
             </span>
-            <span>{qn.question}</span>
+            <CustomMarkdown text={qn.question} inline={true} />
           </li>
         ))}
       </ol>
