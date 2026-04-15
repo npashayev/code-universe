@@ -4,7 +4,7 @@ import type { Updater } from 'use-immer';
 
 import type { CreatePlanetData, SupportedLanguage } from '@/types/planet';
 import {
-  preSubmitCreatePlanetDataSchema,
+  // preSubmitCreatePlanetDataSchema,
   preSubmitLocalizedPlanetDataSchema,
 } from '@/lib/validation/planetDataSchema';
 
