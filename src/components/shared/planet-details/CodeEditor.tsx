@@ -23,7 +23,7 @@ const CodeEditor = ({
   onChange,
   paddingTop = 20,
   paddingBottom = 20,
-  fontSize = 18,
+  fontSize = 16,
 }: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const editorRef = useRef<any>(null);

@@ -4,7 +4,7 @@ import type { Updater } from 'use-immer';
 
 import type { CreatePlanetData, SupportedLanguage } from '@/types/planet';
 import {
-  preSubmitCreatePlanetDataSchema,
+  // preSubmitCreatePlanetDataSchema,
   preSubmitLocalizedPlanetDataSchema,
 } from '@/lib/validation/planetDataSchema';
 
@@ -68,21 +68,21 @@ export const usePlanetJsonIO = ({
         const parsed = JSON.parse(reader.result);
 
         if (jsonTypeRef.current === 'full') {
-          const result = preSubmitCreatePlanetDataSchema.safeParse(parsed);
+          // const result = preSubmitCreatePlanetDataSchema.safeParse(parsed);
 
-          if (!result.success) {
-            toast.error(
-              "JSON content doesn't satisfy full planet data structure",
-            );
-            console.error(
-              'JSON validation error for full planet data:',
-              result.error.flatten().fieldErrors,
-            );
-            return;
-          }
+          // if (!result.success) {
+          //   toast.error(
+          //     "JSON content doesn't satisfy full planet data structure",
+          //   );
+          //   console.error(
+          //     'JSON validation error for full planet data:',
+          //     result.error.flatten().fieldErrors,
+          //   );
+          //   return;
+          // }
 
           setPlanetData(() => {
-            return result.data;
+            return parsed;
           });
         } else if (jsonTypeRef.current === 'locale') {
           const result = preSubmitLocalizedPlanetDataSchema.safeParse(parsed);

@@ -2,15 +2,15 @@ import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
 import { cn } from '@/lib/utils/cn';
-
 interface Props {
   text: string;
   className?: string;
+  inline?: boolean;
 }
-
-const CustomMarkdown = ({ text, className }: Props) => {
+const CustomMarkdown = ({ text, className, inline }: Props) => {
+  const Wrapper = inline ? 'span' : 'div';
   return (
-    <div
+    <Wrapper
       className={cn(
         `prose max-w-none 
         text-lg text-white
@@ -24,9 +24,13 @@ const CustomMarkdown = ({ text, className }: Props) => {
         className,
       )}
     >
-      <Markdown remarkPlugins={[remarkGfm]}>{text}</Markdown>
-    </div>
+      <Markdown
+        remarkPlugins={[remarkGfm]}
+        components={inline ? { p: ({ children }) => children } : undefined}
+      >
+        {text}
+      </Markdown>
+    </Wrapper>
   );
 };
-
 export default CustomMarkdown;

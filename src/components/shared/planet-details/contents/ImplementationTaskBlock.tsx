@@ -4,18 +4,13 @@ import CustomMarkdown from './CustomMarkdown';
 
 interface Props {
   content: ImplementationTaskContent;
-  labels: Record<string, string>;
 }
 
-const ImplementationTaskBlock = ({ content, labels }: Props) => {
+const ImplementationTaskBlock = ({ content }: Props) => {
   const { title, task } = content;
   return (
     <div>
-      {title && (
-        <h3 className="heading-sub">
-          {labels.task}: {title}
-        </h3>
-      )}
+      {title && <h3 className="heading-sub">{title}</h3>}
       <CustomMarkdown text={task} />
     </div>
   );
