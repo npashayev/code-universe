@@ -2,6 +2,7 @@
   "name": "code-universe",
   "version": "0.1.0",
   "private": true,
+  "license": "SEE LICENSE IN LICENSE",
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build",
@@ -38,7 +39,7 @@
     "gsap": "^3.14.2",
     "immer": "^11.1.3",
     "lucide-react": "^0.563.0",
-    "next": "^16.2.1",
+    "next": "^16.2.11",
     "next-auth": "^4.24.13",
     "next-intl": "^4.8.3",
     "prism-react-renderer": "^2.4.1",
